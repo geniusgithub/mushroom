@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <public type="attr" name="text" id="0x7f010000" />-->
+<!--   -->
+<!--    <public type="drawable" name="add_point_btn_s" id="0x7f020000" />-->
+<!--    -->
+<!--    <public type="layout" name="activity_dialog_del_fri" id="0x7f030000" />-->
+<!--    -->
+<!--   -->
+<!--    <public type="anim" name="down_in" id="0x7f040000" />-->
+<!--   -->
+<!--    <public type="xml" name="appwidget" id="0x7f050000" />-->
+<!--   -->
+<!--    <public type="array" name="around" id="0x7f060000" />-->
+    
+<!--    <public type="id" name="title_bar" id="0x7f070000" />-->
+    
+<!--    <public type="string" name="maps_api_key" id="0x7f080000" />-->
+<!--  -->
+<!--    <public type="style" name="mydialog" id="0x7f090000" />-->
+<!--    -->
+<!--    <public type="menu" name="imheremenu" id="0x7f0a0000" />-->
+</resources>

@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<style name="dialog" parent="@android:style/Theme.Dialog">
+	    <item name="android:windowIsFloating">true</item>     <!-- 设置未浮动窗口 -->
+		<item name="android:windowFrame">@null</item>         <!-- 设置无边框 -->     
+		<item name="android:windowNoTitle">true</item>        <!-- 设置无标题 -->
+		<item name="android:windowBackground">@color/sc_transparent_background</item>  <!-- 设置完全透明 -->
+		<item name="android:backgroundDimEnabled">true</item>                          <!-- 设置屏幕变暗 -->   
+	</style>
+
+    <style name="common_dialog_title_style">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="common_dialog_message_style">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">#ff666666</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="common_dialog_positive_btn_style" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/selector_btn_cancel</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#444444</item>
+        <item name="android:gravity">center</item>
+    </style>
+    <style name="common_dialog_negative_btn_style" parent="@android:style/Widget.Button">
+        <item name="android:background">@drawable/selector_btn_cancel</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">#444444</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+        				
+
+    <style name="tab_item_text_style">
+        <item name="android:textSize">12.0dip</item>
+        <item name="android:textColor">@color/tab_text</item>
+        <item name="android:ellipsize">marquee</item>       
+        <item name="android:singleLine">true</item>
+    </style>
+    
+        
+<!--     <style name="MMTabButton"> -->
+<!--         <item name="android:textAppearance">@style/tab_item_text_style</item>  -->
+<!--         <item name="android:gravity">center_horizontal</item> -->
+<!--         <item name="android:background">@drawable/tab_bg</item> -->
+<!--         <item name="android:layout_width">0.0dip</item> -->
+<!--         <item name="android:layout_height">wrap_content</item> -->
+<!--         <item name="android:button">@null</item> -->
+<!--         <item name="android:layout_weight">1.0</item> -->
+<!--     </style> -->
+    
+    <style name="MMTabButton">
+        <item name="android:layout_width">0.0dip</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:button">@null</item>
+        <item name="android:layout_weight">1.0</item>       
+		<item name="android:textSize">14sp</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:gravity">bottom|center</item>
+		<item name="android:paddingBottom">5dp</item>
+    </style>
+    
+
+    
+
+    
+    <style name="leba_bg_layout">
+       	<item name="android:orientation">vertical</item>
+       	<item name="android:background">@drawable/leba_shape_bg</item>
+       	<item name="android:layout_width">fill_parent</item>
+      	<item name="android:layout_height">wrap_content</item>
+       	<item name="android:layout_marginLeft">10.0dip</item>
+       	<item name="android:layout_marginTop">10.0dip</item>
+       	<item name="android:layout_marginRight">10.0dip</item>   
+   </style>
+    
+   <style name="leba_bg_base_layout">
+       	<item name="android:orientation">horizontal</item>
+       	<item name="android:layout_width">fill_parent</item>
+      	<item name="android:layout_height">wrap_content</item>
+      	<item name="android:gravity">center_vertical</item>
+       	<item name="android:paddingTop">10.0dip</item>
+       	<item name="android:paddingBottom">10.0dip</item>
+       	<item name="android:focusable">true</item>
+       	<item name="android:clickable">true</item>   
+   </style>
+       
+   <style name="leba_bg_top_layout" parent="@style/leba_bg_base_layout">      
+       	<item name="android:background">@drawable/leba_bg_top_selector</item>
+   </style>
+                                   
+   
+   <style name="leba_bg_mid_layout" parent="@style/leba_bg_base_layout">
+       	<item name="android:background">@drawable/leba_bg_mid_selector</item> 
+   </style>
+                    
+   
+   <style name="leba_bg_bottom_layout" parent="@style/leba_bg_base_layout">
+       	<item name="android:background">@drawable/leba_bg_bottom_selector</item> 
+   </style>
+   
+    <style name="leba_bg_single_layout" parent="@style/leba_bg_base_layout">
+       	<item name="android:background">@drawable/leba_bg_single_selector</item>  
+    </style>   
+   
+        
+    <style name="text_whitebtn_style">
+        <item name="android:textSize">18.0dip</item>
+        <item name="android:textColor">#ff444444</item>
+    </style>
+    
+    <style name="text_style1">
+        <item name="android:textSize">18.0dip</item>
+        <item name="android:textColor">#ff000000</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">15.0dip</item>
+    </style>
+        
+    <style name="text_style2">
+        <item name="android:textSize">16.0dip</item>
+        <item name="android:textColor">#ff777777</item>
+       	<item name="android:layout_width">wrap_content</item>
+      	<item name="android:layout_height">wrap_content</item>
+      	<item name="android:gravity">right</item>
+      	<item name="android:layout_marginRight">12.0dip</item>     	
+   </style>  
+   
+    <style name="text_style3">
+        <item name="android:textSize">14.0dip</item>
+        <item name="android:textColor">#ff777777</item>
+       	<item name="android:layout_width">wrap_content</item>
+      	<item name="android:layout_height">wrap_content</item>
+      	<item name="android:gravity">left</item> 	
+     </style>  
+     
+    
+    <style name="TextAppearanceMsgHint">
+		<item name="android:textColor">#fff</item>
+		<item name="android:textSize">12sp</item>
+		<item name="android:textStyle">bold</item>
+	</style>
+	
+         
+     <style name="TextMapMenuItem">
+		<item name="android:textColor">#fff</item>
+		<item name="android:textSize">14sp</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:gravity">bottom|center</item>
+		<item name="android:paddingBottom">5dp</item>
+	</style>
+	
+    <style name="TextTabItem">
+		<item name="android:textColor">#fff</item>
+		<item name="android:textSize">14sp</item>
+		<item name="android:textStyle">bold</item>
+		<item name="android:gravity">bottom|center</item>
+		<item name="android:paddingBottom">5dp</item>
+	</style>   
+         
+    <style name="chat_text_date_style"> 
+		<item name="android:textColor">@color/tab_text</item>   
+		<item name="android:textSize">12sp</item>      
+		<item name="android:background">#bfbfbf</item> 
+	</style>
+  
+	         
+	<style name="chat_content_date_style">
+	    <item name="android:minHeight">50dp</item>
+	    <item name="android:gravity">left|center</item>    
+		<item name="android:textColor">#000000</item>   
+		<item name="android:textSize">15sp</item>      
+		<item name="android:lineSpacingExtra">2dp</item>   
+		<item name="android:clickable">true</item>   
+		<item name="android:focusable">true</item>   
+		<item name="android:background">#bfbfbf</item> 
+	</style>	 
+	
+	<style name="chat_text_name_style">  
+		<item name="android:textColor">#818181</item>   
+		<item name="android:textSize">15sp</item>      
+		<item name="android:gravity">center</item> 
+	</style>
+
+</resources>

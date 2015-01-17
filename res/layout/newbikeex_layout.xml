@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    
+    <View 
+        android:background="@drawable/vertical_line" 
+        android:layout_width="1dp" 
+        android:layout_height="fill_parent" 
+        android:layout_centerHorizontal="true"/>
+            
+    <RelativeLayout 
+    android:id="@+id/rl_newbiketitle"
+    android:orientation="vertical"
+    android:background="@drawable/title_bar" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content">
+                    <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_btn_back"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp"/> 
+    	<TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/newbike_text_title" />	 
+      		 <Button 
+             android:id="@+id/btn_switch"  
+             android:layout_marginRight="10dp" 
+             android:layout_alignParentRight="true" 
+             android:layout_centerVertical="true" 
+             android:layout_width="wrap_content" 
+             android:layout_height="wrap_content"
+             android:textColor="#ffffff"
+             android:textSize="18sp"
+             android:background="@drawable/selector_btn_add_clock"
+             android:text="切换"/>
+    	</RelativeLayout>
+   		
+        
+	    <LinearLayout 
+	    android:id="@+id/ll_newbiketop"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/rl_newbiketitle"
+	    android:orientation="vertical">
+        		
+
+	            <RelativeLayout 
+			    android:layout_width="fill_parent" 
+			    android:layout_height="wrap_content"
+			    android:background="@color/white"
+			    android:padding="5dp">
+	                  <TextView 
+	                  android:id="@+id/tv_timeinterval"
+	       		      android:layout_width="wrap_content" 
+	       		      android:layout_height="wrap_content" 
+	       		      android:layout_centerInParent="true"
+	       		      android:text="00:00:00"
+	       		      android:textSize="25.0sp" 
+	       		      android:textColor="@color/black"  />
+	                  
+	                  <ImageView
+	                  android:layout_width="wrap_content" 
+	       		      android:layout_height="wrap_content"
+	       		      android:layout_toLeftOf="@id/tv_timeinterval"
+	       		      android:layout_marginRight="5dp"
+	       		      android:layout_centerVertical="true"
+	       		      android:src="@drawable/clock_icon">                      
+	                  </ImageView>
+	                  
+	                  <TextView 
+	       		      android:layout_width="wrap_content" 
+	       		      android:layout_height="wrap_content" 
+	       		      android:layout_below="@id/tv_timeinterval"
+	       		      android:layout_centerHorizontal="true"
+	       		      android:text="@string/newbike_text_timeinterval"
+	       		      android:textSize="10.0sp"  />
+	            </RelativeLayout>
+	            
+         		<View android:background="@drawable/horizontal_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+
+	            <LinearLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal"
+			    android:padding="5dp">
+	      	        <RelativeLayout 
+				    android:layout_width="fill_parent" 
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1">    
+				    	  <TextView 
+				    	  android:id="@+id/tv_curspeed"
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_centerInParent="true"
+		       		      android:text="38.56"
+		       		      android:textSize="20.0sp" 
+		       		      android:textColor="@color/black"  />  
+		       		      	
+			       		  <ImageView
+			       		  android:id="@+id/iv_curspeed"
+		                  android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content"
+		       		      android:layout_toLeftOf="@id/tv_curspeed"
+		       		      android:layout_marginRight="5dp"
+		       		      android:layout_centerVertical="true"
+		       		      android:src="@drawable/distance_icon">                      
+		                  </ImageView>          
+		                  
+				       	  <TextView 
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_below="@id/tv_curspeed"
+		       		      android:layout_alignLeft="@id/iv_curspeed"
+		       		      android:text="@string/newbike_text_curspeed"
+		       		      android:textSize="10.0sp"/>
+	      	        </RelativeLayout>
+	      	        
+<!-- 	      	        <View android:background="@drawable/shape_line" android:layout_width="1.0px" android:layout_height="100dp" /> -->
+	            	<View android:background="?android:attr/listDivider" android:layout_width="1.0px" android:layout_height="fill_parent" />
+	      	        	            
+	                <RelativeLayout 
+				    android:layout_width="fill_parent" 
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1">      	
+				    	  <TextView 
+				    	  android:id="@+id/tv_distance"
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_centerInParent="true"
+		       		      android:text="51.29"
+		       		      android:textSize="20.0sp" 
+		       		      android:textColor="@color/black"  />  
+		       		      
+				    	  <ImageView
+			       		  android:id="@+id/iv_distance"
+		                  android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content"
+		       		      android:layout_toLeftOf="@id/tv_distance"
+		       		      android:layout_marginRight="5dp"
+		       		      android:layout_centerVertical="true"
+		       		      android:src="@drawable/distance_icon">                      
+		                  </ImageView>          
+		                  
+				       	  <TextView 
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_below="@id/tv_distance"
+		       		      android:layout_alignLeft="@id/iv_distance"
+		       		      android:text="@string/newbike_text_distance"
+		       		      android:textSize="10.0sp"/>
+	      	        </RelativeLayout>
+	      	        
+	            </LinearLayout>
+	                  
+	            <View android:background="@drawable/horizontal_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+	            
+        	    <LinearLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal"
+			    android:padding="5dp">
+	                
+        	         <RelativeLayout 
+				    android:layout_width="fill_parent" 
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1">      	
+				    	  <TextView 
+				    	  android:id="@+id/tv_averagespeed"
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_centerInParent="true"
+		       		      android:text="51.29"
+		       		      android:textSize="20.0sp" 
+		       		      android:textColor="@color/black"  /> 
+		       		      
+				    	  <ImageView
+			       		  android:id="@+id/iv_averagespeed"
+		                  android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content"
+		       		      android:layout_toLeftOf="@id/tv_averagespeed"
+		       		      android:layout_marginRight="5dp"
+		       		      android:layout_centerVertical="true"
+		       		      android:src="@drawable/distance_icon">                      
+		                  </ImageView>          
+		                  
+				       	  <TextView 
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_below="@id/tv_averagespeed"
+		       		      android:layout_alignLeft="@id/iv_averagespeed"
+		       		      android:text="@string/newbike_text_averagespeed"
+		       		      android:textSize="10.0sp"/>	
+	      	        </RelativeLayout>
+	      	        
+        	        	                
+	      	        <RelativeLayout 
+				    android:layout_width="fill_parent" 
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1">    
+				    	  <TextView 
+				    	  android:id="@+id/tv_hspeed"
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_centerInParent="true"
+		       		      android:text="38.56"
+		       		      android:textSize="20.0sp" 
+		       		      android:textColor="@color/black"  />  
+		       		      
+				    	  <ImageView
+			       		  android:id="@+id/iv_hspeed"
+		                  android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content"
+		       		      android:layout_toLeftOf="@id/tv_hspeed"
+		       		      android:layout_marginRight="5dp"
+		       		      android:layout_centerVertical="true"
+		       		      android:src="@drawable/distance_icon">                      
+		                  </ImageView>          
+		                  
+				       	  <TextView 
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_below="@id/tv_hspeed"
+		       		      android:layout_alignLeft="@id/iv_hspeed"
+		       		      android:text="@string/newbike_text_hightspeed"
+		       		      android:textSize="10.0sp"/>	            
+	      	        </RelativeLayout>
+	      	        
+
+	      	        
+	            </LinearLayout>
+	            
+        	    <View android:background="@drawable/horizontal_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+	            
+        	    <LinearLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal"
+			    android:padding="5dp">
+	      	        <RelativeLayout 
+				    android:layout_width="fill_parent" 
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1">    
+				    	  <TextView 
+				    	  android:id="@+id/tv_cal"
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_centerInParent="true"
+		       		      android:text="38.56"
+		       		      android:textSize="20.0sp" 
+		       		      android:textColor="@color/black"  /> 
+		       		      
+				    	  <ImageView
+			       		  android:id="@+id/iv_cal"
+		                  android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content"
+		       		      android:layout_toLeftOf="@id/tv_cal"
+		       		      android:layout_marginRight="5dp"
+		       		      android:layout_centerVertical="true"
+		       		      android:src="@drawable/distance_icon">                      
+		                  </ImageView>          
+		                  
+				       	  <TextView 
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_below="@id/tv_cal"
+		       		      android:layout_alignLeft="@id/iv_cal"
+		       		      android:text="@string/newbike_text_cal"
+		       		      android:textSize="10.0sp"/>	            
+	      	        </RelativeLayout>
+	      	        
+	                <RelativeLayout 
+				    android:layout_width="fill_parent" 
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1">      	
+			 			 <TextView 
+				    	  android:id="@+id/tv_height"
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_centerInParent="true"
+		       		      android:text="38.56"
+		       		      android:textSize="20.0sp" 
+		       		      android:textColor="@color/black"  /> 
+		       		      
+				    	  <ImageView
+			       		  android:id="@+id/iv_height"
+		                  android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content"
+		       		      android:layout_toLeftOf="@id/tv_height"
+		       		      android:layout_marginRight="5dp"
+		       		      android:layout_centerVertical="true"
+		       		      android:src="@drawable/height_icon">                      
+		                  </ImageView>          
+		                  
+				       	  <TextView 
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_below="@id/tv_height"
+		       		      android:layout_alignLeft="@id/iv_height"
+		       		      android:text="@string/newbike_text_height"
+		       		      android:textSize="10.0sp"/>	          
+	      	        </RelativeLayout>
+	      	        
+	            </LinearLayout>
+	            
+        	    <RelativeLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content">
+	                
+        	        <RelativeLayout 
+        	        android:id="@+id/rl_lock"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:background="@drawable/red_background"
+				    android:layout_centerInParent="true">
+        	             <CheckBox
+        	             android:id="@+id/cb_lock"
+				         android:layout_width="wrap_content"
+				         android:layout_height="wrap_content"
+				         android:layout_centerInParent="true"
+				         android:background="@drawable/selector_checkbox_lock"
+				         android:button="@null"/>
+        	        </RelativeLayout>
+
+        	        <Button
+        	        android:id="@+id/btn_start"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_toLeftOf="@id/rl_lock"
+			        android:background="@drawable/selector_btn_black"
+			        android:text="@string/newbike_text_start"
+			        android:textColor="#ffffffff"
+			        android:textSize="18.0sp" />
+        	        
+        	        <Button
+        	        android:id="@+id/btn_pause"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_toLeftOf="@id/rl_lock"
+			        android:background="@drawable/selector_btn_black"
+			        android:text="@string/newbike_text_pause"
+			        android:textColor="#ffffffff"
+			        android:textSize="18.0sp" />
+        	        
+        	        <Button
+        	        android:id="@+id/btn_stop"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_toRightOf="@id/rl_lock"
+			        android:background="@drawable/selector_btn_black"
+			        android:text="@string/newbike_text_stop"
+			        android:textColor="#ffffffff"
+			        android:textSize="18.0sp" />
+        	        	            	
+	            </RelativeLayout>
+
+        	    		        	
+        </LinearLayout>      	
+        
+	    <RelativeLayout 
+	    android:layout_below="@id/ll_newbiketop"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">
+	        <com.amap.api.maps.MapView
+	        android:id="@+id/map"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent" />
+	    </RelativeLayout>
+    
+    
+</RelativeLayout>

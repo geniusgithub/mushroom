@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:orientation="vertical" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent" 
+    android:background="@drawable/act_content_bg">
+  
+    <RelativeLayout 
+        android:orientation="vertical"
+        android:background="@drawable/title_bar" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+        <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_btn_back"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp">      
+        </Button>
+        
+        <TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_text_mogu" />
+   
+           <Button 
+             android:id="@+id/btn_changepwd"  
+             android:layout_marginRight="10dp" 
+             android:layout_alignParentRight="true" 
+             android:layout_centerVertical="true" 
+             android:layout_width="wrap_content" 
+             android:layout_height="wrap_content"
+             android:textColor="#ffffff"
+             android:textSize="18sp"
+             android:background="@drawable/selector_btn_add_clock"
+             android:text="@string/bind_text_changepwd"/>
+   </RelativeLayout>
+ 
+
+	<LinearLayout
+	    	android:orientation="vertical" 
+            android:layout_width="fill_parent" 
+    		android:layout_height="wrap_content">    
+
+	     <LinearLayout 
+	            android:id="@+id/ll_layout1"
+	            style="@style/leba_bg_layout">                  
+	      
+	            <RelativeLayout 
+	                style="@style/leba_bg_top_layout"
+	                android:clickable="false" >
+	                <TextView android:id="@+id/tv_account" style="@style/text_style1" android:text="@string/bind_text_account" android:layout_weight="1.0" />
+		            <EditText
+	        		android:id="@+id/et_account"
+		            android:layout_width="fill_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_toRightOf="@id/tv_account"
+		            android:layout_marginLeft="15dp"
+		            android:background="@null"
+		            android:gravity="center_vertical"
+		            android:singleLine="true"
+		            android:paddingLeft="5.0dip"
+		            android:textColor="#ff1d1d1d"
+		            android:textColorHint="#ff666666"
+		            android:textSize="16.0sp" />
+	            </RelativeLayout>
+	            
+	            <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+    
+	         
+	            <RelativeLayout 
+	                style="@style/leba_bg_bottom_layout"
+	                android:clickable="false" >
+	                <TextView android:id="@+id/tv_pwd" style="@style/text_style1" android:text="@string/bind_text_pwd" android:layout_weight="1.0" />
+		            <EditText
+	        		android:id="@+id/et_password"
+		            android:layout_width="fill_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_toRightOf="@id/tv_pwd"
+		            android:layout_marginLeft="15dp"
+		            android:inputType="textPassword"
+		            android:background="@null"
+		            android:gravity="center_vertical"
+		            android:singleLine="true"
+		            android:paddingLeft="5.0dip"
+		            android:textColor="#ff1d1d1d"
+		            android:textColorHint="#ff666666"
+		            android:textSize="16.0sp" />
+	            </RelativeLayout>
+	
+	     </LinearLayout>
+	     
+		<RelativeLayout 
+	        android:layout_width="fill_parent" 
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="20dp"
+	        android:layout_marginLeft="10dp"
+	        android:layout_marginRight="10dp">
+	            
+		     <Button
+		     android:id="@+id/btn_bind"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:background="@drawable/btn_bind"   
+		     android:layout_centerInParent="true"
+		     android:text="@string/btn_bind"
+		     android:textSize="18sp"
+		     android:textColor="@color/white"/>
+		     
+		     <Button
+		     android:id="@+id/btn_unbind"
+		     android:layout_width="wrap_content"
+		     android:layout_height="wrap_content"
+		     android:background="@drawable/btn_unbind"   
+		     android:visibility="gone"
+		     android:layout_centerInParent="true"
+		     android:text="@string/btn_unbind"
+		     android:textSize="18sp"
+		     android:textColor="@color/white"/>
+
+	     </RelativeLayout>
+   
+	         
+	</LinearLayout>
+    
+</LinearLayout>
+

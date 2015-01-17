@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:orientation="vertical" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent" 
+    android:background="@drawable/act_content_bg">
+  
+  
+     
+    <RelativeLayout 
+        android:orientation="vertical"
+        android:background="@drawable/title_bar" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+        <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_btn_back"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp">      
+        </Button>
+        
+        <TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_text_warn" />
+   
+        <Button 
+             android:id="@+id/btn_save"  
+             android:layout_marginRight="10dp" 
+             android:layout_alignParentRight="true" 
+             android:layout_centerVertical="true" 
+             android:layout_width="wrap_content" 
+             android:layout_height="wrap_content"
+             android:textColor="#ffffff"
+             android:textSize="18sp"
+             android:background="@drawable/selector_btn_add_clock"
+             android:text="@string/safe_text_save"/>
+   </RelativeLayout>
+ 
+
+	<LinearLayout
+	    	android:orientation="vertical" 
+            android:layout_width="fill_parent" 
+    		android:layout_height="wrap_content">    
+             
+	   <TextView android:layout_marginLeft="20dp" android:layout_marginTop="10dp" android:textSize="15.0sp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/warn_text_tip" />
+   
+	    	<LinearLayout 
+	            style="@style/leba_bg_layout">
+	    	    <RelativeLayout 
+	               style="@style/leba_bg_single_layout" >
+		            <TextView android:id="@+id/tv_phone" style="@style/text_style1" android:text="@string/warn_text_phone" android:layout_weight="1.0" />
+		            <EditText
+		       		android:id="@+id/et_phone"
+		            android:layout_width="fill_parent"
+		            android:layout_height="wrap_content"
+		            android:layout_toRightOf="@id/tv_phone"
+		            android:layout_marginLeft="15dp"
+		            android:background="@null"
+		            android:gravity="center_vertical"
+		            android:singleLine="true"
+		            android:paddingLeft="5.0dip"
+		            android:textColor="#ff1d1d1d"
+		            android:textColorHint="#ff666666"
+		            android:textSize="16.0sp" />
+	           </RelativeLayout>
+	    	</LinearLayout>
+
+	            
+  
+	            
+         <TextView  android:layout_marginLeft="20dp" android:layout_marginTop="10dp"  android:layout_centerInParent="true" android:textSize="15.0sp"  android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/warn_text_way" />     
+	         
+	     <LinearLayout 
+	            style="@style/leba_bg_layout">                  
+	      
+	            <LinearLayout 
+	                style="@style/leba_bg_top_layout" >
+	                <TextView style="@style/text_style1" android:text="@string/warn_text_ring" android:layout_weight="1.0" />
+		            <CheckBox
+		               android:id="@+id/cb_ring"
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:button="@null"
+		               android:layout_marginRight="10dp"
+		               android:layout_centerVertical="true"
+		               android:background="@drawable/selector_checkbox2"/>
+	            </LinearLayout>
+	            
+	            <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+	
+	            <LinearLayout 
+	                style="@style/leba_bg_mid_layout" >
+	                <TextView style="@style/text_style1" android:text="@string/warn_text_vibre" android:layout_weight="1.0" />
+		            <CheckBox
+		               android:id="@+id/cb_virbe"
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:button="@null"
+		               android:layout_marginRight="10dp"
+		               android:layout_centerVertical="true"
+		               android:background="@drawable/selector_checkbox2"/>
+	            </LinearLayout>
+
+	             
+	            <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" /> 
+	                          
+	         
+	            <LinearLayout 
+	                style="@style/leba_bg_bottom_layout" >
+	                <TextView android:id="@+id/tv_phone" style="@style/text_style1" android:text="@string/warn_text_msg" android:layout_weight="1.0" />
+
+		            <CheckBox
+		               android:id="@+id/cb_message"
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:button="@null"
+		               android:layout_alignParentRight="true"
+		               android:layout_marginRight="10dp"
+		               android:layout_centerVertical="true"
+		               android:background="@drawable/selector_checkbox2"/>
+	            </LinearLayout>
+	
+	     </LinearLayout>
+    
+	</LinearLayout>
+    
+</LinearLayout>
+

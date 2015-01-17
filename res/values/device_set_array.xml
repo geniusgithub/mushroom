@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string-array name="device_set_name">
+        <item>监护设置</item>
+        <item>白名单设置</item>
+        <item>闹钟设置</item>
+        <item>关注时段</item>
+        <item>情景模式</item>
+        <item>来电模式</item>
+        <item>休眠时段</item>
+        <item>低电量提醒</item>
+        <item>通话时长</item>
+    </string-array>
+    
+        
+    <string-array name="dev_scenemode_name">
+        <item>铃声</item>
+        <item>震动</item>
+        <item>静音</item>
+        <item>铃声和震动</item>
+    </string-array>   
+    
+    <string-array name="dev_lowerwarn_name">
+        <item>约1%电池电量</item>
+        <item>约5%电池电量</item>
+        <item>约10%电池电量</item>
+        <item>约30%电池电量</item>
+        <item>约60%电池电量</item>
+        <item>约100%电池电量</item>
+    </string-array>   
+    
+    <string-array name="dev_power_name">
+        <item>休眠模式</item>
+        <item>正常模式</item>
+    </string-array> 
+    
+        
+    <string-array name="dev_phonecall_mode_name">
+        <item>启用白名单</item>
+        <item>屏蔽所有来电</item>
+        <item>允许所有来电</item>
+    </string-array>    
+    
+        
+        
+   <string-array name="dev_week_name">
+        <item>周一</item>
+        <item>周二</item>
+        <item>周三</item>
+        <item>周四</item>
+        <item>周五</item>
+        <item>周六</item>
+        <item>周日</item>
+    </string-array>   
+    
+   <string-array name="user_sex_name">
+        <item>男</item>
+        <item>女</item>
+    </string-array>   
+        
+</resources>

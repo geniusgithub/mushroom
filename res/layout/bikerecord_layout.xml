@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/act_content_bg"
+    android:orientation="vertical">
+            
+       <RelativeLayout 
+        android:id="@+id/rl_title"
+        android:orientation="vertical"
+        android:background="@drawable/title_bar" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+                <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_btn_back"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp">      
+        </Button>
+        	<TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/bikerecord_text_title" />
+    
+        	<Button 
+             android:id="@+id/btn_del"  
+             android:layout_marginRight="10dp" 
+             android:layout_alignParentRight="true" 
+             android:layout_centerVertical="true" 
+             android:layout_width="wrap_content" 
+             android:layout_height="wrap_content"
+             android:textColor="#ffffff"
+             android:textSize="18sp"
+             android:background="@drawable/selector_btn_add_clock"
+             android:text="@string/bikerecord_text_del"/>
+     </RelativeLayout>
+
+	 
+	<LinearLayout 	  
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/rl_title"
+	    android:layout_marginLeft="15dp"
+	    android:layout_marginRight="15dp"
+	    android:orientation="vertical">
+
+	        <RelativeLayout 
+	        android:layout_width="fill_parent" 
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="5dp"
+	        android:layout_marginBottom="5dp">
+	            
+	              <TextView 
+	              android:id="@+id/tv_distance"
+       		      android:layout_width="wrap_content" 
+       		      android:layout_height="wrap_content" 
+       		      android:layout_centerInParent="true"
+       		      android:text="150公里"
+       		      android:textSize="25.0sp" 
+       		      android:textColor="@color/black"  />
+	                  		 
+	        </RelativeLayout>
+   		        	
+	    	<LinearLayout 
+	        android:layout_width="fill_parent" 
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="2dp"
+	        android:layout_marginBottom="2dp">
+	             <TextView 
+	              android:id="@+id/tv_bikecount"
+       		      android:layout_width="fill_parent" 
+       		      android:layout_height="wrap_content" 
+       		   	  android:layout_weight="1"
+       		   	  android:gravity="center"
+       		      android:text="5"
+       		      android:textSize="15.0sp" 
+       		      android:textColor="@color/black"  />
+	              <TextView 
+	              android:id="@+id/tv_timeinterval"
+       		      android:layout_width="fill_parent" 
+       		      android:layout_height="wrap_content" 
+       		   	  android:layout_weight="1"
+       		   	  android:gravity="center"
+       		      android:text="10:38:56"
+       		      android:textSize="15.0sp" 
+       		      android:textColor="@color/black"  />
+	              <TextView 
+	              android:id="@+id/tv_cal"
+       		      android:layout_width="fill_parent" 
+       		      android:layout_height="wrap_content" 
+       		   	  android:layout_weight="1"
+       		   	  android:gravity="center"
+       		      android:text="2458"
+       		      android:textSize="15.0sp" 
+       		      android:textColor="@color/black"  />
+	        </LinearLayout>
+	        
+	    	<LinearLayout 
+	        android:layout_width="fill_parent" 
+	        android:layout_height="wrap_content"
+	        android:layout_marginTop="2dp"
+	        android:layout_marginBottom="2dp">
+	              <TextView 
+       		      android:layout_width="fill_parent" 
+       		      android:layout_height="wrap_content" 
+       		   	  android:layout_weight="1"
+       		   	  android:gravity="center"
+       		      android:text="历史骑行记录"
+       		      android:textSize="15.0sp" 
+       		      android:textColor="@color/black"  />
+	              <TextView 
+       		      android:layout_width="fill_parent" 
+       		      android:layout_height="wrap_content" 
+       		   	  android:layout_weight="1"
+       		   	  android:gravity="center"
+       		      android:text="时长"
+       		      android:textSize="15.0sp" 
+       		      android:textColor="@color/black"  />
+	              <TextView 
+       		      android:layout_width="fill_parent" 
+       		      android:layout_height="wrap_content" 
+       		   	  android:layout_weight="1"
+       		   	  android:gravity="center"
+       		      android:text="卡路里"
+       		      android:textSize="15.0sp" 
+       		      android:textColor="@color/black"  />
+	        </LinearLayout>     
+	        
+	      
+			  
+		    <com.mobile.yunyou.widget.RefreshListView
+		    android:id="@+id/listview"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent"
+		    android:layout_marginLeft="10.0dip" 
+			android:layout_marginTop="10.0dip" 
+			android:layout_marginRight="10.0dip"
+			android:scrollbars="@null"
+			android:divider="#00000000"
+			android:dividerHeight="5dp"
+		    android:cacheColorHint="#00000000"
+		    android:listSelector="@drawable/selector_friend_item"/>
+	        		        
+	        	     
+      </LinearLayout>      	
+        
+	<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+         
+	     <ProgressBar 
+		    android:id="@+id/load_progress"
+			android:visibility="gone"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/load_progress"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="5dp"/>
+	     
+	   	<Button 
+	   	    android:id="@+id/btn_load" 
+	   	    android:visibility="gone"
+	   	    android:layout_width="wrap_content" 
+	   	    android:layout_height="wrap_content"  
+	   	    android:layout_centerInParent="true"
+	   	    android:textSize="18.0sp" 
+	   	    android:textColor="#ffffff" 
+	   	    android:background="@drawable/selector_btn_ok" 
+	   	    android:text="@string/btn_refresh" />
+
+   </RelativeLayout>
+
+    
+</RelativeLayout>

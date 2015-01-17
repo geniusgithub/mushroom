@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/device_bg" >
+
+    <RelativeLayout 
+        android:id="@+id/title_bar"
+        android:orientation="vertical"
+        android:background="@drawable/title_bar" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+        <Button android:id="@+id/btn_back" android:layout_centerVertical="true" android:layout_marginLeft="10dp" android:paddingLeft="5dp" android:textSize="18.0sp" android:textColor="#ffffff"  android:background="@drawable/selector_btn_back" android:layout_width="wrap_content" android:layout_height="wrap_content"   android:text="@string/btn_back" />
+        <TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/clock_text_title" />
+        <Button android:id="@+id/btn_addclock" android:text="@string/clock_btn_addclock" android:textSize="18.0sp" android:textColor="#ffffff"  android:layout_marginRight="10dp" android:layout_alignParentRight="true" android:layout_centerVertical="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/selector_btn_add_clock"/>
+    </RelativeLayout>
+
+    <LinearLayout
+         android:id="@+id/linearlayout"
+         android:layout_below="@id/title_bar"
+         android:layout_width="fill_parent" 
+         android:layout_height="wrap_content"
+         android:layout_marginTop="10dp"
+         android:layout_marginBottom="10dp"
+         android:orientation="vertical"
+         android:gravity="center_horizontal">
+
+        
+         <TextView
+            android:id="@+id/tvTime1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#0098fe"
+            android:textSize="20.0sp"
+   			android:text="@string/clock_text_prompt"/>
+
+
+<!--         <TextView -->
+<!--             android:id="@+id/tvTime1" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:textColor="#7e7e7e" -->
+<!--             android:textSize="20.0sp" -->
+<!--             android:text="2012年08月16日 星期四" /> -->
+                 
+                 
+<!--         <TextView -->
+<!--             android:id="@+id/tvTime2" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:textColor="#0098fe" -->
+<!--             android:textSize="30.0sp" -->
+<!--             android:text="22:00" /> -->
+        
+
+              
+<!--          <TextView -->
+<!--             android:id="@+id/tvTime3" -->
+<!--             android:layout_width="wrap_content" -->
+<!--             android:layout_height="wrap_content" -->
+<!--             android:textColor="#7e7e7e" -->
+<!--             android:textSize="20.0sp" -->
+<!--             android:text="下一个闹钟: 周五08:00" /> -->
+         
+    </LinearLayout>
+     
+      <Button
+        android:id="@+id/btn_save"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+     	android:layout_marginLeft="10.0dip" 
+	    android:layout_marginBottom="10.0dip" 
+	    android:layout_marginRight="10.0dip"   
+	    android:background="@drawable/selector_btn_white"   
+        android:text="@string/keyset_btn_text"
+        style="@style/text_whitebtn_style" />
+      
+      
+    <ListView
+        android:layout_below="@id/linearlayout"
+        android:layout_above="@id/btn_save"
+	    android:id="@+id/listview"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:minHeight="100dp"	
+	    android:divider="#ffcccccc"
+	    android:dividerHeight="2px"
+	    android:cacheColorHint="@color/transparent"
+	    android:scrollbars="none"
+	    android:listSelector="@drawable/selector_friend_item"
+	    android:layout_marginLeft="15dp"
+	    android:layout_marginRight="15dp"
+	    android:layout_marginBottom="15dp"
+	    android:clickable="true"
+	    style="@style/leba_bg_layout"/>
+        
+     
+
+  
+    
+    
+</RelativeLayout>

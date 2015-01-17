@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:orientation="vertical" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent" 
+    android:background="@drawable/act_content_bg">
+  
+    <RelativeLayout 
+        android:orientation="vertical"
+        android:background="@drawable/title_bar" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+        <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_btn_back"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp">      
+        </Button>
+        <TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_text_title" />
+   </RelativeLayout>
+      
+   <RelativeLayout 
+        android:orientation="vertical" 
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent">
+
+
+       <LinearLayout 
+       android:id="@+id/ll_layout1"
+       style="@style/leba_bg_layout">
+             <LinearLayout 
+                android:id="@+id/ll_goOfflineMap"
+                style="@style/leba_bg_single_layout">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:src="@drawable/set_offmap_icon"/>
+                <TextView style="@style/text_style1" android:text="@string/setting_text_offMap" android:layout_weight="1.0" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
+            </LinearLayout> 
+       </LinearLayout>   
+            
+         
+      <LinearLayout 
+       android:id="@+id/ll_layout2"
+       android:layout_below="@id/ll_layout1"
+       style="@style/leba_bg_layout">
+             <LinearLayout 
+                android:id="@+id/ll_goWarn"
+                style="@style/leba_bg_top_layout">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:src="@drawable/set_rec_icon"/>
+                <TextView style="@style/text_style1" android:text="@string/setting_text_warn" android:layout_weight="1.0" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
+            </LinearLayout> 
+             
+            <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" /> 
+                 
+            <LinearLayout 
+                android:id="@+id/ll_goMoGu"
+                style="@style/leba_bg_bottom_layout">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:src="@drawable/set_mogu_icon"/>
+                <TextView style="@style/text_style1" android:text="@string/setting_text_mogu" android:layout_weight="1.0" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
+            </LinearLayout> 
+       </LinearLayout>   
+       
+    <LinearLayout 
+            android:id="@+id/ll_layout3"
+            android:layout_below="@id/ll_layout2"
+            style="@style/leba_bg_layout">                  
+      
+
+             <LinearLayout 
+                 android:id="@+id/ll_goVersion"
+             	 style="@style/leba_bg_top_layout">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:src="@drawable/set_rec_icon"/>
+                <TextView style="@style/text_style1" android:text="@string/setting_text_version" android:layout_weight="1.0" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
+             </LinearLayout>
+             
+            <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" /> 
+                          
+            <LinearLayout 
+                 android:id="@+id/ll_goabout"
+             	 style="@style/leba_bg_mid_layout">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:src="@drawable/set_circle_icon"/>
+                <TextView style="@style/text_style1" android:text="@string/setting_text_about"/>
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/set_logo_icon"/>
+             </LinearLayout>
+             
+            <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+
+            <LinearLayout 
+                android:id="@+id/ll_goHelp"
+                style="@style/leba_bg_mid_layout">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:src="@drawable/set_circle_icon"/>
+                <TextView style="@style/text_style1" android:text="@string/setting_text_help" android:layout_weight="1.0" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
+            </LinearLayout> 
+            
+             <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+
+             
+            <LinearLayout 
+                android:id="@+id/ll_exit"
+                style="@style/leba_bg_bottom_layout">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:src="@drawable/set_loginout_icon"/>
+                <TextView style="@style/text_style1" android:text="@string/setting_text_exit" android:layout_weight="1.0" />
+             </LinearLayout> 
+            
+                        
+        </LinearLayout>
+
+
+    </RelativeLayout>     
+
+    
+</LinearLayout>
+

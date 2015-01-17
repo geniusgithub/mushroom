@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+          android:id="@+id/rl_keyset1"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:background="@drawable/leba_bg_single_selector"
+          android:layout_below="@id/title_bar"
+    	  android:layout_marginLeft="10.0dip" 
+	      android:layout_marginTop="10.0dip" 
+	      android:layout_marginRight="10.0dip"
+	      android:paddingTop="10dp"
+	      android:paddingBottom="10dp">
+      
+          <ImageView
+              android:id="@+id/ivUserProfile"
+              android:layout_width="80px"
+              android:layout_height="80px"
+              android:layout_alignParentLeft="true"
+              android:layout_marginLeft="10dp"
+              android:layout_centerVertical="true"
+              android:src="@drawable/default_head">
+          </ImageView>
+          
+           <LinearLayout 
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_toRightOf="@id/ivUserProfile"
+              android:layout_marginLeft="10dp"
+              android:layout_centerVertical="true"
+              android:orientation="vertical">
+               
+               	   <TextView
+	               android:id="@+id/tvName"
+	               android:layout_width="wrap_content"
+	               android:layout_height="wrap_content"
+	               android:textColor="#000000"
+	               android:textSize="18sp"/>  
+	               
+               
+	               <TextView
+	               android:id="@+id/tvPhone"
+	               android:layout_width="wrap_content"
+	               android:layout_height="wrap_content"
+	               android:textColor="#000000"
+	               android:textSize="18sp"/>  
+               
+               
+           </LinearLayout>
+          
+            
+           <Button 
+               android:id="@+id/btn_unbind" 
+               android:text="@string/friend_title_unbind" 
+               android:textSize="18.0sp" 
+               android:textColor="#ffffff"  
+               android:layout_marginRight="10dp" 
+               android:layout_alignParentRight="true" 
+               android:layout_centerVertical="true" 
+               android:layout_width="wrap_content" 
+               android:layout_height="wrap_content" 
+               android:background="@drawable/selector_btn_add_clock"/>
+           <CheckBox
+              android:id="@+id/checkBox"
+              android:visibility="invisible"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:button="@null"
+              android:layout_alignParentRight="true"
+              android:layout_marginRight="10dp"
+              android:layout_centerVertical="true"
+              android:focusable="false"
+              android:background="@drawable/selector_checkbox2"/>
+
+</RelativeLayout>

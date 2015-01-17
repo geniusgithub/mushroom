@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+        <string name="app_name">蘑菇兄弟</string>
+    
+        <string name="btn_yes">是</string>
+    	<string name="btn_no">否</string>
+    	<string name="btn_sure">确定</string>
+    	<string name="btn_save">保存</string>
+    	<string name="btn_bind">绑定</string>
+    	<string name="btn_ignore">忽略</string>
+    	<string name="btn_unbind">取消绑定</string>
+    	<string name="btn_drop">放弃</string>
+    	<string name="btn_cancel">取消</string>
+    	<string name="btn_del">删除</string>
+    	<string name="btn_back">返回</string>
+    	<string name="btn_refresh">刷新</string>
+    	<string name="btn_devicesel">终端选择</string>
+    	<string name="btn_selectall">选择全部</string>
+    	<string name="btn_cancel_select">取消全部</string>
+        <string name="sending_request">正在发送请求...</string>
+        <string name="request_data">正在获取数据...</string>
+        <string name="request_data_fail">获取数据失败...</string>
+        <string name="set_data_success">设置数据成功...</string>
+        <string name="set_data_fail">设置数据失败...</string>
+        <string name="analyze_data_fail">解析数据失败...</string>
+        <string name="bottom_text">Copyright@2011-2015 www.360lbs.net</string>
+        
+        <string name="navtitle_location">即时跟踪</string>
+        <string name="navtitle_safe">GPS防盗</string>
+        <string name="navtitle_newrun">新的骑行</string>
+        <string name="navtitle_runrecord">历史记录</string>
+        <string name="navtitle_warning">告警选项</string>
+        <string name="navtitle_info">消息</string>  
+     	<string name="navtitle_setting">设置</string>  
+     	
+
+     	 	
+     	<string name="safe_text_title">GPS防盗</string>  
+     	<string name="safe_text_switch">防盗开关</string> 
+     	<string name="safe_text_set">范围设定</string>  
+     	<string name="safe_text_save">保存</string>  
+     	<string name="safe_text_location">定位当前位置</string>       	
+     	<string name="safe_text_noarea">当前无防盗围栏 </string>      
+     	<string name="safe_text_areasuccess">获取围栏成功</string>  
+     	<string name="safe_text_areaerror">围栏显示失败</string>  
+     	
+     	<string name="map_text_nodistance">无法计算距离</string>
+     	<string name="map_text_noself">未获取到位置信息</string>
+     	<string name="map_text_searchbike">正在追踪</string>  
+     		
+     	<string name="newbike_text_title">新的骑行</string>  
+     	<string name="newbike_text_start">开始</string>  
+     	<string name="newbike_text_pause">暂停</string> 
+     	<string name="newbike_text_stop">停止</string>  
+     	<string name="newbike_text_timeinterval">时长</string>  
+     	<string name="newbike_text_curspeed">当前速度(km/h)</string>  
+     	<string name="newbike_text_distance">距离(km)</string>  
+     	<string name="newbike_text_hightspeed">最高速度(km/h)</string>  
+     	<string name="newbike_text_averagespeed">平均速度(km/h)</string>  
+     	<string name="newbike_text_cal">卡路里</string>  
+     	<string name="newbike_text_height">海拔</string>  
+     	<string name="newbike_text_status_run">骑行记录中...</string>  
+     	<string name="newbike_text_status_pause">骑行暂停中...</string> 
+     	<string name="newbike_text_status_stop">未开始骑行...</string>  
+     	
+     	<string name="bikerecord_text_title">历史记录</string>  
+     	<string name="bikerecord_text_noRecord">当前无骑行轨迹</string>  
+        <string name="bikerecord_text_getRecordFail">获取骑行轨迹失败</string>  
+        <string name="bikerecord_text_del">删除轨迹</string>  
+      
+        <string name="bind_text_account">账号</string>  
+        <string name="bind_text_pwd">密码</string>  
+        <string name="bind_text_changepwd">修改密码</string>  
+        
+        <string name="maprecord_text_timeinterval">时长</string>  
+        <string name="maprecord_text_distance">公里数</string>  
+        <string name="maprecord_text_speed">平均速度 </string>  
+         
+         
+        <string name="toask_input_account">请输入账号</string>
+        <string name="toask_input_password">请输入密码</string>
+        <string name="toask_input_email">请输入邮箱</string>
+        <string name="toask_input_username">请输入用户名</string>
+        <string name="toask_input_phone">请输入手机号码</string>
+        <string name="toask_error_email">邮箱格式不正确，请重新输入</string>
+        <string name="toask_login_success">登陆成功</string>
+        <string name="toask_login_fail">登陆失败</string>
+        <string name="toask_register_success">注册成功</string>
+        <string name="toask_register_fail">注册失败</string>
+        <string name="toask_name_not_null">姓名不能为空</string>
+        <string name="toask_pwd_not_null">密码不能为空</string>
+        <string name="toask_newpwd_not_equal">新密码不一致</string>
+        <string name="toask_email_not_null">邮箱不能为空</string>
+        <string name="toask_phone_not_null">手机号码不能为空</string>
+        <string name="toask_birthday_not_null">生日不能为空</string>
+        <string name="toask_clockname_not_null">闹钟名称不能为空</string>
+        <string name="toask_error_phone">手机号码格式不正确，请重新输入</string>
+        <string name="toask_error_birthday">生日格式不正确，请重新输入</string>
+        <string name="toask_error_time">开始时间必须小于结束时间</string>
+        <string name="toask_error_guard_time">关注时间不能有重复</string>
+        <string name="toask_error_number">请输入正确的数字</string>
+        <string name="toask_request_success">请求发送成功</string>
+        <string name="toask_request_fail">请求失败</string>
+        <string name="toask_tip_unbind">未绑定设备，请先绑定设备</string>
+        <string name="toask_tip_unable_shutdown">终端不在线，不能进行关机</string>
+        <string name="toask_tip_unable_listener">终端不在线，不能进行监听</string>
+        <string name="toask_tip_unable_setting">终端不在线，不能进行设置</string>
+        <string name="toask_tip_bind_success">绑定设备成功</string>
+        <string name="toask_tip_bind_fail">绑定设备失败</string>
+        <string name="toask_tip_unbind_success">解除绑定成功</string>
+        <string name="toask_tip_unbind_fail">解除绑定失败</string>
+        <string name="toask_tip_unable_distance">当前无法比较距离</string>
+        <string name="toask_tip_unable_focus">当前无位置信息</string>
+        <string name="toask_tip_del_fail">删除消息失败</string>
+        <string name="toask_tip_msg_success">删除消息成功</string>
+        <string name="toask_tip_no_msg_del">无消息可删除</string>
+        <string name="toask_device_not_line">当前设备离线，不能设置</string>
+        <string name="toask_setArea_success">设置防盗成功</string>
+        <string name="toask_delArea_success">取消防盗成功</string>  
+        <string name="toask_saveRecord_success">保存成功</string>
+        <string name="toask_saveRecord_fail">保存失败</string>
+        <string name="toask_unsave_record">未能形成有效的骑行记录</string>  
+        
+        
+        <string name="popwindow_title_bind">绑定设备账号</string>      
+        <string name="popwindow_title_listener">设备监听</string>
+        <string name="popwindow_title_sex">性别选择</string>  
+        <string name="popwindow_title_date">日期选择</string>
+        <string name="popwindow_text_account">账号：</string>
+        <string name="popwindow_text_pwd">密码：</string>    
+        <string name="popwindow_text_localphone">回拨号码：</string> 
+        
+        <string name="dialog_title_exitRun">是否放弃当前骑行</string>
+        <string name="dialog_msg_exitRun">您确定要放弃骑行吗?</string> 
+        <string name="dialog_title_saveRun">是否保存当前骑行</string>
+        <string name="dialog_msg_saveRun">是否保存当前骑行?</string> 
+        <string name="dialog_title_exit">是否退出蘑菇兄弟</string>
+        <string name="dialog_msg_exit">您确定要离开蘑菇兄弟吗?</string> 
+        <string name="dialog_title_unbind">解绑设备</string>
+        <string name="dialog_msg_message">您确定要解绑该设备吗?</string> 
+        <string name="dialog_title_gogps">打开GPS</string>
+        <string name="dialog_msg_gogps">检测到您未开启GPS定位，是否前去打开？</string>     
+        <string name="dialog_title_bind">未绑定蘑菇伴侣</string>
+        <string name="dialog_msg_bind">实时跟踪和GPS防盗系统功能将在绑定蘑菇伴侣后生效</string>     
+        
+        
+        <string name="login_hint_account">输入云友号码</string>
+        <string name="login_hint_password">输入密码</string>
+        <string name="login_btn_login">登 录</string>
+        <string name="login_checkbox_save_password">记住密码</string>
+        <string name="login_tv_forget_password">找回密码</string>
+        <string name="login_tv_register">注册新用户</string>
+        <string name="login_sending">正在登陆...</string>
+    
+       
+        <string name="register_text_register">注册账号</string>
+        <string name="register_btn_register">注 册</string>
+        <string name="register_text_email"> 邮 箱:</string>
+        <string name="register_text_username">用户名:</string>
+        <string name="register_text_password"> 密 码:</string>
+        <string name="register_text_phone">手机号:</string>
+        <string name="register_hint_email">方便找回密码</string>
+        <string name="register_hint_username">输入用户名</string>
+        <string name="register_hint_password">输入密码</string>
+        <string name="register_hint_phone">输入手机号</string>    
+        <string name="register_tip">提示 \n填写邮箱方便您找回密码及了解更多关于KaleTn</string>
+       
+        
+        <string name="main_tab_text_pos">位置</string>
+        <string name="main_tab_text_friend">云友</string>
+        <string name="main_tab_text_msg">消息</string>
+        <string name="main_tab_text_setting">设置</string>
+        
+        
+        
+        <string name="position_text_title">位置</string>
+        <string name="position_menu_distance">距离</string>
+        <string name="position_menu_listener">回拨监听</string>
+        <string name="position_menu_history">历史轨迹</string>
+        <string name="position_menu_pen">围栏签到</string>
+        <string name="position_menu_deviceset">终端设置</string>
+        <string name="position_menu_shutdown">关机</string>
+
+     
+        <string name="friend_text_title">云 友</string>
+        <string name="friend_title_unbind">解除绑定</string>
+        <string name="friend_msg_unbind">是否解除绑定？</string>
+        <string name="friend_msg_dev_cant_unbind">当前终端不能解绑</string>
+              
+        <string name="message_text_title">消息</string>
+        <string name="message_btn_send">发送</string>
+        <string name="msgdel_title">删除消息</string>
+        
+        <string name="warn_text_tip">友情提示：短信告警需要填写个人手机号码</string>  
+        <string name="warn_text_phone">手机号码</string>  
+        <string name="warn_text_way">告警方式</string>
+        <string name="warn_text_ring">铃声</string>
+        <string name="warn_text_vibre">振动</string>
+        <string name="warn_text_push">推送</string>
+        <string name="warn_text_msg">短信</string>    
+           
+        <string name="setting_text_title">设 置</string>
+        <string name="setting_text_person">个人信息</string>
+        <string name="setting_text_warn">告警选项</string>
+        <string name="setting_text_mogu">蘑菇伴侣</string>
+        <string name="setting_text_recharge">账户充值</string>
+        <string name="setting_text_password">更改密码</string>
+        <string name="setting_text_version">发现新版本</string>
+        <string name="setting_text_about">关于</string>
+        <string name="setting_text_help">帮助</string>
+        <string name="setting_text_offMap">离线地图下载</string>
+        <string name="setting_text_exit">登出</string>
+        <string name="setting_text_old_password">旧密码</string>
+        <string name="setting_text_new_password">新密码</string>
+        <string name="setting_text_new_password_again">再次输入新密码</string>
+        <string name="setting_text_balance">查询余额</string>
+        <string name="setting_text_meal">查询套餐</string>
+        <string name="setting_btn_logout">退出登录</string>
+        <string name="setting_commit_set">提交修改</string>       
+        <string name="setting_text_account">用户名</string>
+        <string name="setting_text_email">邮箱</string>
+        <string name="setting_text_phone">手机号码</string>
+        <string name="setting_text_name">昵称</string>
+        <string name="setting_text_sex">性别</string>
+        <string name="setting_text_birthday">生日</string>
+        <string name="setting_text_year">年</string>
+        <string name="setting_text_month">月</string>
+        <string name="setting_text_day">日</string>
+        <string name="setting_text_message">短信</string>
+        <string name="setting_text_email2">Email邮件</string>
+        <string name="setting_text_client">客户端消息</string>
+        <string name="setting_title_recharge">充值 </string>
+        <string name="setting_recharge_text1">移动充值卡 </string>
+        <string name="setting_recharge_text2">联通充值卡 </string>
+        <string name="setting_recharge_text3">电信充值卡 </string>
+        <string name="setting_recharge_text4">支付宝充值 </string>
+        <string name="setting_title_querybalance">查询余额 </string>
+        <string name="setting_querybalance_text1">账 号: </string>
+        <string name="setting_querybalance_text2">总余额: </string>
+        <string name="setting_querybalance_text3">账户使用套餐: </string>
+        <string name="setting_querybalance_text4">VIP有效期: </string>
+  	    <string name="setting_btn_recharge">立即充值</string>
+  	    <string name="setting_btn_recharge_record">充值记录</string>
+  	    <string name="setting_title_recharge_now">充值卡充值</string>
+  	    <string name="setting_title_recharge_record">充值记录</string>
+        
+        <string name="about_text_title">关于</string>
+        <string name="about_notice">\n\n本计算机软件程序受《中华人民共和国著作权法》及中华人民共和国最高人民法院相关司法解释、国际公约的保护。
+		本公司对本计算机软件程序的版权依上述法律及国际公约合法所有，任何未经授权许可而擅自复制、散布、反向编译或反向工程本软件程序的全部或部分，
+		均被视为对软件的侵权，必将受到严厉的民事追诉、甚至刑事追诉。对于已知的违反者，本公司必定根据上述法律及国际公约进行全面的法律制裁。
+	    </string>
+        
+       
+        
+        <string name="set_content_recharge"> 账户使用套餐:全能套餐 \n套餐到期时间：2012年12月01日</string> 
+        
+        <string name="device_text_title">终端设置</string>
+        
+            
+        <string name="keyset_text_title">监护设置</string>
+        <string name="keyset_title_poptitle">修改按键设置</string>
+        <string name="keyset_btn_text">保存</string>
+        <string name="keyset_btn_permiss">权限</string>
+        <string name="keyset_permission_poptitle">权限设置</string>
+        <string name="keyset_vertify_pre">按键</string>
+        <string name="keyset_vertify_name_last">名字不能为空</string>
+        <string name="keyset_vertify_phone_last">手机号码不正确</string>
+        <string name="keyset_hint_name">姓名</string>
+        <string name="keyset_hint_phone">手机号码</string>
+            
+        <string name="whitelist_text_title">白名单设置</string>
+        <string name="whitelist_title_poptitle">添加白名单</string>
+        <string name="whitelist_text_name">姓名：</string>
+        <string name="whitelist_text_phone">手机号码：</string>
+  		<string name="whitelist_text_phone2">手机：</string>
+        
+        <string name="clock_text_title">闹钟设置</string>
+        <string name="clock_btn_addclock">添加闹钟</string>
+        <string name="clock_text_name">名称：</string>
+        <string name="clock_text_time">时间：</string>
+        <string name="clock_text_week">每周设置：</string>
+        <string name="clock_text_poptitle">选取</string>
+        <string name="clock_time_poptitle">时间设置</string>
+        <string name="clock_name_poptitle">闹钟名称</string>
+        <string name="clock_text_tip">是否删除该闹钟</string>
+        <string name="clock_text_prompt">长按可删除闹钟</string>
+        
+        <string name="scenemode_text_title">情景模式</string>
+        <string name="phonecall_text_title">来电模式</string>
+        <string name="powermode_text_title">省电模式</string>
+        
+            
+       
+        <string name="guardtime_text_title1">关注时段</string>
+        <string name="guardtime_text_title2">忽略时段</string>
+        <string name="guardtime_text_title3">休眠时段</string>  
+        
+  		<string name="guardtime_btn_addtime">增加时段</string>
+        <string name="guardtime_starttime">开始：</string>
+        <string name="guardtime_endtime">结束：</string>
+            
+            
+        <string name="simple_text_title1">低电告警</string>
+        <string name="simple_text_title2">通话时长</string>
+        <string name="simple_textpre1">报警阀值</string>
+        <string name="simple_textlast1">%</string>
+        <string name="simple_textpre2">通话时长设置</string>
+        <string name="simple_textlast2">分钟</string>
+        
+        
+  
+    
+    
+	
+	<!-- 静默设置和GPS持续上报时间页面ReportTimeActivity -->
+	<string name="reportTime_silent_txt">温馨提示：设置终端免打扰时段(不能有重复，最多三个)！</string>
+	<string name="reportTime_gps_txt">温馨提示：设置终端GPS持续时段(在规定的时间段内持续上报位置信息，不能有重复，最多三个)！</string>
+	<string name="reportTime_startTime1">起始时间:</string>
+	<string name="reportTime_endTime1">结束时间:</string>
+	<string name="reportTime_startTime">起始时间</string>
+	<string name="reportTime_endTime">结束时间</string>
+	<string name="reportTime_txtBefore">结束时间必须在起始时间之后！</string>
+	<string name="reportTime_txtHave1">所设置的</string>
+	<string name="reportTime_txtHave2">时段中有重复时段，请检查！</string>
+	<string name="reportTime_weekSet1">星期:</string>
+	<string name="reportTime_weekSet">星期</string>
+	<string name="reportTime_weekSetNote">请选择周期时间（星期）！</string>
+	
+	
+	
+	
+	
+	
+	<!-- 支付宝页面 -->
+	<string name="confirm_install_hint">"安装提示"</string>	
+	<string name="confirm_install">"为保证您的交易安全，需要您安装支付宝安全支付服务，才能进行付款。\n\n点击确定，立即安装。"</string>
+	
+	<string name="Ensure">"确定"</string>
+	<string name="Cancel">"取消"</string>
+	<string name="check_sign_failed">您的订单信息已被非法篡改。</string> 
+	
+        
+</resources>

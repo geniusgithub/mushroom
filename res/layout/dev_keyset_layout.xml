@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/device_bg" >
+
+
+    <RelativeLayout 
+        android:id="@+id/title_bar"
+        android:orientation="vertical"
+        android:background="@drawable/title_bar" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+        <Button android:id="@+id/btn_back" android:layout_centerVertical="true" android:layout_marginLeft="10dp" android:paddingLeft="5dp" android:textSize="18.0sp" android:textColor="#ffffff"  android:background="@drawable/selector_btn_back" android:layout_width="wrap_content" android:layout_height="wrap_content"   android:text="@string/btn_back" />
+        <TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/keyset_text_title" />
+    </RelativeLayout>
+     	
+        
+       <RelativeLayout
+           android:id="@+id/rl_keyset1"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:background="@drawable/leba_bg_single_selector"
+           android:layout_below="@id/title_bar"
+     	   android:layout_marginLeft="10.0dip" 
+	       android:layout_marginTop="10.0dip" 
+	       android:layout_marginRight="10.0dip"
+	       android:paddingTop="10dp"
+	       android:paddingBottom="10dp"
+	       android:clickable="true">
+       
+           <ImageView
+               android:id="@+id/ivHead1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentLeft="true"
+               android:layout_marginLeft="10dp"
+               android:layout_centerVertical="true"
+               android:src="@drawable/default_head">
+           </ImageView>
+           
+            <LinearLayout 
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_toRightOf="@id/ivHead1"
+               android:layout_marginLeft="10dp"
+               android:layout_centerVertical="true"
+               android:orientation="vertical">
+                
+                	   <TextView
+		               android:id="@+id/tvName1"
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:hint="@string/keyset_hint_name"
+		               android:textColor="#000000"
+		               android:textSize="18sp"/>  
+		               
+                
+		               <TextView
+		               android:id="@+id/tvPhone1"
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:hint="@string/keyset_hint_phone"
+		               android:textColor="#000000"
+		               android:textSize="18sp"/>  
+                
+                
+            </LinearLayout>
+           
+               
+            <CheckBox
+               android:id="@+id/checkBox1"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:button="@null"
+               android:layout_alignParentRight="true"
+               android:layout_marginRight="10dp"
+               android:layout_centerVertical="true"
+               android:background="@drawable/selector_checkbox2"/>
+           
+       </RelativeLayout>
+       
+       <RelativeLayout
+           android:id="@+id/rl_keyset2"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:background="@drawable/leba_bg_single_selector"
+           android:layout_below="@id/rl_keyset1"
+     	   android:layout_marginLeft="10.0dip" 
+	       android:layout_marginTop="10.0dip" 
+	       android:layout_marginRight="10.0dip"
+	       android:paddingTop="10dp"
+	       android:paddingBottom="10dp"
+	       android:clickable="true">   
+	       
+
+           
+           <ImageView
+               android:id="@+id/ivHead2"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentLeft="true"
+               android:layout_marginLeft="10dp"
+               android:layout_centerVertical="true"
+               android:src="@drawable/default_head">
+           </ImageView>
+           
+               
+              <LinearLayout 
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_toRightOf="@id/ivHead2"
+               android:layout_marginLeft="10dp"
+               android:layout_centerVertical="true"
+               android:orientation="vertical">
+                
+                	   <TextView
+		               android:id="@+id/tvName2"
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:hint="@string/keyset_hint_name"
+		               android:textColor="#000000"
+		               android:textSize="18sp"/>  
+		               
+                
+		               <TextView
+		               android:id="@+id/tvPhone2"
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:hint="@string/keyset_hint_phone"
+		               android:textColor="#000000"
+		               android:textSize="18sp"/>  
+                
+                
+            </LinearLayout>
+            
+            <CheckBox
+               android:id="@+id/checkBox2"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:button="@null"
+               android:layout_alignParentRight="true"
+               android:layout_marginRight="10dp"
+               android:layout_centerVertical="true"
+               android:background="@drawable/selector_checkbox2"/>
+        
+       </RelativeLayout>
+       
+       <RelativeLayout
+           android:id="@+id/rl_keyset3"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:background="@drawable/leba_bg_single_selector"
+           android:layout_below="@id/rl_keyset2"
+     	   android:layout_marginLeft="10.0dip" 
+	       android:layout_marginTop="10.0dip" 
+	       android:layout_marginRight="10.0dip"
+	       android:paddingTop="10dp"
+	       android:paddingBottom="10dp"
+	       android:clickable="true">  
+	       
+           
+           <ImageView
+               android:id="@+id/ivHead3"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentLeft="true"
+               android:layout_marginLeft="10dp"
+               android:layout_centerVertical="true"
+               android:src="@drawable/default_head">
+           </ImageView>
+           
+               
+          <LinearLayout 
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_toRightOf="@id/ivHead3"
+               android:layout_marginLeft="10dp"
+               android:layout_centerVertical="true"
+               android:orientation="vertical">
+                
+                	   <TextView
+		               android:id="@+id/tvName3"
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:hint="@string/keyset_hint_name"
+		               android:textColor="#000000"
+		               android:textSize="18sp"/>  
+		               
+                
+		               <TextView
+		               android:id="@+id/tvPhone3"
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:hint="@string/keyset_hint_phone"
+		               android:textColor="#000000"
+		               android:textSize="18sp"/>  
+                
+                
+            </LinearLayout>
+            
+            <CheckBox
+               android:id="@+id/checkBox3"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:button="@null"
+               android:layout_alignParentRight="true"
+               android:layout_marginRight="10dp"
+               android:layout_centerVertical="true"
+               android:background="@drawable/selector_checkbox2"/>
+
+       </RelativeLayout>
+       
+       <RelativeLayout
+           android:id="@+id/rl_keyset4"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content"
+           android:background="@drawable/leba_bg_single_selector"
+           android:layout_below="@id/rl_keyset3"
+     	   android:layout_marginLeft="10.0dip" 
+	       android:layout_marginTop="10.0dip" 
+	       android:layout_marginRight="10.0dip"
+	       android:paddingTop="10dp"
+	       android:paddingBottom="10dp"
+	       android:clickable="true">   
+	       
+
+           
+           <ImageView
+               android:id="@+id/ivHead4"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignParentLeft="true"
+               android:layout_marginLeft="10dp"
+               android:layout_centerVertical="true"
+               android:src="@drawable/default_head">
+           </ImageView>
+           
+               
+        	<LinearLayout 
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_toRightOf="@id/ivHead4"
+               android:layout_marginLeft="10dp"
+               android:layout_centerVertical="true"
+               android:orientation="vertical">
+                
+                	   <TextView
+		               android:id="@+id/tvName4"
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:hint="@string/keyset_hint_name"
+		               android:textColor="#000000"
+		               android:textSize="18sp"/>  
+		               
+                
+		               <TextView
+		               android:id="@+id/tvPhone4"
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:hint="@string/keyset_hint_phone"
+		               android:textColor="#000000"
+		               android:textSize="18sp"/>  
+                
+                
+            </LinearLayout>
+              
+            <CheckBox
+               android:id="@+id/checkBox4"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:button="@null"
+               android:layout_alignParentRight="true"
+               android:layout_marginRight="10dp"
+               android:layout_centerVertical="true"
+               android:background="@drawable/selector_checkbox2"/>
+           
+       </RelativeLayout>
+       
+                   
+
+       <Button
+        android:id="@+id/btn_save"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+     	android:layout_marginLeft="10.0dip" 
+	    android:layout_marginBottom="10.0dip" 
+	    android:layout_marginRight="10.0dip"   
+	    android:background="@drawable/selector_btn_white"   
+        android:text="@string/keyset_btn_text"
+        style="@style/text_whitebtn_style" />
+           
+
+
+</RelativeLayout>

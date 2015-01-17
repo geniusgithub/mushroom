@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/device_bg" >
+
+    <RelativeLayout
+        android:id="@+id/title_bar"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bar"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/btn_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/selector_btn_back"
+            android:paddingLeft="5dp"
+            android:text="@string/btn_back"
+            android:textColor="#ffffff"
+            android:textSize="18.0sp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="20.0sp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        style="@style/leba_bg_layout"
+        android:layout_below="@id/title_bar" >
+
+        <LinearLayout      
+            style="@style/leba_bg_top_layout"
+            android:clickable="false"
+            android:minHeight="60dp" >
+
+                    <LinearLayout   
+                    android:id="@+id/ll_starttime"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_marginLeft="15dp"
+			        android:layout_weight="1" >
+			        
+                            <TextView
+			                android:layout_width="60dp"
+			                android:layout_height="wrap_content"
+			    
+			                android:text="@string/guardtime_starttime"
+			                android:textColor="#7e7e7e"
+			                android:textSize="15sp" />
+			
+			                <TextView
+			                android:id="@+id/tvstartTime"
+			                android:layout_width="fill_parent"
+			                android:layout_height="wrap_content"
+			                android:layout_marginLeft="5dp"
+			                android:textColor="#0098fe"
+			                android:textSize="15sp" />
+            
+			        </LinearLayout>
+        
+                    
+                    <LinearLayout
+                    android:id="@+id/ll_endtime"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_weight="1" >
+			                
+                            <TextView
+			                android:layout_width="60dp"
+			                android:layout_height="wrap_content"
+			                android:layout_marginLeft="5dp"
+			                android:text="@string/guardtime_endtime"
+			                android:textColor="#7e7e7e"
+			                android:textSize="15sp" />
+			
+			                <TextView
+			                android:id="@+id/tvendTime"
+			                android:layout_width="fill_parent"
+			                android:layout_height="wrap_content"
+			                android:layout_marginLeft="5dp"
+			                android:textColor="#0098fe"
+			                android:textSize="15sp" />
+			                
+			                
+			        </LinearLayout>
+                
+          
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="1.0px"
+            android:background="@color/shape_line" />
+
+        <LinearLayout
+            android:id="@+id/weektimeLayout"
+            style="@style/leba_bg_bottom_layout"
+            android:minHeight="60dp" >
+
+            <TextView
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:text="@string/clock_text_week"
+                android:textColor="#7e7e7e"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/tvweekTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="#0098fe"
+                android:textSize="15sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottom_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10.0dip"
+        android:layout_marginLeft="10.0dip"
+        android:layout_marginRight="10.0dip" >
+
+        <Button
+            android:id="@+id/btn_ok"
+            style="@style/text_whitebtn_style"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5.0dip"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_white"
+            android:text="@string/btn_sure" />
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="@style/text_whitebtn_style"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5.0dip"
+            android:layout_weight="1"
+            android:background="@drawable/selector_btn_white"
+            android:text="@string/btn_cancel" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>

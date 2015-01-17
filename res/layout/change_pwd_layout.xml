@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/common_bg" >
+    
+
+
+    <RelativeLayout 
+        android:id="@+id/title_bar"
+        android:orientation="vertical"
+        android:background="@drawable/title_bar" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+        <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_btn_back"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="15dp">      
+        </Button>
+        <TextView android:id="@+id/tv_title" android:text="@string/setting_text_password" android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+            <Button 
+             android:id="@+id/btn_save"  
+             android:layout_marginRight="10dp" 
+             android:layout_alignParentRight="true" 
+             android:layout_centerVertical="true" 
+             android:layout_width="wrap_content" 
+             android:layout_height="wrap_content"
+             android:textColor="#ffffff"
+             android:textSize="18sp"
+             android:background="@drawable/selector_btn_add_clock"
+             android:text="@string/btn_save"/>
+        </RelativeLayout>
+    
+
+    <LinearLayout    
+      android:layout_below="@id/title_bar"
+	  android:orientation="vertical" 
+	  android:layout_width="fill_parent" 
+	  android:layout_height="fill_parent">
+                            
+	            
+        <LinearLayout 
+        android:id="@+id/ll_birthdayview"
+        android:orientation="vertical" 
+        android:background="@drawable/shape_bg" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10.0dip" 
+        android:layout_marginTop="20.0dip" 
+        android:layout_marginRight="10.0dip">
+            
+            <LinearLayout  android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="50.0dip" >
+            	<TextView android:textSize="18.0sp" android:textColor="#6d6d6d"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp"  android:text="@string/setting_text_old_password"/>
+            	<EditText android:id="@+id/et_oldpwd"  android:textSize="16.0sp"  android:inputType="textPassword" android:textColor="#ff545454" android:background="@android:color/white" android:paddingLeft="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="15.0dip" />
+       		</LinearLayout>
+       		
+			<View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+                                 
+            <LinearLayout  android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="50.0dip" >
+            	<TextView android:textSize="18.0sp" android:textColor="#6d6d6d"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp"  android:text="@string/setting_text_new_password"/>
+            	<EditText android:id="@+id/et_newpwd1"  android:inputType="textPassword"  android:textSize="16.0sp" android:textColor="#ff545454" android:background="@android:color/white" android:paddingLeft="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="15.0dip"  />
+       		</LinearLayout>
+       		
+            <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+                                 
+            <LinearLayout  android:gravity="center_vertical" android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="50.0dip" >
+            	<TextView android:textSize="18.0sp" android:textColor="#6d6d6d"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="10dp"  android:text="@string/setting_text_new_password_again"/>
+            	<EditText android:id="@+id/et_newpwd2"  android:inputType="textPassword"  android:textSize="16.0sp" android:textColor="#ff545454" android:background="@android:color/white" android:paddingLeft="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:layout_marginRight="15.0dip"  />
+       		</LinearLayout>
+        </LinearLayout>    
+
+
+    </LinearLayout> 
+  
+
+</RelativeLayout>

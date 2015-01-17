@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    
+ 
+    
+    
+  <LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/testicon">   
+    </ImageView>
+    
+        			<Button
+			        android:id="@+id/btn_test"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="test" />
+
+    			    <Button
+			        android:id="@+id/btn_insert"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="insert" />
+    			    
+    			    <Button
+			        android:id="@+id/btn_del"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="del" />
+    			        			    
+    			    <Button
+			        android:id="@+id/btn_query"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="query" />
+    			    
+			    <Button
+			        android:id="@+id/button1"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="按键设置" />
+			
+			    <Button
+			        android:id="@+id/button2"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取按键设置" />
+			
+			    <Button
+			        android:id="@+id/button3"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="通话时长设置" />
+			
+			    <Button
+			        android:id="@+id/button4"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取通话时长" />
+			
+						
+			
+			    <Button
+			        android:id="@+id/button5"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="白名单设置" />
+			
+			    <Button
+			        android:id="@+id/button6"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取白名单" />
+			
+			    <Button
+			        android:id="@+id/button7"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="闹钟设置" />
+			
+			    <Button
+			        android:id="@+id/button8"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取闹钟" />
+			    
+			    
+			    
+			    
+			        <Button
+			        android:id="@+id/button9"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="情景模式" />
+			        
+			        <Button
+			        android:id="@+id/button10"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取情景" />
+			            
+			        <Button
+			        android:id="@+id/button11"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="电源设置" />
+			                
+			                
+			        <Button
+			        android:id="@+id/button12"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取电源设置" />
+			                    
+			                        <Button
+			        android:id="@+id/button13"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="低电量设置" />
+			                        
+			                            <Button
+			        android:id="@+id/button14"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取低电量" />
+			                            
+			                                <Button
+			        android:id="@+id/button15"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="GPS间隔设置" />
+			                                
+			                                
+			        <Button
+			        android:id="@+id/button16"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取GPS间隔" />
+			                                    
+			        <Button
+			        android:id="@+id/button17"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="GPS上报时间设置" />
+			                                        
+			                                        
+			        <Button
+			        android:id="@+id/button18"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取GPS上报时间" />
+			        
+			        <Button
+			        android:id="@+id/button19"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="远程监听" />
+			        
+			        <Button
+			        android:id="@+id/button20"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="修改密码" />
+			        
+			        <Button
+			        android:id="@+id/button21"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="修改用户信息" />
+			            
+			            
+			        <Button
+			        android:id="@+id/button22"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取用户信息" />
+			        
+			        <Button
+			        android:id="@+id/button23"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="注销用户" />
+			        
+			        <Button
+			        android:id="@+id/button24"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="心跳包" />
+			        
+			        <Button
+			        android:id="@+id/button25"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="位置获取" />
+			        
+			        <Button
+			        android:id="@+id/button26"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="绑定设备" />
+			        
+			        <Button
+			        android:id="@+id/button27"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="解除绑定" />
+			        
+			        <Button
+			        android:id="@+id/button28"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="在线状态获取" />
+			        
+			        <Button
+			        android:id="@+id/button29"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="消息获取" />
+			        	        
+			        <Button
+			        android:id="@+id/button30"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="查询未读消息" />	    
+			        
+			        <Button
+			        android:id="@+id/button31"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取套餐列表" />	  
+			        
+			        	        
+			        <Button
+			        android:id="@+id/button32"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="创建订单" />	  
+			        
+			        <Button
+			        android:id="@+id/button33"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取区域位置" />
+			        
+			        <Button
+			        android:id="@+id/button34"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取历史轨迹" />
+			        
+			        <Button
+			        android:id="@+id/button35"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="test" />
+			         
+			       <Button
+			        android:id="@+id/button36"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="下载头像" />
+			       
+			       
+			       	<Button
+			        android:id="@+id/button37"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="设置防盗" />
+			       	
+			       	<Button
+			        android:id="@+id/button38"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="取消防盗" />
+
+			       	
+			       	<Button
+			        android:id="@+id/button39"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="设置头像" />
+			       	
+			       	<Button
+			        android:id="@+id/button40"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取告警" />
+			       	
+			       	<Button
+			        android:id="@+id/button41"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="开始骑行" />
+			       	
+			       	<Button
+			        android:id="@+id/button42"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="暂停骑行" />
+			       			       	
+			       	<Button
+			        android:id="@+id/button43"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="停止骑行" />
+			       	
+			       	<Button
+			        android:id="@+id/button44"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取骑行状态" />
+			       	
+			       	<Button
+			        android:id="@+id/button45"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取骑行总记录" />
+			       	
+			       	<Button
+			        android:id="@+id/button46"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取骑行轨迹" />
+			       	
+			       	<Button
+			        android:id="@+id/button47"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="设置防盗" />
+			       	
+			       	<Button
+			        android:id="@+id/button48"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="取消防盗" />
+			       	
+
+			       	
+			       	<Button
+			        android:id="@+id/button49"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="设置告警" />
+			       	
+			       	<Button
+			        android:id="@+id/button50"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="获取防盗" />
+			       	
+			       	<Button
+			        android:id="@+id/button51"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:text="发送通知" />
+			        	        
+	</LinearLayout>
+
+</ScrollView>

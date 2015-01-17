@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+    
+    <View 
+        android:background="@drawable/vertical_line" 
+        android:layout_width="1dp" 
+        android:layout_height="fill_parent" 
+        android:layout_centerHorizontal="true"/>
+            
+    <RelativeLayout 
+    android:id="@+id/rl_newbiketitle"
+    android:orientation="vertical"
+    android:background="@drawable/title_bar" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content">
+    	<TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/newbike_text_title" />
+	</RelativeLayout>
+   		
+        
+	    <LinearLayout 
+	    android:id="@+id/ll_newbiketop"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/rl_newbiketitle"
+	    android:orientation="vertical">
+        		
+
+	            <RelativeLayout 
+			    android:layout_width="fill_parent" 
+			    android:layout_height="wrap_content"
+			    android:background="@color/white"
+			    android:padding="15dp">
+	                  <TextView 
+	                  android:id="@+id/tv_timeinterval"
+	       		      android:layout_width="wrap_content" 
+	       		      android:layout_height="wrap_content" 
+	       		      android:layout_centerInParent="true"
+	       		      android:text="01:38:56"
+	       		      android:textSize="25.0sp" 
+	       		      android:textColor="@color/black"  />
+	            </RelativeLayout>
+    
+         		<View android:background="@drawable/horizontal_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+
+	            <LinearLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal"
+			    android:padding="10dp">
+	      	        <RelativeLayout 
+				    android:layout_width="fill_parent" 
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1">    
+				    	  <TextView 
+				    	  android:id="@+id/tv_speed"
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_centerInParent="true"
+		       		      android:text="38.56"
+		       		      android:textSize="20.0sp" 
+		       		      android:textColor="@color/black"  />  	            
+	      	        </RelativeLayout>
+	      	        
+<!-- 	      	        <View android:background="@drawable/shape_line" android:layout_width="1.0px" android:layout_height="100dp" /> -->
+	            	<View android:background="?android:attr/listDivider" android:layout_width="1.0px" android:layout_height="fill_parent" />
+	      	        	            
+	                <RelativeLayout 
+				    android:layout_width="fill_parent" 
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1">      	
+				    	  <TextView 
+				    	  android:id="@+id/tv_distance"
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_centerInParent="true"
+		       		      android:text="51.29"
+		       		      android:textSize="20.0sp" 
+		       		      android:textColor="@color/black"  />              
+	      	        </RelativeLayout>
+	      	        
+	            </LinearLayout>
+	                  
+	            <View android:background="@drawable/horizontal_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+	            
+        	    <LinearLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal"
+			    android:padding="10dp">
+	      	        <RelativeLayout 
+				    android:layout_width="fill_parent" 
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1">    
+				    	  <TextView 
+				    	  android:id="@+id/tv_hspeed"
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_centerInParent="true"
+		       		      android:text="38.56"
+		       		      android:textSize="20.0sp" 
+		       		      android:textColor="@color/black"  />  	            
+	      	        </RelativeLayout>
+	      	        
+	                <RelativeLayout 
+				    android:layout_width="fill_parent" 
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1">      	
+				    	  <TextView 
+				    	  android:id="@+id/tv_lspeed"
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_centerInParent="true"
+		       		      android:text="51.29"
+		       		      android:textSize="20.0sp" 
+		       		      android:textColor="@color/black"  />              
+	      	        </RelativeLayout>
+	      	        
+	            </LinearLayout>
+	            
+        	    <View android:background="@drawable/horizontal_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+	            
+        	    <LinearLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content"
+			    android:orientation="horizontal"
+			    android:padding="10dp">
+	      	        <RelativeLayout 
+				    android:layout_width="fill_parent" 
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1">    
+				    	  <TextView 
+				    	  android:id="@+id/tv_cal"
+		       		      android:layout_width="wrap_content" 
+		       		      android:layout_height="wrap_content" 
+		       		      android:layout_centerInParent="true"
+		       		      android:text="38.56"
+		       		      android:textSize="20.0sp" 
+		       		      android:textColor="@color/black"  />  	            
+	      	        </RelativeLayout>
+	      	        
+	                <RelativeLayout 
+				    android:layout_width="fill_parent" 
+				    android:layout_height="wrap_content"
+				    android:layout_weight="1">      	
+<!-- 				    	  <TextView  -->
+<!-- 		       		      android:layout_width="wrap_content"  -->
+<!-- 		       		      android:layout_height="wrap_content"  -->
+<!-- 		       		      android:layout_centerInParent="true" -->
+<!-- 		       		      android:text="51.29" -->
+<!-- 		       		      android:textSize="20.0sp"  -->
+<!-- 		       		      android:textColor="@color/black"  />               -->
+	      	        </RelativeLayout>
+	      	        
+	            </LinearLayout>
+	            
+        	    <RelativeLayout 
+			    android:layout_width="match_parent"
+			    android:layout_height="wrap_content">
+	                
+        	        <RelativeLayout 
+        	        android:id="@+id/rl_lock"
+				    android:layout_width="wrap_content"
+				    android:layout_height="wrap_content"
+				    android:layout_centerInParent="true"
+				    android:background="@drawable/red_background">
+        	             <CheckBox
+        	             android:id="@+id/cb_lock"
+				         android:layout_width="wrap_content"
+				         android:layout_height="wrap_content"
+				         android:layout_centerInParent="true"
+				         android:button="@drawable/selector_checkbox_lock"/>
+        	        </RelativeLayout>
+
+        	        <Button
+        	        android:id="@+id/btn_start"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_toLeftOf="@id/rl_lock"
+			        android:background="@drawable/selector_btn_black"
+			        android:text="@string/newbike_text_start"
+			        android:textColor="#ffffffff"
+			        android:textSize="18.0sp" />
+        	        
+        	        <Button
+        	        android:id="@+id/btn_stop"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_toRightOf="@id/rl_lock"
+			        android:background="@drawable/selector_btn_black"
+			        android:text="@string/newbike_text_stop"
+			        android:textColor="#ffffffff"
+			        android:textSize="18.0sp" />
+        	        	            	
+	            </RelativeLayout>
+
+        	    		        	
+        </LinearLayout>      	
+        
+	    <RelativeLayout 
+	    android:layout_below="@id/ll_newbiketop"
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">
+	        <com.amap.api.maps.MapView
+	        android:id="@+id/map"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent" />
+	    </RelativeLayout>
+    
+    
+</RelativeLayout>

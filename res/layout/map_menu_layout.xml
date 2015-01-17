@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content" 
+    android:background="@drawable/map_menu_view"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        
+        <Button
+        android:id="@+id/btn_menu_distance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/position_menu_distance"
+        style="@style/TextMapMenuItem"
+        android:background="@drawable/selector_btn_distance" />
+
+        <View android:background="@drawable/vertical_line" android:layout_width="2.0dp" android:layout_height="fill_parent" />
+        
+        <Button
+        android:id="@+id/btn_menu_history"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/position_menu_history"
+        style="@style/TextMapMenuItem"
+        android:background="@drawable/selector_btn_history" />
+
+        <View android:background="@drawable/vertical_line" android:layout_width="2.0dp" android:layout_height="fill_parent" />
+        
+         <Button
+         android:id="@+id/btn_menu_pen"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/position_menu_pen"
+         style="@style/TextMapMenuItem"
+         android:background="@drawable/selector_btn_pen" />
+      
+    </LinearLayout>
+    
+   <View android:background="@drawable/horizontal_line" android:layout_width="fill_parent" android:layout_height="2.0px" /> 
+                     
+                     
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+        
+         <Button
+         android:id="@+id/btn_menu_listener"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/position_menu_listener"
+         style="@style/TextMapMenuItem"
+         android:background="@drawable/selector_btn_listener" />
+        
+                
+         <View android:background="@drawable/vertical_line" android:layout_width="2.0dp" android:layout_height="fill_parent" />
+          
+          <Button
+          android:id="@+id/btn_menu_shutdown"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/position_menu_shutdown"
+          style="@style/TextMapMenuItem"
+          android:background="@drawable/selector_btn_shutdown" />
+
+         <View android:background="@drawable/vertical_line" android:layout_width="2.0dp" android:layout_height="fill_parent" />
+      	
+         <Button
+         android:id="@+id/btn_menu_deviceset"
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/position_menu_deviceset"
+         style="@style/TextMapMenuItem"
+         android:background="@drawable/selector_btn_deviceset" />
+        	  
+    </LinearLayout>
+
+</LinearLayout>
+

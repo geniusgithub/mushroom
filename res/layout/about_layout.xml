@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/act_content_bg">
+
+   <RelativeLayout 
+        android:id="@+id/title_bar"
+        android:orientation="vertical"
+        android:background="@drawable/title_bar" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+        <Button android:id="@+id/btn_back" android:layout_centerVertical="true" android:layout_marginLeft="10dp" android:paddingLeft="5dp" android:textSize="18.0sp" android:textColor="#ffffff"  android:background="@drawable/selector_btn_back" android:layout_width="wrap_content" android:layout_height="wrap_content"    />
+        <TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_text_about"/>
+    </RelativeLayout>
+    
+            
+    <ImageView 
+        android:layout_marginTop="30.0dip"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:src="@drawable/icon"/>
+        
+    <TextView
+        android:id="@+id/textView"
+        android:textColor="#ff222222"
+        android:textSize="14sp"
+  		android:typeface="serif"
+  		android:lineSpacingExtra="5dp"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20.0dip"
+        android:layout_marginTop="10.0dip"
+        android:layout_marginRight="20.0dip"/>
+<!--         android:text="@string/about_notice" /> -->
+
+       
+</LinearLayout>
+
+

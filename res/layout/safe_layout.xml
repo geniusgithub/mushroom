@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/safe_background"
+    android:orientation="vertical">
+            
+        <RelativeLayout 
+        android:orientation="vertical"
+        android:background="@drawable/title_bar" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+            <Button
+	        android:id="@+id/btn_back"
+	        android:layout_width="wrap_content" 
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/selector_btn_back"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="15dp"/> 
+        	<TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/safe_text_title" />
+   		
+   		     <Button 
+             android:id="@+id/btn_save"  
+             android:layout_marginRight="10dp" 
+             android:layout_alignParentRight="true" 
+             android:layout_centerVertical="true" 
+             android:layout_width="wrap_content" 
+             android:layout_height="wrap_content"
+             android:textColor="#ffffff"
+             android:textSize="18sp"
+             android:background="@drawable/selector_btn_add_clock"
+             android:text="@string/safe_text_save"/>
+   		</RelativeLayout>
+   		
+        
+	    <LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_marginLeft="15dp"
+	    android:layout_marginRight="15dp"
+	    android:orientation="vertical">
+        		
+        	<LinearLayout 
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/leba_shape_bg"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:clickable="false">
+                    <TextView style="@style/text_style1" android:text="@string/safe_text_switch" android:layout_weight="1.0" /> 
+                   	<CheckBox
+                   	   android:id="@+id/cb_switch"                  	   
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:checked="true"
+		               android:button="@null"
+		               android:layout_alignParentRight="true"
+		               android:layout_marginRight="10dp"
+		               android:layout_centerVertical="true"
+		               android:background="@drawable/selector_checkbox2"/>		               
+               </LinearLayout>
+               
+        		               
+        		<EditText
+        		android:id="@+id/et_location"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="10dp"
+	            android:background="@drawable/edit_white"
+	            android:editable="false"
+	            android:gravity="center_vertical"
+	            android:singleLine="true"
+	            android:paddingLeft="5.0dip"
+	            android:textColor="#ff1d1d1d"
+	            android:textColorHint="#ff666666"
+	            android:textSize="16.0sp" />
+
+
+
+        		 <TextView 
+       		      android:layout_width="wrap_content" 
+       		      android:layout_height="wrap_content" 
+       		      android:layout_marginTop="10dp"
+       		      android:text="@string/safe_text_set"
+       		      android:paddingLeft="5dp" 
+       		      android:textSize="15.0sp" 
+       		      android:textColor="@color/black"  />
+        		 
+        		 <LinearLayout 
+		         android:orientation="horizontal" 
+		         android:layout_width="fill_parent" 
+		         android:layout_height="wrap_content"
+		         android:layout_marginTop="10dp"
+		         android:layout_marginBottom="10dp">
+         
+				        <RadioGroup 
+				        android:id="@+id/rg_radius"
+						android:orientation="horizontal"
+						android:layout_width="fill_parent" 
+						android:layout_height="wrap_content">
+						
+								<RadioButton 
+								android:id="@+id/rb1"
+						        android:layout_width="fill_parent" 
+						        android:layout_height="wrap_content"
+						        android:background="@drawable/selector_checkbox"
+						        android:layout_weight="1"
+						        android:gravity="center"
+							    android:text="50m" 
+							    android:textColor="@color/safe_text"
+							    android:button="@null"/>
+							
+								<RadioButton 
+								android:id="@+id/rb2"
+						        android:layout_width="fill_parent" 
+						        android:layout_height="wrap_content"
+						        android:background="@drawable/selector_checkbox"
+						        android:layout_weight="1"
+						        android:gravity="center"
+							    android:text="150m" 
+							    android:textColor="@color/safe_text"
+							    android:button="@null"/>
+														
+								<RadioButton 
+								android:id="@+id/rb3"
+						        android:layout_width="fill_parent" 
+						        android:layout_height="wrap_content"
+						        android:layout_weight="1"
+						        android:background="@drawable/selector_checkbox"
+						        android:gravity="center"
+							    android:text="300m" 
+							    android:textColor="@color/safe_text"
+							    android:button="@null"/>
+								
+								<RadioButton 
+								android:id="@+id/rb4"
+						        android:layout_width="fill_parent" 
+						        android:layout_height="wrap_content"
+						        android:layout_weight="1"
+						        android:background="@drawable/selector_checkbox"
+						        android:gravity="center"
+							    android:text="1.5km" 
+							    android:textColor="@color/safe_text"
+							    android:button="@null"/>
+														
+								<RadioButton 
+								android:id="@+id/rb5"
+						        android:layout_width="fill_parent" 
+						        android:layout_height="wrap_content"
+						        android:layout_weight="1"
+						        android:background="@drawable/selector_checkbox"
+						        android:gravity="center"
+							    android:text="3km" 
+							    android:textColor="@color/safe_text"
+							    android:button="@null"/>
+						</RadioGroup>	
+	        
+      			</LinearLayout>       		        	
+        </LinearLayout>      	
+        
+	    <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">
+	        <com.amap.api.maps.MapView
+	        android:id="@+id/map"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent" />
+	        
+<!-- 	        <ImageView -->
+<!-- 	        android:layout_width="wrap_content" -->
+<!-- 	        android:layout_height="wrap_content" -->
+<!-- 	        android:src="@drawable/safe_point"  -->
+<!-- 	        android:layout_centerInParent="true"> -->
+	            
+<!-- 	        </ImageView> -->
+	        
+	        
+	       <RelativeLayout
+            android:id="@+id/fr_map_menu"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+                
+                <ImageView
+                android:id="@+id/bt_focus_pos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="25dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/map_location_nor"/>
+                
+
+
+	           <ImageView
+	            android:id="@+id/bt_zoomout_pos"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentRight="true"
+	            android:layout_alignParentBottom="true"
+	            android:layout_marginBottom="25dp"
+	            android:layout_marginRight="10dp"
+	            android:background="@drawable/selector_zoom_in"/>
+                        
+                
+	            <ImageView
+	            android:id="@+id/bt_zoomin_pos"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_above="@id/bt_zoomout_pos"
+	            android:layout_alignLeft="@id/bt_zoomout_pos"
+	            android:background="@drawable/selector_zoom_out"/>
+
+
+        	</RelativeLayout>   
+	    </RelativeLayout>
+    
+    
+</LinearLayout>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/pop_listview_bg">
+
+	    <ListView
+        android:id="@+id/listView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="60dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:cacheColorHint="#00000000"
+        android:divider="@drawable/list_divider"	
+        android:scrollbarThumbVertical="@drawable/scroll_bar">
+	    </ListView>
+		
+	    <View 
+	    android:background="@drawable/list_divider" 
+	   	android:layout_marginTop="60dp"
+	    android:layout_marginLeft="6dp"
+		android:layout_marginRight="6dp"
+	    android:layout_width="fill_parent" 
+	    android:layout_height="1dp" />
+	    
+	    <RelativeLayout
+		android:id="@+id/ListTitle"
+	    android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:minHeight="60dp"
+		android:layout_alignParentTop="true"
+	    android:layout_marginLeft="10dp"
+		android:layout_marginRight="10dp">
+	
+			<TextView 
+			android:id="@+id/tvTitle"
+	        android:layout_width="wrap_content" 
+	        android:layout_height="wrap_content"
+	 		android:layout_centerInParent="true"
+	 		android:text="共有60条围栏记录，请选择显示"
+	 		android:textColor="#ffffff"
+	 		android:textSize="20dp">
+	        </TextView>	
+	    
+		</RelativeLayout>
+		
+	      
+</RelativeLayout>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/common_dialog_title_tv"
+        style="@style/common_dialog_title_style"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/common_dialog_msg_tv"
+        style="@style/common_dialog_message_style"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp" />
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+       	android:layout_marginLeft="5dp"
+       	android:layout_marginRight="5dp"
+       	android:layout_marginBottom="10dp"
+        android:weightSum="2" >
+        
+         <TextView
+            android:id="@+id/common_dialog_positive_btn"
+            style="@style/common_dialog_positive_btn_style"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_sure" />
+         
+        <TextView
+            android:id="@+id/common_dialog_negative_btn"
+            style="@style/common_dialog_negative_btn_style"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/btn_cancel" />
+       
+
+    </LinearLayout>
+
+</LinearLayout>

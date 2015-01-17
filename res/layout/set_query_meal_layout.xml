@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    android:id="@+id/rootView"
+    android:orientation="vertical" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent" 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/act_content_bg">
+  
+    <RelativeLayout 
+        android:id="@+id/rl_relativelayout"
+        android:orientation="vertical"
+        android:background="@drawable/map_top_bg" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+        <Button android:id="@+id/btn_back" android:layout_centerVertical="true" android:layout_marginLeft="10dp" android:paddingLeft="5dp" android:textSize="18.0sp" android:textColor="#ffffff"  android:background="@drawable/selector_btn_back" android:layout_width="wrap_content" android:layout_height="wrap_content"   android:text="@string/btn_back" />
+        <TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_text_meal" />   
+   </RelativeLayout>
+      
+      <ListView
+        android:layout_below="@id/rl_relativelayout"
+	    android:id="@+id/listview"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:minHeight="100dp"	
+	    android:divider="#ffcccccc"
+	    android:dividerHeight="2px"
+	    android:cacheColorHint="@color/transparent"
+	    android:scrollbars="none"
+	    android:listSelector="@drawable/selector_friend_item"
+	    android:layout_marginLeft="15dp"
+	    android:layout_marginRight="15dp"
+	    android:layout_marginBottom="15dp"
+	    android:clickable="true"
+	    style="@style/leba_bg_layout"/>
+    
+</LinearLayout>
+

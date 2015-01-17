@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/popwindow_common_linear" android:focusableInTouchMode="true"
+	android:focusable="true" android:background="@drawable/popview_bg"
+	android:layout_width="fill_parent" android:layout_height="fill_parent"
+	android:paddingLeft="10dp" android:paddingRight="10dp" 
+	android:orientation="vertical" >
+	<TextView android:id="@+id/popwindow_common_title"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:gravity="center" android:layout_marginBottom="10dp"
+		android:singleLine="true" android:textSize="25sp"
+		android:layout_marginTop="20dp" android:textColor="@color/textcolor_progress"/>
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:id="@+id/popwindow_common_content">
+	</LinearLayout>
+	<TextView android:id="@+id/popwindow_common_note"
+		android:layout_width="fill_parent" android:layout_height="wrap_content"
+		android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
+		android:textColor="@color/textcolor_itemright"/>
+	<LinearLayout android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:orientation="horizontal">
+		<Button android:id="@+id/popwindow_common_btnOk"
+			android:layout_width="fill_parent" android:layout_height="45dp"
+			android:layout_weight="1" android:text="确定"
+			android:background="@drawable/btn_selector_ok" android:textSize="25sp" />
+		<Button android:id="@+id/popwindow_common_btnCancel"
+			android:layout_width="fill_parent" android:layout_height="45dp"
+			android:layout_weight="1" android:text="取消"
+			android:background="@drawable/btn_selector_ok" android:textSize="25sp"
+			android:layout_marginLeft="10dp" />
+	</LinearLayout>
+
+</LinearLayout>

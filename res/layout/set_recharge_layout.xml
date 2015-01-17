@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/device_bg" >
+
+    <RelativeLayout 
+        android:id="@+id/title_bar"
+        android:orientation="vertical"
+        android:background="@drawable/title_bar" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+        <Button android:id="@+id/btn_back" android:layout_centerVertical="true" android:layout_marginLeft="10dp" android:paddingLeft="5dp" android:textSize="18.0sp" android:textColor="#ffffff"  android:background="@drawable/selector_btn_back" android:layout_width="wrap_content" android:layout_height="wrap_content"   android:text="@string/btn_back" />
+        <TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_title_recharge" />
+        <Button android:id="@+id/btn_query_balance"  android:layout_marginRight="10dp" android:layout_alignParentRight="true" android:layout_centerVertical="true" android:layout_width="wrap_content" android:layout_height="wrap_content" android:background="@drawable/selector_btn_query"/>
+    </RelativeLayout>
+
+    <LinearLayout
+         android:id="@+id/linearlayout"
+         android:layout_below="@id/title_bar"
+         android:layout_width="fill_parent" 
+         android:layout_height="wrap_content"
+         android:layout_marginTop="10dp"
+         android:layout_marginBottom="10dp"
+         android:orientation="vertical"
+         android:gravity="center_horizontal">
+
+         <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="#7d7d7d"
+            android:textSize="14.0sp"
+   			android:text="@string/set_content_recharge"/>
+         
+          <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="#7d7d7d"
+            android:textSize="24.0sp"
+   			android:text="请选择充值方式:"
+   			android:layout_marginTop="20dp"/>
+          
+            <LinearLayout 
+            android:layout_below="@id/rl_layout1"
+            style="@style/leba_bg_layout">                  
+      
+            <LinearLayout 
+                android:id="@+id/ll_goperson"
+                style="@style/leba_bg_top_layout" >
+                <TextView style="@style/text_style1" android:textColor="#7d7d7d" android:textSize="20sp" android:text="@string/setting_recharge_text1" android:layout_weight="1.0" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
+            </LinearLayout>
+            
+            <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+
+             <LinearLayout 
+                 android:id="@+id/ll_gorecharge"
+             	 style="@style/leba_bg_mid_layout">          
+                <TextView style="@style/text_style1"  android:textColor="#7d7d7d" android:textSize="20sp" android:text="@string/setting_recharge_text2" android:layout_weight="1.0" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
+             </LinearLayout>
+             
+             <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+                           
+             <LinearLayout 
+                 android:id="@+id/ll_gobalance"
+             	 style="@style/leba_bg_mid_layout">
+                <TextView style="@style/text_style1"  android:textColor="#7d7d7d" android:textSize="20sp" android:text="@string/setting_recharge_text3" android:layout_weight="1.0" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
+             </LinearLayout>
+            
+             <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+                  
+   
+            <LinearLayout 
+                android:id="@+id/ll_goabout"
+                style="@style/leba_bg_bottom_layout">
+                <TextView style="@style/text_style1"  android:textColor="#7d7d7d" android:textSize="20sp" android:text="@string/setting_recharge_text4" android:layout_weight="1.0" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
+            </LinearLayout>                             
+        </LinearLayout>
+        
+            
+          <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textColor="#ff3c00"
+            android:textSize="18.0sp"
+   			android:text="最新优惠(暂无)"
+   			android:layout_marginTop="20dp"/>
+         
+    </LinearLayout>
+     
+ 
+    
+</RelativeLayout>

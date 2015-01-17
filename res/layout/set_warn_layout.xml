@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+    android:orientation="vertical" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent" 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/act_content_bg">
+  
+    <RelativeLayout 
+        android:orientation="vertical"
+        android:background="@drawable/map_top_bg" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+        <Button android:id="@+id/btn_back" android:layout_centerVertical="true" android:layout_marginLeft="10dp" android:paddingLeft="5dp" android:textSize="18.0sp" android:textColor="#ffffff"  android:background="@drawable/selector_btn_back" android:layout_width="wrap_content" android:layout_height="wrap_content"   android:text="@string/btn_back" />
+        <TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_text_warn" />   
+   </RelativeLayout>
+      
+    <LinearLayout 
+        android:orientation="vertical" 
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent">        
+        
+        <LinearLayout 
+            style="@style/leba_bg_layout">                  
+        
+                <LinearLayout 
+                    style="@style/leba_bg_top_layout" android:clickable="false">
+                    <TextView style="@style/text_style1" android:text="@string/setting_text_message" android:layout_weight="1.0" />
+					 <CheckBox
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:button="@null"
+		               android:layout_alignParentRight="true"
+		               android:layout_marginRight="10dp"
+		               android:layout_centerVertical="true"
+		               android:background="@drawable/selector_checkbox2"/>
+                </LinearLayout>
+                
+                <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+                
+           
+                 <LinearLayout 
+                 	 style="@style/leba_bg_mid_layout" android:clickable="false">
+                     <TextView style="@style/text_style1" android:text="@string/setting_text_email2" android:layout_weight="1.0" />
+                   	 <CheckBox
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:button="@null"
+		               android:layout_alignParentRight="true"
+		               android:layout_marginRight="10dp"
+		               android:layout_centerVertical="true"
+		               android:background="@drawable/selector_checkbox2"/>
+                 </LinearLayout>
+                
+                 <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+                      
+       
+                <LinearLayout 
+                    style="@style/leba_bg_bottom_layout" android:clickable="false">
+                    <TextView style="@style/text_style1" android:text="@string/setting_text_client" android:layout_weight="1.0" />
+                   	<CheckBox
+		               android:layout_width="wrap_content"
+		               android:layout_height="wrap_content"
+		               android:button="@null"
+		               android:layout_alignParentRight="true"
+		               android:layout_marginRight="10dp"
+		               android:layout_centerVertical="true"
+		               android:background="@drawable/selector_checkbox2"/>
+                </LinearLayout>     
+                                        
+       </LinearLayout>    
+            
+    </LinearLayout>     
+
+    
+</LinearLayout>
+

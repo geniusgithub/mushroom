@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TabHost xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@android:id/tabhost" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent">
+    
+    <LinearLayout 
+        android:orientation="vertical" 
+        android:layout_width="fill_parent" 
+        android:layout_height="fill_parent"
+        android:background="@drawable/act_content_bg">
+        
+        <FrameLayout 
+            android:id="@android:id/tabcontent" 
+            android:layout_width="fill_parent" 
+            android:layout_height="0.0dip" 
+            android:layout_weight="1.0" />
+        
+        <TabWidget 
+            android:id="@android:id/tabs" 
+            android:visibility="gone" 
+            android:layout_width="fill_parent" 
+            android:layout_height="wrap_content" 
+            android:layout_weight="0.0" />
+
+        <FrameLayout
+		android:layout_width="fill_parent"
+	    android:layout_height="wrap_content" >
+		
+             <RadioGroup 
+				android:id="@+id/main_radiogroup"
+				android:gravity="center_vertical"
+				android:layout_centerVertical="true"
+				android:paddingTop="5dp"
+				android:orientation="horizontal"
+				android:layout_width="fill_parent" 
+				android:layout_height="wrap_content"
+				android:background="@drawable/mmfooter_bg">
+				<RadioButton 
+				    android:id="@+id/main_tab_pos" 
+				    android:checked="true" 
+				    android:background="@drawable/selector_tab_pos"
+				    android:text="@string/main_tab_text_pos" 
+				    style="@style/MMTabButton" 
+				    android:textColor="@color/tab_text"/>
+        
+				<RadioButton 
+	                android:id="@+id/main_tab_friend" 
+	                android:background="@drawable/selector_tab_friend" 
+	                android:text="@string/main_tab_text_friend" 
+	                style="@style/MMTabButton"
+	                android:textColor="@color/tab_text" />
+		        			
+				 <RadioButton 
+			 	    android:id="@+id/main_tab_msg" 
+			 	    android:background="@drawable/selector_tab_msg"
+			 	    android:text="@string/main_tab_text_msg" 
+			 	    style="@style/MMTabButton"
+			 	    android:textColor="@color/tab_text" />
+				 	
+				 	
+				 <RadioButton 
+			 	    android:id="@+id/main_tab_settings" 
+			 	    android:background="@drawable/selector_tab_set" 
+			 	    android:text="@string/main_tab_text_setting" 
+			 	    style="@style/MMTabButton" 
+			 	    android:textColor="@color/tab_text"/>
+			</RadioGroup>	
+			
+            <LinearLayout 
+	        android:orientation="horizontal" 
+	        android:layout_width="fill_parent" 
+	        android:layout_height="80px">
+                
+                    <RelativeLayout 
+		            android:layout_width="fill_parent" 
+		            android:layout_height="fill_parent"
+		            android:layout_weight="1">                      
+                    </RelativeLayout>
+                    
+                    <RelativeLayout 
+		            android:layout_width="fill_parent" 
+		            android:layout_height="fill_parent"
+		            android:layout_weight="1">                        
+                    </RelativeLayout>
+                    
+                    <RelativeLayout 
+		            android:layout_width="fill_parent" 
+		            android:layout_height="fill_parent"
+		            android:layout_weight="1">
+                        <TextView
+                        android:id="@+id/tv_unreadmsg"
+                        android:layout_width="wrap_content" 
+		           		android:layout_height="wrap_content"
+		           		android:visibility="gone"
+		           		android:gravity="center"
+		           		android:textColor="#ffffff"
+		           		android:background="@drawable/msg_hint_item"
+		           		android:layout_alignParentRight="true">		           		                            
+                        </TextView>
+                    </RelativeLayout>
+                    
+                    <RelativeLayout 
+		            android:layout_width="fill_parent" 
+		            android:layout_height="fill_parent"
+		            android:layout_weight="1">                        
+                    </RelativeLayout>                                                   
+            </LinearLayout>
+             
+            
+        </FrameLayout>	
+            
+    </LinearLayout>
+    
+</TabHost>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/selector_bikerecord_item"
+    android:orientation="vertical">
+    
+    <RelativeLayout 
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:padding="5dp"
+    android:gravity="center_vertical">
+	         
+         <TextView
+         android:id="@+id/tv_timeTop"
+	     android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_centerVertical="true"
+	     android:layout_marginLeft="10dp"
+	     android:text="2014-04-05" 
+	     android:textColor="#000000"
+	     android:textSize="20sp"
+	     android:clickable="false"/>  
+	     
+         <ImageView
+         android:layout_width="wrap_content"
+	     android:layout_height="wrap_content"
+	     android:layout_centerVertical="true"
+	     android:layout_marginRight="10dp"
+	     android:src="@drawable/bike_point"
+	     android:layout_alignParentRight="true">
+             
+         </ImageView>
+        
+    </RelativeLayout>
+    
+    <View android:background="@drawable/horizontal_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+    
+    <RelativeLayout 
+	        android:layout_width="fill_parent" 
+	        android:layout_height="wrap_content"
+	        android:padding="5dp"
+	        android:gravity="center_vertical">
+	              
+	              <ImageView
+	              android:layout_width="wrap_content" 
+       		      android:layout_height="wrap_content"
+       		      android:layout_centerVertical="true"
+       		      android:layout_marginLeft="5dp"
+       		      android:src="@drawable/bike_icon">                  
+	              </ImageView>
+
+	                 
+	              <TextView 
+	              android:id="@+id/tv_timeRight"
+       		      android:layout_width="wrap_content" 
+       		      android:layout_height="wrap_content" 
+       		      android:layout_marginRight="5dp"
+       		      android:layout_alignParentRight="true"
+       		      android:layout_centerVertical="true"
+       		      android:text="10:38:56"
+       		      android:textSize="15.0sp" 
+       		      android:textColor="@color/black"  />
+	              
+	              	              
+	              <ImageView
+	              android:id="@+id/iv_icon2"
+	              android:layout_width="wrap_content" 
+       		      android:layout_height="wrap_content"
+       		      android:layout_centerVertical="true"
+       		      android:layout_marginRight="5dp"
+       		      android:layout_toLeftOf="@id/tv_timeRight"
+       		      android:src="@drawable/clock_icon">                  
+	              </ImageView>
+	              
+	              <TextView 
+	              android:id="@+id/tv_distance"
+       		      android:layout_width="wrap_content" 
+       		      android:layout_height="wrap_content" 
+       		      android:layout_marginRight="15dp"
+       		      android:layout_centerVertical="true"
+       		      android:layout_toLeftOf="@id/iv_icon2"
+       		      android:text="150公里"
+       		      android:textSize="15.0sp" 
+       		      android:textColor="@color/black"  />
+	              
+	              <ImageView
+	              android:id="@+id/iv_icon3"
+	              android:layout_width="wrap_content" 
+       		      android:layout_height="wrap_content"
+       		      android:layout_centerVertical="true"
+       		      android:layout_marginRight="5dp"
+       		      android:layout_toLeftOf="@id/tv_distance"
+       		      android:src="@drawable/distance_icon">                  
+	              </ImageView>
+	              	              		 
+	</RelativeLayout>
+	        
+    	        
+        
+
+</LinearLayout>

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout  xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/pop_listview_bg"
+	    android:padding="5dp" >
+	
+	    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"	
+        android:layout_marginTop="10dp"	
+        android:layout_marginBottom="10dp"       
+        android:gravity="center"  
+        android:textColor="#ffffff"
+        android:textSize="20sp"
+        android:text="请选择查询时段"/>
+	    
+	   <LinearLayout 
+	       android:id="@+id/contentLayout"
+           android:layout_below="@id/tvTitle"
+           android:orientation="vertical"
+           android:layout_width="fill_parent"
+           android:layout_height="wrap_content">                       	           
+	                 
+	           <LinearLayout 
+	               android:orientation="horizontal"
+	               android:layout_width="fill_parent"
+          		   android:layout_height="wrap_content"
+          		   android:gravity="center_vertical"
+          		   android:layout_marginTop="10dp"	
+                   android:layout_marginBottom="10dp" 
+                   android:layout_marginLeft="20dp"  >	            
+	               <EditText
+			            android:id="@+id/etEditYear"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:background="@drawable/edit1"
+			            android:textColor="#FFFFFF"
+			            android:maxLength="4" 
+			            android:paddingTop="5dp"
+			            android:paddingBottom="5dp"
+			            android:gravity="center"
+			            android:singleLine="true"
+			            android:inputType="number" >       
+			        </EditText>			        
+	                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:textSize="20sp" android:textColor="#ffffff" android:text="年" />	              
+	          	    <EditText
+			            android:id="@+id/etEditMonth"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:background="@drawable/edit1"
+			            android:textColor="#FFFFFF"
+			            android:maxLength="2" 
+			            android:paddingTop="5dp"
+			            android:paddingBottom="5dp"
+			            android:gravity="center"
+			            android:singleLine="true" 
+			            android:inputType="number">       
+			        </EditText>		        
+	                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5dp" android:layout_marginRight="5dp"  android:textSize="20sp" android:textColor="#ffffff" android:text="月" />	
+	           	    <EditText
+			            android:id="@+id/etEditDay"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:background="@drawable/edit1"
+			            android:textColor="#FFFFFF"
+			            android:maxLength="2" 
+			            android:paddingTop="5dp"
+			            android:paddingBottom="5dp"
+			            android:gravity="center"
+			            android:singleLine="true"
+			            android:inputType="number" >       
+			        </EditText>		        
+	                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="5dp" android:layout_marginRight="5dp" android:textSize="20sp" android:textColor="#ffffff" android:text="日" />	 
+	           </LinearLayout> 
+	           
+	           	<LinearLayout 
+	               android:orientation="horizontal"
+	               android:layout_width="fill_parent"
+          		   android:layout_height="wrap_content"
+          		   android:gravity="center_vertical"
+          		   android:layout_marginTop="10dp"	
+        		   android:layout_marginBottom="10dp" 
+        		   android:layout_marginLeft="20dp"  >
+	           	        <TextView  android:layout_width="wrap_content" android:layout_height="wrap_content"  android:textSize="20sp" android:textColor="#ffffff" android:text="起始时间:" />	 
+	           	 	    <EditText
+			            android:id="@+id/etEditStartHour"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_marginLeft="20dp" 
+			            android:background="@drawable/edit1"
+			            android:textColor="#FFFFFF"
+			            android:maxLength="2" 
+			            android:paddingTop="5dp"
+			            android:paddingBottom="5dp"
+			            android:gravity="center"
+			            android:singleLine="true" 
+			            android:inputType="number">       
+			            </EditText>
+			            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="12dp" android:layout_marginRight="13dp"  android:textSize="20sp" android:textColor="#ffffff" android:text=":" />	 
+	           	 	    <EditText
+			            android:id="@+id/etEditStartMinute"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:background="@drawable/edit1"
+			            android:textColor="#FFFFFF"
+			            android:maxLength="2" 
+			            android:paddingTop="5dp"
+			            android:paddingBottom="5dp"
+			            android:gravity="center"
+			            android:singleLine="true"
+			            android:inputType="number" >       
+			            </EditText>
+	           	</LinearLayout>
+	           	
+	           	<LinearLayout 
+	               android:orientation="horizontal"
+	               android:layout_width="fill_parent"
+          		   android:layout_height="wrap_content"
+          		   android:gravity="center_vertical"
+          		   android:layout_marginTop="10dp"	
+        		   android:layout_marginBottom="10dp" 
+        		   android:layout_marginLeft="20dp"  >
+	           	        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"  android:textSize="20sp" android:textColor="#ffffff" android:text="结束时间:" />	 
+	           	 	    <EditText
+			            android:id="@+id/etEditEndHour"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:layout_marginLeft="20dp" 
+			            android:background="@drawable/edit1"
+			            android:textColor="#FFFFFF"
+			            android:maxLength="2" 
+			            android:paddingTop="5dp"
+			            android:paddingBottom="5dp"
+			            android:gravity="center"
+			            android:singleLine="true"
+			            android:inputType="number" >       
+			            </EditText>
+			            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="12dp" android:layout_marginRight="13dp" android:textSize="20sp" android:textColor="#ffffff" android:text=":" />	 
+	           	 	    <EditText
+			            android:id="@+id/etEditEndMinute"
+			            android:layout_width="wrap_content"
+			            android:layout_height="wrap_content"
+			            android:background="@drawable/edit1"
+			            android:textColor="#FFFFFF"
+			            android:maxLength="2" 
+			            android:paddingTop="5dp"
+			            android:paddingBottom="5dp"
+			            android:gravity="center"
+			            android:singleLine="true"
+			            android:inputType="number" >       
+			            </EditText>
+	           	</LinearLayout>
+          		   
+        </LinearLayout>
+   
+	     
+    
+	    <LinearLayout
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@id/contentLayout"
+	    android:layout_marginTop="20dp"	    
+        android:layout_marginBottom="20dp">
+	
+	        <Button
+	        android:id="@+id/btnOK"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:background="@drawable/selector_btn_white"
+	        android:text="@string/btn_sure"
+	        android:textColor="#444444"
+     				android:textSize="18sp" />
+	        
+	        <Button
+	        android:id="@+id/btnCancel"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:background="@drawable/selector_btn_white"
+	        android:text="@string/btn_cancel"
+	        android:textColor="#444444"
+     				android:textSize="18sp"  />
+	        
+	    </LinearLayout>
+
+</RelativeLayout>
+
+
