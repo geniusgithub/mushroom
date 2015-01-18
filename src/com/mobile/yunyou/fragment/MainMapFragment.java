@@ -606,7 +606,10 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 			public void run() {
 	
 				mSelfMarket.setLocation(location);
-				//Utils.showToast(getActivity(), "provider = " + location.getProvider());
+				if (mApplication.mIsDebug){
+					Utils.showToast(getActivity(), "provider = " + location.getProvider());
+				}
+	
 				Message msg = mHandler.obtainMessage(MSG_REFRESH_SELF);
 				msg.sendToTarget();
 

@@ -314,21 +314,21 @@ public class NewBikeCenter implements LocationListener{
 				"\nAccuracy = " + location.getAccuracy() + 
 				"\ntime:" + timeString + 
 				"\nlatlon = (" + location.getLatitude() + "," + location.getLongitude() + ")");
-		if (location.getProvider().equalsIgnoreCase(LocationProviderProxy.AMapNetwork)){
-			locationEx.setOffsetLonLat(location.getLatitude(), location.getLongitude());
-			msg.obj = locationEx;
-			msg.sendToTarget();
-			return ;
-		}
+//		if (location.getProvider().equalsIgnoreCase(LocationProviderProxy.AMapNetwork)){
+//			locationEx.setOffsetLonLat(location.getLatitude(), location.getLongitude());
+//			msg.obj = locationEx;
+//			msg.sendToTarget();
+//			return ;
+//		}
 
-		Location newLocation = WebManager.correctPosToMap(locationEx.getLatitude(), locationEx.getLongitude());
-		if (newLocation == null)
-		{
-			log.e("correctPosToMap fail!!!");
-			return ;
-		}
+//		Location newLocation = WebManager.correctPosToMap(locationEx.getLatitude(), locationEx.getLongitude());
+//		if (newLocation == null)
+//		{
+//			log.e("correctPosToMap fail!!!");
+//			return ;
+//		}
 		
-		locationEx.setOffsetLonLat(newLocation.getLatitude(), newLocation.getLongitude());
+		locationEx.setOffsetLonLat(locationEx.getLatitude(), locationEx.getLongitude());
 		msg.obj = locationEx;
 		msg.sendToTarget();
 	}

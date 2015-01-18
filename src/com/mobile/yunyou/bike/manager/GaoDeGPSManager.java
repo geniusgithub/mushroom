@@ -16,7 +16,7 @@ import com.amap.api.location.LocationProviderProxy;
 public class GaoDeGPSManager implements AMapLocationListener {
 
 
-	private final static int CHECK_POSITION_INTERVAL = 30 * 1000;
+	private final static int CHECK_POSITION_INTERVAL = 15 * 1000;
 	
 	private LocationManagerProxy aMapLocManager = null;
 	

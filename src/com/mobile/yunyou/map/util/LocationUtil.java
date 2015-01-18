@@ -53,7 +53,7 @@ public class LocationUtil {
 	}
 	
 	/** 检查坐标更新的频率时间 */
-	private static final int CHECK_INTERVAL = 90 * 1000;
+	private static final int CHECK_INTERVAL = 30 * 1000;
 	/**
 	 * 判断最新位置信息是否符合最新位置的规则
 	 * 

@@ -140,7 +140,7 @@ public class SingleGPSManager implements AMapLocationListener {
 			synchronized(SingleGPSManager.this){
 				if (mListener != null){
 					if (isGetGPS){
-						mListener.onLocationChanged(aMapLocManager.getLastKnownLocation(provider));
+						mListener.onLocationChanged(mLocation);
 					}else{
 						log.e("isGetGPS = false");
 						mListener.onLocationChanged(null);
@@ -186,6 +186,7 @@ public class SingleGPSManager implements AMapLocationListener {
 	public void onLocationChanged(AMapLocation location) {
 		log.e("(" + location.getLatitude() + ", " + location.getLongitude() + ")  " + YunTimeUtils.getFormatTime2(location.getTime()));
 		isGetGPS = true;
+		mLocation = location;
 	}
 
 }

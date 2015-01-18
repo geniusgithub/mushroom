@@ -73,7 +73,6 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	private Button mBtnPause;
 	private Button mBtnStop;
 	private Button mBtnBack;
-	private Button mBtnSwitch;
 	
 	private View mLockView;
 	private CheckBox mCBLock;
@@ -178,12 +177,11 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 		mBtnStart = (Button) findViewById(R.id.btn_start);
 		mBtnStop = (Button) findViewById(R.id.btn_stop);
 		mBtnPause = (Button) findViewById(R.id.btn_pause); 
-		mBtnSwitch = (Button) findViewById(R.id.btn_switch);
+
 		mBtnStart.setOnClickListener(this);
 		mBtnPause.setOnClickListener(this);
 		mBtnStop.setOnClickListener(this);
 		mBtnStop.setEnabled(false);
-		mBtnSwitch.setOnClickListener(this);
 
 		
 		mLockView = findViewById(R.id.rl_lock);
@@ -293,12 +291,6 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 		  
 		  mNewBikeCenter.setCallback(this);
 			
-			if (YunyouApplication.getInstance().mIsDebug){
-
-			}else{
-				mBtnSwitch.setVisibility(View.GONE);
-			}
-		  
 //		  updateStatus();
 		  mRunRecordDBManager = RunRecordDBManager.getInstance();
 
@@ -347,11 +339,6 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()){
-			case R.id.btn_switch:
-				SingleGPSManager gpsManager = mNewBikeCenter.mGpsManager;
-				boolean flag = gpsManager.isGPSProvider();
-				gpsManager.setGPSProvider(!flag);
-				break;
 			case R.id.btn_back:
 				onBackPressed();
 				break;

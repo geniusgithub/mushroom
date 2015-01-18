@@ -37,7 +37,7 @@ public class SelfLocationManager implements LocationListener{
 	
 	private GaoDeGPSManager mGaoDeGPSManager;
 	private GaoDeNetworkManager mGaoDeNetworkManager;
-	private SingleGPSManager mSingleGPSManager;
+	//private SingleGPSManager mSingleGPSManager;
 	
 	private GeocodeSearch mGeocoderSearch;
 	private LocationEx mLocationEx;
@@ -73,7 +73,7 @@ public class SelfLocationManager implements LocationListener{
 	//	mGpsLocationManager.registerListen(this);
 	//	mMobileStationManager.registerListen(this);
 	//	mOriginStationManager.registerListen(this);
-	//	mGaoDeGPSManager.registerListen(this);
+		mGaoDeGPSManager.registerListen(this);
 		mGaoDeNetworkManager.registerListen(this);
 		
 //		mSingleGPSManager.registerListen(this);
@@ -83,7 +83,7 @@ public class SelfLocationManager implements LocationListener{
 	//	mGpsLocationManager.unRegisterListen();
 	//	mMobileStationManager.unRegisterListen();
 	//	mOriginStationManager.unRegisterListen();
-	//	mGaoDeGPSManager.unRegisterListen();
+		mGaoDeGPSManager.unRegisterListen();
 		mGaoDeNetworkManager.unRegisterListen();
 		
 //		mSingleGPSManager.unRegisterListen();
@@ -153,23 +153,19 @@ public class SelfLocationManager implements LocationListener{
 			locationEx.setUpdateTimeString(YunTimeUtils.getFormatTime(System.currentTimeMillis()));
 			
 			
-			if (location.getProvider().equalsIgnoreCase(LocationManager.GPS_PROVIDER)){
-				Location newLocation = WebManager.correctPosToMap(location.getLatitude(), location.getLongitude());
-				if (newLocation == null)
-				{
-					log.e("correctPosToMap fail!!!");
-					return ;
-				}
-				
-				
-				
-				newLocation.setLatitude(24.4968034);
-				newLocation.setLongitude(118.131769);
-				locationEx.setOffsetLonLat(newLocation.getLatitude(), newLocation.getLongitude());
-			}else{
-				locationEx.setOffsetLonLat(location.getLatitude(), location.getLongitude());
-			}
-		
+//			if (location.getProvider().equalsIgnoreCase(LocationManager.GPS_PROVIDER)){
+//				Location newLocation = WebManager.correctPosToMap(location.getLatitude(), location.getLongitude());
+//				if (newLocation == null)
+//				{
+//					log.e("correctPosToMap fail!!!");
+//					return ;
+//				}
+//
+//				locationEx.setOffsetLonLat(newLocation.getLatitude(), newLocation.getLongitude());
+//			}else{
+//				locationEx.setOffsetLonLat(location.getLatitude(), location.getLongitude());
+//			}
+			locationEx.setOffsetLonLat(location.getLatitude(), location.getLongitude());
 			//String address = WebManager.getAdressByGaodeEX( mGeocoderSearch, locationEx.getOffsetLat(), locationEx.getOffsetLon());
 			String address = "";
 			locationEx.setAdress(address);
