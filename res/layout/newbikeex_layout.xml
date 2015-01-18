@@ -323,13 +323,24 @@
 			        android:textColor="#ffffffff"
 			        android:textSize="18.0sp" />
         	        
+        	        
+        	        <Button
+        	        android:id="@+id/btn_upload"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_toLeftOf="@id/rl_lock"
+			        android:background="@drawable/selector_btn_black"
+			        android:text="@string/newbike_text_upload"
+			        android:textColor="#ffffffff"
+			        android:textSize="18.0sp" />
+        	                	        
         	        <Button
         	        android:id="@+id/btn_pause"
 			        android:layout_width="fill_parent"
 			        android:layout_height="wrap_content"
 			        android:layout_toLeftOf="@id/rl_lock"
 			        android:background="@drawable/selector_btn_black"
-			        android:text="@string/newbike_text_pause"
+			        android:text="@string/newbike_text_startyet"
 			        android:textColor="#ffffffff"
 			        android:textSize="18.0sp" />
         	        
@@ -340,6 +351,16 @@
 			        android:layout_toRightOf="@id/rl_lock"
 			        android:background="@drawable/selector_btn_black"
 			        android:text="@string/newbike_text_stop"
+			        android:textColor="#ffffffff"
+			        android:textSize="18.0sp" />
+        	        
+        	        <Button
+        	        android:id="@+id/btn_stopyet"
+			        android:layout_width="fill_parent"
+			        android:layout_height="wrap_content"
+			        android:layout_toRightOf="@id/rl_lock"
+			        android:background="@drawable/selector_btn_black"
+			        android:text="@string/newbike_text_stopyet"
 			        android:textColor="#ffffffff"
 			        android:textSize="18.0sp" />
         	        	            	

@@ -2,6 +2,7 @@ package com.mobile.yunyou.bike.tmp;
 
 import java.util.List;
 
+import android.R.integer;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -28,6 +29,7 @@ import com.amap.api.maps.model.PolylineOptions;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.bike.MapUtils;
+import com.mobile.yunyou.bike.manager.RunRecordUploadPoxy;
 import com.mobile.yunyou.bike.manager.SelfLocationManager;
 import com.mobile.yunyou.datastore.RunRecordDBManager;
 import com.mobile.yunyou.map.data.LocationEx;
@@ -70,8 +72,10 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	
 	
 	private Button mBtnStart;
-	private Button mBtnPause;
+	private Button mBtnUpload;
+	private Button mBtnStartYet;
 	private Button mBtnStop;
+	private Button mBtnStopYet;
 	private Button mBtnBack;
 	
 	private View mLockView;
@@ -82,11 +86,13 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	
 	private RunRecordDBManager mRunRecordDBManager;
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.newbikeex_layout);
 		
+		mContext = this;
 		mMapView = (MapView) findViewById(R.id.map);
 		mMapView.onCreate(savedInstanceState);
 		aMap = mMapView.getMap();
@@ -108,7 +114,15 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 		updateCamarra(17);
 		if (isFristResume){
 			  isFristResume = false;
-			  updateCamarra(SelfLocationManager.getInstance().getLastLocation());
+			  LocationEx locationEx = SelfLocationManager.getInstance().getLastLocation();
+			  if (locationEx != null){
+				  LatLng latLng = new LatLng(locationEx.getOffsetLat(), locationEx.getOffsetLon());
+				  mRunBikeMarket.addLocation(latLng);
+				  updateNewBikeMapView();
+				  updateCamarra(locationEx);
+			  }
+			  
+			 
 		}
 	}
 
@@ -176,10 +190,15 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
     	mBtnBack.setOnClickListener(this);
 		mBtnStart = (Button) findViewById(R.id.btn_start);
 		mBtnStop = (Button) findViewById(R.id.btn_stop);
-		mBtnPause = (Button) findViewById(R.id.btn_pause); 
-
+		mBtnStartYet = (Button) findViewById(R.id.btn_pause); 
+		mBtnStopYet = (Button) findViewById(R.id.btn_stopyet); 
+		mBtnUpload = (Button) findViewById(R.id.btn_upload); 
+		mBtnStartYet.setEnabled(false);
+		mBtnStopYet.setEnabled(false);
+		
+		mBtnUpload.setOnClickListener(this);
 		mBtnStart.setOnClickListener(this);
-		mBtnPause.setOnClickListener(this);
+		//mBtnPause.setOnClickListener(this);
 		mBtnStop.setOnClickListener(this);
 		mBtnStop.setEnabled(false);
 
@@ -190,9 +209,9 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 		mCBLock.setChecked(false);
 		mCBLock.setOnCheckedChangeListener(this);
 		
-		mRunBikeMarket = new RunBikeMarket(R.drawable.self_pos);
+		mRunBikeMarket = new RunBikeMarket(R.drawable.red_point);
 		
-		showStartButton(true);
+		showButtonType(VIEW_START);
 		
 	}
 	
@@ -222,52 +241,80 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	
 	}
 	
-	private Dialog mSaveDialog = null;
-	private void showSaveDialog(boolean bShow)
+//	private Dialog mSaveDialog = null;
+//	private void showSaveDialog(boolean bShow)
+//	{
+//		if (mSaveDialog != null)
+//		{
+//			mSaveDialog.dismiss();
+//			mSaveDialog = null;
+//		}
+//		
+//		DialogFactory.ISelectComplete onListener = new DialogFactory.ISelectComplete() {
+//
+//			@Override
+//			public void onSelectComplete(boolean flag) {
+//
+//				if (flag){
+//					BikeType.RunRecordGroup group = mNewBikeCenter.newRunRecord();
+//					log.e("mTotalDistance = " + group.mTotalDistance + ", mRunRecordList.size = " + group.mRunRecordList.size());
+//					if (group.mTotalDistance == 0 || group.mRunRecordList.size() < 2){
+//						
+//						Utils.showToast(NewBikeExActivity.this, R.string.toask_unsave_record);
+//					}else{
+//						boolean ret = false;
+//						try {
+//							ret = mRunRecordDBManager.insert(group);
+//						} catch (Exception e) {
+//							e.printStackTrace();
+//						}
+//						if (ret){
+//							Utils.showToast(NewBikeExActivity.this, R.string.toask_saveRecord_success);
+//						}else{
+//							Utils.showToast(NewBikeExActivity.this, R.string.toask_saveRecord_fail);
+//						}
+//					}	
+//				}
+//					
+//				
+//				finish();
+//			}
+//
+//		};
+//
+//		if (bShow)
+//		{
+//			mSaveDialog = DialogFactory.creatSelectDialog(this, R.string.dialog_title_saveRun, R.string.dialog_msg_saveRun, 
+//												R.string.btn_save, R.string.btn_drop, onListener);
+//			mSaveDialog.show();
+//		}
+//	
+//	}
+	
+	private Dialog mTipDialog = null;
+	private void showTipDialog(boolean bShow)
 	{
-		if (mSaveDialog != null)
+		if (mTipDialog != null)
 		{
-			mSaveDialog.dismiss();
-			mSaveDialog = null;
+			mTipDialog.dismiss();
+			mTipDialog = null;
 		}
 		
-		DialogFactory.ISelectComplete onListener = new DialogFactory.ISelectComplete() {
-
-			@Override
-			public void onSelectComplete(boolean flag) {
-
-				if (flag){
-					BikeType.RunRecordGroup group = mNewBikeCenter.newRunRecord();
-					log.e("mTotalDistance = " + group.mTotalDistance + ", mRunRecordList.size = " + group.mRunRecordList.size());
-					if (group.mTotalDistance == 0 || group.mRunRecordList.size() < 2){
-						
-						Utils.showToast(NewBikeExActivity.this, R.string.toask_unsave_record);
-					}else{
-						boolean ret = false;
-						try {
-							ret = mRunRecordDBManager.insert(group);
-						} catch (Exception e) {
-							e.printStackTrace();
-						}
-						if (ret){
-							Utils.showToast(NewBikeExActivity.this, R.string.toask_saveRecord_success);
-						}else{
-							Utils.showToast(NewBikeExActivity.this, R.string.toask_saveRecord_fail);
-						}
-					}	
-				}
-					
+			View.OnClickListener onListener = new OnClickListener() {
 				
-				finish();
-			}
+				@Override
+				public void onClick(View v) {
+					finish();
+				}
+			};
 
-		};
+
 
 		if (bShow)
 		{
-			mSaveDialog = DialogFactory.creatSelectDialog(this, R.string.dialog_title_saveRun, R.string.dialog_msg_saveRun, 
-												R.string.btn_save, R.string.btn_drop, onListener);
-			mSaveDialog.show();
+			mTipDialog = DialogFactory.creatSingleDialog(mContext, R.string.dialog_title_invalidrecord, R.string.dialog_msg_sinvalidrecord, onListener);
+			mTipDialog.setCancelable(false);
+			mTipDialog.show();
 		}
 	
 	}
@@ -302,13 +349,37 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 		updateNewBikeEntiy(new NewBikeEntiy());
 	}
 
-	private void showStartButton(boolean flag){
-		if (flag){
-			mBtnStart.setVisibility(View.VISIBLE);
-			mBtnPause.setVisibility(View.GONE);
-		}else{
-			mBtnStart.setVisibility(View.GONE);
-			mBtnPause.setVisibility(View.VISIBLE);
+	
+	private final static int VIEW_START = 0x0001;
+	private final static int VIEW_PAUSE = 0x0002;
+	private final static int VIEW_UPLOAD = 0x0003;
+	
+	private void showButtonType(int type){
+		
+		switch (type) {
+			case VIEW_START:
+				mBtnStart.setVisibility(View.VISIBLE);
+				mBtnStartYet.setVisibility(View.GONE);
+				mBtnUpload.setVisibility(View.GONE);
+				mBtnStop.setVisibility(View.VISIBLE);
+				mBtnStopYet.setVisibility(View.GONE);
+				break;
+			case VIEW_PAUSE:
+				mBtnStart.setVisibility(View.GONE);
+				mBtnStartYet.setVisibility(View.VISIBLE);
+				mBtnUpload.setVisibility(View.GONE);
+				mBtnStop.setVisibility(View.VISIBLE);
+				mBtnStopYet.setVisibility(View.GONE);
+				break;
+			case VIEW_UPLOAD:
+				mBtnStart.setVisibility(View.GONE);
+				mBtnStartYet.setVisibility(View.GONE);
+				mBtnUpload.setVisibility(View.VISIBLE);
+				mBtnStop.setVisibility(View.GONE);
+				mBtnStopYet.setVisibility(View.VISIBLE);
+				break;
+			default:
+				break;
 		}
 
 	}
@@ -319,13 +390,15 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 			Toast.makeText(this, "lock", Toast.LENGTH_SHORT).show();
 			
 			mBtnStart.setEnabled(false);
-			mBtnPause.setEnabled(false);
+			mBtnUpload.setEnabled(false);
 			mBtnStop.setEnabled(false);
+	
 		}else{
 			Toast.makeText(this, "unlock", Toast.LENGTH_SHORT).show();
 			
 			mBtnStart.setEnabled(true);
-			mBtnPause.setEnabled(true);
+			mBtnUpload.setEnabled(true);
+		//	mBtnPause.setEnabled(true);
 			int status = mNewBikeCenter.getRunStatus();
 			if (status == NewBikeCenter.IRunStatus.STOP){
 				mBtnStop.setEnabled(false);
@@ -348,22 +421,41 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 			case R.id.btn_start:
 					mRunBikeMarket.reset();
 					mNewBikeCenter.startRunning();
-					showStartButton(false);
+					showButtonType(VIEW_PAUSE);
 					mBtnStop.setEnabled(true);
 					//  updateStatus();
 					break;
-			case R.id.btn_pause:
-				mNewBikeCenter.pauseRunning();
-				showStartButton(true);
-				mBtnStop.setEnabled(true);
-				//  updateStatus();
-				break;
+//			case R.id.btn_pause:
+//				mNewBikeCenter.pauseRunning();
+//				showStartButton(true);
+//				mBtnStop.setEnabled(true);
+//				//  updateStatus();
+//				break;
 			case R.id.btn_stop:
 				mNewBikeCenter.stopRunning();
-				showStartButton(true);
-				mBtnStop.setEnabled(false);
-				showSaveDialog(true);
-				//  updateStatus();
+				showButtonType(VIEW_UPLOAD);
+				BikeType.BikeRecordUpload upload = mNewBikeCenter.newBikeRecord();
+				log.e("mTotalDistance = " + upload.mTotalDistance + ", mRunRecordList.size = " + upload.mBikeRecordList.size());
+				if (upload.mTotalDistance == 0 || upload.mBikeRecordList.size() < 2){
+					
+					showTipDialog(true);
+				}else{
+					boolean ret = false;
+//					try {
+//						ret = mRunRecordDBManager.insert(group);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//					if (!ret){
+//						Utils.showToast(this, R.string.toask_saveRecord_fail);
+//					}
+				}	
+				break;
+			case R.id.btn_upload:
+				Utils.showToast(this, "上传中...");
+				BikeType.BikeRecordUpload object = mNewBikeCenter.newBikeRecord();
+				RunRecordUploadPoxy.getInstance().requestUpload(object);
+				finish();
 				break;
 		}
 	}

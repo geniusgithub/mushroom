@@ -50,8 +50,11 @@
      		
      	<string name="newbike_text_title">新的骑行</string>  
      	<string name="newbike_text_start">开始</string>  
+        <string name="newbike_text_upload">上传</string>  
+     	<string name="newbike_text_startyet">已开始</string>  
      	<string name="newbike_text_pause">暂停</string> 
      	<string name="newbike_text_stop">停止</string>  
+     	<string name="newbike_text_stopyet">已停止</string>  
      	<string name="newbike_text_timeinterval">时长</string>  
      	<string name="newbike_text_curspeed">当前速度(km/h)</string>  
      	<string name="newbike_text_distance">距离(km)</string>  
@@ -118,10 +121,10 @@
         <string name="toask_setArea_success">设置防盗成功</string>
         <string name="toask_delArea_success">取消防盗成功</string>  
         <string name="toask_saveRecord_success">保存成功</string>
-        <string name="toask_saveRecord_fail">保存失败</string>
+        <string name="toask_saveRecord_fail">保存本地失败</string>
         <string name="toask_unsave_record">未能形成有效的骑行记录</string>  
-        
-        
+        <string name="toask_invalid_record">无效的骑行记录</string>  
+              
         <string name="popwindow_title_bind">绑定设备账号</string>      
         <string name="popwindow_title_listener">设备监听</string>
         <string name="popwindow_title_sex">性别选择</string>  
@@ -134,6 +137,10 @@
         <string name="dialog_msg_exitRun">您确定要放弃骑行吗?</string> 
         <string name="dialog_title_saveRun">是否保存当前骑行</string>
         <string name="dialog_msg_saveRun">是否保存当前骑行?</string> 
+        <string name="dialog_title_invalidrecord">骑行记录</string>
+        <string name="dialog_msg_sinvalidrecord">未形成有效的骑行记录</string> 
+        <string name="dialog_title_warnphone">未输入手机号码</string>
+        <string name="dialog_msg_warnphone">请输入有效的手机号码\n保持短信告警功能正常</string> 
         <string name="dialog_title_exit">是否退出蘑菇兄弟</string>
         <string name="dialog_msg_exit">您确定要离开蘑菇兄弟吗?</string> 
         <string name="dialog_title_unbind">解绑设备</string>

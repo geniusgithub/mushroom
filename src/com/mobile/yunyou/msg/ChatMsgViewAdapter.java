@@ -17,6 +17,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import java.util.List;
 
 import com.mobile.yunyou.R;
+import com.mobile.yunyou.map.data.LocationEx;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.ImageLoader;
 import com.mobile.yunyou.util.LogFactory;
@@ -130,7 +131,8 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnItemClickListen
 			  viewHolder.tvContent = (TextView) convertView.findViewById(R.id.tv_chatcontent);
 			  viewHolder.cbCheckBox = (CheckBox) convertView.findViewById(R.id.cb_checkbox);
 			  viewHolder.isComMsg = isComMsg;
-			  
+			  LocationEx fEx;
+	
 			  convertView.setTag(viewHolder);
 	    }else{
 	        viewHolder = (ViewHolder) convertView.getTag();
@@ -139,10 +141,11 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnItemClickListen
 	    
 	    
 	    viewHolder.tvSendTime.setText(entity.getDate());
-	    viewHolder.tvUserName.setText(entity.getName());
+	    //viewHolder.tvUserName.setText(entity.getName());
+	    viewHolder.tvUserName.setText("蘑菇伴侣");
 	    viewHolder.tvContent.setText(entity.getText());
 	    viewHolder.cbCheckBox.setChecked(entity.getSelectState());
-	    viewHolder.ivHeadImageView.setImageResource(R.drawable.set_mogu_icon);
+	    viewHolder.ivHeadImageView.setImageResource(R.drawable.mogu_icon);
 	    if (isShowCheckbox == true)
 	    {
 	    	 viewHolder.cbCheckBox.setVisibility(View.VISIBLE);

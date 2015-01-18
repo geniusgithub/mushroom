@@ -5,25 +5,21 @@ import java.util.LinkedList;
 import java.util.List;
 
 import android.graphics.Color;
-import android.location.LocationManager;
-import android.opengl.GLSurfaceView.Renderer;
 import android.view.View;
 import android.widget.TextView;
 
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
+import com.amap.api.maps.model.LatLngBounds.Builder;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolylineOptions;
-import com.amap.api.maps.model.LatLngBounds.Builder;
 import com.mobile.yunyou.R;
-import com.mobile.yunyou.map.data.LocationEx;
 import com.mobile.yunyou.model.BikeType;
-import com.mobile.yunyou.model.BikeType.BikeRecordSubResult;
+import com.mobile.yunyou.model.BikeType.BikeLRecordSubResult;
 import com.mobile.yunyou.model.BikeType.MinRunRecord;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.YunTimeUtils;
 
 
 
@@ -36,7 +32,7 @@ public class RunRecordMarket {
 	private int drawableIDStart = 0;
 	private int drawableIDEnd = 0;
 	
-	private BikeType.RunRecordGroup mRecordGroup = new BikeType.RunRecordGroup();
+	private BikeType.BikeLRecordSubResultGroup mRecordGroup = new BikeType.BikeLRecordSubResultGroup();
 	private List<LatLng> mLatLngList = new ArrayList<LatLng>();
 	private List<PolylineOptions> mPLineList = new ArrayList<PolylineOptions>();
 	
@@ -99,23 +95,22 @@ public class RunRecordMarket {
 	public List<PolylineOptions> getPLineList (){
 		return mPLineList;
 	}
-	public void setRunRecord(BikeType.RunRecordGroup group){
+	public void setRunRecord(BikeType.BikeLRecordSubResultGroup group){
 		if (group != null)
 		{
-		
-			log.e("setRunRecord size = " + group.mRunRecordList.size());
+			LinkedList<BikeLRecordSubResult> mRunRecordList = group.mBikeSubRecordResultList;
+			log.e("setRunRecord size = " + mRunRecordList.size());
 			mRecordGroup = group;
 			mLatLngList.clear();
 			mPLineList.clear();
 			mBounds = null;
-			LinkedList<MinRunRecord> mRunRecordList = group.mRunRecordList;
 			int size = mRunRecordList.size();
 			int index = 0;
 			LatLng preLatLng = null;
 			Builder build = LatLngBounds.builder();
 			for(int i = 0; i < size; i++)
 			{
-				BikeType.MinRunRecord object = mRunRecordList.get(i);	
+				BikeLRecordSubResult object = mRunRecordList.get(i);	
 				LatLng latLng = new LatLng(object.mLat, object.mLon);
 				mLatLngList.add(latLng);
 				build.include(latLng);
@@ -129,7 +124,10 @@ public class RunRecordMarket {
 				preLatLng = latLng;
 			}
 			
-			mBounds = build.build();
+			if (size != 0){
+				mBounds = build.build();
+			}
+			
 		}
 	}
 	

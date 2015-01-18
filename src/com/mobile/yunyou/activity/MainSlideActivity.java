@@ -2,7 +2,6 @@ package com.mobile.yunyou.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.RemoteException;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
@@ -11,19 +10,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
-import com.amap.api.maps.MapsInitializer;
-//import com.amap.api.maps2d.MapsInitializer;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.bike.BikeRecordActivity;
-import com.mobile.yunyou.bike.RunRecordActivity;
+import com.mobile.yunyou.bike.RunLRecordActivity;
 import com.mobile.yunyou.fragment.MainMapFragment;
 import com.mobile.yunyou.fragment.NavigationFragment;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.Utils;
 
 
 
@@ -129,7 +124,7 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 	
 	public void goRunRecord(){
 		Intent intent = new Intent();
-		intent.setClass(this, RunRecordActivity.class);
+		intent.setClass(this, RunLRecordActivity.class);
 		startActivityForResult(intent, MSG_REQUEST_RECORD);
 	}
 	

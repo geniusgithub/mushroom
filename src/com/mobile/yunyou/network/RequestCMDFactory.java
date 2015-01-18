@@ -92,13 +92,19 @@ public class RequestCMDFactory {
 		mRequestCMDMap.put(BikeType.BIKE_PAUSE_MASITD, "bike_pause");
 		mRequestCMDMap.put(BikeType.BIKE_STOP_MASITD, "bike_stop");
 		mRequestCMDMap.put(BikeType.BIKE_STATUS_MASITD, "bike_status");
-		mRequestCMDMap.put(BikeType.BIKE_RECORD_MASITD, "bike_record");
-		mRequestCMDMap.put(BikeType.BIKE_RECORDSUB_MASITD, "bike_recordsub");
+//		mRequestCMDMap.put(BikeType.BIKE_RECORD_MASITD, "bike_record");
+//		mRequestCMDMap.put(BikeType.BIKE_RECORDSUB_MASITD, "bike_recordsub");
 		mRequestCMDMap.put(BikeType.BIKE_SETAREA_MASITD, "bike_setarea");
 		mRequestCMDMap.put(BikeType.BIKE_GETAREA_MASITD, "bike_getarea");
 		mRequestCMDMap.put(BikeType.BIKE_DELAREA_MASITD, "bike_delarea");
 		mRequestCMDMap.put(BikeType.BIKE_GETALERTWAY, "bike_getalertway");
 		mRequestCMDMap.put(BikeType.BIKE_SETALERTWAY, "bike_setalertway");
+		
+		
+		mRequestCMDMap.put(BikeType.BIKE_RECORDUPLOAD_MASITD, "bike_uploadlocal");
+		mRequestCMDMap.put(BikeType.BIKE_LRECORD_MASITD, "bike_lrecord");
+		mRequestCMDMap.put(BikeType.BIKE_LRECORDSUB_MASITD, "bike_lrecordsub");
+		
 	}
 	
 	public String getCMDString(int cmd)

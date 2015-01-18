@@ -1,6 +1,7 @@
 package com.mobile.yunyou.bike;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -9,6 +10,8 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 
@@ -19,11 +22,12 @@ import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.set.SetWarnActivity;
 import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 
-public class WarningActivity extends Activity implements OnClickListener, IRequestCallback{
+public class WarningActivity extends Activity implements OnClickListener, IRequestCallback, OnCheckedChangeListener{
 
 	private static final int MSG_GET_WARNING = 0x0001;
 	
@@ -78,6 +82,8 @@ public class WarningActivity extends Activity implements OnClickListener, IReque
     	mBtnBack.setOnClickListener(this);
 		mBtnSave = (Button) findViewById(R.id.btn_save);
 		mBtnSave.setOnClickListener(this);
+		
+		mCBMessage.setOnCheckedChangeListener(this);
 	}
 	
 	private void initData(){
@@ -148,6 +154,11 @@ public class WarningActivity extends Activity implements OnClickListener, IReque
 	}
 	
 	private void save(){
+		String phone = mEditTextPhone.getText().toString();
+		if (phone.length() == 0 && mCBMessage.isChecked()){
+			showTipDialog(true);
+			return ;
+		}
 		setWarn();
 	}
 	
@@ -174,6 +185,34 @@ public class WarningActivity extends Activity implements OnClickListener, IReque
 	
 	}
 
+	private Dialog mTipDialog = null;
+	private void showTipDialog(boolean bShow)
+	{
+		if (mTipDialog != null)
+		{
+			mTipDialog.dismiss();
+			mTipDialog = null;
+		}
+		
+			View.OnClickListener onListener = new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					mCBMessage.setChecked(false);
+				}
+			};
+
+
+
+		if (bShow)
+		{
+			mTipDialog = DialogFactory.creatSingleDialog(this, R.string.dialog_title_warnphone, R.string.dialog_msg_warnphone, onListener);
+			mTipDialog.setCancelable(false);
+			mTipDialog.show();
+		}
+	
+	}
+	
 
 	@Override
 	public boolean onComplete(int requestAction, ResponseDataPacket dataPacket) {
@@ -231,7 +270,29 @@ public class WarningActivity extends Activity implements OnClickListener, IReque
 		}
 		
 		Utils.showToast(this, R.string.set_data_success);
-		
+		finish();
 		
 	}
+
+
+	@Override
+	public void onCheckedChanged(CompoundButton box, boolean arg1) {
+		switch(box.getId()){
+			case R.id.cb_message:
+				if (mCBMessage.isChecked()){
+					onMessage();	
+				}
+				break;
+		}
+	}
+	
+	private void onMessage(){
+		String phone = mEditTextPhone.getEditableText().toString();
+		if (phone.length() == 0){
+			
+			showTipDialog(true);
+			return ;
+		}
+	}
+	
 }

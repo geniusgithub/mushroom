@@ -23,6 +23,7 @@ import com.mobile.yunyou.activity.OnlineStatusManager;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.GloalType;
 import com.mobile.yunyou.model.MessagePushType;
+import com.mobile.yunyou.model.BikeType.BikeLRecordResult;
 import com.mobile.yunyou.msg.MsgManager;
 import com.mobile.yunyou.network.HeartBeatManager;
 import com.mobile.yunyou.network.NetworkCenterEx;
@@ -68,8 +69,10 @@ public class YunyouApplication extends Application{
 	
 	private ISelDeviceUnbind mISelDeviceChange;
 	
-	private BikeType.RunRecordGroup mRecordGroup = new BikeType.RunRecordGroup();
+//	private BikeType.RunRecordGroup mRecordGroup = new BikeType.RunRecordGroup();
 	
+	private BikeLRecordResult mCurRecord;
+	private BikeType.BikeLRecordSubResultGroup mRecordGroup = new BikeType.BikeLRecordSubResultGroup();
 	private boolean isIgnoreBind = true;
 	
 	public synchronized static YunyouApplication getInstance()
@@ -435,11 +438,24 @@ public class YunyouApplication extends Application{
 	
 	
 	
-	public void setRunRecord(BikeType.RunRecordGroup group){
+//	public void setRunRecord(BikeType.RunRecordGroup group){
+//		mRecordGroup = group;
+//	}
+//	
+//	public BikeType.RunRecordGroup getRunRecord(){
+//		return mRecordGroup;
+//	}
+	
+	public void attachRunRecords(BikeLRecordResult record, BikeType.BikeLRecordSubResultGroup group){
+		mCurRecord = record;
 		mRecordGroup = group;
 	}
 	
-	public BikeType.RunRecordGroup getRunRecord(){
+	public BikeLRecordResult getRunRecord(){
+		return mCurRecord;
+	}
+	
+	public BikeType.BikeLRecordSubResultGroup getRunRecordSub(){
 		return mRecordGroup;
 	}
 }

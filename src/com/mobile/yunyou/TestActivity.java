@@ -119,8 +119,10 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 	    	
 //	    	mNetworkCenter.setDid("A000000012000086");
 //	    	mNetworkCenter.setSid("A128966000007152");
-	    	mNetworkCenter.setDid("A000000012000087");
-			mNetworkCenter.setSid("A12null000007135");
+	    //	mNetworkCenter.setDid("A000000012000087");
+		//	mNetworkCenter.setSid("A12null000007135");
+			mNetworkCenter.setSid("A128966000007112");
+			mNetworkCenter.setDid("A000000114002330");
 	    	mNetworkCenter.initNetwork();
 	    }
 	    
@@ -1001,20 +1003,20 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 		}
 		
 		public void doBtn45(){
-			log.e("BIKE_RECORD_MASITD begin...");
-			BikeType.BikeRecord object = new BikeType.BikeRecord();
+			log.e("BIKE_LRECORD_MASITD begin...");
+			BikeType.BikeLRecord object = new BikeType.BikeLRecord();
 			object.mOffset = 0;
 			object.mSinceID = -1;
-			object.mNum = 20;
+			object.mNum = 10;
 			
-			mNetworkCenter.StartRequestToServer(BikeType.BIKE_RECORD_MASITD, object, this);
+			mNetworkCenter.StartRequestToServer(BikeType.BIKE_LRECORD_MASITD, object, this);
 		}
 		
 		public void doBtn46(){
-			log.e("BIKE_RECORDSUB_MASITD begin...");
-			BikeType.BikeRecordSub object = new BikeType.BikeRecordSub();
-			object.mID = 0;
-			mNetworkCenter.StartRequestToServer(BikeType.BIKE_RECORDSUB_MASITD, object, this);
+			log.e("BIKE_LRECORDSUB_MASITD begin...");
+			BikeType.BikeLRecordSub object = new BikeType.BikeLRecordSub();
+			object.mID = 49;
+			mNetworkCenter.StartRequestToServer(BikeType.BIKE_LRECORDSUB_MASITD, object, this);
 			
 		}
 		
@@ -1346,24 +1348,48 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 					}
 				}
 				break;
-				case BikeType.BIKE_RECORD_MASITD:
+//				case BikeType.BIKE_RECORD_MASITD:
+//				{
+//					BikeType.BikeRecordResult object = new BikeType.BikeRecordResult();
+//					try {
+//						object.parseString(dataPacket.data.toString());
+//						log.e("BIKE_RECORD_MASITD success...");
+//					} catch (Exception e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//				}
+//				break;
+//				case BikeType.BIKE_RECORDSUB_MASITD:
+//				{
+//					BikeType.BikeRecordSubResult object = new BikeType.BikeRecordSubResult();
+//					try {
+//						object.parseString(dataPacket.data.toString());
+//						log.e("BIKE_RECORDSUB_MASITD success...");
+//					} catch (Exception e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//				}
+//					break;
+				case BikeType.BIKE_LRECORD_MASITD:
 				{
-					BikeType.BikeRecordResult object = new BikeType.BikeRecordResult();
+					BikeType.BikeLRecordResultGroup object = new BikeType.BikeLRecordResultGroup();
 					try {
 						object.parseString(dataPacket.data.toString());
-						log.e("BIKE_RECORD_MASITD success...");
+						log.e("BIKE_LRECORD_MASITD success...");
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
 				break;
-				case BikeType.BIKE_RECORDSUB_MASITD:
+				case BikeType.BIKE_LRECORDSUB_MASITD:
 				{
-					BikeType.BikeRecordSubResult object = new BikeType.BikeRecordSubResult();
+					BikeType.BikeLRecordSubResultGroup object = new BikeType.BikeLRecordSubResultGroup();
 					try {
 						object.parseString(dataPacket.data.toString());
-						log.e("BIKE_RECORDSUB_MASITD success...");
+						log.e("BIKE_LRECORDSUB_MASITD success...");
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();

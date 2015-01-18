@@ -20,6 +20,7 @@ import com.mobile.yunyou.map.data.LocationEx;
 import com.mobile.yunyou.map.util.LocationUtil;
 import com.mobile.yunyou.map.util.WebManager;
 import com.mobile.yunyou.model.BikeType;
+import com.mobile.yunyou.model.BikeType.MinLRunRecord;
 import com.mobile.yunyou.model.BikeType.MinRunRecord;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
@@ -214,33 +215,63 @@ public class NewBikeCenter implements LocationListener{
 		return entiy;
 	}
 	
-	public BikeType.RunRecordGroup newRunRecord(){
-		 BikeType.RunRecordGroup group = new BikeType.RunRecordGroup();
-		 group.mTimeMillsion = mTimeMilllons;
-		 group.mTotalDistance = mTotalDistance;
-		 group.mHSpeed = mHSpeed;
-		 group.mAverageSpeed = mAverage;
-		 group.mCal = mCal;
-		 group.mStartTime = YunTimeUtils.getFormatTime(mStartTimeMilllons);
-		 group.mEndTime = YunTimeUtils.getFormatTime(mEndTimeMilllons);
-		 LinkedList<MinRunRecord> list = new LinkedList<MinRunRecord>();
+	public BikeType.BikeRecordUpload newBikeRecord(){
+		
+		BikeType.BikeRecordUpload group = new BikeType.BikeRecordUpload();
+		group.mStartTime = YunTimeUtils.getFormatTime(mStartTimeMilllons);
+		group.mEndTime = YunTimeUtils.getFormatTime(mEndTimeMilllons);
+		group.mTotalDistance =  mTotalDistance / 1000.0;
+		group.mCal = 0;
+		group.mHSpeed = mHSpeed * 3.6;
+		group.mLSpeed = 0;
+		group.mHeight = 0;
+		
+		 LinkedList<MinLRunRecord> list = new LinkedList<MinLRunRecord>();
 		 for(LatLng object : mlLatLngLists){
-			 MinRunRecord record = new MinRunRecord();
+			 MinLRunRecord record = new MinLRunRecord();
 			 record.mLat = object.latitude;
 			 record.mLon = object.longitude;
+			 record.mType = 1;
+			 record.mHeight = 0;
 			 record.mCreateTime = "";
 			 list.add(record);
 		 }
-		 group.mRunRecordList = list;
-		 
-		 return group;
+		 group.mBikeRecordList = list;
+		
+		
+		return group;
 	}
+//	public BikeType.RunRecordGroup newRunRecord(){
+//		 BikeType.RunRecordGroup group = new BikeType.RunRecordGroup();
+//		 group.mTimeMillsion = mTimeMilllons;
+//		 group.mTotalDistance = mTotalDistance;
+//		 group.mHSpeed = mHSpeed;
+//		 group.mAverageSpeed = mAverage;
+//		 group.mCal = mCal;
+//		 group.mStartTime = YunTimeUtils.getFormatTime(mStartTimeMilllons);
+//		 group.mEndTime = YunTimeUtils.getFormatTime(mEndTimeMilllons);
+//		 LinkedList<MinRunRecord> list = new LinkedList<MinRunRecord>();
+//		 for(LatLng object : mlLatLngLists){
+//			 MinRunRecord record = new MinRunRecord();
+//			 record.mLat = object.latitude;
+//			 record.mLon = object.longitude;
+//			 record.mCreateTime = "";
+//			 list.add(record);
+//		 }
+//		 group.mRunRecordList = list;
+//		 
+//		 return group;
+//	}
 	
 	public void addLocation(LocationEx location){
 		if (location != null){
 			log.e("NewBikeCenter  addLocation(" + location.getOffsetLat() + "," + location.getOffsetLon());
 		}else{
 			log.e("NewBikeCenter  addLocation = null");
+		}
+		
+		if (location != null){
+			mHeight = (int) location.getAltitude();
 		}
 
 		if (mLastLatLng == null){
@@ -275,9 +306,10 @@ public class NewBikeCenter implements LocationListener{
 			}
 			
 			mAverage = mTotalDistance * 1.0 / mTimeMilllons * 1000;
-			log.e("mTotalDistance = " + mTotalDistance + ", curspeed = " + mCurSpeed +  
-					", hspeed = " + mHSpeed + ", averagespeed = " + mAverage + 
-					", mlLatLngLists.size = " + mlLatLngLists.size());
+			log.e("mTotalDistance = " + mTotalDistance + "\n curspeed = " + mCurSpeed +  
+					"\n hspeed = " + mHSpeed + "\n averagespeed = " + mAverage + 
+					"\nHeight = " + mHeight + 
+					"\n mlLatLngLists.size = " + mlLatLngLists.size());
 		}
 		
 

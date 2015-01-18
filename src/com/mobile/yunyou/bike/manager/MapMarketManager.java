@@ -7,11 +7,9 @@ import android.os.Message;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
-import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.PolylineOptions;
 import com.mobile.yunyou.bike.BikeMarket;
-import com.mobile.yunyou.bike.BikeRecordMarket;
 import com.mobile.yunyou.bike.SafeMarket;
 import com.mobile.yunyou.bike.SelfMarket;
 import com.mobile.yunyou.util.CommonLog;
@@ -30,7 +28,7 @@ public class MapMarketManager {
 	private SelfMarket mSelfMarket;
 	private BikeMarket mBikeMarket;
 	private SafeMarket mSafeMarket;
-	private BikeRecordMarket mBikeRecordMarket;
+	//private BikeRecordMarket mBikeRecordMarket;
 	
 	private Marker mMarketBIKE;
 	private int mCurShowState = -1;
@@ -79,10 +77,10 @@ public class MapMarketManager {
 	}
 	
 	
-	public void setBikeRecordPos(BikeRecordMarket object)
-	{
-		mBikeRecordMarket = object;
-	}
+//	public void setBikeRecordPos(BikeRecordMarket object)
+//	{
+//		mBikeRecordMarket = object;
+//	}
 	
 	public int getCurShowState(){
 		return mCurShowState;

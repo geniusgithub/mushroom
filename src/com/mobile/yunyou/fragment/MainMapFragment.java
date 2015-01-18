@@ -1,6 +1,5 @@
 package com.mobile.yunyou.fragment;
 
-import android.R.integer;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -35,8 +34,6 @@ import com.amap.api.maps.model.Marker;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.bike.BikeMarket;
-import com.mobile.yunyou.bike.BikeRecordMarket;
-import com.mobile.yunyou.bike.BikeSubRecordManager;
 import com.mobile.yunyou.bike.MoGuActivity;
 import com.mobile.yunyou.bike.SelfMarket;
 import com.mobile.yunyou.bike.manager.BikeLocationManager;
@@ -45,7 +42,6 @@ import com.mobile.yunyou.bike.manager.MapMarketManager;
 import com.mobile.yunyou.bike.manager.SelfLocationManager;
 import com.mobile.yunyou.bike.manager.SelfLocationManager.ILocationUpdate;
 import com.mobile.yunyou.map.data.LocationEx;
-import com.mobile.yunyou.map.util.LocationUtil;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.BikeType.BikeGetArea;
 import com.mobile.yunyou.network.NetworkCenterEx;

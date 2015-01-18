@@ -30,8 +30,8 @@
 	        
 	           <ImageView 
 	           android:id="@+id/iv_userhead" 
-	           android:layout_width="80px"
-               android:layout_height="80px"
+	           android:layout_width="60dp"
+               android:layout_height="60dp"
 	           android:focusable="false" 
 	           android:layout_alignParentRight="true" 
                android:layout_alignParentTop="true" 

@@ -22,15 +22,19 @@
 	     android:textSize="20sp"
 	     android:clickable="false"/>  
 	     
-         <ImageView
-         android:layout_width="wrap_content"
+         
+         <TextView
+         android:id="@+id/tv_type"
+	     android:layout_width="wrap_content"
 	     android:layout_height="wrap_content"
 	     android:layout_centerVertical="true"
 	     android:layout_marginRight="10dp"
-	     android:src="@drawable/bike_point"
-	     android:layout_alignParentRight="true">
-             
-         </ImageView>
+	     android:layout_alignParentRight="true"
+	     android:text="网络" 
+	     android:textColor="#000000"
+	     android:textSize="20sp"
+	     android:clickable="false"/>  
+
         
     </RelativeLayout>
     

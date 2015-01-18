@@ -236,7 +236,7 @@
 <!--              </intent-filter>  -->
         </activity>
                  
-         <activity android:name="com.mobile.yunyou.bike.BikeRecordActivity" 
+         <activity android:name="com.mobile.yunyou.bike.RunLRecordActivity" 
      	  android:theme="@android:style/Theme.NoTitleBar">
              
 <!-- 			<intent-filter >  -->

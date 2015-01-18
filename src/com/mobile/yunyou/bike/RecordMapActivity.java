@@ -64,6 +64,7 @@ import com.mobile.yunyou.map.util.WebManager;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.model.BikeType.BikeGetArea;
+import com.mobile.yunyou.model.BikeType.BikeLRecordResult;
 import com.mobile.yunyou.model.BikeType.MinRunRecord;
 import com.mobile.yunyou.network.Courier;
 import com.mobile.yunyou.network.IRequestCallback;
@@ -105,7 +106,9 @@ public class RecordMapActivity extends Activity implements OnClickListener,
 	private TextView mTVTimeInterval;
 	private TextView mTVSpeed;
 	
-	private BikeType.RunRecordGroup mRunRecordGroup;
+//	private BikeType.RunRecordGroup mRunRecordGroup;
+	private BikeLRecordResult mCurRecord;
+	private BikeType.BikeLRecordSubResultGroup mRunRecordGroup;
 	private RunRecordMarket mBikeRecordMarket;
 	
 	private Handler mHandler;
@@ -195,9 +198,10 @@ public class RecordMapActivity extends Activity implements OnClickListener,
 
 		mBikeRecordMarket = new RunRecordMarket(R.drawable.point_start, R.drawable.point_end);
 		
-		mRunRecordGroup = YunyouApplication.getInstance().getRunRecord();
+		mCurRecord = YunyouApplication.getInstance().getRunRecord();
+		mRunRecordGroup = YunyouApplication.getInstance().getRunRecordSub();
 		mBikeRecordMarket.setRunRecord(mRunRecordGroup);
-		updateView(mRunRecordGroup);
+		updateView(mCurRecord);
 	}
     
 	
@@ -221,11 +225,13 @@ public class RecordMapActivity extends Activity implements OnClickListener,
 
 	}
 	
-	private void updateView(BikeType.RunRecordGroup object){
+	private void updateView(BikeType.BikeLRecordResult object){
 
 		mTVDistance.setText(getShowDistance(object.mTotalDistance));
-		mTVTimeInterval.setText(YunTimeUtils.getFormatTimeInterval(object.mTimeMillsion));
-		mTVSpeed.setText(StringUtil.ConvertByDoubeString(object.mAverageSpeed) + "km/h");
+		long timeInterval = YunTimeUtils.getTimeInterval(object.mEndTime, object.mStartTime);
+		mTVTimeInterval.setText(YunTimeUtils.getFormatTimeInterval(timeInterval));
+		double speed = object.mTotalDistance / (timeInterval / 1000.0 / 60 / 60);
+		mTVSpeed.setText(StringUtil.ConvertByDoubeString(speed) + "km/h");
 	}
 
 	
@@ -332,9 +338,8 @@ public class RecordMapActivity extends Activity implements OnClickListener,
 		showBikeRecord();
 	}
 
-	   public String getShowDistance(int distance){
-	    	double value = distance * 1.0 / 1000;
-	    	String string = Double.valueOf(value) + "公里";
+	   public String getShowDistance(double distance){
+	    	String string = Double.valueOf(distance) + "公里";
 	    	return string;
 	    }
 

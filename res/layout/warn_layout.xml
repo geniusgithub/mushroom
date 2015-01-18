@@ -57,6 +57,7 @@
 		            android:layout_toRightOf="@id/tv_phone"
 		            android:layout_marginLeft="15dp"
 		            android:background="@null"
+		            android:inputType="number"
 		            android:gravity="center_vertical"
 		            android:singleLine="true"
 		            android:paddingLeft="5.0dip"

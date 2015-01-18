@@ -80,6 +80,22 @@ public class YunTimeUtils {
 		
 	}
 	
+	// 03:23:23
+	public static long getTimeInterval(String endTime, String startTime)
+	{
+		long timeInterval = 0;
+		try {
+			long time1 = getTimeMillison(endTime);
+			long time2 = getTimeMillison(startTime);
+			timeInterval = time1 - time2;
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		return timeInterval;
+		
+	}
+	
 	public static String getShowTimeIntervalString(int seconds)
 	{
 

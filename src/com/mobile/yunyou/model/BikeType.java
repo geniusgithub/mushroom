@@ -89,197 +89,197 @@ public class BikeType {
 	}
 
 	// 获取骑行记录
-	public final static int BIKE_RECORD_MASITD = 0x0404;
-	public static class BikeRecord  implements IToJsonObject
-	{
-		
-		public final static String KEY_OFFSET = "offset";
-		public final static String KEY_NUM = "num";
-		public final static String KEY_SINCEID = "sinceId";
-		
-		public int mOffset = 0;
-		public int mNum = 0;
-		public int mSinceID = -1;
-		
-		@Override
-		public JSONObject toJsonObject() throws JSONException {
-			// TODO Auto-generated method stub
-			JSONObject jsonObject  = new JSONObject();
-			jsonObject.put(KEY_OFFSET, mOffset);
-			jsonObject.put(KEY_NUM, mNum);
-			jsonObject.put(KEY_SINCEID, mSinceID);
-			return jsonObject;
-			
-		}	
-	}
+//	public final static int BIKE_RECORD_MASITD = 0x0404;
+//	public static class BikeRecord  implements IToJsonObject
+//	{
+//		
+//		public final static String KEY_OFFSET = "offset";
+//		public final static String KEY_NUM = "num";
+//		public final static String KEY_SINCEID = "sinceId";
+//		
+//		public int mOffset = 0;
+//		public int mNum = 0;
+//		public int mSinceID = -1;
+//		
+//		@Override
+//		public JSONObject toJsonObject() throws JSONException {
+//			// TODO Auto-generated method stub
+//			JSONObject jsonObject  = new JSONObject();
+//			jsonObject.put(KEY_OFFSET, mOffset);
+//			jsonObject.put(KEY_NUM, mNum);
+//			jsonObject.put(KEY_SINCEID, mSinceID);
+//			return jsonObject;
+//			
+//		}	
+//	}
 	
-	public static class BikeRecordResultGroup implements IParseString
-	{
-		private final static String KEY_SINCEID = "sinceId";
-		private final static String KEY_ARRAY = "array";
-		
-		public int mSindID = -1;		
-		public LinkedList<BikeRecordResult> mBikeRecordResultList = new LinkedList<BikeRecordResult>();
-
-		@Override
-		public boolean parseString(String jsonString) throws Exception {
-			// TODO Auto-generated method stub
-					
-			JSONObject jsonObject = new JSONObject(jsonString);
-			mSindID = jsonObject.getInt(KEY_SINCEID);
-			JSONArray jsonArray = jsonObject.getJSONArray(KEY_ARRAY);
-			int size = jsonArray.length();
-			for(int i = 0; i < size; i++)
-			{
-				BikeRecordResult object = new BikeRecordResult();
-				
-				try {
-					object.parseString(jsonArray.getJSONObject(i).toString());
-					mBikeRecordResultList.add(object);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-
-			
-			return true;
-		}
-
-	
-	}
-	
-	
-	public static class BikeRecordResult implements IParseString
-	{
-		public final static String KEY_ID = "id";
-		public final static String KEY_STARTTIME = "start_time";
-		public final static String KEY_ENDTIME = "end_time";
-		public final static String KEY_DISTANCE = "distance";
-		public final static String KEY_CAL = "cal";
-		
-		public int mID = 0;
-		public String mStartTimeString = "";
-		public String mEndTimeString = "";
-		public int mDistance = 0;
-		public int mCal = 0;
-		
-		
-		public String mTimeTop = "";
-		public String mTimeRight = "";
-		public long mTimeInterval = 0;
-		
-		@Override
-		public boolean parseString(String jsonString) throws Exception {
-			
-			JSONObject jsonObject = new JSONObject(jsonString);	
-
-			mID = jsonObject.optInt(KEY_ID);
-			mStartTimeString = jsonObject.optString(KEY_STARTTIME);
-			mEndTimeString = jsonObject.optString(KEY_ENDTIME);		
-			mDistance = jsonObject.optInt(KEY_DISTANCE);	
-			mCal = jsonObject.optInt(KEY_CAL);
-
-			long timeStart = YunTimeUtils.getTimeMillison(mStartTimeString);
-			mTimeTop = YunTimeUtils.getFormatTime1(timeStart);
-			
-			long timeEnd = YunTimeUtils.getTimeMillison(mEndTimeString);
-			mTimeInterval = (int) (timeEnd - timeStart);
-			mTimeRight = YunTimeUtils.getFormatTimeInterval(mTimeInterval);
-			return true;
-		}
-
-	}
-	
-	
-	
+//	public static class BikeRecordResultGroup implements IParseString
+//	{
+//		private final static String KEY_SINCEID = "sinceId";
+//		private final static String KEY_ARRAY = "array";
+//		
+//		public int mSindID = -1;		
+//		public LinkedList<BikeRecordResult> mBikeRecordResultList = new LinkedList<BikeRecordResult>();
+//
+//		@Override
+//		public boolean parseString(String jsonString) throws Exception {
+//			// TODO Auto-generated method stub
+//					
+//			JSONObject jsonObject = new JSONObject(jsonString);
+//			mSindID = jsonObject.getInt(KEY_SINCEID);
+//			JSONArray jsonArray = jsonObject.getJSONArray(KEY_ARRAY);
+//			int size = jsonArray.length();
+//			for(int i = 0; i < size; i++)
+//			{
+//				BikeRecordResult object = new BikeRecordResult();
+//				
+//				try {
+//					object.parseString(jsonArray.getJSONObject(i).toString());
+//					mBikeRecordResultList.add(object);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//
+//			
+//			return true;
+//		}
+//
+//	
+//	}
+//	
+//	
+//	public static class BikeRecordResult implements IParseString
+//	{
+//		public final static String KEY_ID = "id";
+//		public final static String KEY_STARTTIME = "start_time";
+//		public final static String KEY_ENDTIME = "end_time";
+//		public final static String KEY_DISTANCE = "distance";
+//		public final static String KEY_CAL = "cal";
+//		
+//		public int mID = 0;
+//		public String mStartTimeString = "";
+//		public String mEndTimeString = "";
+//		public int mDistance = 0;
+//		public int mCal = 0;
+//		
+//		
+//		public String mTimeTop = "";
+//		public String mTimeRight = "";
+//		public long mTimeInterval = 0;
+//		
+//		@Override
+//		public boolean parseString(String jsonString) throws Exception {
+//			
+//			JSONObject jsonObject = new JSONObject(jsonString);	
+//
+//			mID = jsonObject.optInt(KEY_ID);
+//			mStartTimeString = jsonObject.optString(KEY_STARTTIME);
+//			mEndTimeString = jsonObject.optString(KEY_ENDTIME);		
+//			mDistance = jsonObject.optInt(KEY_DISTANCE);	
+//			mCal = jsonObject.optInt(KEY_CAL);
+//
+//			long timeStart = YunTimeUtils.getTimeMillison(mStartTimeString);
+//			mTimeTop = YunTimeUtils.getFormatTime1(timeStart);
+//			
+//			long timeEnd = YunTimeUtils.getTimeMillison(mEndTimeString);
+//			mTimeInterval = (int) (timeEnd - timeStart);
+//			mTimeRight = YunTimeUtils.getFormatTimeInterval(mTimeInterval);
+//			return true;
+//		}
+//
+//	}
+//	
 	
 	
-	// 获取骑行轨迹
-	public final static int BIKE_RECORDSUB_MASITD = 0x0405;
-	public static class BikeRecordSub  implements IToJsonObject
-	{
-		public final static String KEY_RECORD_ID = "record_id";
-		
-		public int mID = 0;
-
-		@Override
-		public JSONObject toJsonObject() throws JSONException {
-			
-			JSONObject jsonObject = new JSONObject();
-			jsonObject.put(KEY_RECORD_ID, mID);
-			
-			return jsonObject;
-			
-		}
-	}
 	
-	public static class BikeRecordSubResultGroup implements IParseString
-	{
-			
-		public LinkedList<BikeRecordSubResult> mBikeSubRecordResultList = new LinkedList<BikeRecordSubResult>();
+//	
+//	// 获取骑行轨迹
+//	public final static int BIKE_RECORDSUB_MASITD = 0x0405;
+//	public static class BikeRecordSub  implements IToJsonObject
+//	{
+//		public final static String KEY_RECORD_ID = "record_id";
+//		
+//		public int mID = 0;
+//
+//		@Override
+//		public JSONObject toJsonObject() throws JSONException {
+//			
+//			JSONObject jsonObject = new JSONObject();
+//			jsonObject.put(KEY_RECORD_ID, mID);
+//			
+//			return jsonObject;
+//			
+//		}
+//	}
+//	
+//	public static class BikeRecordSubResultGroup implements IParseString
+//	{
+//			
+//		public LinkedList<BikeRecordSubResult> mBikeSubRecordResultList = new LinkedList<BikeRecordSubResult>();
+//
+//		@Override
+//		public boolean parseString(String jsonString) throws Exception {
+//			// TODO Auto-generated method stub
+//					
+//
+//			JSONArray jsonArray = new JSONArray(jsonString);
+//			int size = jsonArray.length();
+//			for(int i = 0; i < size; i++)
+//			{
+//				BikeRecordSubResult object = new BikeRecordSubResult();
+//				
+//				try {
+//					object.parseString(jsonArray.getJSONObject(i).toString());
+//					mBikeSubRecordResultList.add(object);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//
+//			
+//			return true;
+//		}
+//
+//	
+//	}
 
-		@Override
-		public boolean parseString(String jsonString) throws Exception {
-			// TODO Auto-generated method stub
-					
-
-			JSONArray jsonArray = new JSONArray(jsonString);
-			int size = jsonArray.length();
-			for(int i = 0; i < size; i++)
-			{
-				BikeRecordSubResult object = new BikeRecordSubResult();
-				
-				try {
-					object.parseString(jsonArray.getJSONObject(i).toString());
-					mBikeSubRecordResultList.add(object);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-
-			
-			return true;
-		}
-
-	
-	}
-
-	public static class BikeRecordSubResult  implements IParseString
-	{
-		public final static String KEY_LAT = "w";
-		public final static String KEY_LON = "j";
-		public final static String KEY_UPDATE_TIME = "u";
-		public final static String KEY_CREATE_TIME = "c";
-		public final static String KEY_TYPE = "t";
-		public final static String KEY_POWER = "p";
-		
-		public double mLat = 0;
-		public double mLon = 0;
-		public String mUpdateTime = "";
-		public String mCreateTime = "";
-		public int mType = 0;
-		public int mPower = 0;
-		
-		public double mOffsetLat = 0;
-		public double mOffsetLon = 0;
-		
-		
-		@Override
-		public boolean parseString(String jsonString) throws Exception {
-			
-			JSONObject jsonObject = new JSONObject(jsonString);	
-
-			mLat = jsonObject.optDouble(KEY_LAT);
-			mLon = jsonObject.optDouble(KEY_LON);
-			mUpdateTime = jsonObject.optString(KEY_UPDATE_TIME);
-			mCreateTime = jsonObject.optString(KEY_CREATE_TIME);
-			mType = jsonObject.optInt(KEY_TYPE);
-			mPower = jsonObject.optInt(KEY_POWER);
-			
-			
-			return true;
-		}
-	}
+//	public static class BikeRecordSubResult  implements IParseString
+//	{
+//		public final static String KEY_LAT = "w";
+//		public final static String KEY_LON = "j";
+//		public final static String KEY_UPDATE_TIME = "u";
+//		public final static String KEY_CREATE_TIME = "c";
+//		public final static String KEY_TYPE = "t";
+//		public final static String KEY_POWER = "p";
+//		
+//		public double mLat = 0;
+//		public double mLon = 0;
+//		public String mUpdateTime = "";
+//		public String mCreateTime = "";
+//		public int mType = 0;
+//		public int mPower = 0;
+//		
+//		public double mOffsetLat = 0;
+//		public double mOffsetLon = 0;
+//		
+//		
+//		@Override
+//		public boolean parseString(String jsonString) throws Exception {
+//			
+//			JSONObject jsonObject = new JSONObject(jsonString);	
+//
+//			mLat = jsonObject.optDouble(KEY_LAT);
+//			mLon = jsonObject.optDouble(KEY_LON);
+//			mUpdateTime = jsonObject.optString(KEY_UPDATE_TIME);
+//			mCreateTime = jsonObject.optString(KEY_CREATE_TIME);
+//			mType = jsonObject.optInt(KEY_TYPE);
+//			mPower = jsonObject.optInt(KEY_POWER);
+//			
+//			
+//			return true;
+//		}
+//	}
 	
 	// 设置防盗区域
 	public final static int BIKE_SETAREA_MASITD = 0x0406;
@@ -417,8 +417,10 @@ public class BikeType {
 		    sBuffer.append(mPush ? "1" : "0");
 		    sBuffer.append(",");
 		    sBuffer.append(mMessage ? "1" : "0");
-		    sBuffer.append(",");
-		    sBuffer.append(mPhone);
+		    if (isMsg){
+			    sBuffer.append(",");
+			    sBuffer.append(mPhone);
+		    }
 		    
 		    mValue = sBuffer.toString();
 		}
@@ -429,8 +431,16 @@ public class BikeType {
 			mRing = Integer.parseInt(ayyay[0]) != 0;
 			mVibe = Integer.parseInt(ayyay[1]) != 0;
 			mPush = Integer.parseInt(ayyay[2]) != 0;
+	
+
 			mMessage = Integer.parseInt(ayyay[3]) != 0;
-			mPhone = ayyay[4];
+			
+			if (ayyay.length > 4){
+				mPhone = ayyay[4];
+			}else{
+				mPhone = "";
+			}
+
 		}
 
 		@Override
@@ -583,4 +593,279 @@ public class BikeType {
 		}
 		
 	}	
+	
+
+	// 上传骑行记录
+	public final static int BIKE_RECORDUPLOAD_MASITD = 0x0411;
+	public static class BikeRecordUpload  implements IToJsonObject
+	{
+		
+		public final static String KEY_DISTANCE = "total_distance";
+		public final static String KEY_STARTTIME = "start_time";
+		public final static String KEY_ENDTIME = "end_time";
+		public final static String KEY_CAL = "total_cal";		
+		public final static String KEY_HSPEED = "max_speed";
+		public final static String KEY_LSPEED = "min_speed";
+		public final static String KEY_HEIGHT = "max_elevation";
+	
+		public final static String KEY_DATA = "data";
+		
+		public double mTotalDistance = 0;
+		public String mStartTime = "";
+		public String mEndTime = "";
+		public int mCal = 0;
+		public double mHSpeed = 0;
+		public double mLSpeed = 0;
+		public int mHeight = 0;
+		
+		
+		public LinkedList<MinLRunRecord> mBikeRecordList = new LinkedList<MinLRunRecord>();
+		
+		@Override
+		public JSONObject toJsonObject() throws JSONException {
+			// TODO Auto-generated method stub
+			JSONObject jsonObject  = new JSONObject();
+			jsonObject.put(KEY_DISTANCE, mTotalDistance);
+			jsonObject.put(KEY_STARTTIME, mStartTime);
+			jsonObject.put(KEY_ENDTIME, mEndTime);
+			jsonObject.put(KEY_CAL, mCal);
+			jsonObject.put(KEY_HSPEED, mHSpeed);
+			jsonObject.put(KEY_LSPEED, mLSpeed);
+			jsonObject.put(KEY_HEIGHT, mHeight);
+			 
+			int size = mBikeRecordList.size();
+			JSONArray jsonArray = new JSONArray();
+			for(int i = 0; i < size; i++){
+				MinLRunRecord object = mBikeRecordList.get(i);
+				jsonArray.put(object.toJsonObject());
+			}
+			
+			jsonObject.put(KEY_DATA, jsonArray);
+			
+			return jsonObject;
+			
+		}	
+	}
+
+	public static class MinLRunRecord  implements IToJsonObject
+	{
+		public final static String KEY_LAT = "lat";
+		public final static String KEY_LON = "lon";
+		public final static String KEY_TYPE = "type";
+		public final static String KEY_ELEVATION = "elevation";
+		public final static String KEY_CREATE_TIME = "time";
+		
+		public double mLat = 0;
+		public double mLon = 0;
+		public int mType = 0;
+		public int mHeight = 0;
+		public String mCreateTime = "";
+		
+
+		@Override
+		public JSONObject toJsonObject() throws JSONException {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put(KEY_LAT, mLat);
+			jsonObject.put(KEY_LON, mLon);
+			jsonObject.put(KEY_TYPE, mType);
+			jsonObject.put(KEY_ELEVATION, mHeight);
+			jsonObject.put(KEY_CREATE_TIME, mCreateTime);
+			return jsonObject;
+		}
+	}
+	
+	// 获取骑行记录
+	public final static int BIKE_LRECORD_MASITD = 0x0412;
+	public static class BikeLRecord  implements IToJsonObject
+	{
+		
+		public final static String KEY_OFFSET = "offset";
+		public final static String KEY_NUM = "num";
+		public final static String KEY_SINCEID = "sinceId";
+		
+		public int mOffset = 0;
+		public int mNum = 0;
+		public int mSinceID = -1;
+		
+		@Override
+		public JSONObject toJsonObject() throws JSONException {
+			// TODO Auto-generated method stub
+			JSONObject jsonObject  = new JSONObject();
+			jsonObject.put(KEY_OFFSET, mOffset);
+			jsonObject.put(KEY_NUM, mNum);
+			jsonObject.put(KEY_SINCEID, mSinceID);
+			return jsonObject;
+			
+		}	
+	}
+
+	
+
+
+	
+	public static class BikeLRecordResultGroup  implements IParseString{
+
+		private final static String KEY_SINCEID = "sinceId";
+		private final static String KEY_ARRAY = "array";
+		
+		public int mSindID = -1;		
+		public LinkedList<BikeLRecordResult> mBikeRecordList = new LinkedList<BikeLRecordResult>();
+		
+		@Override
+		public boolean parseString(String str) throws Exception {
+			JSONObject jsonObject = new JSONObject(str);
+			mSindID = jsonObject.getInt(KEY_SINCEID);
+			
+			JSONArray jsonArray = jsonObject.getJSONArray(KEY_ARRAY);
+			int size = jsonArray.length();
+			for(int i = 0; i < size; i++)
+			{
+				BikeLRecordResult object = new BikeLRecordResult();
+				
+				try {
+					object.parseString(jsonArray.getJSONObject(i).toString());
+					mBikeRecordList.add(object);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			
+			return true;
+			
+		}
+		
+	}
+	
+	public static class BikeLRecordResult  implements IParseString
+	{
+		
+		public final static String KEY_DISTANCE = "distance";
+		public final static String KEY_STARTTIME = "start_time";
+		public final static String KEY_ENDTIME = "end_time";
+		public final static String KEY_CAL = "total_cal";		
+		public final static String KEY_HSPEED = "max_speed";
+		public final static String KEY_LSPEED = "min_speed";
+		public final static String KEY_HEIGHT = "max_elevation";
+	
+		public final static String KEY_ID = "id";
+		public final static String KEY_USERID = "user_id";
+		
+		
+		public double mTotalDistance = 0;
+		public String mStartTime = "";
+		public String mEndTime = "";
+		public int mCal = 0;
+		public double mHSpeed = 0;
+		public double mLSpeed = 0;
+		public int mHeight = 0;
+		
+		public int mID = 0;
+		public String mUserID = "";
+		
+		public boolean isLocal = false;
+		
+
+		@Override
+		public boolean parseString(String str) throws Exception {
+			JSONObject jsonObject = new JSONObject(str);
+			mTotalDistance = jsonObject.getDouble(KEY_DISTANCE);
+			mStartTime = jsonObject.getString(KEY_STARTTIME);
+			mEndTime = jsonObject.getString(KEY_ENDTIME);
+			mCal = jsonObject.getInt(KEY_CAL);
+			mHSpeed = jsonObject.getDouble(KEY_HSPEED);
+			mLSpeed = jsonObject.getDouble(KEY_LSPEED);
+			mHeight = jsonObject.getInt(KEY_HEIGHT);
+			mID = jsonObject.getInt(KEY_ID);
+			mUserID = jsonObject.getString(KEY_USERID);
+			return true;
+		}	
+	}
+	
+	// 获取骑行详细记录
+	public final static int BIKE_LRECORDSUB_MASITD = 0x0413;
+	public static class BikeLRecordSub  implements IToJsonObject
+	{
+		public final static String KEY_RECORD_ID = "record_id";
+		
+		public int mID = 0;
+
+		@Override
+		public JSONObject toJsonObject() throws JSONException {
+			
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put(KEY_RECORD_ID, mID);
+			
+			return jsonObject;
+			
+		}
+	}
+	
+	public static class BikeLRecordSubResultGroup implements IParseString
+	{
+			
+		public LinkedList<BikeLRecordSubResult> mBikeSubRecordResultList = new LinkedList<BikeLRecordSubResult>();
+
+		@Override
+		public boolean parseString(String jsonString) throws Exception {
+			// TODO Auto-generated method stub
+					
+
+			JSONArray jsonArray = new JSONArray(jsonString);
+			int size = jsonArray.length();
+			for(int i = 0; i < size; i++)
+			{
+				BikeLRecordSubResult object = new BikeLRecordSubResult();
+				
+				try {
+					object.parseString(jsonArray.getJSONObject(i).toString());
+					mBikeSubRecordResultList.add(object);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+
+			
+			return true;
+		}
+		
+		
+	}
+	public static class BikeLRecordSubResult  implements IParseString
+	{
+		public final static String KEY_LAT = "w";
+		public final static String KEY_LON = "j";
+		public final static String KEY_UPDATE_TIME = "u";
+		public final static String KEY_CREATE_TIME = "c";
+		public final static String KEY_TYPE = "t";
+		public final static String KEY_POWER = "p";
+		
+		public double mLat = 0;
+		public double mLon = 0;
+		public String mUpdateTime = "";
+		public String mCreateTime = "";
+		public int mType = 0;
+		public int mPower = 0;
+		
+		public double mOffsetLat = 0;
+		public double mOffsetLon = 0;
+		
+		
+		@Override
+		public boolean parseString(String jsonString) throws Exception {
+			
+			JSONObject jsonObject = new JSONObject(jsonString);	
+
+			mLat = jsonObject.optDouble(KEY_LAT);
+			mLon = jsonObject.optDouble(KEY_LON);
+			mUpdateTime = jsonObject.optString(KEY_UPDATE_TIME);
+			mCreateTime = jsonObject.optString(KEY_CREATE_TIME);
+			mType = jsonObject.optInt(KEY_TYPE);
+			mPower = jsonObject.optInt(KEY_POWER);
+			
+			
+			return true;
+		}
+	}
+	
 }

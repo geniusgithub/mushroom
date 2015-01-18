@@ -48,9 +48,9 @@ public class SingleGPSManager implements AMapLocationListener {
 		aMapLocManager = LocationManagerProxy.getInstance(mContext);
 		mTimer = new Timer();	
 		
-//		if (YunyouApplication.getInstance().mIsDebug){
-//			provider = 	LocationProviderProxy.AMapNetwork;
-//		}
+		if (YunyouApplication.getInstance().mIsDebug){
+			provider = 	LocationProviderProxy.AMapNetwork;
+		}
 	}
 	
 	public void setGPSProvider(boolean flag){
