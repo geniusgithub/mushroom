@@ -213,16 +213,16 @@
 //		@Override
 //		public void run() {
 //
-////			List<BikeType.RunRecordGroup> mList = new ArrayList<BikeType.RunRecordGroup>();
-////			try {
-////				mRunRecordDBManager.queryAll(mList);
-////				mMessage.obj = mList;
-////				mMessage.sendToTarget();
-////			} catch (Exception e) {
-////				e.printStackTrace();
-////				mMessage.obj = null;
-////				mMessage.sendToTarget();
-////			}
+//			List<BikeType.RunRecordGroup> mList = new ArrayList<BikeType.RunRecordGroup>();
+//			try {
+//				mRunRecordDBManager.queryAll(mList);
+//				mMessage.obj = mList;
+//				mMessage.sendToTarget();
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//				mMessage.obj = null;
+//				mMessage.sendToTarget();
+//			}
 //		}
 //	}
 //	

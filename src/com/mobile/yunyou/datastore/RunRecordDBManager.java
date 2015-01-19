@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.map.util.StringUtil;
 import com.mobile.yunyou.model.BikeType;
+import com.mobile.yunyou.model.BikeType.BikeLRecordSubResult;
 import com.mobile.yunyou.model.BikeType.MinLRunRecord;
 import com.mobile.yunyou.model.DeviceSetType;
 import com.mobile.yunyou.model.BikeType.MinRunRecord;
@@ -26,7 +27,7 @@ public class RunRecordDBManager{
 		
 	private static final CommonLog log = LogFactory.createLog();
 	
-	private static final int DATABASE_VERSION = 3;
+	private static final int DATABASE_VERSION = 4;
 	
 		private RunRecordDataBaseHelper m_dbHelper;
 		private Context m_context;
@@ -159,7 +160,7 @@ public class RunRecordDBManager{
 			values.put(KEY_CAL, group.mCal);
 			
 			JSONArray jsonArray = new JSONArray();
-			for(MinLRunRecord object : group.mBikeRecordList){
+			for(BikeType.BikeLRecordSubResult object : group.mBikeSubRecordResultList){
 				jsonArray.put(object.toJsonObject());
 			}
 			values.put(KEY_RECORDLIST, jsonArray.toString());
@@ -212,7 +213,7 @@ public class RunRecordDBManager{
 			return true;
 		}
 		
-		public synchronized boolean queryAll(List<BikeType.BikeLRecordResult> groupList) throws Exception
+		public synchronized boolean queryAll(LinkedList<BikeType.BikeLRecordResult> groupList) throws Exception
 		{
 
 			if (m_db == null || !m_db.isOpen())
@@ -220,9 +221,10 @@ public class RunRecordDBManager{
 				return false;
 			}		
 
-			String userName = YunyouApplication.getInstance().getUserInfoEx().mAccountName;
+			String userName = YunyouApplication.getInstance().getUserInfoEx().mSid;
 			DeviceSetType.DeviceMsgData msgData = null;
 			Cursor cursor = m_db.query(TABLE_NAME, COLUMES, KEY_USER + "=?", new String[]{userName}, null, null, null);
+			
 			if (cursor != null)
 			{
 				while(cursor.moveToNext())
@@ -250,16 +252,17 @@ public class RunRecordDBManager{
 					group.mLSpeed = lSpeed;
 					group.mHeight = height;
 					group.mCal = cal;
+					group.isLocal = true;
 
 					try {
 						JSONArray jsonArray = new JSONArray(recordList);
 						int size = jsonArray.length();
 						for(int i = 0; i < size; i++){
 							JSONObject object = jsonArray.getJSONObject(i);
-							MinLRunRecord record = new MinLRunRecord();
+							BikeLRecordSubResult record = new BikeLRecordSubResult();
 							try {
 								record.parseString(object.toString());
-								group.mBikeRecordList.add(record);
+								group.mBikeSubRecordResultList.add(record);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}

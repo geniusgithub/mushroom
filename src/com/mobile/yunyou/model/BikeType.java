@@ -779,8 +779,7 @@ public class BikeType {
 		public String mUserID = "";
 		
 		public boolean isLocal = false;
-		public LinkedList<MinLRunRecord> mBikeRecordList = new LinkedList<MinLRunRecord>();
-
+		public LinkedList<BikeLRecordSubResult> mBikeSubRecordResultList = new LinkedList<BikeLRecordSubResult>();
 		@Override
 		public boolean parseString(String str) throws Exception {
 			JSONObject jsonObject = new JSONObject(str);
@@ -846,7 +845,7 @@ public class BikeType {
 		
 		
 	}
-	public static class BikeLRecordSubResult  implements IParseString
+	public static class BikeLRecordSubResult  implements IParseString, IToJsonObject
 	{
 		public final static String KEY_LAT = "w";
 		public final static String KEY_LON = "j";
@@ -862,9 +861,9 @@ public class BikeType {
 		public int mType = 0;
 		public int mPower = 0;
 		
-		public double mOffsetLat = 0;
-		public double mOffsetLon = 0;
-		
+//		public double mOffsetLat = 0;
+//		public double mOffsetLon = 0;
+//		
 		
 		@Override
 		public boolean parseString(String jsonString) throws Exception {
@@ -880,6 +879,19 @@ public class BikeType {
 			
 			
 			return true;
+		}
+
+		@Override
+		public JSONObject toJsonObject() throws JSONException {
+			JSONObject jsonObject = new JSONObject();
+			jsonObject.put(KEY_LAT, mLat);
+			jsonObject.put(KEY_LON, mLon);
+			jsonObject.put(KEY_UPDATE_TIME, mUpdateTime);
+			jsonObject.put(KEY_CREATE_TIME, mCreateTime);
+			jsonObject.put(KEY_TYPE, mType);
+			jsonObject.put(KEY_POWER, mPower);
+			return jsonObject;
+			
 		}
 	}
 	

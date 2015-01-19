@@ -22,17 +22,17 @@
         </Button>
         	<TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/bikerecord_text_title" />
     
-        	<Button 
-             android:id="@+id/btn_del"  
-             android:layout_marginRight="10dp" 
-             android:layout_alignParentRight="true" 
-             android:layout_centerVertical="true" 
-             android:layout_width="wrap_content" 
-             android:layout_height="wrap_content"
-             android:textColor="#ffffff"
-             android:textSize="18sp"
-             android:background="@drawable/selector_btn_add_clock"
-             android:text="@string/bikerecord_text_del"/>
+<!--         	<Button  -->
+<!--              android:id="@+id/btn_del"   -->
+<!--              android:layout_marginRight="10dp"  -->
+<!--              android:layout_alignParentRight="true"  -->
+<!--              android:layout_centerVertical="true"  -->
+<!--              android:layout_width="wrap_content"  -->
+<!--              android:layout_height="wrap_content" -->
+<!--              android:textColor="#ffffff" -->
+<!--              android:textSize="18sp" -->
+<!--              android:background="@drawable/selector_btn_add_clock" -->
+<!--              android:text="@string/bikerecord_text_del"/> -->
      </RelativeLayout>
 
 	 

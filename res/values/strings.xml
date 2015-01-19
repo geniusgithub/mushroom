@@ -125,6 +125,8 @@
         <string name="toask_unsave_record">未能形成有效的骑行记录</string>  
         <string name="toask_invalid_record">无效的骑行记录</string>  
         <string name="toask_unbind_bike">未绑定蘑菇伴侣,无法追踪</string>
+        <string name="toask_query_database_fail">查询数据库失败</string>
+                      
                       
         <string name="popwindow_title_bind">绑定设备账号</string>      
         <string name="popwindow_title_listener">设备监听</string>

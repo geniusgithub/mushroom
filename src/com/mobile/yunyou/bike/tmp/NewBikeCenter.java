@@ -21,6 +21,7 @@ import com.mobile.yunyou.map.data.LocationEx;
 import com.mobile.yunyou.map.util.LocationUtil;
 import com.mobile.yunyou.map.util.WebManager;
 import com.mobile.yunyou.model.BikeType;
+import com.mobile.yunyou.model.BikeType.BikeLRecordSubResult;
 import com.mobile.yunyou.model.BikeType.MinLRunRecord;
 import com.mobile.yunyou.model.BikeType.MinRunRecord;
 import com.mobile.yunyou.util.CommonLog;
@@ -256,17 +257,22 @@ public class NewBikeCenter implements LocationListener{
 		group.mUserID = YunyouApplication.getInstance().getUserInfoEx().mSid;
 		group.isLocal = true;
 		
-		 LinkedList<MinLRunRecord> list = new LinkedList<MinLRunRecord>();
+		
+	
+		LinkedList<BikeLRecordSubResult> mBikeSubRecordResultList = new LinkedList<BikeLRecordSubResult>();
 		 for(LatLng object : mlLatLngLists){
-			 MinLRunRecord record = new MinLRunRecord();
+			 BikeLRecordSubResult record = new BikeLRecordSubResult();
 			 record.mLat = object.latitude;
 			 record.mLon = object.longitude;
-			 record.mType = 1;
-			 record.mHeight = 0;
+			 record.mUpdateTime = "";
 			 record.mCreateTime = "";
-			 list.add(record);
+			 record.mCreateTime = "";
+			 record.mType = 0;
+			 record.mPower = 0;
+			 mBikeSubRecordResultList.add(record);
 		 }
-		 group.mBikeRecordList = list;
+		 
+		 group.mBikeSubRecordResultList = mBikeSubRecordResultList;
 		
 		
 		return group;

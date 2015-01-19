@@ -438,8 +438,8 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 				mCuRecordResult = null;
 				BikeType.BikeLRecordResult group = mNewBikeCenter.newLocalBikeRecord();
 			//	BikeType.BikeRecordUpload upload = mNewBikeCenter.newBikeRecord();
-				log.e("mTotalDistance = " + group.mTotalDistance + ", mRunRecordList.size = " + group.mBikeRecordList.size());
-				if (group.mTotalDistance == 0 || group.mBikeRecordList.size() < 2){
+				log.e("mTotalDistance = " + group.mTotalDistance + ", mRunRecordList.size = " + group.mBikeSubRecordResultList.size());
+				if (group.mTotalDistance == 0 || group.mBikeSubRecordResultList.size() < 2){
 					
 					showTipDialog(true);
 				}else{

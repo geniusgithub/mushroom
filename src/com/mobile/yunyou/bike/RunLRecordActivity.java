@@ -23,8 +23,11 @@ import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.bike.manager.RunRecordQueryProxy;
 import com.mobile.yunyou.bike.manager.RunRecordSubManager;
+import com.mobile.yunyou.datastore.RunRecordDBManager;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.BikeType.BikeLRecordResult;
+import com.mobile.yunyou.model.BikeType.BikeLRecordSubResult;
+import com.mobile.yunyou.model.BikeType.MinLRunRecord;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
@@ -45,7 +48,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 
 	private static final CommonLog log = LogFactory.createLog();
 	
-	private static final int MSG_GET_Record = 0x0001;
+	private static final int MSG_GET_NETWORK = 0x0001;
 	
 	private YunyouApplication mApplication;
 	private NetworkCenterEx mNetworkCenterEx;
@@ -62,7 +65,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	private RefreshListView mListView;
 	private RunLRecordAdapter mAdapter;
 	
-	public List<BikeLRecordResult> mBikeRecordResultList = new ArrayList<BikeLRecordResult>();
+	public LinkedList<BikeLRecordResult> mNetworkBikeRecordResultList = new LinkedList<BikeLRecordResult>();
 	private RunRecordQueryProxy mBikeRecordProxy;
 	private RunRecordSubManager mBikeSubRecordManager;
 	
@@ -74,6 +77,11 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	private Handler mHandler;
 	
 	private BikeLRecordResult curRecord;
+	
+	public LinkedList<BikeLRecordResult> mLocalBikeRecordResultList = new LinkedList<BikeLRecordResult>();
+	private RunRecordDBManager mRecordDBManager;
+	
+	private LinkedList<BikeLRecordResult> mBikeRecordResultList = new LinkedList<BikeLRecordResult>();
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -94,8 +102,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 		
 		if (isFirstResume){
 			isFirstResume = false;
-			mHandler.sendEmptyMessageDelayed(MSG_GET_Record, 500);
-			
+			RequestFromDatabase();
 		}
 	}
 
@@ -115,7 +122,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 		mTVTimeInterval = (TextView) findViewById(R.id.tv_timeinterval);
 		mTVRecordCount = (TextView) findViewById(R.id.tv_bikecount);
 		
-		mAdapter = new RunLRecordAdapter(this, mBikeRecordResultList);
+		mAdapter = new RunLRecordAdapter(this, new LinkedList<BikeType.BikeLRecordResult>());
 		
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
@@ -130,6 +137,8 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	private void initData(){
 		  mApplication = YunyouApplication.getInstance();
 		  mNetworkCenterEx = NetworkCenterEx.getInstance();
+		  
+		  mRecordDBManager = RunRecordDBManager.getInstance();
 		  
 //		  	mNetworkCenterEx.setDid("A000000012000087");
 //			mNetworkCenterEx.setSid("A12null000007135");
@@ -149,8 +158,8 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 					@Override
 					public void handleMessage(Message msg) {
 						switch(msg.what){
-						case MSG_GET_Record:
-							load();
+						case MSG_GET_NETWORK:
+							RequestFromServer();
 							break;
 						}
 					}
@@ -190,13 +199,63 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 		mTVTimeInterval.setText(YunTimeUtils.getFormatTimeInterval(mTimeMillsion));
 	}
 	
-	private void refreshList(){
-		mAdapter.setData(mBikeRecordResultList);
+	private LinkedList<BikeLRecordResult> copyFromOther(LinkedList<BikeLRecordResult> list){
+		LinkedList<BikeLRecordResult> mlList = new LinkedList<BikeType.BikeLRecordResult>();
+		int size = list.size();
+		for(int i = 0; i < size;i++){
+			mlList.add(list.get(i));
+		}
+		return mlList;
+	}
+	
+	private void initLocalList(LinkedList<BikeLRecordResult> list){
+		mLocalBikeRecordResultList = list;
+		mBikeRecordResultList = copyFromOther(list);
+		mAdapter.setData(mLocalBikeRecordResultList);
+		calData(list);
+		mListView.setVisibility(View.VISIBLE);
+	}
+	
+	
+	private void initNetworkList(LinkedList<BikeLRecordResult> list){
+		mNetworkBikeRecordResultList = list;
+		mBikeRecordResultList = copyFromOther(list);
+		mAdapter.setData(mNetworkBikeRecordResultList);
+		calData(list);
+		mListView.setVisibility(View.VISIBLE);
+	}
+	
+	private LinkedList<BikeLRecordResult> mergeList(LinkedList<BikeLRecordResult> localList, LinkedList<BikeLRecordResult> netList){
+		
+		LinkedList<BikeLRecordResult> list = new LinkedList<BikeType.BikeLRecordResult>();
+		
+		int size1 = localList.size();
+		for(int i = 0;i < size1; i++){
+			list.add(localList.get(i));
+		}
+		
+		int size2 = netList.size();
+		for(int i = 0;i < size2; i++){
+			list.add(netList.get(i));
+		}
+		
+		return list;
+
+	}
+	
+	private void addList(List<BikeLRecordResult> list){
+//		if (list != null){
+//			mBikeRecordResultList = list;
+//			mAdapter.setData(mBikeRecordResultList);
+//		}
+
 	}
 	
 	private boolean isExistLocalRecord()
 	{
-		return mBikeRecordResultList.size() == 0 ? false : true;
+		boolean isEmpty1 = mLocalBikeRecordResultList.size() == 0;
+		boolean isEmpty2 = mNetworkBikeRecordResultList.size() == 0;
+		return !(isEmpty1 && isEmpty2);
 	}
 	
 
@@ -204,18 +263,39 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	public void onClick(View v) {
 		switch(v.getId()){
 		case R.id.btn_load:
-			load();
+			RequestFromServer();
 			break;
 		}
 	}
 	
-	private void load(){
+	private void RequestFromServer(){
 
 		mBikeRecordProxy.requestLast();
-		
-		mBtnRefresh.setVisibility(View.GONE);
-		mLoadProgressBar.setVisibility(View.VISIBLE);
 
+	}
+	
+	private void RequestFromDatabase(){
+
+		LinkedList<BikeType.BikeLRecordResult> mList = new LinkedList<BikeType.BikeLRecordResult>();
+		boolean ret = false;
+		try {
+			ret = mRecordDBManager.queryAll(mList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if (!ret){
+			Utils.showToast(this, R.string.toask_query_database_fail);
+		}
+		
+		if (mList.size() == 0){
+		//	mHandler.sendEmptyMessageDelayed(MSG_GET_NETWORK, 200);
+			return ;
+		}
+		
+		mLoadProgressBar.setVisibility(View.GONE);
+		initLocalList(mList);
+		
 	}
 	
 	private PopupWindow mPopupWindow = null;
@@ -280,22 +360,25 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 			return ;
 		}
 		
-		mBikeRecordResultList = mBikeRecordProxy.getDataArray();
-		int size = mBikeRecordResultList.size();		
-		if (size == 0)
-		{
-			mBtnRefresh.setVisibility(View.VISIBLE);
-			mLoadProgressBar.setVisibility(View.GONE);	
-			clearData();
+		
+		LinkedList<BikeType.BikeLRecordResult> list = mBikeRecordProxy.getDataArray();
+		if (isExistLocalRecord() == false){
+			if (list.size() != 0){
+				initNetworkList(list);
+				mBtnRefresh.setVisibility(View.GONE);
+				mLoadProgressBar.setVisibility(View.GONE);
+			}else{
+				mBtnRefresh.setVisibility(View.VISIBLE);
+				mLoadProgressBar.setVisibility(View.GONE);
+			}
+			
 			return ;
 		}
 		
+		mNetworkBikeRecordResultList = list;	
+		mBikeRecordResultList = mergeList(mLocalBikeRecordResultList, mNetworkBikeRecordResultList);
 		mAdapter.setData(mBikeRecordResultList);
-		mAdapter.notifyDataSetChanged();
 		
-		mBtnRefresh.setVisibility(View.GONE);
-		mLoadProgressBar.setVisibility(View.GONE);
-		mListView.setVisibility(View.VISIBLE);
 		mListView.onRefreshComplete();
 		mListView.onLoadMoreComplete(false);
 		
@@ -331,9 +414,29 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 		
 		if (pos >= 0 && pos < mBikeRecordResultList.size()){
 			BikeLRecordResult object =  mBikeRecordResultList.get((int) pos);
-			mBikeSubRecordManager.RequestSubRecord(object.mID, RunLRecordActivity.this);
-			showRequestDialog(true);
-			curRecord = object;
+			boolean isLocal = object.isLocal;
+			if (!isLocal){
+				mBikeSubRecordManager.RequestSubRecord(object.mID, RunLRecordActivity.this);
+				showRequestDialog(true);
+				curRecord = object;
+			}else{
+				
+				LinkedList<BikeLRecordSubResult> mBikeSubRecordList = object.mBikeSubRecordResultList;
+				if (mBikeSubRecordList.size() < 2){
+					Utils.showToast(RunLRecordActivity.this, R.string.toask_invalid_record);
+					return ;
+				}
+				
+				BikeType.BikeLRecordSubResultGroup group = new BikeType.BikeLRecordSubResultGroup();
+				group.mBikeSubRecordResultList = mBikeSubRecordList;
+				curRecord = object;
+				YunyouApplication.getInstance().attachRunRecords(curRecord, group);
+				Intent intent = new Intent();
+				intent.setClass(RunLRecordActivity.this, RecordMapActivity.class);
+				startActivity(intent);
+			}
+			
+
 		}
 		
 	}

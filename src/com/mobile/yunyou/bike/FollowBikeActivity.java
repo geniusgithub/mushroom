@@ -126,8 +126,12 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 			mBikeLocationManager.addObserver(this);
 			mBikeLocationManager.startLocationCheck();
 			
+			LocationEx locationEx = mBikeLocationManager.getLastLocation();
+			if (locationEx == null){
+				locationEx = SelfLocationManager.getInstance().getLastLocation();
+			}
 			updateCamarra(13);
-			moveCamara(SelfLocationManager.getInstance().getLastLocation());
+			moveCamara(locationEx);
 
 			isFirstResume = false;
 		}
