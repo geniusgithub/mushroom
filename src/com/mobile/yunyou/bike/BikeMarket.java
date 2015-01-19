@@ -11,14 +11,14 @@ import android.widget.TextView;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
-import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolylineOptions;
 import com.mobile.yunyou.R;
+import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.map.data.LocationEx;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.YunTimeUtils;
+import com.mobile.yunyou.util.Utils;
 
 public class BikeMarket {
 
@@ -205,6 +205,16 @@ public class BikeMarket {
 	public void render(View view){
 		TextView tvContent = (TextView)view.findViewById(R.id.tv_content);
 		tvContent.setText(getShowContent());
+		
+		
+		String adressString = "位置:  " + mLastLocation.getAdress();	
+		String timeString = "时间:  " + mLastLocation.getUpdateTimeString();
+
+		int width1 = Utils.getFitWidth(YunyouApplication.getInstance(), timeString, (int)tvContent.getTextSize());
+		int width2 = Utils.getFitWidth(YunyouApplication.getInstance(), adressString, (int)tvContent.getTextSize());
+		int w = Math.max(width1, width2);
+		
+		tvContent.setWidth(w);
 	}
 	
 	public  String getShowContent()
@@ -246,7 +256,8 @@ public class BikeMarket {
 			StringBuffer sBuffer = new StringBuffer();
 			sBuffer.append(adressString + "\n" + 
 							timeString + "\n" + 
-							statusString);
+							statusString + "\n" + 
+							powerDetail);
 			
 			
 			return sBuffer.toString();

@@ -185,12 +185,12 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 		mSelfLocationManager.startLocationCheck();
 		
 		
-		
-		if (mApplication.isBindDevice()){
-			mBikeMarket.setLastLocation(mBikeLocationManager.getLastLocation());
-		}else{
-			mBikeMarket.clear();
-		}
+//		
+//		if (mApplication.isBindDevice()){
+//			mBikeMarket.setLastLocation(mBikeLocationManager.getLastLocation());
+//		}else{
+//			mBikeMarket.clear();
+//		}
 		mSelfMarket.setLocation(mSelfLocationManager.getLastLocation());
 
 		
@@ -209,8 +209,8 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 		mMapView.onPause();
 		
 		if (!mApplication.mIsDebug){
-			mBikeLocationManager.removeObservser(this);
-			mBikeLocationManager.stopLocationCheck();
+//			mBikeLocationManager.removeObservser(this);
+//			mBikeLocationManager.stopLocationCheck();
 		}
 		
 		mSelfLocationManager.removeObservser(this);
@@ -327,7 +327,7 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 		
 		mDistanceBtn = (ImageView) view.findViewById(R.id.bt_map_distance);
 		mDistanceBtn.setOnClickListener(this);	
-
+		mDistanceBtn.setVisibility(View.GONE);
 	
 		mSelfMarket = new SelfMarket(R.drawable.self_pos);	
 		mBikeMarket = new BikeMarket(R.drawable.point_start, R.drawable.bike_point_on, R.drawable.bike_point_off);
@@ -450,17 +450,17 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 	}
 	
 	public void searchBike(){
-		mBikeMarket.startRunning();
-		LatLng latLng1 = mBikeMarket.getLastLatLon();
-		mMapMarketManager.updateBikePos();
-		if (latLng1 != null){
-			updateCamarra(18);
-			moveCamara(latLng1);
-		}else{
-			Utils.showToast(mContext, R.string.map_text_searchbike);
-			mBikeLocationManager.requesetNow();
-
-		}
+//		mBikeMarket.startRunning();
+//		LatLng latLng1 = mBikeMarket.getLastLatLon();
+//		mMapMarketManager.updateBikePos();
+//		if (latLng1 != null){
+//			updateCamarra(18);
+//			moveCamara(latLng1);
+//		}else{
+//			Utils.showToast(mContext, R.string.map_text_searchbike);
+//			mBikeLocationManager.requesetNow();
+//
+//		}
 		
 	}
 	

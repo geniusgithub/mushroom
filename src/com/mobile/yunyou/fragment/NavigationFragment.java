@@ -26,6 +26,7 @@ import com.mobile.yunyou.set.SettingExActivity;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.FileManager;
 import com.mobile.yunyou.util.LogFactory;
+import com.mobile.yunyou.util.Utils;
 
 public class NavigationFragment extends Fragment implements OnClickListener{
 
@@ -148,11 +149,17 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 
 	
 	private void goLocation(){
-		FragmentActivity activity = getActivity();
-		if (activity instanceof MainSlideActivity){
-			MainSlideActivity mainSlideActivity = (MainSlideActivity) activity;
-			mainSlideActivity.goFollowBike();
+		
+		if (mApplication.isBindDevice()){
+			FragmentActivity activity = getActivity();
+			if (activity instanceof MainSlideActivity){
+				MainSlideActivity mainSlideActivity = (MainSlideActivity) activity;
+				mainSlideActivity.goFollowBike();
+			}
+		}else{
+			Utils.showToast(getActivity(), R.string.toask_unbind_bike);
 		}
+
 	}
 	
 	private void goNewRun(){

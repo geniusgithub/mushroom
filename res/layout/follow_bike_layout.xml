@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/safe_background"
+    android:orientation="vertical">
+            
+        <RelativeLayout 
+        android:orientation="vertical"
+        android:background="@drawable/title_bar" 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content">
+            <Button
+	        android:id="@+id/btn_back"
+	        android:layout_width="wrap_content" 
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/selector_btn_back"
+	        android:layout_centerVertical="true"
+	        android:layout_marginLeft="15dp"/> 
+        	<TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/navtitle_location" />
+   		   	 <Button 
+             android:id="@+id/btn_follow"  
+             android:layout_marginRight="10dp" 
+             android:layout_alignParentRight="true" 
+             android:layout_centerVertical="true" 
+             android:layout_width="wrap_content" 
+             android:layout_height="wrap_content"
+             android:textColor="#ffffff"
+             android:textSize="18sp"
+             android:background="@drawable/selector_btn_add_clock"
+             android:text="@string/follow_text_follow"/>
+   		</RelativeLayout>
+   		
+	    <RelativeLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="fill_parent">
+	        <com.amap.api.maps.MapView
+	        android:id="@+id/map"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent" />        
+	        
+	       <RelativeLayout
+            android:id="@+id/fr_map_menu"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" >
+
+                
+                <ImageView
+                android:id="@+id/bt_focus_pos"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="25dp"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/map_location_nor"/>
+                
+
+
+	           <ImageView
+	            android:id="@+id/bt_zoomout_pos"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentRight="true"
+	            android:layout_alignParentBottom="true"
+	            android:layout_marginBottom="25dp"
+	            android:layout_marginRight="10dp"
+	            android:background="@drawable/selector_zoom_in"/>
+                        
+                
+	            <ImageView
+	            android:id="@+id/bt_zoomin_pos"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_above="@id/bt_zoomout_pos"
+	            android:layout_alignLeft="@id/bt_zoomout_pos"
+	            android:background="@drawable/selector_zoom_out"/>
+
+
+        	</RelativeLayout>   
+	    </RelativeLayout>
+    
+    
+</LinearLayout>

@@ -26,7 +26,7 @@ import com.mobile.yunyou.util.Utils;
 
 public class BikeLocationManager implements IRequestCallback {
 
-	private final static int CHECK_POSITION_INTERVAL = 10 * 1000;
+	private final static int CHECK_POSITION_INTERVAL = 5 * 1000;
 	
 	private static final CommonLog log = LogFactory.createLog();
 	
@@ -199,6 +199,7 @@ public class BikeLocationManager implements IRequestCallback {
 		    locationEx.setCreateTimeString(deviceLocation.mCreateTime);
 		    locationEx.setOnline(deviceLocation.mOnline);		    
 		    locationEx.setDID(requestDid);
+		    locationEx.setPowerDletai(deviceLocation.mPowerDetail);
 		    
 		    InnerThread innerThread = new InnerThread(locationEx);
 		    innerThread.start();

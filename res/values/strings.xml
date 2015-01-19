@@ -33,7 +33,7 @@
         <string name="navtitle_info">消息</string>  
      	<string name="navtitle_setting">设置</string>  
      	
-
+ 		<string name="follow_text_follow">重新跟踪</string>  
      	 	
      	<string name="safe_text_title">GPS防盗</string>  
      	<string name="safe_text_switch">防盗开关</string> 
@@ -124,7 +124,8 @@
         <string name="toask_saveRecord_fail">保存本地失败</string>
         <string name="toask_unsave_record">未能形成有效的骑行记录</string>  
         <string name="toask_invalid_record">无效的骑行记录</string>  
-              
+        <string name="toask_unbind_bike">未绑定蘑菇伴侣,无法追踪</string>
+                      
         <string name="popwindow_title_bind">绑定设备账号</string>      
         <string name="popwindow_title_listener">设备监听</string>
         <string name="popwindow_title_sex">性别选择</string>  
@@ -133,6 +134,8 @@
         <string name="popwindow_text_pwd">密码：</string>    
         <string name="popwindow_text_localphone">回拨号码：</string> 
         
+        <string name="dialog_title_exitFollow">是否退出跟踪</string>
+        <string name="dialog_msg_exitFollow">您确定要退出跟踪吗?</string> 
         <string name="dialog_title_exitRun">是否放弃当前骑行</string>
         <string name="dialog_msg_exitRun">您确定要放弃骑行吗?</string> 
         <string name="dialog_title_saveRun">是否保存当前骑行</string>
