@@ -218,6 +218,7 @@ public class BikeMarket {
 			String adressString = "位置:  " + mLastLocation.getAdress();	
 			String timeString = "时间:  " + mLastLocation.getUpdateTimeString();
 			String statusString = "状态:  ";
+			String powerDetail = "电量:  " + mLastLocation.getPowerDletai();
 	
 			String provider = mLastLocation.getProvider();
 

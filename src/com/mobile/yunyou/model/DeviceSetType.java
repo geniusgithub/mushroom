@@ -1136,6 +1136,7 @@ public class DeviceSetType {
 	public static class DeviceLocation implements IParseString, IToJsonObject
 	{
 		private final static String KEY_POWER = "power";
+		private final static String KEY_POWERDETAIL = "power_detail";
 		private final static String KEY_LAT = "lat";
 		private final static String KEY_LON = "lon";
 		private final static String KEY_TYPE = "type";
@@ -1147,6 +1148,7 @@ public class DeviceSetType {
 		
 		public String mLat = "";
 		public String mLon = "";
+		public String mPowerDetail = "";
 		public String mUploadTime = "";
 		public String mCreateTime = "";
 		public int    mType = 0;
@@ -1162,6 +1164,7 @@ public class DeviceSetType {
 
 			mLat = jsonObject.getString(KEY_LAT);				
 			mLon = jsonObject.getString(KEY_LON);		
+			mPowerDetail = jsonObject.getString(KEY_POWERDETAIL);	
 			mUploadTime = jsonObject.getString(KEY_UPDATETIME);	
 			mCreateTime = jsonObject.getString(KEY_CREATETIME);
 			mType = jsonObject.getInt(KEY_TYPE);
@@ -1180,6 +1183,7 @@ public class DeviceSetType {
 			
 			jsonObject.put(KEY_LAT, mLat);
 			jsonObject.put(KEY_LON, mLon);
+			jsonObject.put(KEY_POWERDETAIL, mPowerDetail);			
 			jsonObject.put(KEY_UPDATETIME, mUploadTime);
 			jsonObject.put(KEY_CREATETIME, mCreateTime);
 			jsonObject.put(KEY_TYPE, mType);

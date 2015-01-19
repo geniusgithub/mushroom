@@ -25,7 +25,7 @@
         <string name="analyze_data_fail">解析数据失败...</string>
         <string name="bottom_text">Copyright@2011-2015 www.360lbs.net</string>
         
-        <string name="navtitle_location">即时跟踪</string>
+        <string name="navtitle_location">实时跟踪</string>
         <string name="navtitle_safe">GPS防盗</string>
         <string name="navtitle_newrun">新的骑行</string>
         <string name="navtitle_runrecord">历史记录</string>

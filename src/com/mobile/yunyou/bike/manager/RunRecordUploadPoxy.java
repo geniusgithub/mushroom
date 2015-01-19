@@ -7,6 +7,7 @@ import android.location.Location;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.datastore.RunRecordDBManager;
 import com.mobile.yunyou.map.util.WebManager;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.ResponseDataPacket;
@@ -25,6 +26,8 @@ public class RunRecordUploadPoxy implements IRequestCallback{
 	private Context mContext;
 	
 	public static RunRecordUploadPoxy mInstance;
+	
+	private BikeType.BikeLRecordResult mCuRecordResult;
 
 	public static synchronized RunRecordUploadPoxy getInstance()
 	{
@@ -94,6 +97,23 @@ public class RunRecordUploadPoxy implements IRequestCallback{
 		if (isDebug){
 			Utils.showToast(YunyouApplication.getInstance(), "upload success...");
 		}
+		
+		RunRecordDBManager rDbManager = RunRecordDBManager.getInstance();
+		boolean ret = false;
+		if (mCuRecordResult != null){
+			try {
+				ret = rDbManager.delete(mCuRecordResult);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		if (isDebug){
+			Utils.showToast(YunyouApplication.getInstance(), "delete data from database ret = ..." + ret);
+		}
 	}
 	
+	public void attachCurRecord(BikeType.BikeLRecordResult object){
+		mCuRecordResult = object;
+	}
 }

@@ -151,8 +151,7 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		FragmentActivity activity = getActivity();
 		if (activity instanceof MainSlideActivity){
 			MainSlideActivity mainSlideActivity = (MainSlideActivity) activity;
-			mainSlideActivity.toggle();
-			mainSlideActivity.searchBike();
+			mainSlideActivity.goFollowBike();
 		}
 	}
 	
@@ -166,7 +165,6 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		FragmentActivity activity = getActivity();
 		if (activity instanceof MainSlideActivity){
 			MainSlideActivity mainSlideActivity = (MainSlideActivity) activity;
-			mainSlideActivity.toggle();
 			mainSlideActivity.goRunRecord();
 		}
 	}

@@ -14,6 +14,7 @@ import android.os.Message;
 
 import com.amap.api.location.LocationProviderProxy;
 import com.amap.api.maps.model.LatLng;
+import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.bike.MapUtils;
 import com.mobile.yunyou.bike.tmp.SingleGPSManager.MyTimeTask;
 import com.mobile.yunyou.map.data.LocationEx;
@@ -225,6 +226,35 @@ public class NewBikeCenter implements LocationListener{
 		group.mHSpeed = mHSpeed * 3.6;
 		group.mLSpeed = 0;
 		group.mHeight = 0;
+		
+		 LinkedList<MinLRunRecord> list = new LinkedList<MinLRunRecord>();
+		 for(LatLng object : mlLatLngLists){
+			 MinLRunRecord record = new MinLRunRecord();
+			 record.mLat = object.latitude;
+			 record.mLon = object.longitude;
+			 record.mType = 1;
+			 record.mHeight = 0;
+			 record.mCreateTime = "";
+			 list.add(record);
+		 }
+		 group.mBikeRecordList = list;
+		
+		
+		return group;
+	}
+	
+	public BikeType.BikeLRecordResult newLocalBikeRecord(){
+		
+		BikeType.BikeLRecordResult group = new BikeType.BikeLRecordResult();
+		group.mStartTime = YunTimeUtils.getFormatTime(mStartTimeMilllons);
+		group.mEndTime = YunTimeUtils.getFormatTime(mEndTimeMilllons);
+		group.mTotalDistance =  mTotalDistance / 1000.0;
+		group.mCal = 0;
+		group.mHSpeed = mHSpeed * 3.6;
+		group.mLSpeed = 0;
+		group.mHeight = 0;
+		group.mUserID = YunyouApplication.getInstance().getUserInfoEx().mSid;
+		group.isLocal = true;
 		
 		 LinkedList<MinLRunRecord> list = new LinkedList<MinLRunRecord>();
 		 for(LatLng object : mlLatLngLists){

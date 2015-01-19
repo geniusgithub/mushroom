@@ -12,6 +12,7 @@ public class LocationEx extends Location{
 	private String mCreateTime = "";
 	private int mOnline = 0;
 	private String mDID = "";
+	private String mPowerDetail = "";
 	
 	private double mOffsetLat = 0;
 	private double mOffsetLon = 0;
@@ -122,5 +123,15 @@ public class LocationEx extends Location{
 	public void setDID(String did)
 	{
 		mDID = did;
+	}
+	
+	public String getPowerDletai()
+	{
+		return mPowerDetail;
+	}
+	
+	public void setPowerDletai(String value)
+	{
+		mPowerDetail = value;
 	}
 }

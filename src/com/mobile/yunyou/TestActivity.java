@@ -544,17 +544,17 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 			mRunRecordList.add(record2);
 			group.mRunRecordList = mRunRecordList;
 			
-			log.e("insert = \n" + group.getShowString());
+//			log.e("insert = \n" + group.getShowString());
+//			
+//			boolean ret = false;
+//			try {
+//				ret = mRunRecordDBManager.insert(group);
+//				
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
 			
-			boolean ret = false;
-			try {
-				ret = mRunRecordDBManager.insert(group);
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			
-			log.e("insert ret = " + ret);
+//			log.e("insert ret = " + ret);
 		}
 
 		
@@ -566,21 +566,21 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 		
 		
 		public void query(){
-			boolean ret = false;
-			List<BikeType.RunRecordGroup> groupList = new ArrayList<BikeType.RunRecordGroup>();
-			try {
-				ret = mRunRecordDBManager.queryAll(groupList);
-			} catch (Exception e) {
-				e.printStackTrace();
-	
-			}
-			
-			int index = 0;
-			for(BikeType.RunRecordGroup group : groupList){
-				log.e("index = " + index + ":\n" + group.getShowString());
-				index++;
-			}
-			log.e("query = ret " + ret);
+//			boolean ret = false;
+//			List<BikeType.RunRecordGroup> groupList = new ArrayList<BikeType.RunRecordGroup>();
+//			try {
+//				ret = mRunRecordDBManager.queryAll(groupList);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//	
+//			}
+//			
+//			int index = 0;
+//			for(BikeType.RunRecordGroup group : groupList){
+//				log.e("index = " + index + ":\n" + group.getShowString());
+//				index++;
+//			}
+//			log.e("query = ret " + ret);
 			
 			
 		}

@@ -647,7 +647,7 @@ public class BikeType {
 		}	
 	}
 
-	public static class MinLRunRecord  implements IToJsonObject
+	public static class MinLRunRecord  implements IToJsonObject, IParseString
 	{
 		public final static String KEY_LAT = "lat";
 		public final static String KEY_LON = "lon";
@@ -671,6 +671,21 @@ public class BikeType {
 			jsonObject.put(KEY_ELEVATION, mHeight);
 			jsonObject.put(KEY_CREATE_TIME, mCreateTime);
 			return jsonObject;
+		}
+
+
+		@Override
+		public boolean parseString(String str) throws Exception {
+			
+			JSONObject jsonObject = new JSONObject(str);
+			mLat = jsonObject.getDouble(KEY_LAT);
+			mLon = jsonObject.getDouble(KEY_LON);
+			mType = jsonObject.getInt(KEY_TYPE);
+			mHeight = jsonObject.getInt(KEY_ELEVATION);
+			mCreateTime = jsonObject.getString(KEY_CREATE_TIME);
+			
+			return true;
+			
 		}
 	}
 	
@@ -764,7 +779,7 @@ public class BikeType {
 		public String mUserID = "";
 		
 		public boolean isLocal = false;
-		
+		public LinkedList<MinLRunRecord> mBikeRecordList = new LinkedList<MinLRunRecord>();
 
 		@Override
 		public boolean parseString(String str) throws Exception {

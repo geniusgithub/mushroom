@@ -14,6 +14,7 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.bike.FollowBikeActivity;
 import com.mobile.yunyou.bike.RunLRecordActivity;
 import com.mobile.yunyou.fragment.MainMapFragment;
 import com.mobile.yunyou.fragment.NavigationFragment;
@@ -120,6 +121,12 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 	
 	public void searchBike(){
 		mMapExFragment.searchBike();
+	}
+	
+	public void goFollowBike(){
+		Intent intent = new Intent();
+		intent.setClass(this, FollowBikeActivity.class);
+		startActivity(intent);
 	}
 	
 	public void goRunRecord(){

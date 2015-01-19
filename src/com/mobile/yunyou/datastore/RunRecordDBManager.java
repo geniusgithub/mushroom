@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.map.util.StringUtil;
 import com.mobile.yunyou.model.BikeType;
+import com.mobile.yunyou.model.BikeType.MinLRunRecord;
 import com.mobile.yunyou.model.DeviceSetType;
 import com.mobile.yunyou.model.BikeType.MinRunRecord;
 import com.mobile.yunyou.util.CommonLog;
@@ -25,7 +26,7 @@ public class RunRecordDBManager{
 		
 	private static final CommonLog log = LogFactory.createLog();
 	
-	private static final int DATABASE_VERSION = 2;
+	private static final int DATABASE_VERSION = 3;
 	
 		private RunRecordDataBaseHelper m_dbHelper;
 		private Context m_context;
@@ -34,12 +35,15 @@ public class RunRecordDBManager{
 		public static final String TABLE_NAME = "RunRecordInfoTable";
 		
 		public static final String ID = "_id";
+		public final static String KEY_ID = "ids";						// 
 		public final static String KEY_USER = "user";					// 用户
 		public final static String KEY_DISTANCE = "distance";			// 距离 
 		public final static String KEY_STARTTIME = "start_time";		// 开始时间
 		public final static String KEY_ENDTIME = "end_time";			// 结束时间
 		public final static String KEY_HSPEED = "hspeed";				// 最高速度
-		public final static String KEY_AVERAGESPEED = "averagespeed";	// 平均速度
+		public final static String KEY_LSPEED = "lspeed";				// 最低速度
+		public final static String KEY_HEIGHT = "height";				// 最高海拔
+		//public final static String KEY_AVERAGESPEED = "averagespeed";	// 平均速度
 		public final static String KEY_CAL = "cal";						// 卡路里
 		public final static String KEY_RECORDLIST = "record";			// 轨迹列表
 		
@@ -50,17 +54,19 @@ public class RunRecordDBManager{
 		public static final String CREATE_TABLE = 
 								"create table if not exists " + TABLE_NAME + "(" +
 								ID + " integer primary key autoincrement, " + 
+								KEY_ID + " integer not null, " + 
 								KEY_USER + " text not null, " + 
-								KEY_DISTANCE + " integer not null, " + 
+								KEY_DISTANCE + " double not null, " + 
 								KEY_STARTTIME + " text not null, " + 
 								KEY_ENDTIME + " text not null, " + 
 								KEY_HSPEED + " double not null, " + 
-								KEY_AVERAGESPEED + " double not null, " + 
+								KEY_LSPEED + " double not null, " + 
+								KEY_HEIGHT + " integer not null, " +
 								KEY_CAL + " integer not null, " +
 								KEY_RECORDLIST + " text not null);";						
 		
 
-		public static final String[] COLUMES = {KEY_USER, KEY_DISTANCE, KEY_STARTTIME, KEY_ENDTIME, KEY_HSPEED, KEY_AVERAGESPEED, KEY_CAL, KEY_RECORDLIST};
+		public static final String[] COLUMES = {KEY_ID, KEY_USER, KEY_DISTANCE, KEY_STARTTIME, KEY_ENDTIME, KEY_HSPEED, KEY_LSPEED, KEY_HEIGHT, KEY_CAL, KEY_RECORDLIST};
 
 		private static RunRecordDBManager mDBManagerInstance;
 		
@@ -134,7 +140,7 @@ public class RunRecordDBManager{
 //			return flag;
 //		}
 		
-		public synchronized boolean insert(BikeType.RunRecordGroup group) throws Exception
+		public synchronized boolean insert(BikeType.BikeLRecordResult group) throws Exception
 		{
 			if (m_db == null || !m_db.isOpen())
 			{
@@ -142,26 +148,44 @@ public class RunRecordDBManager{
 			}
 			
 			ContentValues values = new ContentValues();
-			
-			String userName = YunyouApplication.getInstance().getUserInfoEx().mAccountName;
-			values.put(KEY_USER, userName);
+			values.put(KEY_USER, group.mUserID);
 			values.put(KEY_DISTANCE, group.mTotalDistance);
 			values.put(KEY_STARTTIME, group.mStartTime);
 			values.put(KEY_ENDTIME, group.mEndTime);
 			values.put(KEY_HSPEED, group.mHSpeed);
-			values.put(KEY_AVERAGESPEED, group.mAverageSpeed);
+			values.put(KEY_LSPEED, group.mLSpeed);
+			values.put(KEY_HEIGHT, group.mHeight);
+			values.put(KEY_ID, group.mID);
 			values.put(KEY_CAL, group.mCal);
 			
 			JSONArray jsonArray = new JSONArray();
-			for(MinRunRecord object : group.mRunRecordList){
+			for(MinLRunRecord object : group.mBikeRecordList){
 				jsonArray.put(object.toJsonObject());
 			}
 			values.put(KEY_RECORDLIST, jsonArray.toString());
 			
-			log.e("insert : \n " + group.getShowString());
+			//log.e("insert : \n " + group.getShowString());
 			
 			
 			long ret = m_db.insert(TABLE_NAME, null, values);
+			if (ret == -1)
+			{
+				return false;
+			}
+			
+			return true;
+			
+		}
+		
+		public synchronized boolean delete(BikeType.BikeLRecordResult object) throws Exception
+		{
+			if (m_db == null || !m_db.isOpen())
+			{
+				return false;
+			}
+	
+			int ret = m_db.delete(TABLE_NAME, KEY_USER + "=?" + " and " +KEY_STARTTIME + "=?" ,  new String[]{object.mUserID , object.mStartTime});
+
 			if (ret == -1)
 			{
 				return false;
@@ -188,7 +212,7 @@ public class RunRecordDBManager{
 			return true;
 		}
 		
-		public synchronized boolean queryAll(List<BikeType.RunRecordGroup> groupList) throws Exception
+		public synchronized boolean queryAll(List<BikeType.BikeLRecordResult> groupList) throws Exception
 		{
 
 			if (m_db == null || !m_db.isOpen())
@@ -204,35 +228,38 @@ public class RunRecordDBManager{
 				while(cursor.moveToNext())
 				{
 					
-					BikeType.RunRecordGroup group = new BikeType.RunRecordGroup();
+					BikeType.BikeLRecordResult group = new BikeType.BikeLRecordResult();
 					
-					int distance = cursor.getInt(cursor.getColumnIndex(KEY_DISTANCE));
+					String userID = cursor.getString(cursor.getColumnIndex(KEY_USER));
+					int id = cursor.getInt(cursor.getColumnIndex(KEY_ID));
+					double distance = cursor.getDouble(cursor.getColumnIndex(KEY_DISTANCE));
 					String startTime = cursor.getString(cursor.getColumnIndex(KEY_STARTTIME));
 					String endtTime = cursor.getString(cursor.getColumnIndex(KEY_ENDTIME));
 					double hSpeed = cursor.getDouble(cursor.getColumnIndex(KEY_HSPEED));
-					double aSpeed = cursor.getDouble(cursor.getColumnIndex(KEY_AVERAGESPEED));
+					double lSpeed = cursor.getDouble(cursor.getColumnIndex(KEY_LSPEED));
+					int height = cursor.getInt(cursor.getColumnIndex(KEY_HEIGHT));
 					int cal = cursor.getInt(cursor.getColumnIndex(KEY_CAL));
 					String recordList = cursor.getString(cursor.getColumnIndex(KEY_RECORDLIST));
 					
+					group.mUserID = userID;
+					group.mID = id;
 					group.mTotalDistance = distance;
 					group.mStartTime = startTime;
 					group.mEndTime = endtTime;
 					group.mHSpeed = hSpeed;
-					group.mAverageSpeed = aSpeed;
+					group.mLSpeed = lSpeed;
+					group.mHeight = height;
 					group.mCal = cal;
-				
-					
-					group.mTimeMillsion = StringUtil.getTimeMillson(group.mStartTime, group.mEndTime);
-					
+
 					try {
 						JSONArray jsonArray = new JSONArray(recordList);
 						int size = jsonArray.length();
 						for(int i = 0; i < size; i++){
 							JSONObject object = jsonArray.getJSONObject(i);
-							MinRunRecord record = new MinRunRecord();
+							MinLRunRecord record = new MinLRunRecord();
 							try {
 								record.parseString(object.toString());
-								group.mRunRecordList.add(record);
+								group.mBikeRecordList.add(record);
 							} catch (Exception e) {
 								e.printStackTrace();
 							}

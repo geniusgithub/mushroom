@@ -86,6 +86,7 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	
 	private RunRecordDBManager mRunRecordDBManager;
 	
+	private BikeType.BikeLRecordResult mCuRecordResult;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -434,27 +435,32 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 			case R.id.btn_stop:
 				mNewBikeCenter.stopRunning();
 				showButtonType(VIEW_UPLOAD);
-				BikeType.BikeRecordUpload upload = mNewBikeCenter.newBikeRecord();
-				log.e("mTotalDistance = " + upload.mTotalDistance + ", mRunRecordList.size = " + upload.mBikeRecordList.size());
-				if (upload.mTotalDistance == 0 || upload.mBikeRecordList.size() < 2){
+				mCuRecordResult = null;
+				BikeType.BikeLRecordResult group = mNewBikeCenter.newLocalBikeRecord();
+			//	BikeType.BikeRecordUpload upload = mNewBikeCenter.newBikeRecord();
+				log.e("mTotalDistance = " + group.mTotalDistance + ", mRunRecordList.size = " + group.mBikeRecordList.size());
+				if (group.mTotalDistance == 0 || group.mBikeRecordList.size() < 2){
 					
 					showTipDialog(true);
 				}else{
 					boolean ret = false;
-//					try {
-//						ret = mRunRecordDBManager.insert(group);
-//					} catch (Exception e) {
-//						e.printStackTrace();
-//					}
-//					if (!ret){
-//						Utils.showToast(this, R.string.toask_saveRecord_fail);
-//					}
+					try {
+						ret = mRunRecordDBManager.insert(group);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+					if (!ret){
+						Utils.showToast(this, R.string.toask_saveRecord_fail);
+					}else{
+						mCuRecordResult = group;
+					}
 				}	
 				break;
 			case R.id.btn_upload:
 				Utils.showToast(this, "上传中...");
 				BikeType.BikeRecordUpload object = mNewBikeCenter.newBikeRecord();
 				RunRecordUploadPoxy.getInstance().requestUpload(object);
+				RunRecordUploadPoxy.getInstance().attachCurRecord(mCuRecordResult);
 				finish();
 				break;
 		}
