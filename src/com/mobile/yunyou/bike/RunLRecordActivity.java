@@ -289,7 +289,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 		}
 		
 		if (mList.size() == 0){
-		//	mHandler.sendEmptyMessageDelayed(MSG_GET_NETWORK, 200);
+			mHandler.sendEmptyMessageDelayed(MSG_GET_NETWORK, 200);
 			return ;
 		}
 		

@@ -280,6 +280,9 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		}
 		
 		log.e("showView IViewConstant.IVC_BIKE_POS isShow = " + isShow + ", isNeedUpdate = " + isNeedUpdate);
+		if (!isNeedUpdate){
+			return ;
+		}
 		mMarker = null;
 		
 		

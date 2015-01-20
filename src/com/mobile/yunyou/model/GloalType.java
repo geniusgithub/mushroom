@@ -35,6 +35,20 @@ public class GloalType {
 			mBirthday = userInfoEx.mBirthday;
 			mSid = userInfoEx.mSid;
 		}
+		
+		public String getShowString(){
+			StringBuffer sBuffer = new StringBuffer();
+			sBuffer.append("mAccountName = " + mAccountName + 
+							"\nmTrueName = " + mTrueName + 
+							"\nmSex = " + mSex + 
+							"\nmPhone = " + mPhone + 
+							"\nmEmail = " + mEmail + 
+							"\nmAddr = " + mAddr + 
+							"\nmBirthday = " + mBirthday + 
+							"\nmSid = " + mSid);
+			
+			return sBuffer.toString();
+		}
 	}
 
 	

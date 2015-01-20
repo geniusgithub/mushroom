@@ -26,8 +26,8 @@ public class MapMarketManager {
 	private AMap mAMap;
 	private MapView mMapView;
 	private SelfMarket mSelfMarket;
-	private BikeMarket mBikeMarket;
-	private SafeMarket mSafeMarket;
+	//private BikeMarket mBikeMarket;
+	//private SafeMarket mSafeMarket;
 	//private BikeRecordMarket mBikeRecordMarket;
 	
 	private Marker mMarketBIKE;
@@ -65,16 +65,16 @@ public class MapMarketManager {
 	{
 		mSelfMarket = object;
 	}
-	
-	public void setBikePos(BikeMarket object)
-	{
-		mBikeMarket = object;
-	}
-	
-	public void setSafeAreaPos(SafeMarket object)
-	{
-		mSafeMarket = object;
-	}
+//	
+//	public void setBikePos(BikeMarket object)
+//	{
+//		mBikeMarket = object;
+//	}
+//	
+//	public void setSafeAreaPos(SafeMarket object)
+//	{
+//		mSafeMarket = object;
+//	}
 	
 	
 //	public void setBikeRecordPos(BikeRecordMarket object)
@@ -93,44 +93,44 @@ public class MapMarketManager {
 		{
 			case IViewConstant.IVC_BIKE_POS:
 			{
-				boolean isShow = false;
-				if (mMarketBIKE != null){
-					isShow = mMarketBIKE.isInfoWindowShown();
-				}
-				
-				boolean isNeedUpdate = true;
-				if (mBikeMarket != null){
-					isNeedUpdate = mBikeMarket.isNeedUpdate();
-				}
-				log.e("showView IViewConstant.IVC_BIKE_POS isShow = " + isShow + ", isNeedUpdate = " + isNeedUpdate);
-				
+//				boolean isShow = false;
+//				if (mMarketBIKE != null){
+//					isShow = mMarketBIKE.isInfoWindowShown();
+//				}
+//				
+//				boolean isNeedUpdate = true;
+//				if (mBikeMarket != null){
+//					isNeedUpdate = mBikeMarket.isNeedUpdate();
+//				}
+//				log.e("showView IViewConstant.IVC_BIKE_POS isShow = " + isShow + ", isNeedUpdate = " + isNeedUpdate);
+//				mMarketBIKE = null;
 				mAMap.clear();
-				mMarketBIKE = null;
+		
 				if (mSelfMarket.getLocation() != null){
 					mAMap.addMarker(mSelfMarket.newMarkerOptions());
 				//	mAMap.addCircle(mSelfMarket.newCircleOptions());
 				}
 				
-				List<PolylineOptions> list = mBikeMarket.getPLineList();
-				int size = list.size();
-				for(int i = 0;i < size; i++){
-					mAMap.addPolyline(list.get(i));
-				}
+//				List<PolylineOptions> list = mBikeMarket.getPLineList();
+//				int size = list.size();
+//				for(int i = 0;i < size; i++){
+//					mAMap.addPolyline(list.get(i));
+//				}
 				
 				
 //				if (mBikeMarket.getFirstLocation() != null && mBikeMarket.isRunning()){
 //					mAMap.addMarker(mBikeMarket.newStartMarkerOptions());
 //				}
-				if (mBikeMarket.getLastLocation() != null){
-					Marker marker = mAMap.addMarker(mBikeMarket.newCurrentMarkerOptions());
-					marker.setTitle("BIKE");
-					mMarketBIKE = marker;
-					log.e("mMarketBIKE=this");
-				}
-				
-				if (isShow){
-					mHandler.sendEmptyMessage(MSG_SHOW_POP);
-				}
+//				if (mBikeMarket.getLastLocation() != null){
+//					Marker marker = mAMap.addMarker(mBikeMarket.newCurrentMarkerOptions());
+//					marker.setTitle("BIKE");
+//					mMarketBIKE = marker;
+//					log.e("mMarketBIKE=this");
+//				}
+//				
+//				if (isShow){
+//					mHandler.sendEmptyMessage(MSG_SHOW_POP);
+//				}
 				
 				
 			}
@@ -178,18 +178,18 @@ public class MapMarketManager {
 		mCurShowState = IViewConstant.IVC_BIKE_POS;
 	}
 	
-	public void updateAreaPos()
-	{
-		showView(IViewConstant.IVC_AREA_POS);
-		mCurShowState = IViewConstant.IVC_AREA_POS;
-	}
-	
-	
-	public void updateBikeRecordPos()
-	{
-		showView(IViewConstant.IVC_BIKERECORD_POS);	
-		mCurShowState = IViewConstant.IVC_BIKERECORD_POS;
-	}
+//	public void updateAreaPos()
+//	{
+//		showView(IViewConstant.IVC_AREA_POS);
+//		mCurShowState = IViewConstant.IVC_AREA_POS;
+//	}
+//	
+//	
+//	public void updateBikeRecordPos()
+//	{
+//		showView(IViewConstant.IVC_BIKERECORD_POS);	
+//		mCurShowState = IViewConstant.IVC_BIKERECORD_POS;
+//	}
 	
 	
 }

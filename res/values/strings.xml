@@ -229,7 +229,9 @@
         <string name="setting_text_meal">查询套餐</string>
         <string name="setting_btn_logout">退出登录</string>
         <string name="setting_commit_set">提交修改</string>       
+        <string name="setting_text_head">头像</string>
         <string name="setting_text_account">用户名</string>
+        <string name="setting_text_pwd">更改密码</string>
         <string name="setting_text_email">邮箱</string>
         <string name="setting_text_phone">手机号码</string>
         <string name="setting_text_name">昵称</string>

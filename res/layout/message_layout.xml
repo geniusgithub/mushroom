@@ -17,8 +17,7 @@
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
         android:background="@drawable/selector_btn_back"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="15dp">      
+        android:layout_centerVertical="true">      
         </Button>
          <Button 
              android:id="@+id/btn_go"  
@@ -29,7 +28,7 @@
              android:layout_height="wrap_content"
              android:textColor="#ffffff"
              android:textSize="18sp"
-             android:background="@drawable/selector_btn_add_clock"
+             android:background="@null"
              android:text="@string/msgdel_title"/>
 
     </RelativeLayout>

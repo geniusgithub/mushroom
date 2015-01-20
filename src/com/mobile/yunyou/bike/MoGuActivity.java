@@ -85,6 +85,7 @@ private static final int MSG_GET_WARNING = 0x0001;
 		mBtnUnBind.setOnClickListener(this);
 		mBtnChangePwd = (Button) findViewById(R.id.btn_changepwd);
 		mBtnChangePwd.setOnClickListener(this);
+		mBtnChangePwd.setVisibility(View.GONE);
 		
 		mETAccount = (EditText) findViewById(R.id.et_account);
 		mETPassword = (EditText) findViewById(R.id.et_password);

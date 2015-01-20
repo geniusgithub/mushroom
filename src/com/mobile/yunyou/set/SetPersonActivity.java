@@ -40,7 +40,8 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 	private View mRootView;
 	private View mEmailView;
 	private View mNameView;
-	private View mPhoenView;
+	private View mPwdView;
+	//private View mPhoenView;
 	private View mSexView;
 	private View mBirthdayView;
 	
@@ -106,13 +107,15 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 		mRootView = findViewById(R.id.rootView);
 		mEmailView = findViewById(R.id.ll_emailset);
 		mNameView = findViewById(R.id.ll_nameset);
-		mPhoenView = findViewById(R.id.ll_phoneset);
+		mPwdView = findViewById(R.id.ll_changepwd);
+		//mPhoenView = findViewById(R.id.ll_phoneset);
 		mSexView = findViewById(R.id.ll_sexset);
 		mBirthdayView = findViewById(R.id.ll_birthdayset);
 				
 		mEmailView.setOnClickListener(this);
 		mNameView.setOnClickListener(this);
-		mPhoenView.setOnClickListener(this);
+		mPwdView.setOnClickListener(this);
+		//mPhoenView.setOnClickListener(this);
 		mSexView.setOnClickListener(this);
 		mBirthdayView.setOnClickListener(this);
 		
@@ -136,7 +139,7 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 	   setAccont(mUserInfoEx.mAccountName);
 	   setEmail(mUserInfoEx.mEmail);
 	   setTurename(mUserInfoEx.mTrueName);
-	   setPhone(mUserInfoEx.mPhone);
+	//   setPhone(mUserInfoEx.mPhone);
 	   setSex(mUserInfoEx.mSex);
 	   setBirthday(mUserInfoEx.mBirthday);
 	   
@@ -182,11 +185,11 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 		mTVTruename.setText(name);
 	}
 	
-	private void setPhone(String phone)
-	{
-		mPhoneString = phone;
-		mTVPhone.setText(phone);
-	}
+//	private void setPhone(String phone)
+//	{
+//		mPhoneString = phone;
+//		mTVPhone.setText(phone);
+//	}
 	
 	private void setSex(String sex)
 	{
@@ -243,20 +246,29 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 				
 			}
 				break;
-			case R.id.ll_phoneset:
+			case R.id.ll_changepwd:
 			{			
 				Intent intent = new Intent();
-				intent.setClass(this, SetPersonCommentActivity.class);
-				intent.putExtra(SetPersonCommentActivity.VIEW_KEY, SetPersonCommentActivity.IViewMode.IVM_PHONE);
-				
-				Bundle bundle = new Bundle();
-				bundle.putString(SetPersonIntentConstant.KEY_OBJECT_DATA, mPhoneString);
-			
-				intent.putExtra(DeviceIntentConstant.KEY_DATA_BUNDLE, bundle);
-				startActivityForResult(intent, REQUEST_CODE_SET_COMMENT);
+				intent.setClass(this, ChangePwdActivity.class);
+				startActivity(intent);
 				
 			}
 				break;
+				
+//			case R.id.ll_phoneset:
+//			{			
+//				Intent intent = new Intent();
+//				intent.setClass(this, SetPersonCommentActivity.class);
+//				intent.putExtra(SetPersonCommentActivity.VIEW_KEY, SetPersonCommentActivity.IViewMode.IVM_PHONE);
+//				
+//				Bundle bundle = new Bundle();
+//				bundle.putString(SetPersonIntentConstant.KEY_OBJECT_DATA, mPhoneString);
+//			
+//				intent.putExtra(DeviceIntentConstant.KEY_DATA_BUNDLE, bundle);
+//				startActivityForResult(intent, REQUEST_CODE_SET_COMMENT);
+//				
+//			}
+//				break;
 			case R.id.ll_sexset:
 				showSexWindow();
 				break;
@@ -386,10 +398,10 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 				String emailString = bundle.getString(SetPersonIntentConstant.KEY_OBJECT_DATA);
 				setEmail(emailString);
 				break;
-			case IViewMode.IVM_PHONE:
-				String phoneString = bundle.getString(SetPersonIntentConstant.KEY_OBJECT_DATA);
-				setPhone(phoneString);
-				break;
+//			case IViewMode.IVM_PHONE:
+//				String phoneString = bundle.getString(SetPersonIntentConstant.KEY_OBJECT_DATA);
+//				setPhone(phoneString);
+//				break;
 			case IViewMode.IVM_NAME:
 				String nameString = bundle.getString(SetPersonIntentConstant.KEY_OBJECT_DATA);
 				setTurename(nameString);
@@ -452,10 +464,12 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 			userInfoEx.mAddr = info.mAddr;
 			userInfoEx.mSex = info.mSex;
 			
+			mUserInfoEx = new GloalType.UserInfoEx(userInfoEx);
+			
 			   setAccont(mUserInfoEx.mAccountName);
 			   setEmail(mUserInfoEx.mEmail);
 			   setTurename(mUserInfoEx.mTrueName);
-			   setPhone(mUserInfoEx.mPhone);
+			//   setPhone(mUserInfoEx.mPhone);
 			   setSex(mUserInfoEx.mSex);
 			   setBirthday(mUserInfoEx.mBirthday);
 			   

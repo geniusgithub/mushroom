@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -29,14 +28,11 @@ import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
-import com.amap.api.maps.model.LatLngBounds.Builder;
 import com.amap.api.maps.model.Marker;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.bike.BikeMarket;
 import com.mobile.yunyou.bike.MoGuActivity;
 import com.mobile.yunyou.bike.SelfMarket;
-import com.mobile.yunyou.bike.manager.BikeLocationManager;
 import com.mobile.yunyou.bike.manager.BikeLocationManager.IBikeLocationUpdate;
 import com.mobile.yunyou.bike.manager.MapMarketManager;
 import com.mobile.yunyou.bike.manager.SelfLocationManager;
@@ -52,8 +48,7 @@ import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 
 public class MainMapFragment extends Fragment implements OnClickListener, 
-																ILocationUpdate,
-																IBikeLocationUpdate,
+																ILocationUpdate,															
 																OnMarkerClickListener,
 																InfoWindowAdapter,
 																OnInfoWindowClickListener{
@@ -88,10 +83,10 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 	private YunyouApplication mApplication;
 	private NetworkCenterEx mNetworkCenter;
 	private SelfLocationManager mSelfLocationManager;
-	private BikeLocationManager mBikeLocationManager;
+	//private BikeLocationManager mBikeLocationManager;
 	//private SafeAreaManager mSafeAreaManager;
 	private SelfMarket mSelfMarket;
-	private BikeMarket mBikeMarket;
+//	private BikeMarket mBikeMarket;
 	//private SafeMarket mSafeMarket;
 //	private BikeRecordMarket mBikeRecordMarket;
 	private MapMarketManager mMapMarketManager;
@@ -175,11 +170,11 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 		}
 
 		
-		if (!mApplication.mIsDebug){
-
-			mBikeLocationManager.addObserver(this);
-			mBikeLocationManager.startLocationCheck();
-		}
+//		if (!mApplication.mIsDebug){
+//
+//			mBikeLocationManager.addObserver(this);
+//			mBikeLocationManager.startLocationCheck();
+//		}
 
 		mSelfLocationManager.addObserver(this);
 		mSelfLocationManager.startLocationCheck();
@@ -218,7 +213,7 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 		
 	
 		
-		mBikeMarket.reset();
+	//	mBikeMarket.reset();
 	}
 
 	/**
@@ -330,12 +325,12 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 		mDistanceBtn.setVisibility(View.GONE);
 	
 		mSelfMarket = new SelfMarket(R.drawable.self_pos);	
-		mBikeMarket = new BikeMarket(R.drawable.point_start, R.drawable.bike_point_on, R.drawable.bike_point_off);
+		//mBikeMarket = new BikeMarket(R.drawable.point_start, R.drawable.bike_point_on, R.drawable.bike_point_off);
 		//mSafeMarket = new SafeMarket(R.drawable.safe_pos);
 		//mBikeRecordMarket = new BikeRecordMarket(R.drawable.bike, R.drawable.bike_end);
 		mMapMarketManager = new MapMarketManager(aMap, mMapView);
 		mMapMarketManager.setSelfPos(mSelfMarket);
-		mMapMarketManager.setBikePos(mBikeMarket);
+		//mMapMarketManager.setBikePos(mBikeMarket);
 		//mMapMarketManager.setSafeAreaPos(mSafeMarket);
 		//mMapMarketManager.setBikeRecordPos(mBikeRecordMarket);
 	}
@@ -345,7 +340,7 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 
 		
 		  mSelfLocationManager = SelfLocationManager.getInstance();
-		  mBikeLocationManager = BikeLocationManager.getInstance();
+	//	  mBikeLocationManager = BikeLocationManager.getInstance();
 	//	  mSafeAreaManager = SafeAreaManager.getInstance();
 	//	  mBikeSubRecordManager = BikeSubRecordManager.getInstance();
 		  mHandler = new Handler(){
@@ -361,9 +356,10 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 							isFistCenter = false;
 							if (msg.what == MSG_REFRESH_SELF){
 								fircenter(mSelfMarket.getLatLon());
-							}else{
-								fircenter(mBikeMarket.getLastLatLon());
 							}
+//							else{
+//								fircenter(mBikeMarket.getLastLatLon());
+//							}
 						}
 						mMapMarketManager.updateBikePos();
 					}				
@@ -373,11 +369,11 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 //					mSafeMarket.setArea(area);
 //					mMapMarketManager.updateAreaPos();
 //					moveCamara(mSafeMarket.getLatLon());
-					mBikeMarket.reset();
+//					mBikeMarket.reset();
 					break;
 				case MSG_REFRESH_BIKERECORD:
 					//mBikeRecordMarket.setBikeRecordList(mBikeSubRecordManager.getLinkList());
-					mMapMarketManager.updateBikeRecordPos();
+					//mMapMarketManager.updateBikeRecordPos();
 					//moveCamara(mBikeRecordMarket.getBound());
 	
 					break;
@@ -401,20 +397,15 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 	private void focusPosition(){
 		log.e("focusPosition");
 		LatLng latLng1 = mSelfMarket.getLatLon();	
-		LatLng latLng2 = mBikeMarket.getLastLatLon();
+//		LatLng latLng2 = mBikeMarket.getLastLatLon();
 		mMapMarketManager.updateBikePos();
-		if (latLng1 == null || latLng2 == null){
+		if (latLng1 == null){
 			return ;
 		}
 		
 		updateCamarra(18);
 		
-		if (latLng2 != null){
-			moveCamara(latLng2);
-//			LatLngBounds bounds = mBikeMarket.getBound();
-//			
-//			moveCamara(bounds);
-		}else{
+		if (latLng1 != null){
 			moveCamara(latLng1);
 		}
 	}
@@ -482,9 +473,9 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 //		case R.id.bt_map_location:
 //			mapArea();
 //			break;
-		case R.id.bt_map_distance:
-			mapDistance();
-			break;
+//		case R.id.bt_map_distance:
+//			mapDistance();
+//			break;
 		case R.id.bt_focus_pos:
 //			focusSelfPosition();
 			focusPosition();
@@ -524,38 +515,38 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 //	
 
 	
-	private void mapDistance(){
-		
-		LatLng latLng1= mSelfMarket.getLatLon();
-		LatLng latLng2= mBikeMarket.getLastLatLon();
-		
-		if (latLng1 == null || latLng2 == null){
-			Utils.showToast(mContext, R.string.map_text_nodistance);
-			return ;
-		}
-		
-		float results[]  = new float[1];
-		Location.distanceBetween(latLng1.latitude, latLng1.longitude, 
-				latLng2.latitude,  latLng2.longitude, results);
-		
-		String showString = "";
-		if (results[0] < 1000)
-		{
-			int distance = (int)results[0];
-			showString = "距离" + distance + "米";
-		}else{
-			int distance = (int) (results[0]/1000);
-			showString = "距离" + distance  + "千米";
-		}
-		
-		Utils.showToast(mContext, showString);
-		
-		Builder builder = LatLngBounds.builder().include(latLng1).include(latLng2);
-		moveCamara(builder.build());
-		
-		mMapMarketManager.updateBikePos();
-		
-	}
+//	private void mapDistance(){
+//		
+//		LatLng latLng1= mSelfMarket.getLatLon();
+//		LatLng latLng2= mBikeMarket.getLastLatLon();
+//		
+//		if (latLng1 == null || latLng2 == null){
+//			Utils.showToast(mContext, R.string.map_text_nodistance);
+//			return ;
+//		}
+//		
+//		float results[]  = new float[1];
+//		Location.distanceBetween(latLng1.latitude, latLng1.longitude, 
+//				latLng2.latitude,  latLng2.longitude, results);
+//		
+//		String showString = "";
+//		if (results[0] < 1000)
+//		{
+//			int distance = (int)results[0];
+//			showString = "距离" + distance + "米";
+//		}else{
+//			int distance = (int) (results[0]/1000);
+//			showString = "距离" + distance  + "千米";
+//		}
+//		
+//		Utils.showToast(mContext, showString);
+//		
+//		Builder builder = LatLngBounds.builder().include(latLng1).include(latLng2);
+//		moveCamara(builder.build());
+//		
+//		mMapMarketManager.updateBikePos();
+//		
+//	}
 	
 
 	
@@ -614,45 +605,45 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 	}
 	
 
-	@Override
-	public void onBikeLocationUpdate(final LocationEx location) {
-		log.e("onBikeLocationUpdate (" + location.getLatitude() + "," + location.getLongitude() + ")");
-		getActivity().runOnUiThread(new Runnable() {
-		
-			@Override
-			public void run() {
-	
-				boolean isRunning = mBikeMarket.isRunning();
-				log.e("mBikeMarket.isRunning() = " + isRunning);
-				if (isRunning){
-					mBikeMarket.addLocation(location);
-				}else{
-					mBikeMarket.setLastLocation(location);
-				}
-				
-		
-				Message msg = mHandler.obtainMessage(MSG_REFRESH_BIKE);
-				msg.sendToTarget();
-	
-			}
-		});
-	}
+//	@Override
+//	public void onBikeLocationUpdate(final LocationEx location) {
+//		log.e("onBikeLocationUpdate (" + location.getLatitude() + "," + location.getLongitude() + ")");
+//		getActivity().runOnUiThread(new Runnable() {
+//		
+//			@Override
+//			public void run() {
+//	
+//				boolean isRunning = mBikeMarket.isRunning();
+//				log.e("mBikeMarket.isRunning() = " + isRunning);
+//				if (isRunning){
+//					mBikeMarket.addLocation(location);
+//				}else{
+//					mBikeMarket.setLastLocation(location);
+//				}
+//				
+//		
+//				Message msg = mHandler.obtainMessage(MSG_REFRESH_BIKE);
+//				msg.sendToTarget();
+//	
+//			}
+//		});
+//	}
 	@Override
 	public void onInfoWindowClick(Marker market) {
 		market.hideInfoWindow();
 	}
 	@Override
 	public View getInfoContents(Marker market) {
-		String title = market.getTitle();
-		if (title == null){
-			return null;
-		}
-		log.e("getInfoContents market.title = " + title);
-		if (title.equals("BIKE")){
-			View infoContent = getActivity().getLayoutInflater().inflate(R.layout.maptip_layout, null);
-			mBikeMarket.render(infoContent);
-			return infoContent;
-		}
+//		String title = market.getTitle();
+//		if (title == null){
+//			return null;
+//		}
+//		log.e("getInfoContents market.title = " + title);
+//		if (title.equals("BIKE")){
+//			View infoContent = getActivity().getLayoutInflater().inflate(R.layout.maptip_layout, null);
+//			mBikeMarket.render(infoContent);
+//			return infoContent;
+//		}
 		return null;
 	}
 	@Override

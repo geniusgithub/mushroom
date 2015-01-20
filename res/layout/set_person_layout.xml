@@ -12,8 +12,19 @@
         android:background="@drawable/title_bar" 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content">
-        <Button android:id="@+id/btn_back" android:layout_centerVertical="true" android:layout_marginLeft="10dp" android:paddingLeft="5dp" android:textSize="18.0sp" android:textColor="#ffffff"  android:background="@drawable/selector_btn_back" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+        <Button android:id="@+id/btn_back" android:layout_centerVertical="true" android:paddingLeft="5dp" android:textSize="18.0sp" android:textColor="#ffffff"  android:background="@drawable/selector_btn_back" android:layout_width="wrap_content" android:layout_height="wrap_content"/>
         <TextView android:layout_centerInParent="true" android:textSize="20.0sp" android:textColor="@color/white"  android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="@string/setting_text_person" />   
+     		 <Button 
+             android:id="@+id/btn_save"  
+             android:layout_marginRight="10dp" 
+             android:layout_alignParentRight="true" 
+             android:layout_centerVertical="true" 
+             android:layout_width="wrap_content" 
+             android:layout_height="wrap_content"
+             android:textColor="#ffffff"
+             android:textSize="18sp"
+             android:background="@null"
+             android:text="@string/safe_text_save"/>
    </RelativeLayout>
       
     <LinearLayout 
@@ -21,6 +32,33 @@
         android:layout_width="fill_parent" 
         android:layout_height="fill_parent">
 
+        <LinearLayout 
+            style="@style/leba_bg_layout">
+                <RelativeLayout
+                    style="@style/leba_bg_single_layout" android:clickable="false">
+                    <TextView style="@style/text_style1" android:text="@string/setting_text_head"  android:layout_centerVertical="true" android:layout_weight="1.0" />
+	                <ImageView 
+	                    android:id="@+id/iv_arrow" 
+	                    android:layout_width="wrap_content" 
+	                    android:layout_height="wrap_content" 
+	                    android:layout_marginRight="12.0dip" 
+	                    android:src="@drawable/setting_arrow" 
+	                    android:layout_alignParentRight="true"
+	                    android:layout_centerVertical="true"/>
+               
+	                <ImageView
+		        	android:id="@+id/iv_head"
+		        	android:layout_width="wrap_content"
+		    		android:layout_height="wrap_content"
+		    		android:layout_toLeftOf="@id/iv_arrow"
+		    		android:layout_marginRight="12.0dip" 
+		    		android:src="@drawable/head_icon"
+		    		android:layout_centerVertical="true">
+		        	</ImageView>
+	              </RelativeLayout>
+            
+        </LinearLayout>    
+            
         <LinearLayout 
             style="@style/leba_bg_layout">                  
         
@@ -33,23 +71,31 @@
                 
                 <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
                 
+                 <LinearLayout android:id="@+id/ll_changepwd"
+                 	 style="@style/leba_bg_mid_layout">
+                     <TextView style="@style/text_style1" android:text="@string/setting_text_pwd" android:layout_weight="1.0" />
+                     <TextView android:id="@+id/tv_changepwd" style="@style/text_style2" android:layout_weight="1" />
+                    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
+                 </LinearLayout>
+                
+                 <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
            
                  <LinearLayout android:id="@+id/ll_emailset"
-                 	 style="@style/leba_bg_mid_layout">
+                 	 style="@style/leba_bg_bottom_layout">
                      <TextView style="@style/text_style1" android:text="@string/setting_text_email" android:layout_weight="1.0" />
                      <TextView android:id="@+id/tv_email" style="@style/text_style2" android:layout_weight="1" />
                     <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
                  </LinearLayout>
                 
-                 <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+<!--                  <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" /> -->
                       
        
-                <LinearLayout android:id="@+id/ll_phoneset"
-                    style="@style/leba_bg_bottom_layout">
-                    <TextView style="@style/text_style1" android:text="@string/setting_text_phone" android:layout_weight="1.0" />
-                    <TextView android:id="@+id/tv_phone"  style="@style/text_style2" android:layout_weight="1" />
-                    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
-                </LinearLayout>     
+<!--                 <LinearLayout android:id="@+id/ll_phoneset" -->
+<!--                     style="@style/leba_bg_bottom_layout"> -->
+<!--                     <TextView style="@style/text_style1" android:text="@string/setting_text_phone" android:layout_weight="1.0" /> -->
+<!--                     <TextView android:id="@+id/tv_phone"  style="@style/text_style2" android:layout_weight="1" /> -->
+<!--                     <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/> -->
+<!--                 </LinearLayout>      -->
                                         
        </LinearLayout>
        
