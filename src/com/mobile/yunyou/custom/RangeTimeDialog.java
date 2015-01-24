@@ -1,7 +1,5 @@
 package com.mobile.yunyou.custom;
 
-import com.mobile.yunyou.R;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -12,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.mobile.yunyou.R;
 import com.mobile.yunyou.model.BaseType;
 import com.mobile.yunyou.util.Utils;
 

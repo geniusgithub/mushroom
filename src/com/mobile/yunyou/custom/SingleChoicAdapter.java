@@ -3,19 +3,17 @@ package com.mobile.yunyou.custom;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mobile.yunyou.R;
-
-
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.mobile.yunyou.R;
 
 
 

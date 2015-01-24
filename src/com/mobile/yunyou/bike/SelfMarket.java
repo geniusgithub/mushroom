@@ -1,6 +1,5 @@
 package com.mobile.yunyou.bike;
 import android.graphics.Color;
-import android.util.Log;
 
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CircleOptions;

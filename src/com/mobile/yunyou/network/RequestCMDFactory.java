@@ -3,8 +3,6 @@ package com.mobile.yunyou.network;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.activity.OnlineStatusManager;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.DeviceSetType;
 import com.mobile.yunyou.model.ProductType;

@@ -2,9 +2,6 @@ package com.mobile.yunyou.custom;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnDismissListener;
-import android.content.DialogInterface.OnShowListener;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;

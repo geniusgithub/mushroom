@@ -1,12 +1,8 @@
 package com.mobile.yunyou.map.util;
 
-import android.app.PendingIntent;
-import android.app.PendingIntent.CanceledException;
 import android.content.Context;
-import android.content.Intent;
 import android.location.Location;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.provider.Settings;
 import android.util.Log;
 

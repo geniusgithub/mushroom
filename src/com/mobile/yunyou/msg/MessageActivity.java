@@ -1,25 +1,7 @@
 package com.mobile.yunyou.msg;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.YunyouApplication;
-//import com.mobile.yunyou.datastore.MsgDBManager;
-import com.mobile.yunyou.device.SetClockActivity;
-import com.mobile.yunyou.model.DeviceSetType;
-import com.mobile.yunyou.model.DeviceSetType.DeviceMsgData;
-import com.mobile.yunyou.model.PublicType;
-import com.mobile.yunyou.model.ResponseDataPacket;
-import com.mobile.yunyou.network.IRequestCallback;
-import com.mobile.yunyou.network.NetworkCenterEx;
-import com.mobile.yunyou.util.CommonLog;
-import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.Utils;
-import com.mobile.yunyou.widget.RefreshListView;
-
 
 import android.app.Activity;
 import android.content.Intent;
@@ -31,6 +13,16 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.model.DeviceSetType;
+import com.mobile.yunyou.model.DeviceSetType.DeviceMsgData;
+import com.mobile.yunyou.network.NetworkCenterEx;
+import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.LogFactory;
+import com.mobile.yunyou.util.Utils;
+import com.mobile.yunyou.widget.RefreshListView;
 
 public class MessageActivity extends Activity implements OnClickListener, 
 											RefreshListView.IOnRefreshListener,

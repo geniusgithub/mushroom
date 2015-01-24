@@ -2,10 +2,6 @@ package com.mobile.yunyou.custom;
 
 import java.util.Calendar;
 
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.widget.NumericWheelAdapter;
-import com.mobile.yunyou.widget.WheelView;
-
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -16,6 +12,10 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.widget.NumericWheelAdapter;
+import com.mobile.yunyou.widget.WheelView;
 
 public class CustomTimeExPopWindow implements OnClickListener{
 

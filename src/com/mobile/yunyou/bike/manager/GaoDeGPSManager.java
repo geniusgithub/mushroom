@@ -2,14 +2,12 @@ package com.mobile.yunyou.bike.manager;
 
 import android.content.Context;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.LocationManagerProxy;
-import com.amap.api.location.LocationProviderProxy;
 
 
 
@@ -22,8 +20,9 @@ public class GaoDeGPSManager implements AMapLocationListener {
 	
 	private Context mContext;
 	
-	private LocationListener mListener;
+	private AMapLocationListener mListener;
 
+	private AMapLocation mLastAMapLocation;
 	
 	public GaoDeGPSManager(Context context)
 	{
@@ -36,7 +35,7 @@ public class GaoDeGPSManager implements AMapLocationListener {
 	
 
 	
-	public void registerListen(LocationListener listener)
+	public void registerListen(AMapLocationListener listener)
 	{
 		if (mListener == null)
 		{
@@ -59,6 +58,9 @@ public class GaoDeGPSManager implements AMapLocationListener {
 		}
 	}
 
+	public AMapLocation getAMapLocation(){
+		return mLastAMapLocation;
+	}
 
 
 	@Override
@@ -95,6 +97,7 @@ public class GaoDeGPSManager implements AMapLocationListener {
 
 	@Override
 	public void onLocationChanged(AMapLocation location) {
+		mLastAMapLocation = location;
 		InnerThread innerThread = new InnerThread(location, mListener);
 		innerThread.start();
 //		if (mListener != null){
@@ -105,9 +108,9 @@ public class GaoDeGPSManager implements AMapLocationListener {
 	class InnerThread extends Thread
 	{
 		private AMapLocation mLocation;
-		private LocationListener listener;
+		private AMapLocationListener listener;
 		
-		public InnerThread( AMapLocation location, LocationListener listener)
+		public InnerThread( AMapLocation location, AMapLocationListener listener)
 		{
 			mLocation = location;		
 			this.listener = listener;

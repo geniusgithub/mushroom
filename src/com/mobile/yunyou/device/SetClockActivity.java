@@ -3,6 +3,14 @@ package com.mobile.yunyou.device;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.custom.CustomTimePopWindow;
@@ -14,16 +22,6 @@ import com.mobile.yunyou.model.DeviceSetType.ClockSet;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.Utils;
-
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class SetClockActivity extends Activity implements OnClickListener{
 

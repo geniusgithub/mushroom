@@ -56,6 +56,20 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@id/v_line">	    
                 
+    	    <LinearLayout 
+	    	        android:id="@+id/ll_goNewRun"
+	                android:orientation="horizontal"
+	                android:layout_width="fill_parent" 
+	                android:layout_height="wrap_content"
+	                android:paddingLeft="25dp"
+	                android:layout_marginTop="10dp"
+	                android:gravity="center_vertical"
+	                android:background="@drawable/nav_selector">
+	                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/nav_newrun"/>
+	                <TextView  android:layout_marginLeft="15dp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textColor="@color/white" android:textSize="18dp" android:text="@string/navtitle_newrun" />
+	        </LinearLayout>
+	        
+    	    	    	
 	    	 <LinearLayout 
 	    	        android:id="@+id/ll_goLocation"
 	                android:orientation="horizontal"
@@ -82,18 +96,7 @@
 	                <TextView  android:layout_marginLeft="15dp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textColor="@color/white" android:textSize="18dp" android:text="@string/navtitle_safe" />
 	        </LinearLayout>
         
-	    	<LinearLayout 
-	    	        android:id="@+id/ll_goNewRun"
-	                android:orientation="horizontal"
-	                android:layout_width="fill_parent" 
-	                android:layout_height="wrap_content"
-	                android:paddingLeft="25dp"
-	                android:layout_marginTop="10dp"
-	                android:gravity="center_vertical"
-	                android:background="@drawable/nav_selector">
-	                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/nav_newrun"/>
-	                <TextView  android:layout_marginLeft="15dp" android:layout_width="fill_parent" android:layout_height="wrap_content" android:textColor="@color/white" android:textSize="18dp" android:text="@string/navtitle_newrun" />
-	        </LinearLayout>
+
 
     	
 	        <LinearLayout 

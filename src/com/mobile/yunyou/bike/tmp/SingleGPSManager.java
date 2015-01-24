@@ -8,7 +8,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
@@ -31,7 +30,7 @@ public class SingleGPSManager implements AMapLocationListener {
 	private LocationManagerProxy aMapLocManager = null;
 	
 	private Context mContext;
-	private LocationListener mListener;
+	private AMapLocationListener mListener;
 	private Timer mTimer;
 	
 	private MyTimeTask mTimeTask;
@@ -73,7 +72,7 @@ public class SingleGPSManager implements AMapLocationListener {
 	}
 
 	
-	public  void  registerListen(LocationListener listener)
+	public  void  registerListen(AMapLocationListener listener)
 	{
 		if (YunyouApplication.getInstance().mIsDebug){
 			if (provider.equals(LocationManager.GPS_PROVIDER)){

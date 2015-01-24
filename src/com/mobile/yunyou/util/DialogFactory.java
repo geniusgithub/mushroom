@@ -1,7 +1,5 @@
 package com.mobile.yunyou.util;
 
-import com.mobile.yunyou.R;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
@@ -10,6 +8,8 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import com.mobile.yunyou.R;
 
 public class DialogFactory {
 

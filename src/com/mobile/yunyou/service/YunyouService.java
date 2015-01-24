@@ -1,11 +1,11 @@
 package com.mobile.yunyou.service;
 
-import com.mobile.yunyou.util.CommonLog;
-import com.mobile.yunyou.util.LogFactory;
-
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+
+import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.LogFactory;
 
 public class YunyouService extends Service{
 

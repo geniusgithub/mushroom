@@ -2,14 +2,10 @@ package com.mobile.yunyou.custom;
 
 import java.util.List;
 
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.device.DeviceSetDataCenter;
-
-
-
-
 import android.content.Context;
 import android.view.View;
+
+import com.mobile.yunyou.R;
 
 public class SingleChoicePopWindow extends AbstractChoicePopWindow{
 	

@@ -1,14 +1,13 @@
 package com.mobile.yunyou.activity;
 
 
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.network.NetworkCenterEx;
-//import com.mobile.yunyou.network.NetworkCenter;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.network.NetworkCenterEx;
 
 
 

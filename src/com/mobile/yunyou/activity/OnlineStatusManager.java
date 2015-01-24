@@ -1,7 +1,5 @@
 package com.mobile.yunyou.activity;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -14,7 +12,6 @@ import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.Utils;
 
 public class OnlineStatusManager implements IRequestCallback{
 

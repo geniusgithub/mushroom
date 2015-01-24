@@ -2,27 +2,29 @@ package com.mobile.yunyou.bike.manager;
 
 import android.content.Context;
 import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationListener;
 import com.amap.api.location.LocationManagerProxy;
 import com.amap.api.location.LocationProviderProxy;
+import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.LogFactory;
 
 
 
 public class GaoDeNetworkManager implements AMapLocationListener {
 
-
+	private static final CommonLog log = LogFactory.createLog();
 	private final static int CHECK_POSITION_INTERVAL = 15 * 1000;
 	
 	private LocationManagerProxy aMapLocManager = null;
 	
 	private Context mContext;
 	
-	private LocationListener mListener;
+	private AMapLocationListener mListener;
 
+	private AMapLocation mLastAMapLocation;
 	
 	public GaoDeNetworkManager(Context context)
 	{
@@ -35,13 +37,14 @@ public class GaoDeNetworkManager implements AMapLocationListener {
 	
 
 	
-	public void registerListen(LocationListener listener)
+	public void registerListen(AMapLocationListener listener)
 	{
 		if (mListener == null)
 		{
 			mListener = listener;
 			aMapLocManager.requestLocationUpdates(
 					LocationProviderProxy.AMapNetwork, CHECK_POSITION_INTERVAL, 0, this);
+			log.e("GaoDeNetworkManager registerListen");
 		}
 
 	}
@@ -52,11 +55,14 @@ public class GaoDeNetworkManager implements AMapLocationListener {
 		{
 			aMapLocManager.removeUpdates(this);	
 			mListener = null;
-			
+			log.e("GaoDeNetworkManager unRegisterListen");
 		}
 	}
 
 
+	public AMapLocation getAMapLocation(){
+		return mLastAMapLocation;
+	}
 
 	@Override
 	public void onLocationChanged(Location location) {
@@ -92,6 +98,7 @@ public class GaoDeNetworkManager implements AMapLocationListener {
 
 	@Override
 	public void onLocationChanged(AMapLocation location) {
+		log.e("GaoDeNetworkManager onLocationChanged = " + location);
 		InnerThread innerThread = new InnerThread(location, mListener);
 		innerThread.start();
 	}
@@ -99,9 +106,9 @@ public class GaoDeNetworkManager implements AMapLocationListener {
 	class InnerThread extends Thread
 	{
 		private AMapLocation mLocation;
-		private LocationListener listener;
+		private AMapLocationListener listener;
 		
-		public InnerThread( AMapLocation location, LocationListener listener)
+		public InnerThread( AMapLocation location, AMapLocationListener listener)
 		{
 			mLocation = location;		
 			this.listener = listener;

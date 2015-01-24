@@ -6,7 +6,6 @@ import java.util.concurrent.Executors;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,6 +21,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
+import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMap.OnCameraChangeListener;
 import com.amap.api.maps.CameraUpdate;
@@ -29,7 +29,6 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.CameraPosition;
-import com.amap.api.maps.model.CircleOptions;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.geocoder.GeocodeSearch;
 import com.mobile.yunyou.R;
@@ -535,7 +534,7 @@ public class SafeActivity extends Activity implements OnCameraChangeListener,IRe
 	}
 
 	@Override
-	public void onLocationUpdate(final LocationEx location) {
+	public void onLocationUpdate(final LocationEx location, AMapLocation aMapLocation) {
 
 //		runOnUiThread(new Runnable() {
 //			

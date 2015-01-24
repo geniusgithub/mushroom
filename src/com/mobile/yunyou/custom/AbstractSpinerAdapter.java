@@ -3,14 +3,14 @@ package com.mobile.yunyou.custom;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mobile.yunyou.R;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.mobile.yunyou.R;
 
 public abstract class AbstractSpinerAdapter<T> extends BaseAdapter {
 

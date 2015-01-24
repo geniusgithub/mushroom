@@ -1,22 +1,14 @@
 package com.mobile.yunyou.model;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.mobile.yunyou.map.util.StringUtil;
-import com.mobile.yunyou.model.DeviceSetType.KeySet;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.YunTimeUtils;
-
-import android.R.array;
-import android.R.integer;
-import android.provider.MediaStore.Video;
 
 //0x0400 - 0x0499
 public class BikeType {

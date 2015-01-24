@@ -9,15 +9,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.mobile.yunyou.bike.NewBikeActivity;
-import com.mobile.yunyou.util.CommonLog;
-import com.mobile.yunyou.util.LogFactory;
-
-import android.R.integer;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
+
+import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.LogFactory;
 
 
 // 0x0100 - 0x0199

@@ -3,16 +3,14 @@ package com.mobile.yunyou.map.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mobile.yunyou.util.CommonLog;
-import com.mobile.yunyou.util.LogFactory;
-
-
-
 import android.content.Context;
 import android.telephony.NeighboringCellInfo;
 import android.telephony.TelephonyManager;
 import android.telephony.cdma.CdmaCellLocation;
 import android.telephony.gsm.GsmCellLocation;
+
+import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.LogFactory;
 
 
 

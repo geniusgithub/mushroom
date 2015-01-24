@@ -4,27 +4,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationListener;
 import com.amap.api.services.geocoder.GeocodeSearch;
 import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.bike.tmp.SingleGPSManager;
 import com.mobile.yunyou.map.data.LocationEx;
 import com.mobile.yunyou.map.util.LocationUtil;
-import com.mobile.yunyou.map.util.WebManager;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.YunTimeUtils;
 
 
-public class SelfLocationManager implements LocationListener{
+public class SelfLocationManager implements AMapLocationListener{
 	
 	private static final CommonLog log = LogFactory.createLog();
 	
 	public static interface ILocationUpdate{
-		public void onLocationUpdate(LocationEx location);
+		public void onLocationUpdate(LocationEx location, AMapLocation aMapLocation);
 	}
 	
 	private List<ILocationUpdate> mObserverList = new ArrayList<SelfLocationManager.ILocationUpdate>();
@@ -41,6 +39,7 @@ public class SelfLocationManager implements LocationListener{
 	
 	private GeocodeSearch mGeocoderSearch;
 	private LocationEx mLocationEx;
+	private AMapLocation mAMapLocation;
 	
 	public static  SelfLocationManager getInstance()
 	{
@@ -138,8 +137,77 @@ public class SelfLocationManager implements LocationListener{
 //		}
 //	}
 	
+//	@Override
+//	public synchronized void onLocationChanged(Location location) {
+//		if (location != null){
+//			String timeString = YunTimeUtils.getFormatTime(location.getTime());
+//			log.e("-->SelfLocationManager onLocationChanged:" +
+//					"\nprovier = " + location.getProvider() + 
+//					"\nAccuracy = " + location.getAccuracy() + 
+//					"\ntime:" + timeString + 
+//					"\nlatlon = (" + location.getLatitude() + "," + location.getLongitude() + ")");
+//			
+//	
+//			LocationEx	locationEx = new LocationEx(location);
+//			locationEx.setUpdateTimeString(YunTimeUtils.getFormatTime(System.currentTimeMillis()));
+//			
+//			
+////			if (location.getProvider().equalsIgnoreCase(LocationManager.GPS_PROVIDER)){
+////				Location newLocation = WebManager.correctPosToMap(location.getLatitude(), location.getLongitude());
+////				if (newLocation == null)
+////				{
+////					log.e("correctPosToMap fail!!!");
+////					return ;
+////				}
+////
+////				locationEx.setOffsetLonLat(newLocation.getLatitude(), newLocation.getLongitude());
+////			}else{
+////				locationEx.setOffsetLonLat(location.getLatitude(), location.getLongitude());
+////			}
+//			locationEx.setOffsetLonLat(location.getLatitude(), location.getLongitude());
+//			//String address = WebManager.getAdressByGaodeEX( mGeocoderSearch, locationEx.getOffsetLat(), locationEx.getOffsetLon());
+//			String address = "";
+//			locationEx.setAdress(address);
+//			if (LocationUtil.isBetterLocation(locationEx, mLocationEx)){
+//				log.e("isBetterLocation!!!");
+//				mLocationEx = locationEx;
+//				doNotifyChange();
+//			}else{
+//				log.e("no BetterLocation!!!");
+//			}
+//		}
+//	}
+
+	private void doNotifyChange(){
+		synchronized (mObserverList) {
+			int size = mObserverList.size();
+			for(int i = 0; i < size; i++){
+				mObserverList.get(i).onLocationUpdate(mLocationEx, mAMapLocation);
+			}
+		}
+	}
 	@Override
-	public synchronized void onLocationChanged(Location location) {
+	public void onProviderDisabled(String arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onProviderEnabled(String arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLocationChanged(AMapLocation location) {
 		if (location != null){
 			String timeString = YunTimeUtils.getFormatTime(location.getTime());
 			log.e("-->SelfLocationManager onLocationChanged:" +
@@ -172,6 +240,7 @@ public class SelfLocationManager implements LocationListener{
 			if (LocationUtil.isBetterLocation(locationEx, mLocationEx)){
 				log.e("isBetterLocation!!!");
 				mLocationEx = locationEx;
+				mAMapLocation = location;
 				doNotifyChange();
 			}else{
 				log.e("no BetterLocation!!!");
@@ -179,30 +248,8 @@ public class SelfLocationManager implements LocationListener{
 		}
 	}
 
-	private void doNotifyChange(){
-		synchronized (mObserverList) {
-			int size = mObserverList.size();
-			for(int i = 0; i < size; i++){
-				mObserverList.get(i).onLocationUpdate(mLocationEx);
-			}
-		}
-	}
 	@Override
-	public void onProviderDisabled(String arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onProviderEnabled(String arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
-	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+	public void onLocationChanged(Location arg0) {
 		// TODO Auto-generated method stub
 		
 	}

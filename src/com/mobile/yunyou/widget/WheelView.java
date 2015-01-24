@@ -3,9 +3,6 @@ package com.mobile.yunyou.widget;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.mobile.yunyou.R;
-
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -21,11 +18,13 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.util.FloatMath;
 import android.view.GestureDetector;
+import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.animation.Interpolator;
 import android.widget.Scroller;
+
+import com.mobile.yunyou.R;
 
 
 /**

@@ -5,30 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.device.adapter.DeviceAdapter;
-import com.mobile.yunyou.device.adapter.DeviceItemObject;
-import com.mobile.yunyou.model.DeviceSetType;
-import com.mobile.yunyou.model.DeviceSetType.ClockSetGroup;
-import com.mobile.yunyou.model.DeviceSetType.GpsStillTimeGroup;
-import com.mobile.yunyou.model.DeviceSetType.KeySetGroup;
-import com.mobile.yunyou.model.DeviceSetType.WhiteListSetGroup;
-import com.mobile.yunyou.model.GloalType;
-import com.mobile.yunyou.model.PublicType;
-import com.mobile.yunyou.model.ResponseDataPacket;
-import com.mobile.yunyou.model.DeviceSetType.GpsStillTime;
-import com.mobile.yunyou.model.DeviceSetType.KeySet;
-import com.mobile.yunyou.model.DeviceSetType.WhiteListSet;
-import com.mobile.yunyou.network.IRequestCallback;
-import com.mobile.yunyou.network.NetworkCenterEx;
-import com.mobile.yunyou.util.CommonLog;
-import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.PopWindowFactory;
-import com.mobile.yunyou.util.Utils;
-
-
-import android.R.bool;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.LevelListDrawable;
@@ -37,13 +13,28 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.device.adapter.DeviceAdapter;
+import com.mobile.yunyou.device.adapter.DeviceItemObject;
+import com.mobile.yunyou.model.DeviceSetType;
+import com.mobile.yunyou.model.DeviceSetType.ClockSetGroup;
+import com.mobile.yunyou.model.DeviceSetType.GpsStillTimeGroup;
+import com.mobile.yunyou.model.DeviceSetType.KeySetGroup;
+import com.mobile.yunyou.model.DeviceSetType.WhiteListSetGroup;
+import com.mobile.yunyou.model.GloalType;
+import com.mobile.yunyou.model.ResponseDataPacket;
+import com.mobile.yunyou.network.IRequestCallback;
+import com.mobile.yunyou.network.NetworkCenterEx;
+import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.LogFactory;
+import com.mobile.yunyou.util.PopWindowFactory;
+import com.mobile.yunyou.util.Utils;
 
 public class DeviceSetActivity extends Activity implements OnItemClickListener, OnClickListener, IRequestCallback{
 

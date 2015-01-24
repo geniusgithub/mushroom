@@ -1,8 +1,5 @@
 package com.mobile.yunyou.map.data;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.location.Location;
 import android.os.Handler;
 

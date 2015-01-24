@@ -3,15 +3,28 @@ package com.mobile.yunyou.friend;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mobile.yunyou.YunyouApplication;
+import android.app.Activity;
+import android.app.Dialog;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.Toast;
+
 import com.mobile.yunyou.R;
-import com.mobile.yunyou.custom.DoubleEditDialog;
+import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.custom.DoubleEditPopWindow;
-import com.mobile.yunyou.model.DeviceSetType;
 import com.mobile.yunyou.model.GloalType;
+import com.mobile.yunyou.model.GloalType.DeviceInfoEx;
 import com.mobile.yunyou.model.PublicType;
 import com.mobile.yunyou.model.ResponseDataPacket;
-import com.mobile.yunyou.model.GloalType.DeviceInfoEx;
 import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.util.CommonLog;
@@ -19,31 +32,6 @@ import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
-import com.mobile.yunyou.util.VertifyUtil;
-
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Intent;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.InputType;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.ContextMenu;
-import android.view.Gravity;
-import android.view.MenuItem;
-import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
-import android.view.View.OnClickListener;
-import android.view.View.OnCreateContextMenuListener;
-import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.PopupWindow;
-import android.widget.Toast;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class FriendActivity extends Activity implements TextWatcher, OnClickListener, 
 														IRequestCallback,

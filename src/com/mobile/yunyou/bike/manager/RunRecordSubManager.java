@@ -1,17 +1,12 @@
 package com.mobile.yunyou.bike.manager;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 import android.content.Context;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.map.util.WebManager;
-import com.mobile.yunyou.model.BaseType;
 import com.mobile.yunyou.model.BikeType;
-import com.mobile.yunyou.model.BikeType.BikeLRecordResult;
 import com.mobile.yunyou.model.BikeType.BikeLRecordSubResult;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;

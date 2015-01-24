@@ -1,7 +1,5 @@
 package com.mobile.yunyou.bike.manager;
 
-import com.mobile.yunyou.bike.manager.MobileGpsManager.InnerThread;
-
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;

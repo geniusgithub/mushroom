@@ -3,21 +3,21 @@ package com.mobile.yunyou.bike.tmp;
 import android.app.Activity;
 import android.content.Context;
 import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationListener;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.bike.manager.GaoDeGPSManager;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.YunTimeUtils;
 
-public class TestGpsActivity extends Activity implements OnClickListener, LocationListener{
+public class TestGpsActivity extends Activity implements OnClickListener, AMapLocationListener{
 
 	private static final CommonLog log = LogFactory.createLog();
 	
@@ -190,6 +190,12 @@ public class TestGpsActivity extends Activity implements OnClickListener, Locati
 
 	@Override
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onLocationChanged(AMapLocation arg0) {
 		// TODO Auto-generated method stub
 		
 	}

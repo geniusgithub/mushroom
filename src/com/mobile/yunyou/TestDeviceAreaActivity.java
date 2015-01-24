@@ -1,11 +1,6 @@
 package com.mobile.yunyou;
 
-import java.util.ArrayList;
 import java.util.List;
-
-import com.mobile.yunyou.custom.DeviceAreaDialog;
-import com.mobile.yunyou.custom.RangeTimeDialog;
-import com.mobile.yunyou.model.DeviceSetType;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -14,8 +9,11 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.Toast;
+
+import com.mobile.yunyou.custom.DeviceAreaDialog;
+import com.mobile.yunyou.custom.RangeTimeDialog;
+import com.mobile.yunyou.model.DeviceSetType;
 
 public class TestDeviceAreaActivity extends Activity implements OnItemClickListener, OnClickListener{
 

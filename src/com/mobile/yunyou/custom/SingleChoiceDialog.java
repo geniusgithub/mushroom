@@ -2,10 +2,9 @@ package com.mobile.yunyou.custom;
 
 import java.util.List;
 
-import com.mobile.yunyou.R;
-
-
 import android.content.Context;
+
+import com.mobile.yunyou.R;
 
 public class SingleChoiceDialog extends AbstractChoickDialog{
 

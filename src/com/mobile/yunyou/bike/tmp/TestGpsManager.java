@@ -1,9 +1,5 @@
 package com.mobile.yunyou.bike.tmp;
 
-import com.mobile.yunyou.map.data.LocationEx;
-import com.mobile.yunyou.map.util.WebManager;
-import com.mobile.yunyou.util.YunTimeUtils;
-
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;

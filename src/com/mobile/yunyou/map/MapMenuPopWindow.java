@@ -1,13 +1,5 @@
 package com.mobile.yunyou.map;
 
-import java.util.List;
-
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.model.GloalType;
-import com.mobile.yunyou.util.CommonLog;
-import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.Utils;
-
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -15,8 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.ListView;
 import android.widget.PopupWindow;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.LogFactory;
 
 public class MapMenuPopWindow extends PopupWindow{
 

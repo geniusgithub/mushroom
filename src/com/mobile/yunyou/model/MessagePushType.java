@@ -2,8 +2,6 @@ package com.mobile.yunyou.model;
 
 import org.json.JSONObject;
 
-import android.os.Parcelable;
-
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
 

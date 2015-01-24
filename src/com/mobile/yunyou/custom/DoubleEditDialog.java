@@ -1,10 +1,6 @@
 package com.mobile.yunyou.custom;
 
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.util.Utils;
-
 import android.content.Context;
-import android.content.DialogInterface;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -14,6 +10,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.mobile.yunyou.R;
 
 public class DoubleEditDialog extends AbstractEditDialog {
 

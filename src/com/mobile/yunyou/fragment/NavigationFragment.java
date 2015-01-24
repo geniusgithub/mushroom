@@ -20,7 +20,6 @@ import com.mobile.yunyou.activity.MainSlideActivity;
 import com.mobile.yunyou.bike.SafeActivity;
 import com.mobile.yunyou.bike.tmp.NewBikeExActivity;
 import com.mobile.yunyou.model.GloalType;
-import com.mobile.yunyou.msg.MessageActivity;
 import com.mobile.yunyou.msg.MessageExActivity;
 import com.mobile.yunyou.network.api.HeadFileConfigure;
 import com.mobile.yunyou.set.SetPersonActivity;

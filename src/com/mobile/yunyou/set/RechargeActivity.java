@@ -1,12 +1,12 @@
 package com.mobile.yunyou.set;
 
-import com.mobile.yunyou.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+
+import com.mobile.yunyou.R;
 
 public class RechargeActivity extends Activity implements OnClickListener{
 

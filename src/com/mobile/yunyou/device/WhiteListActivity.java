@@ -3,7 +3,6 @@ package com.mobile.yunyou.device;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -14,12 +13,10 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-
 import android.widget.Toast;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.custom.DoubleEditDialog;
 import com.mobile.yunyou.custom.DoubleEditPopWindow;
 import com.mobile.yunyou.device.adapter.WhiteListAdapter;
 import com.mobile.yunyou.model.DeviceSetType;

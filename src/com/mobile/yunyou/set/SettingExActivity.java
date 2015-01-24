@@ -1,7 +1,19 @@
 package com.mobile.yunyou.set;
 
 
-import java.util.List;
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
@@ -9,11 +21,8 @@ import com.mobile.yunyou.bike.MoGuActivity;
 import com.mobile.yunyou.bike.WarningActivity;
 import com.mobile.yunyou.bike.tmp.OfflineMapActivity;
 import com.mobile.yunyou.model.GloalType;
-import com.mobile.yunyou.model.ProductType;
-import com.mobile.yunyou.model.PublicType;
-import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.model.GloalType.UserInfoEx;
-import com.mobile.yunyou.model.ProductType.GetPackage;
+import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.network.api.HeadFileConfigure;
@@ -23,21 +32,6 @@ import com.mobile.yunyou.util.FileManager;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
-
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.TextView;
 
 public class SettingExActivity extends Activity implements OnClickListener, IRequestCallback{
 

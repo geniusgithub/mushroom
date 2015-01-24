@@ -1,40 +1,21 @@
 package com.mobile.yunyou.bike;
 
 
-import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.RadioGroup.OnCheckedChangeListener;
-import android.widget.Toast;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMap.InfoWindowAdapter;
-import com.amap.api.maps.AMap.OnCameraChangeListener;
 import com.amap.api.maps.AMap.OnInfoWindowClickListener;
 import com.amap.api.maps.AMap.OnMapLoadedListener;
 import com.amap.api.maps.AMap.OnMarkerClickListener;
@@ -43,37 +24,17 @@ import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.CameraPosition;
-import com.amap.api.maps.model.CircleOptions;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.PolylineOptions;
-import com.amap.api.maps.model.LatLngBounds.Builder;
-import com.amap.api.services.geocoder.GeocodeSearch;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.bike.manager.BikeLocationManager;
-import com.mobile.yunyou.bike.manager.MapMarketManager;
-import com.mobile.yunyou.bike.manager.SafeAreaManager;
-import com.mobile.yunyou.bike.manager.SelfLocationManager;
-import com.mobile.yunyou.fragment.MainMapFragment;
-import com.mobile.yunyou.map.data.LocationEx;
-import com.mobile.yunyou.map.util.LocationUtil;
 import com.mobile.yunyou.map.util.StringUtil;
-import com.mobile.yunyou.map.util.WebManager;
 import com.mobile.yunyou.model.BikeType;
-import com.mobile.yunyou.model.ResponseDataPacket;
-import com.mobile.yunyou.model.BikeType.BikeGetArea;
 import com.mobile.yunyou.model.BikeType.BikeLRecordResult;
-import com.mobile.yunyou.model.BikeType.MinRunRecord;
-import com.mobile.yunyou.network.Courier;
-import com.mobile.yunyou.network.IRequestCallback;
-import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.util.CommonLog;
-import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.PopWindowFactory;
-import com.mobile.yunyou.util.Utils;
 import com.mobile.yunyou.util.YunTimeUtils;
 
 public class RecordMapActivity extends Activity implements OnClickListener, 

@@ -3,13 +3,6 @@ package com.mobile.yunyou.device;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.custom.CustomTimePopWindow;
-import com.mobile.yunyou.custom.MultiChoicePopWindow;
-import com.mobile.yunyou.model.BaseType;
-import com.mobile.yunyou.model.DeviceSetType;
-import com.mobile.yunyou.util.Utils;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -18,6 +11,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.custom.CustomTimePopWindow;
+import com.mobile.yunyou.custom.MultiChoicePopWindow;
+import com.mobile.yunyou.model.BaseType;
+import com.mobile.yunyou.model.DeviceSetType;
+import com.mobile.yunyou.util.Utils;
 
 public class SetGuardTimeActivity extends Activity implements OnClickListener{
 

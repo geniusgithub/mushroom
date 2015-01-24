@@ -3,6 +3,7 @@ package com.mobile.yunyou.custom;
 import java.util.List;
 
 import android.content.Context;
+
 import com.mobile.yunyou.device.adapter.DeviceHistoryAdapter;
 import com.mobile.yunyou.model.DeviceSetType;
 

@@ -2,23 +2,7 @@ package com.mobile.yunyou.set;
 
 
 
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.device.DeviceIntentConstant;
-import com.mobile.yunyou.model.GloalType;
-import com.mobile.yunyou.model.ProductType;
-import com.mobile.yunyou.model.PublicType;
-import com.mobile.yunyou.model.ResponseDataPacket;
-import com.mobile.yunyou.network.IRequestCallback;
-import com.mobile.yunyou.network.NetworkCenterEx;
-import com.mobile.yunyou.set.SetPersonCommentActivity.IViewMode;
-import com.mobile.yunyou.util.CommonLog;
-import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.PopWindowFactory;
-import com.mobile.yunyou.util.Utils;
-import com.mobile.yunyou.util.VertifyUtil;
-
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -26,6 +10,16 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.model.PublicType;
+import com.mobile.yunyou.model.ResponseDataPacket;
+import com.mobile.yunyou.network.IRequestCallback;
+import com.mobile.yunyou.network.NetworkCenterEx;
+import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.LogFactory;
+import com.mobile.yunyou.util.PopWindowFactory;
+import com.mobile.yunyou.util.Utils;
 
 public class ChangePwdActivity extends Activity implements OnClickListener, IRequestCallback{
 

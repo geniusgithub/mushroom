@@ -2,20 +2,6 @@ package com.mobile.yunyou.activity;
 
 //import net.sf.json.JSONObject;
 
-import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.datastore.YunyouSharePreference;
-import com.mobile.yunyou.model.GloalType;
-import com.mobile.yunyou.model.PublicType;
-import com.mobile.yunyou.model.ResponseDataPacket;
-import com.mobile.yunyou.msg.MsgDeleteActivity;
-import com.mobile.yunyou.network.IRequestCallback;
-import com.mobile.yunyou.network.NetworkCenterEx;
-import com.mobile.yunyou.util.CommonLog;
-import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.PopWindowFactory;
-import com.mobile.yunyou.util.Utils;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
@@ -29,6 +15,20 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.datastore.YunyouSharePreference;
+import com.mobile.yunyou.model.GloalType;
+import com.mobile.yunyou.model.PublicType;
+import com.mobile.yunyou.model.ResponseDataPacket;
+import com.mobile.yunyou.msg.MsgDeleteActivity;
+import com.mobile.yunyou.network.IRequestCallback;
+import com.mobile.yunyou.network.NetworkCenterEx;
+import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.LogFactory;
+import com.mobile.yunyou.util.PopWindowFactory;
+import com.mobile.yunyou.util.Utils;
 
 public class LoginActivity extends Activity implements OnClickListener, IRequestCallback{
 
@@ -141,7 +141,7 @@ public class LoginActivity extends Activity implements OnClickListener, IRequest
 
     	Intent intent = new Intent();
     	//intent.setClass(this, MainActivity.class);
-    	intent.setClass(this, MainSlideActivity.class);
+    	intent.setClass(this, MainExActivity.class);
     	startActivity(intent);
     	finish();
     }

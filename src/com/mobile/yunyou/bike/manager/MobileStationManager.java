@@ -8,13 +8,11 @@ import android.content.Context;
 import android.location.Location;
 import android.location.LocationListener;
 
-import com.mobile.yunyou.map.data.LocationEx;
 import com.mobile.yunyou.map.util.CellIDInfo;
 import com.mobile.yunyou.map.util.CellIDInfoManager;
 import com.mobile.yunyou.map.util.WebManager;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.YunTimeUtils;
 
 public class MobileStationManager {
 

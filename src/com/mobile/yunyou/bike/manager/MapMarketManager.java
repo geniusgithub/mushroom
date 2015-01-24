@@ -1,16 +1,11 @@
 package com.mobile.yunyou.bike.manager;
 
-import java.util.List;
-
 import android.os.Handler;
 import android.os.Message;
 
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.model.Marker;
-import com.amap.api.maps.model.PolylineOptions;
-import com.mobile.yunyou.bike.BikeMarket;
-import com.mobile.yunyou.bike.SafeMarket;
 import com.mobile.yunyou.bike.SelfMarket;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;

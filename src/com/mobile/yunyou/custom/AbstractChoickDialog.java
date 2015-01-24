@@ -2,22 +2,19 @@ package com.mobile.yunyou.custom;
 
 import java.util.List;
 
-import com.mobile.yunyou.R;
-
-
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
-import android.view.Display;
-import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.mobile.yunyou.R;
 
 public abstract class AbstractChoickDialog extends Dialog implements OnClickListener{
 

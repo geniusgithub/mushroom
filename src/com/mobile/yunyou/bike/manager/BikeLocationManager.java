@@ -7,14 +7,11 @@ import java.util.TimerTask;
 
 import android.content.Context;
 import android.location.Location;
-import android.location.LocationListener;
 import android.location.LocationManager;
 
 import com.amap.api.services.geocoder.GeocodeSearch;
 import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.bike.manager.SelfLocationManager.ILocationUpdate;
 import com.mobile.yunyou.map.data.LocationEx;
-import com.mobile.yunyou.map.util.LocationUtil;
 import com.mobile.yunyou.map.util.WebManager;
 import com.mobile.yunyou.model.DeviceSetType;
 import com.mobile.yunyou.model.ResponseDataPacket;

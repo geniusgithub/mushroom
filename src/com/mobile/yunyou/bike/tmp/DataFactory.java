@@ -1,7 +1,5 @@
 package com.mobile.yunyou.bike.tmp;
 
-import com.mobile.yunyou.model.BikeType.BikeLRecordResult;
-import com.mobile.yunyou.model.BikeType.BikeRecordUpload;
 
 
 public class DataFactory {

@@ -1,10 +1,7 @@
 package com.mobile.yunyou.custom;
 
-import com.mobile.yunyou.R;
-
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -13,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+
+import com.mobile.yunyou.R;
 
 public class SingleEditPopWindow extends AbstractEditPopWindow implements OnClickListener{
 

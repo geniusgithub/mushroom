@@ -16,11 +16,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.util.Log;
+
 import com.mobile.yunyou.ServiceIPConfig;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
-
-import android.util.Log;
 
 //调用后台，可以通过http，udp等方式。
 public class Caller {

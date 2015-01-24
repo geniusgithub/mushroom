@@ -20,7 +20,6 @@ import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
-import com.mobile.yunyou.set.SetWarnActivity;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.LogFactory;

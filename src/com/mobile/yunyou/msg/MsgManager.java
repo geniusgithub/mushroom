@@ -1,20 +1,17 @@
 package com.mobile.yunyou.msg;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import android.content.Context;
+
 import com.mobile.yunyou.YunyouApplication;
-//import com.mobile.yunyou.datastore.MsgDBManager;
 import com.mobile.yunyou.model.DeviceSetType;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.Utils;
 import com.mobile.yunyou.util.notifactionUtils;
 
 public class MsgManager implements IRequestCallback{

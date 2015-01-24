@@ -3,7 +3,6 @@ package com.mobile.yunyou.device;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.R.integer;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,19 +10,14 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.TextView.SavedState;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.custom.CustomTimePopWindow;
-import com.mobile.yunyou.device.SimpleDevSetActivity.IViewMode;
-import com.mobile.yunyou.device.adapter.ClockSetAdapter;
 import com.mobile.yunyou.device.adapter.GuardTimeAdapter;
 import com.mobile.yunyou.model.DeviceSetType;
 import com.mobile.yunyou.model.ResponseDataPacket;

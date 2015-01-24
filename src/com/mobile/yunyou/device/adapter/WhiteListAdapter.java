@@ -3,23 +3,21 @@ package com.mobile.yunyou.device.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.device.adapter.DeviceAdapter.ViewHolder;
-import com.mobile.yunyou.model.DeviceSetType;
-import com.mobile.yunyou.util.CommonLog;
-import com.mobile.yunyou.util.LogFactory;
-
 import android.content.Context;
 import android.text.TextPaint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.model.DeviceSetType;
+import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.LogFactory;
 
 public class WhiteListAdapter extends BaseAdapter implements OnItemClickListener{
 

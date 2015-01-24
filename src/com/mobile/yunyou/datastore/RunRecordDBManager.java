@@ -1,26 +1,21 @@
 package com.mobile.yunyou.datastore;
 
 import java.util.LinkedList;
-import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.map.util.StringUtil;
-import com.mobile.yunyou.model.BikeType;
-import com.mobile.yunyou.model.BikeType.BikeLRecordSubResult;
-import com.mobile.yunyou.model.BikeType.MinLRunRecord;
-import com.mobile.yunyou.model.DeviceSetType;
-import com.mobile.yunyou.model.BikeType.MinRunRecord;
-import com.mobile.yunyou.util.CommonLog;
-import com.mobile.yunyou.util.LogFactory;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
+
+import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.model.BikeType;
+import com.mobile.yunyou.model.BikeType.BikeLRecordSubResult;
+import com.mobile.yunyou.model.DeviceSetType;
+import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.LogFactory;
 
 
 public class RunRecordDBManager{

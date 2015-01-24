@@ -2,9 +2,6 @@ package com.mobile.yunyou.custom;
 
 import java.util.List;
 
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.custom.AbstractSpinerAdapter.IOnItemSelectListener;
-
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.LayoutInflater;
@@ -14,6 +11,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.custom.AbstractSpinerAdapter.IOnItemSelectListener;
 
 public class SpinerPopWindow extends PopupWindow implements OnItemClickListener{
 

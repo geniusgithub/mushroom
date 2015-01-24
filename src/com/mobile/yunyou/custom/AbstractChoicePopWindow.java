@@ -2,8 +2,6 @@ package com.mobile.yunyou.custom;
 
 import java.util.List;
 
-import com.mobile.yunyou.R;
-
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
@@ -16,6 +14,8 @@ import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ScrollView;
 import android.widget.TextView;
+
+import com.mobile.yunyou.R;
 
 public abstract class AbstractChoicePopWindow implements OnClickListener{
 

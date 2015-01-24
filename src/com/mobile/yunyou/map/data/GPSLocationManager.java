@@ -1,7 +1,5 @@
 package com.mobile.yunyou.map.data;
 
-import com.mobile.yunyou.map.UploadGPSManager;
-
 import android.content.Context;
 import android.location.Criteria;
 import android.location.LocationListener;

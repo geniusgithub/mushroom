@@ -2,10 +2,10 @@ package com.mobile.yunyou.custom;
 
 import java.util.List;
 
+import android.content.Context;
+
 import com.mobile.yunyou.device.adapter.DeviceAreaAdapter;
 import com.mobile.yunyou.model.DeviceSetType;
-
-import android.content.Context;
 
 public class DeviceAreaDialog extends AbstractListDialog{
 

@@ -9,11 +9,9 @@ import android.os.Handler;
 
 import com.huizhilian.android.MessagePushHandler;
 import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.model.BaseType;
 import com.mobile.yunyou.model.GloalType;
 import com.mobile.yunyou.model.IToJsonObject;
 import com.mobile.yunyou.model.MessagePushType;
-import com.mobile.yunyou.model.PublicType;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.api.AbstractFileDownTask;
 import com.mobile.yunyou.network.api.AbstractTaskCallback;

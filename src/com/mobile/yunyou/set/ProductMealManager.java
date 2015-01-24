@@ -3,7 +3,6 @@ package com.mobile.yunyou.set;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import android.content.Context;
 
 import com.mobile.yunyou.YunyouApplication;

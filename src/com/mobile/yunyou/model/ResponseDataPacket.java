@@ -7,9 +7,6 @@ import org.json.JSONObject;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
 
-import android.R.string;
-import android.util.Log;
-
 public class ResponseDataPacket implements IParseJson{
 	private static final CommonLog log = LogFactory.createLog();
 	public final static String KEY_RSP = "rsp";

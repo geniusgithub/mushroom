@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.PopupWindow;
 
+import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.AMap.InfoWindowAdapter;
 import com.amap.api.maps.AMap.OnInfoWindowClickListener;
@@ -33,7 +34,6 @@ import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.bike.MoGuActivity;
 import com.mobile.yunyou.bike.SelfMarket;
-import com.mobile.yunyou.bike.manager.BikeLocationManager.IBikeLocationUpdate;
 import com.mobile.yunyou.bike.manager.MapMarketManager;
 import com.mobile.yunyou.bike.manager.SelfLocationManager;
 import com.mobile.yunyou.bike.manager.SelfLocationManager.ILocationUpdate;
@@ -585,7 +585,7 @@ public class MainMapFragment extends Fragment implements OnClickListener,
 	}
 	
 	@Override
-	public void onLocationUpdate(final LocationEx location) {
+	public void onLocationUpdate(final LocationEx location, AMapLocation aMapLocation) {
 		log.e("onLocationUpdate (" + location.getLatitude() + "," + location.getLongitude() + ")");
 		getActivity().runOnUiThread(new Runnable() {
 		

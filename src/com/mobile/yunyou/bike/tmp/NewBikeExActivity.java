@@ -1,8 +1,7 @@
 package com.mobile.yunyou.bike.tmp;
 
-import java.util.List;
+import java.util.ArrayList;
 
-import android.R.integer;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
@@ -18,16 +17,22 @@ import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
+import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
+import com.amap.api.maps.model.BitmapDescriptor;
+import com.amap.api.maps.model.BitmapDescriptorFactory;
+import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
+import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.PolylineOptions;
 import com.mobile.yunyou.R;
-import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.bike.MapUtils;
 import com.mobile.yunyou.bike.manager.RunRecordUploadPoxy;
 import com.mobile.yunyou.bike.manager.SelfLocationManager;
@@ -53,7 +58,8 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	private AMap aMap;
 	
 	private MapView mMapView;								
-	private UiSettings mUiSettings;			
+	private UiSettings mUiSettings;		
+
 
 	public static final double DOUBLE_STUDEN_LON = 114.1017;
 	public static final double DOUBLE_STUDEN_LAT = 22.6644;
@@ -83,6 +89,7 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	private NewBikeCenter mNewBikeCenter;
 	
 	private RunBikeMarket mRunBikeMarket;
+	private Marker mSelfMarket;	// 定位雷达小图标
 	
 	private RunRecordDBManager mRunRecordDBManager;
 	
@@ -100,6 +107,7 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 		
 		setupViews();
 		initData();
+		initMap();
 		clearData();
 	}
 	
@@ -117,8 +125,7 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 			  isFristResume = false;
 			  LocationEx locationEx = SelfLocationManager.getInstance().getLastLocation();
 			  if (locationEx != null){
-				  LatLng latLng = new LatLng(locationEx.getOffsetLat(), locationEx.getOffsetLon());
-				  mRunBikeMarket.addLocation(latLng);
+				  mRunBikeMarket.addLocation(locationEx);
 				  updateNewBikeMapView();
 				  updateCamarra(locationEx);
 			  }
@@ -210,7 +217,7 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 		mCBLock.setChecked(false);
 		mCBLock.setOnCheckedChangeListener(this);
 		
-		mRunBikeMarket = new RunBikeMarket(R.drawable.red_point);
+		mRunBikeMarket = new RunBikeMarket(R.drawable.point_start, R.drawable.point_end);
 		
 		showButtonType(VIEW_START);
 		
@@ -342,6 +349,17 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 //		  updateStatus();
 		  mRunRecordDBManager = RunRecordDBManager.getInstance();
 
+	}
+	
+	private void initMap(){
+		ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
+		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point1));
+		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point2));
+		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point3));
+		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point4));
+		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point5));
+		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point6));
+		mSelfMarket = aMap.addMarker(new MarkerOptions().anchor(0.5f, 0.5f).icons(giflist).period(50));
 	}
 	
 	
@@ -477,10 +495,11 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	}
 	
 	@Override
-	public void onLatlngUpdate(LatLng latLng) {
-		mRunBikeMarket.addLocation(latLng);
+	public void onLatlngUpdate(LocationEx locationEx, AMapLocation aMapLocation) {
+		mRunBikeMarket.addLocation(locationEx);
 		updateNewBikeMapView();
-		moveCamara(latLng);
+		moveCamara(locationEx);
+		mSelfMarket.setPosition(new LatLng(locationEx.getOffsetLat(), locationEx.getOffsetLon()));
 	}
 	
 	private void updateCamarra(float zoomLevel){
@@ -508,6 +527,21 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 		}
 	}
 	
+	private void moveCamara(LocationEx location){
+		if (location != null){
+			LatLng latLng = new LatLng(location.getOffsetLat(), location.getOffsetLon());
+			log.e("updateCamarra (" + location.getOffsetLat() + ", " + location.getOffsetLon());
+			CameraUpdate object = CameraUpdateFactory.newLatLngZoom(latLng, getZoomLevel());
+			aMap.moveCamera(object);
+
+		}
+	}
+	
+	private float getZoomLevel(){
+		CameraPosition position = aMap.getCameraPosition();
+		return position.zoom;
+	}
+	
 	private void updateTimesion(int timeMison){
 		String time = YunTimeUtils.getFormatTimeInterval(timeMison);
 		mTextViewTime.setText(time);
@@ -532,20 +566,43 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 
 	private void updateNewBikeMapView(){
 		log.e("updateNewBikeMapView");
-		aMap.clear();
-			
-		List<PolylineOptions> list = mRunBikeMarket.getPLineList();
-		int size = list.size();
-		for(int i = 0;i < size; i++){
-			aMap.addPolyline(list.get(i));
+		
+		Marker marker = mRunBikeMarket.getMarket();
+		if (marker == null){
+			if (mRunBikeMarket.getLastLocation() != null){
+				marker = aMap.addMarker(mRunBikeMarket.newStartMarkerOptions());
+				mRunBikeMarket.attchMarket(marker);
+
+			}
+			return ;
 		}
 		
-		MarkerOptions option = mRunBikeMarket.newCurrentMarkerOptions();
-		if (option != null){
-			aMap.addMarker(option);
+		
+		LatLng latLng = mRunBikeMarket.getFirstLatLon();
+		if (latLng != null){
+			marker.setPosition(latLng);
 		}
+		
+		PolylineOptions polylineOptions = mRunBikeMarket.getLastPolyline();
+		if (polylineOptions != null){
+			aMap.addPolyline(polylineOptions);
+		}
+		
+//		aMap.clear();
+//			
+//		List<PolylineOptions> list = mRunBikeMarket.getPLineList();
+//		int size = list.size();
+//		for(int i = 0;i < size; i++){
+//			aMap.addPolyline(list.get(i));
+//		}
+//		
+//		MarkerOptions option = mRunBikeMarket.newStartMarkerOptions();
+//		if (option != null){
+//			aMap.addMarker(option);
+//		}
 
 	}
+	
 	
 //	private void updateStatus(){
 //		String textString = getResources().getString(R.string.newbike_text_status_stop);

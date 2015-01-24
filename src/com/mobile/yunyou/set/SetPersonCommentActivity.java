@@ -1,14 +1,5 @@
 package com.mobile.yunyou.set;
 
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.device.DeviceIntentConstant;
-import com.mobile.yunyou.device.SimpleDevSetActivity.IViewMode;
-import com.mobile.yunyou.model.BaseType.Birthday;
-import com.mobile.yunyou.util.CommonLog;
-import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.Utils;
-import com.mobile.yunyou.util.VertifyUtil;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +8,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.device.DeviceIntentConstant;
+import com.mobile.yunyou.model.BaseType.Birthday;
+import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.LogFactory;
+import com.mobile.yunyou.util.Utils;
+import com.mobile.yunyou.util.VertifyUtil;
 
 public class SetPersonCommentActivity extends Activity implements OnClickListener{
 

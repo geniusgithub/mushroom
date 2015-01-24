@@ -1,17 +1,11 @@
 package com.mobile.yunyou.msg;
 
-import java.util.HashSet;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
 
-import android.view.View;
-
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.model.DeviceSetType;
-import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.model.DeviceSetType.DeviceMsgData;
+import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.util.CommonLog;

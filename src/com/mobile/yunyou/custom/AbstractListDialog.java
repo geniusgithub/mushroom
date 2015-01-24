@@ -1,8 +1,5 @@
 package com.mobile.yunyou.custom;
 
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.util.Utils;
-
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
@@ -14,6 +11,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.util.Utils;
 
 public abstract class AbstractListDialog extends Dialog implements OnItemClickListener{
 

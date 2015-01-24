@@ -3,7 +3,6 @@ package com.mobile.yunyou.bike.manager;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import android.os.Handler;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;

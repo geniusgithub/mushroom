@@ -7,12 +7,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import com.mobile.yunyou.model.DeviceSetType.GpsStillTime;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
-
-import android.R.integer;
-import android.util.Log;
 
 
 //0x0300 - 0x0399

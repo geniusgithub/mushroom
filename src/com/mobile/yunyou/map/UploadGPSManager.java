@@ -1,8 +1,6 @@
 package com.mobile.yunyou.map;
 
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import android.content.Context;
 
@@ -10,8 +8,6 @@ import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.activity.PhoneStateManager;
 import com.mobile.yunyou.map.util.CellIDInfo;
 import com.mobile.yunyou.map.util.CellIDInfoManager;
-import com.mobile.yunyou.map.util.WebManager;
-import com.mobile.yunyou.model.DeviceSetType;
 import com.mobile.yunyou.model.PublicType;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;

@@ -1,6 +1,5 @@
 package com.mobile.yunyou.bike;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,7 +26,6 @@ import com.mobile.yunyou.datastore.RunRecordDBManager;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.BikeType.BikeLRecordResult;
 import com.mobile.yunyou.model.BikeType.BikeLRecordSubResult;
-import com.mobile.yunyou.model.BikeType.MinLRunRecord;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;

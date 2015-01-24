@@ -4,9 +4,6 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-
-import android.util.Log;
-
 import com.mobile.yunyou.model.ProductType;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;

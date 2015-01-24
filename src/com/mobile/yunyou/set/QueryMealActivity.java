@@ -3,28 +3,6 @@ package com.mobile.yunyou.set;
 
 import java.util.List;
 
-
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.model.GloalType;
-import com.mobile.yunyou.model.ProductType;
-import com.mobile.yunyou.model.PublicType;
-import com.mobile.yunyou.model.ProductType.GetPackage;
-import com.mobile.yunyou.model.ResponseDataPacket;
-import com.mobile.yunyou.network.IRequestCallback;
-import com.mobile.yunyou.network.NetworkCenterEx;
-import com.mobile.yunyou.product.AlixId;
-import com.mobile.yunyou.product.BaseHelper;
-import com.mobile.yunyou.product.MobileSecurePayHelper;
-import com.mobile.yunyou.product.MobileSecurePayer;
-import com.mobile.yunyou.product.ProductUtil;
-import com.mobile.yunyou.product.ResultChecker;
-import com.mobile.yunyou.set.adapter.ProductMealAdapter;
-import com.mobile.yunyou.util.CommonLog;
-import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.PopWindowFactory;
-import com.mobile.yunyou.util.Utils;
-
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -40,6 +18,26 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.model.GloalType;
+import com.mobile.yunyou.model.ProductType;
+import com.mobile.yunyou.model.ProductType.GetPackage;
+import com.mobile.yunyou.model.ResponseDataPacket;
+import com.mobile.yunyou.network.IRequestCallback;
+import com.mobile.yunyou.network.NetworkCenterEx;
+import com.mobile.yunyou.product.AlixId;
+import com.mobile.yunyou.product.BaseHelper;
+import com.mobile.yunyou.product.MobileSecurePayHelper;
+import com.mobile.yunyou.product.MobileSecurePayer;
+import com.mobile.yunyou.product.ProductUtil;
+import com.mobile.yunyou.product.ResultChecker;
+import com.mobile.yunyou.set.adapter.ProductMealAdapter;
+import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.LogFactory;
+import com.mobile.yunyou.util.PopWindowFactory;
+import com.mobile.yunyou.util.Utils;
 
 
 

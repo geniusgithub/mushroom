@@ -5,13 +5,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.mobile.yunyou.model.BaseType;
-import com.mobile.yunyou.model.DeviceSetType;
 import com.mobile.yunyou.model.BaseType.Birthday;
-
-import android.content.Context;
-import android.util.Log;
-import android.view.Display;
-import android.view.WindowManager;
+import com.mobile.yunyou.model.DeviceSetType;
 
 public class VertifyUtil {
 

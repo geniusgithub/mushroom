@@ -6,10 +6,6 @@ import java.util.List;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.VertifyUtil;
-import com.mobile.yunyou.util.YunTimeUtils;
-
-import android.R.integer;
-import android.util.Log;
 
 public class BaseType {
 

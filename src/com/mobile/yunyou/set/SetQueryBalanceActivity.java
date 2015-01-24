@@ -1,8 +1,5 @@
 package com.mobile.yunyou.set;
 
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.util.Utils;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +7,9 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.util.Utils;
 
 public class SetQueryBalanceActivity extends Activity implements OnClickListener{
 

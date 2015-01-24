@@ -1,7 +1,5 @@
 package com.mobile.yunyou.util;
 
-import java.io.File;
-
 import android.content.Context;
 
 public class FileCache extends AbstractFileCache{

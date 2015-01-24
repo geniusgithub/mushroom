@@ -3,19 +3,18 @@ package com.mobile.yunyou.friend;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mobile.yunyou.R;
-import com.mobile.yunyou.util.ImageLoader;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.mobile.yunyou.R;
+import com.mobile.yunyou.util.ImageLoader;
 
 
 public class FriendAdapter extends BaseAdapter implements OnClickListener{

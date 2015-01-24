@@ -17,7 +17,6 @@ import com.amap.api.maps.model.PolylineOptions;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.BikeType.BikeLRecordSubResult;
-import com.mobile.yunyou.model.BikeType.MinRunRecord;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
 

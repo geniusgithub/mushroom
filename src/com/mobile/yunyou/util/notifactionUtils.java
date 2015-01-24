@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.Intent;
 
 import com.mobile.yunyou.R;
-import com.mobile.yunyou.activity.MainSlideActivity;
 import com.mobile.yunyou.model.DeviceSetType;
 import com.mobile.yunyou.msg.MessageActivity;
 

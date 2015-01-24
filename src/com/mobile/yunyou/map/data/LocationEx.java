@@ -1,7 +1,5 @@
 package com.mobile.yunyou.map.data;
 
-import java.util.Set;
-
 import android.location.Location;
 
 public class LocationEx extends Location{

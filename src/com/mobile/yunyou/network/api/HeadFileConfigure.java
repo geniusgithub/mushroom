@@ -1,7 +1,6 @@
 package com.mobile.yunyou.network.api;
 
 import com.mobile.yunyou.model.GloalType;
-import com.mobile.yunyou.util.FileManager;
 
 public class HeadFileConfigure {
 

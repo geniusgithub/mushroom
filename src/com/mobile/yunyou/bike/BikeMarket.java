@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.LatLngBounds;
+import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolylineOptions;
 import com.mobile.yunyou.R;
@@ -32,15 +32,18 @@ public class BikeMarket {
 	private int drawableIDStart = 0;
 	private int drawableIDCurrentOnline = 0;
 	private int drawableIDCurrentOffline = 0;
+	private Marker mLastMarket;
 	
 	private LatLng mPreLatLng;
 	private List<LatLng> mLatLngList = new ArrayList<LatLng>();
 	private List<PolylineOptions> mPLineList = new ArrayList<PolylineOptions>();
-	private LatLngBounds mBounds = null;
+	private PolylineOptions mLastPolyline;
+	//private LatLngBounds mBounds = null;
 	
-	private boolean isRunning = true;
+	//private boolean isRunning = true;
 	
-	private boolean isNeedUpdateLocation = true;
+	
+	
 	
 	public BikeMarket(int drawableStart, int drawableCurrentOnline, int drawableCurrentOffline){
 		drawableIDStart = drawableStart;
@@ -54,22 +57,22 @@ public class BikeMarket {
 		mMarkerOptionsCurrent.draggable(true);
 	}
 	
-	public void startRunning(){
-		isRunning = true;
+	public void attchMarket(Marker marker){
+		mLastMarket = marker;
 	}
 	
-	public boolean isRunning(){
-		return isRunning;
+	public Marker getMarket(){
+		return mLastMarket;
 	}
 	
-	public void setUpdateFlag(boolean flag){
-		isNeedUpdateLocation = flag;
-	}
-	
-	public boolean isNeedUpdate(){
-		return isNeedUpdateLocation;
-	}
-	
+//	public void startRunning(){
+//		isRunning = true;
+//	}
+//	
+//	public boolean isRunning(){
+//		return isRunning;
+//	}
+
 	public void clear(){
 		reset();
 		
@@ -81,8 +84,9 @@ public class BikeMarket {
 		mLatLngList.clear();
 		mPLineList.clear();
 		mFirstLocation = mLastLocation;
-		isRunning = true;
-		mBounds = null;
+	//	isRunning = true;
+	//	mBounds = null;
+		mLastPolyline = null;
 	}
 
 	public MarkerOptions newStartMarkerOptions(){
@@ -117,16 +121,19 @@ public class BikeMarket {
 		return mMarkerOptionsCurrent;
 	}
 	
-	public void addLocation(LocationEx location){
+	public boolean addLocation(LocationEx location){
 		if (location != null){
-			log.e("addLocation...");
+			log.e("addLocation...");		
 
-			setUpdateFlag(true);
 			if (mLastLocation != null){
-				if (mLastLocation.getOnline() == 0 && location.getOnline() == 0){
-					setUpdateFlag(false);
+				double distance = MapUtils.getDistanByLatlon(mLastLocation, location);
+				log.e("BikeMarket distance = " + distance);
+				if (distance < 1){
+					return false;
 				}
 			}
+			
+
 			mLastLocation = location;
 			LatLng latLng = new LatLng(location.getOffsetLat(), location.getOffsetLon());
 			mLatLngList.add(latLng);
@@ -134,10 +141,10 @@ public class BikeMarket {
 			if (mPreLatLng == null){
 				mFirstLocation = location;
 				mPreLatLng = latLng;
-				if (mBounds == null){
-					mBounds = new LatLngBounds(getFirstLatLon(), getLastLatLon());
-				}
-				return ;
+//				if (mBounds == null){
+//					mBounds = new LatLngBounds(getFirstLatLon(), getLastLatLon());
+//				}
+				return true;
 			}
 
 	
@@ -148,10 +155,18 @@ public class BikeMarket {
 			mPLineList.add(options);
 			log.e("mPLineList.size = " + mPLineList.size());
 			mPreLatLng = latLng;
-			mBounds.including(latLng);
+			mLastPolyline = options;
+//			mBounds.including(latLng);
+			
+			return true;
 		}
+		
+		return false;
 	}
 	
+	public PolylineOptions getLastPolyline(){
+		return mLastPolyline;
+	}
 	public List<PolylineOptions> getPLineList (){
 		return mPLineList;
 	}
@@ -166,15 +181,15 @@ public class BikeMarket {
 		return mFirstLocation;
 	}
 	
-	public void setLastLocation(LocationEx location){
-		if (location != null){
-			mLastLocation = location;	
-			mFirstLocation = location;
-			if (mBounds == null){
-				mBounds = new LatLngBounds(getFirstLatLon(), getLastLatLon());
-			}
-		}
-	}
+//	public void setLastLocation(LocationEx location){
+//		if (location != null){
+//			mLastLocation = location;	
+//			mFirstLocation = location;
+////			if (mBounds == null){
+////				mBounds = new LatLngBounds(getFirstLatLon(), getLastLatLon());
+////			}
+//		}
+//	}
 	
 	public LocationEx getLastLocation(){
 		return mLastLocation;
@@ -198,9 +213,9 @@ public class BikeMarket {
 		return null;
 	}
 	
-	public LatLngBounds getBound(){
-		return mBounds;
-	}
+//	public LatLngBounds getBound(){
+//		return mBounds;
+//	}
 	
 	public void render(View view){
 		TextView tvContent = (TextView)view.findViewById(R.id.tv_content);

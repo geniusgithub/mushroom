@@ -6,9 +6,6 @@
 
 package com.mobile.yunyou.product;
 
-import com.alipay.android.app.IAlixPay;
-import com.alipay.android.app.IRemoteServiceCallback;
-
 import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
@@ -19,6 +16,9 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.RemoteException;
+
+import com.alipay.android.app.IAlixPay;
+import com.alipay.android.app.IRemoteServiceCallback;
 
 
 

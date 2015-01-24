@@ -5,11 +5,23 @@ package com.mobile.yunyou.device;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mobile.yunyou.YunyouApplication;
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+
 import com.mobile.yunyou.R;
-import com.mobile.yunyou.custom.DoubleEditDialog;
+import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.custom.DoubleEditPopWindow;
-import com.mobile.yunyou.custom.MultiChoicePopWindow;
 import com.mobile.yunyou.model.DeviceSetType;
 import com.mobile.yunyou.model.DeviceSetType.KeySet;
 import com.mobile.yunyou.model.ResponseDataPacket;
@@ -20,23 +32,6 @@ import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 import com.mobile.yunyou.util.VertifyUtil;
-
-import android.R.integer;
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class KeySettingActivity extends Activity implements OnClickListener, OnCheckedChangeListener, IRequestCallback{
 

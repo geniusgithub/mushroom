@@ -3,11 +3,9 @@ package com.mobile.yunyou.bike.manager;
 import org.json.JSONObject;
 
 import android.content.Context;
-import android.location.Location;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.map.util.WebManager;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;

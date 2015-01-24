@@ -7,35 +7,32 @@ import java.util.Timer;
 
 import android.content.Context;
 import android.location.Location;
-import android.location.LocationListener;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
-import com.amap.api.location.LocationProviderProxy;
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationListener;
 import com.amap.api.maps.model.LatLng;
 import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.bike.MapUtils;
 import com.mobile.yunyou.bike.tmp.SingleGPSManager.MyTimeTask;
 import com.mobile.yunyou.map.data.LocationEx;
-import com.mobile.yunyou.map.util.LocationUtil;
-import com.mobile.yunyou.map.util.WebManager;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.BikeType.BikeLRecordSubResult;
 import com.mobile.yunyou.model.BikeType.MinLRunRecord;
-import com.mobile.yunyou.model.BikeType.MinRunRecord;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.YunTimeUtils;
 
-public class NewBikeCenter implements LocationListener{
+public class NewBikeCenter implements AMapLocationListener{
 
 	private static final CommonLog log = LogFactory.createLog();
 	
 	public static interface IStatusCallBack{
 		public void onTimeChange(int timeMillson);
 		public void onStatusChange(NewBikeEntiy entiy);
-		public void onLatlngUpdate(LatLng latLng);
+		public void onLatlngUpdate(LocationEx locationEx, AMapLocation aMapLocation);
 	}
 	
 	
@@ -81,9 +78,10 @@ public class NewBikeCenter implements LocationListener{
 				switch(msg.what){
 					case MSG_UPDATE_LOCATION:
 						if (msg.obj == null){
-							addLocation(null);
+							addLocation(null, null);
 						}else{
-							addLocation((LocationEx)msg.obj);
+							StructLocation object = (StructLocation) msg.obj;
+							addLocation(object.locationEx, object.aMapLocation);
 						}
 						break;
 					case MSG_REFRESH_TIME:
@@ -299,7 +297,7 @@ public class NewBikeCenter implements LocationListener{
 //		 return group;
 //	}
 	
-	public void addLocation(LocationEx location){
+	public void addLocation(LocationEx location, AMapLocation aMapLocation){
 		if (location != null){
 			log.e("NewBikeCenter  addLocation(" + location.getOffsetLat() + "," + location.getOffsetLon());
 		}else{
@@ -317,7 +315,7 @@ public class NewBikeCenter implements LocationListener{
 				
 				if (mStatusCallBack != null){
 					mStatusCallBack.onStatusChange(getEntiy());
-					mStatusCallBack.onLatlngUpdate(mLastLatLng);
+					mStatusCallBack.onLatlngUpdate(location, aMapLocation);
 				}
 			}
 
@@ -360,46 +358,46 @@ public class NewBikeCenter implements LocationListener{
 		if (mStatusCallBack != null){
 			mStatusCallBack.onStatusChange(getEntiy());
 			if (distance > 0.1){
-				mStatusCallBack.onLatlngUpdate(mLastLatLng);
+				mStatusCallBack.onLatlngUpdate(location, aMapLocation);
 			}
 		}
 		
 	}
 	
 
-	@Override
-	public void onLocationChanged(Location location) {
-		Message msg = mHandler.obtainMessage(MSG_UPDATE_LOCATION);	
-		if (location == null ){
-			msg.sendToTarget();
-			return ;
-		}
-		
-		LocationEx	locationEx = new LocationEx(location);
-		String timeString = YunTimeUtils.getFormatTime(location.getTime());
-		log.e("NewBikeCenter onLocationChanged:" +
-				"\nprovier = " + location.getProvider() + 
-				"\nAccuracy = " + location.getAccuracy() + 
-				"\ntime:" + timeString + 
-				"\nlatlon = (" + location.getLatitude() + "," + location.getLongitude() + ")");
-//		if (location.getProvider().equalsIgnoreCase(LocationProviderProxy.AMapNetwork)){
-//			locationEx.setOffsetLonLat(location.getLatitude(), location.getLongitude());
-//			msg.obj = locationEx;
+//	@Override
+//	public void onLocationChanged(Location location) {
+//		Message msg = mHandler.obtainMessage(MSG_UPDATE_LOCATION);	
+//		if (location == null ){
 //			msg.sendToTarget();
 //			return ;
 //		}
-
-//		Location newLocation = WebManager.correctPosToMap(locationEx.getLatitude(), locationEx.getLongitude());
-//		if (newLocation == null)
-//		{
-//			log.e("correctPosToMap fail!!!");
-//			return ;
-//		}
-		
-		locationEx.setOffsetLonLat(locationEx.getLatitude(), locationEx.getLongitude());
-		msg.obj = locationEx;
-		msg.sendToTarget();
-	}
+//		
+//		LocationEx	locationEx = new LocationEx(location);
+//		String timeString = YunTimeUtils.getFormatTime(location.getTime());
+//		log.e("NewBikeCenter onLocationChanged:" +
+//				"\nprovier = " + location.getProvider() + 
+//				"\nAccuracy = " + location.getAccuracy() + 
+//				"\ntime:" + timeString + 
+//				"\nlatlon = (" + location.getLatitude() + "," + location.getLongitude() + ")");
+////		if (location.getProvider().equalsIgnoreCase(LocationProviderProxy.AMapNetwork)){
+////			locationEx.setOffsetLonLat(location.getLatitude(), location.getLongitude());
+////			msg.obj = locationEx;
+////			msg.sendToTarget();
+////			return ;
+////		}
+//
+////		Location newLocation = WebManager.correctPosToMap(locationEx.getLatitude(), locationEx.getLongitude());
+////		if (newLocation == null)
+////		{
+////			log.e("correctPosToMap fail!!!");
+////			return ;
+////		}
+//		
+//		locationEx.setOffsetLonLat(locationEx.getLatitude(), locationEx.getLongitude());
+//		msg.obj = locationEx;
+//		msg.sendToTarget();
+//	}
 
 	@Override
 	public void onProviderDisabled(String arg0) {
@@ -417,5 +415,42 @@ public class NewBikeCenter implements LocationListener{
 	public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public void onLocationChanged(AMapLocation location) {
+		Message msg = mHandler.obtainMessage(MSG_UPDATE_LOCATION);	
+		if (location == null ){
+			msg.sendToTarget();
+			return ;
+		}
+		
+		LocationEx	locationEx = new LocationEx(location);
+		String timeString = YunTimeUtils.getFormatTime(location.getTime());
+		log.e("NewBikeCenter onLocationChanged:" +
+				"\nprovier = " + location.getProvider() + 
+				"\nAccuracy = " + location.getAccuracy() + 
+				"\ntime:" + timeString + 
+				"\nlatlon = (" + location.getLatitude() + "," + location.getLongitude() + ")");
+
+		
+		locationEx.setOffsetLonLat(locationEx.getLatitude(), locationEx.getLongitude());
+		StructLocation location2 = new StructLocation();
+		location2.locationEx = locationEx;
+		location2.aMapLocation = location;
+		msg.obj = location2;
+		msg.sendToTarget();
+	}
+
+	@Override
+	public void onLocationChanged(Location arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	public static class StructLocation{
+		public LocationEx locationEx;
+		public AMapLocation aMapLocation;
 	}
 }

@@ -1,6 +1,12 @@
 package com.mobile.yunyou.activity;
 
-import org.json.JSONObject;
+import android.app.Activity;
+import android.app.Dialog;
+import android.os.Bundle;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.model.PublicType;
@@ -12,15 +18,6 @@ import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.Utils;
 import com.mobile.yunyou.util.VertifyUtil;
-
-import android.app.Activity;
-import android.app.Dialog;
-import android.os.Bundle;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
 
 public class RegisterActivity extends Activity implements OnClickListener, IRequestCallback{
 
