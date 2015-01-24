@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mobile.yunyou"
-    android:versionCode="117"
-    android:versionName="1.1.7" >
+    android:versionCode="118"
+    android:versionName="1.1.8" >
 
     <uses-sdk android:minSdkVersion="10" 
          android:targetSdkVersion="15"/>
@@ -38,9 +38,18 @@
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="ebf5e6dcfd1078dd6cfe7ae90ed6d896" />
+        
+        <activity android:name="com.mobile.yunyou.bike.tmp.PullToRefreshListActivity" 
+             	  android:theme="@android:style/Theme.NoTitleBar">  	    
+<!--        	     <intent-filter >     -->
+<!--                  <action android:name="android.intent.action.MAIN" />   -->
+<!--                    <category android:name="android.intent.category.LAUNCHER" />   -->
+<!--              </intent-filter>    -->
+     	</activity> 
       
        <activity android:name="com.mobile.yunyou.bike.RunRecordActivity" 
-             	  android:theme="@android:style/Theme.NoTitleBar">  	    
+             	  android:theme="@android:style/Theme.NoTitleBar"
+					android:screenOrientation="portrait"  	>    
 <!--        	     <intent-filter >    -->
 <!--                   <action android:name="android.intent.action.MAIN" />   -->
 <!--                   <category android:name="android.intent.category.LAUNCHER" />   -->
@@ -48,7 +57,8 @@
      	</activity> 
      	
        <activity android:name="com.mobile.yunyou.bike.RecordMapActivity" 
-             	  android:theme="@android:style/Theme.NoTitleBar">  	    
+             	  android:theme="@android:style/Theme.NoTitleBar"
+             	  android:screenOrientation="portrait">  	    
 <!--        	     <intent-filter >    -->
 <!--                   <action android:name="android.intent.action.MAIN" />   -->
 <!--                   <category android:name="android.intent.category.LAUNCHER" />   -->
@@ -57,7 +67,8 @@
      	
        
      	<activity android:name="com.mobile.yunyou.bike.MoGuActivity" 
-             	  android:theme="@android:style/Theme.NoTitleBar">  	    
+             	  android:theme="@android:style/Theme.NoTitleBar"
+             	  android:screenOrientation="portrait">  	    
 <!--        	     <intent-filter >    -->
 <!--                   <action android:name="android.intent.action.MAIN" />   -->
 <!--                   <category android:name="android.intent.category.LAUNCHER" />   -->
@@ -72,9 +83,10 @@
 <!--                    <category android:name="android.intent.category.LAUNCHER" />   -->
 <!--              </intent-filter>    -->
      	</activity> 
-     	
+
               <activity android:name="com.mobile.yunyou.bike.tmp.OfflineMapActivity" 
-             	  android:theme="@android:style/Theme.NoTitleBar">  	    
+             	  android:theme="@android:style/Theme.NoTitleBar"
+             	  android:screenOrientation="portrait">  	    
 <!--        	     <intent-filter >    -->
 <!--                   <action android:name="android.intent.action.MAIN" />   -->
 <!--                   <category android:name="android.intent.category.LAUNCHER" />   -->
@@ -92,7 +104,8 @@
      	</activity> 
      	
         <activity android:name="com.mobile.yunyou.bike.tmp.NewBikeExActivity" 
-     	  android:theme="@android:style/Theme.NoTitleBar">     
+     	  android:theme="@android:style/Theme.NoTitleBar"
+     	  android:screenOrientation="portrait">     
      	     
 <!--      	  	 <intent-filter >  -->
 <!--                  <action android:name="android.intent.action.MAIN" />  -->
@@ -103,7 +116,8 @@
          
         
         <activity android:name="com.mobile.yunyou.bike.FollowBikeActivity" 
-     	  android:theme="@android:style/Theme.NoTitleBar">     
+     	  android:theme="@android:style/Theme.NoTitleBar"
+     	  android:screenOrientation="portrait">     
      	     
 <!--      	  	 <intent-filter >  -->
 <!--                  <action android:name="android.intent.action.MAIN" />  -->
@@ -116,7 +130,8 @@
      	
               	
         <activity
-            android:name="com.mobile.yunyou.activity.MainSlideActivity">
+            android:name="com.mobile.yunyou.activity.MainSlideActivity"
+            android:screenOrientation="portrait">
 <!--           <intent-filter > -->
 <!--               <action android:name="android.intent.action.MAIN" /> -->
 <!--               <category android:name="android.intent.category.LAUNCHER" /> -->
@@ -126,7 +141,8 @@
                 
         <activity
             android:name="com.mobile.yunyou.activity.WelcomeActivity" 
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait">
 <!--           <intent-filter > -->
 <!--               <action android:name="android.intent.action.MAIN" /> -->
 <!--               <category android:name="android.intent.category.LAUNCHER" /> -->
@@ -136,7 +152,8 @@
         
         <activity
             android:name="com.mobile.yunyou.activity.LoginActivity" 
-            android:theme="@android:style/Theme.NoTitleBar">
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:screenOrientation="portrait">
 <!--             android:windowSoftInputMode="stateVisible"> -->
 		           <intent-filter >
 		               <action android:name="android.intent.action.MAIN" />
@@ -148,7 +165,8 @@
         <activity
             android:name="com.mobile.yunyou.activity.RegisterActivity" 
             android:theme="@android:style/Theme.NoTitleBar"
-            android:windowSoftInputMode="stateVisible">
+            android:windowSoftInputMode="stateVisible"
+            android:screenOrientation="portrait">
             
 <!--             		  <intent-filter > -->
 <!-- 		               	<action android:name="android.intent.action.MAIN" /> -->
@@ -195,7 +213,18 @@
         
         <activity android:name="com.mobile.yunyou.msg.MessageActivity" 
             android:theme="@android:style/Theme.NoTitleBar"
-            android:launchMode="singleTop">
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
+<!--              <intent-filter >  -->
+<!--                  <action android:name="android.intent.action.MAIN" />  -->
+<!--                  <category android:name="android.intent.category.LAUNCHER" />  -->
+<!--              </intent-filter>  -->
+        </activity>  
+        
+        <activity android:name="com.mobile.yunyou.msg.MessageExActivity" 
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait">
 <!--              <intent-filter >  -->
 <!--                  <action android:name="android.intent.action.MAIN" />  -->
 <!--                  <category android:name="android.intent.category.LAUNCHER" />  -->
@@ -222,7 +251,8 @@
 <!--         </activity> -->
         
         <activity android:name="com.mobile.yunyou.set.SettingExActivity" 
-              android:theme="@android:style/Theme.NoTitleBar">
+              android:theme="@android:style/Theme.NoTitleBar"
+              android:screenOrientation="portrait">
             
 <!--                <intent-filter >  -->
 <!--                  <action android:name="android.intent.action.MAIN" />  -->
@@ -242,7 +272,8 @@
         
         
         <activity android:name="com.mobile.yunyou.bike.WarningActivity" 
-     	  android:theme="@android:style/Theme.NoTitleBar">
+     	  android:theme="@android:style/Theme.NoTitleBar"
+     	  android:screenOrientation="portrait">
 <!--              <intent-filter >  -->
 <!--                  <action android:name="android.intent.action.MAIN" />  -->
 <!--                  <category android:name="android.intent.category.LAUNCHER" />  -->
@@ -250,7 +281,8 @@
         </activity>
                  
          <activity android:name="com.mobile.yunyou.bike.RunLRecordActivity" 
-     	  android:theme="@android:style/Theme.NoTitleBar">
+     	  android:theme="@android:style/Theme.NoTitleBar"
+     	  android:screenOrientation="portrait">
              
 <!-- 			<intent-filter >  -->
 <!--                  <action android:name="android.intent.action.MAIN" />  -->
@@ -270,7 +302,8 @@
          </activity>
          
           <activity android:name="com.mobile.yunyou.bike.SafeActivity" 
-     	  android:theme="@android:style/Theme.NoTitleBar">
+     	  android:theme="@android:style/Theme.NoTitleBar"
+     	  android:screenOrientation="portrait">
               
 <!--             <intent-filter >  -->
 <!--                  <action android:name="android.intent.action.MAIN" />  -->
@@ -281,14 +314,17 @@
                   
         
         <activity android:name="com.mobile.yunyou.set.SetPersonActivity" 
-     	  android:theme="@android:style/Theme.NoTitleBar"/>
+     	  android:theme="@android:style/Theme.NoTitleBar"
+     	  android:screenOrientation="portrait"/>
            
          <activity android:name="com.mobile.yunyou.set.SetPersonCommentActivity" 
-     	  android:theme="@android:style/Theme.NoTitleBar"/>
+     	  android:theme="@android:style/Theme.NoTitleBar"
+     	  android:screenOrientation="portrait"/>
                 
                 
         <activity android:name="com.mobile.yunyou.set.SetWarnActivity" 
-			android:theme="@android:style/Theme.NoTitleBar"/>
+			android:theme="@android:style/Theme.NoTitleBar"
+			android:screenOrientation="portrait"/>
         
          <activity android:name="com.mobile.yunyou.set.RechargeActivity" 
 			android:theme="@android:style/Theme.NoTitleBar"/>
@@ -312,11 +348,13 @@
          
          
          <activity android:name="com.mobile.yunyou.set.ChangePwdActivity" 
-             	  android:theme="@android:style/Theme.NoTitleBar"/>
+             	  android:theme="@android:style/Theme.NoTitleBar"
+             	  android:screenOrientation="portrait"/>
          
          
         <activity android:name="com.mobile.yunyou.set.AboutActivity" 
-             	  android:theme="@android:style/Theme.NoTitleBar"/>
+             	  android:theme="@android:style/Theme.NoTitleBar"
+             	  android:screenOrientation="portrait"/>
 
         
         <activity android:name="com.mobile.yunyou.device.KeySettingActivity" 

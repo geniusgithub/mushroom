@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@drawable/act_content_bg">
+
+    <RelativeLayout
+        android:id="@+id/rl_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/title_bar"
+        android:orientation="vertical" >
+
+        <Button
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:background="@drawable/selector_btn_back"
+        android:layout_centerVertical="true">      
+        </Button>
+         <Button 
+             android:id="@+id/btn_go"  
+             android:layout_marginRight="10dp" 
+             android:layout_alignParentRight="true" 
+             android:layout_centerVertical="true" 
+             android:layout_width="wrap_content" 
+             android:layout_height="wrap_content"
+             android:textColor="#ffffff"
+             android:textSize="18sp"
+             android:background="@null"
+             android:text="@string/msgdel_title"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_bottom"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/layout_bg1" >
+        
+        <Button
+        android:id="@+id/btn_send"
+        android:layout_width="60dp"
+        android:layout_height="40dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="10dp"
+        android:layout_centerVertical="true"
+        android:background="@drawable/selector_btn_cancel"
+        android:text="@string/message_btn_send" />
+         
+        
+        <EditText
+        android:id="@+id/et_sendmessage"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_toLeftOf="@id/btn_send"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/edittext1"
+        android:layout_centerVertical="true"
+        android:singleLine="true"
+        android:textSize="18sp"/>
+         
+    </RelativeLayout>
+
+        <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/listview"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/rl_layout"
+        android:layout_above="@id/rl_bottom"
+        android:layout_marginLeft="10.0dip" 
+		android:layout_marginTop="10.0dip" 
+		android:layout_marginRight="10.0dip"
+        android:cacheColorHint="#00000000"
+        android:listSelector="@drawable/selector_friend_item"
+        android:fadingEdge="none"
+        android:fastScrollEnabled="false"
+        android:footerDividersEnabled="false"
+        android:headerDividersEnabled="false"
+        android:smoothScrollbar="true" />
+          
+          
+   <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:layout_below="@id/rl_layout"
+    android:layout_above="@id/rl_bottom">
+         
+	     <ProgressBar 
+		    android:id="@+id/load_progress"
+			android:visibility="gone"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/load_progress"
+            android:layout_centerInParent="true"
+            android:layout_above="@id/tv_progress_tip"
+            android:layout_marginBottom="5dp"/>
+	     
+	   	<Button 
+	   	    android:id="@+id/btn_load" 
+	   	    android:visibility="gone"
+	   	    android:layout_width="wrap_content" 
+	   	    android:layout_height="wrap_content"  
+	   	    android:layout_centerInParent="true"
+	   	    android:textSize="18.0sp" 
+	   	    android:textColor="#ffffff" 
+	   	    android:background="@drawable/selector_btn_ok" 
+	   	    android:text="@string/btn_refresh" />
+
+   </RelativeLayout>
+
+</RelativeLayout>

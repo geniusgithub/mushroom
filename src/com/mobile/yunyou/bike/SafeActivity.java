@@ -68,9 +68,9 @@ public class SafeActivity extends Activity implements OnCameraChangeListener,IRe
 	private UiSettings mUiSettings;		
 	private View mRootView;
 
-	public static final double DOUBLE_STUDEN_LON = 114.1017;
-	public static final double DOUBLE_STUDEN_LAT = 22.6644;
-	public static final LatLng ORIGIN_POSITION = new LatLng(DOUBLE_STUDEN_LAT, DOUBLE_STUDEN_LON);// 北京市中关村经纬度
+//	public static final double DOUBLE_STUDEN_LON = 114.1017;
+//	public static final double DOUBLE_STUDEN_LAT = 22.6644;
+//	public static final LatLng ORIGIN_POSITION = new LatLng(DOUBLE_STUDEN_LAT, DOUBLE_STUDEN_LON);// 北京市中关村经纬度
 	
 	private YunyouApplication mApplication;
 	private NetworkCenterEx mNetworkCenterEx;
@@ -189,7 +189,7 @@ public class SafeActivity extends Activity implements OnCameraChangeListener,IRe
 		mRGRadius = (RadioGroup) findViewById(R.id.rg_radius);
 		mRGRadius.setOnCheckedChangeListener(this);
 		((RadioButton) mRGRadius.getChildAt(0)).toggle();
-		mRadius = 50;
+		mRadius = 100;
 		
 		mZoomInBtn = (ImageView) findViewById(R.id.bt_zoomin_pos);
 		mZoomInBtn.setOnClickListener(this);
@@ -389,30 +389,30 @@ public class SafeActivity extends Activity implements OnCameraChangeListener,IRe
 	
 	public int getZoomByRadius(int radius){
 		switch(radius){
-		case 50:
+		case 100:
 			return 18;
-		case 150:
-			return 17;
 		case 300:
-			return 16;
+			return 17;
+		case 800:
+			return 15;
 		case 1500:
 			return 14;
 		case 3000:
 			return 13;
 		}
 		
-		return 14;
+		return 18;
 	}
 	
 	public int getRadiusByRB(RadioGroup radioGroup){
 		int id = radioGroup.getCheckedRadioButtonId();
 		switch(id){
 			case R.id.rb1:
-				return 50;
+				return 100;
 			case R.id.rb2:
-				return 150;
-			case R.id.rb3:
 				return 300;
+			case R.id.rb3:
+				return 800;
 			case R.id.rb4:
 				return 1500;
 			case R.id.rb5:
@@ -425,13 +425,13 @@ public class SafeActivity extends Activity implements OnCameraChangeListener,IRe
 		
 		int index = 0;
 		switch(radius){
-			case 50:
+			case 100:
 				index = 0;
 				break;
-			case 150:
+			case 300:
 				index = 1;
 				break;
-			case 300:
+			case 800:
 				index = 2;
 				break;
 			case 1500:

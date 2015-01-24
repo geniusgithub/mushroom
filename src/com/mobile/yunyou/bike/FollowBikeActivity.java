@@ -45,6 +45,7 @@ import com.mobile.yunyou.bike.manager.BikeLocationManager;
 import com.mobile.yunyou.bike.manager.SafeAreaManager;
 import com.mobile.yunyou.bike.manager.SelfLocationManager;
 import com.mobile.yunyou.bike.manager.BikeLocationManager.IBikeLocationUpdate;
+import com.mobile.yunyou.bike.manager.SelfLocationManager.ILocationUpdate;
 import com.mobile.yunyou.bike.tmp.NewBikeCenter;
 import com.mobile.yunyou.map.data.LocationEx;
 import com.mobile.yunyou.map.util.WebManager;
@@ -61,14 +62,16 @@ import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 
 public class FollowBikeActivity extends Activity implements OnClickListener,
+															ILocationUpdate,	
 															IBikeLocationUpdate,
 															OnMarkerClickListener,
 															InfoWindowAdapter,
 															OnInfoWindowClickListener{
 
 	private static final CommonLog log = LogFactory.createLog();
-	private static final int MSG_REFRESH_BIKE = 0x0001;
-	private static final int MSG_SHOW_POP = 0x0002;
+	private static final int MSG_REFRESH_SELF = 0x0001;
+	private static final int MSG_REFRESH_BIKE = 0x0002;
+	private static final int MSG_SHOW_POP = 0x0003;
 	
 
 	private Context mContext;
@@ -94,6 +97,11 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 	private BikeLocationManager mBikeLocationManager;
 	private BikeMarket mBikeMarket;
 	private Marker mMarker;
+	
+	private SelfLocationManager mSelfLocationManager;
+	private SelfMarket mSelfMarket;
+	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -121,6 +129,8 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		super.onResume();
 		mMapView.onResume();
 
+		mSelfLocationManager.addObserver(this);
+		mSelfLocationManager.startLocationCheck();
 		
 		if (isFirstResume){
 			mBikeLocationManager.addObserver(this);
@@ -128,7 +138,7 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 			
 			LocationEx locationEx = mBikeLocationManager.getLastLocation();
 			if (locationEx == null){
-				locationEx = SelfLocationManager.getInstance().getLastLocation();
+				locationEx = mSelfLocationManager.getLastLocation();
 			}
 			updateCamarra(13);
 			moveCamara(locationEx);
@@ -148,7 +158,8 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		super.onPause();
 		mMapView.onPause();
 
-
+		mSelfLocationManager.removeObservser(this);
+		mSelfLocationManager.stopLocationCheck();
 	}
 
 	/**
@@ -205,7 +216,7 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		mFocusPosition.setOnClickListener(this);	
 		
 		mBikeMarket = new BikeMarket(R.drawable.point_start, R.drawable.bike_point_on, R.drawable.bike_point_off);
-		
+		mSelfMarket = new SelfMarket(R.drawable.self_pos);	
 		
 	}
 	
@@ -218,6 +229,9 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 			@Override
 			public void handleMessage(Message msg) {
 					switch(msg.what){
+						case MSG_REFRESH_SELF:
+							refreshSelf();
+							break;
 						case MSG_REFRESH_BIKE:
 							refreshBike();
 							break;
@@ -230,6 +244,7 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 			}
 		  };
 		  mBikeLocationManager = BikeLocationManager.getInstance();
+		  mSelfLocationManager = SelfLocationManager.getInstance();
 	}
 
 	private Dialog mDialog = null;
@@ -268,6 +283,49 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		
 	}
 	
+	private void refreshSelf(){
+		boolean isShow = false;
+		if (mMarker != null){
+			isShow = mMarker.isInfoWindowShown();
+		}
+		
+		boolean isNeedUpdate = true;
+		if (mSelfMarket != null){
+			isNeedUpdate = mSelfMarket.isNeedUpdate();
+		}
+		
+		log.e("showView refreshSelf isShow = " + isShow + ", isNeedUpdate = " + isNeedUpdate);
+		if (!isNeedUpdate){
+			return ;
+		}
+		
+		aMap.clear();
+
+		if (mSelfMarket.getLocation() != null){
+			aMap.addMarker(mSelfMarket.newMarkerOptions());
+		}
+		
+		List<PolylineOptions> list = mBikeMarket.getPLineList();
+		int size = list.size();
+		for(int i = 0;i < size; i++){
+			aMap.addPolyline(list.get(i));
+		}
+		if (mBikeMarket.getLastLocation() != null){
+			Marker marker = aMap.addMarker(mBikeMarket.newCurrentMarkerOptions());
+			marker.setTitle("BIKE");
+			mMarker = marker;
+		}
+		
+		
+		
+		if (isShow){
+		//	mHandler.sendEmptyMessage(MSG_SHOW_POP);
+			mMarker.showInfoWindow();
+		}
+		
+	}
+	
+	
 	private void refreshBike(){
 		boolean isShow = false;
 		if (mMarker != null){
@@ -279,7 +337,7 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 			isNeedUpdate = mBikeMarket.isNeedUpdate();
 		}
 		
-		log.e("showView IViewConstant.IVC_BIKE_POS isShow = " + isShow + ", isNeedUpdate = " + isNeedUpdate);
+		log.e("showView refreshBike isShow = " + isShow + ", isNeedUpdate = " + isNeedUpdate);
 		if (!isNeedUpdate){
 			return ;
 		}
@@ -287,6 +345,12 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		
 		
 		aMap.clear();
+		
+		if (mSelfMarket.getLocation() != null){
+			aMap.addMarker(mSelfMarket.newMarkerOptions());
+		}
+		
+		
 		List<PolylineOptions> list = mBikeMarket.getPLineList();
 		int size = list.size();
 		for(int i = 0;i < size; i++){
@@ -397,6 +461,29 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 			}
 		});
 	}
+	
+	
+	@Override
+	public void onLocationUpdate(final LocationEx location) {
+		log.e("onLocationUpdate (" + location.getLatitude() + "," + location.getLongitude() + ")");
+		runOnUiThread(new Runnable() {
+		
+			@Override
+			public void run() {
+	
+				mSelfMarket.setLocation(location);
+				if (mApplication.mIsDebug){
+					Utils.showToast(FollowBikeActivity.this, "provider = " + location.getProvider());
+				}
+	
+				Message msg = mHandler.obtainMessage(MSG_REFRESH_SELF);
+				msg.sendToTarget();
+
+			}
+		});
+	}
+	
+	
 
 	@Override
 	public void onInfoWindowClick(Marker market) {
@@ -429,6 +516,8 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+	
 
 
 

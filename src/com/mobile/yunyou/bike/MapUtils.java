@@ -25,6 +25,14 @@ public class MapUtils {
 		return position.zoom;
 	}
 	
+	public static double getDistanByLatlon(LocationEx location1, LocationEx location2){
+		float results[]  = new float[1];
+		Location.distanceBetween(location1.getOffsetLat(), location1.getOffsetLon(), 
+				location2.getOffsetLat(), location2.getOffsetLon(), results);
+		
+		return  results[0];
+	}
+	
 	public static double getDistanByLatlon(LatLng latLng1, LatLng latLng2){
 		float results[]  = new float[1];
 		Location.distanceBetween(latLng1.latitude, latLng1.longitude, 

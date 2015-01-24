@@ -28,7 +28,7 @@ public class MsgRuestProxy implements IRequestCallback{
 	
 	private static final CommonLog log = LogFactory.createLog();
 	
-	private final static int QUERY_COUNT = 2;
+	private final static int QUERY_COUNT = 20;
 	
 	private NetworkCenterEx mNetworkCenter;
 	private IRequestComplete mIRequestComplete;

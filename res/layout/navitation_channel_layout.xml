@@ -29,17 +29,19 @@
 	         android:layout_centerVertical="true">
                 
                 <TextView
+                android:id="@+id/tv_nickname"                    
                 android:layout_width="wrap_content" 
 	            android:layout_height="wrap_content"
 	            android:textColor="@color/white"
-	            android:text="可乐">                    
+	            android:text="">                    
                 </TextView>
                 
                 <TextView
+                android:id="@+id/tv_curDidtance"               
                 android:layout_width="wrap_content" 
 	            android:layout_height="wrap_content"
 	            android:textColor="@color/white"
-	            android:text="我运动我健康">                    
+	            android:text="当天里程: 0km">                    
                 </TextView>
                 
             </LinearLayout>

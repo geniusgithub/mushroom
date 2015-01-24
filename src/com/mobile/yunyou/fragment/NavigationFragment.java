@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
@@ -20,6 +21,7 @@ import com.mobile.yunyou.bike.SafeActivity;
 import com.mobile.yunyou.bike.tmp.NewBikeExActivity;
 import com.mobile.yunyou.model.GloalType;
 import com.mobile.yunyou.msg.MessageActivity;
+import com.mobile.yunyou.msg.MessageExActivity;
 import com.mobile.yunyou.network.api.HeadFileConfigure;
 import com.mobile.yunyou.set.SetPersonActivity;
 import com.mobile.yunyou.set.SettingExActivity;
@@ -43,6 +45,8 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 	private LinearLayout mLLGoSetting;
 	
 	  private ImageView mHeadImageView;
+	  private TextView mTVNickName;
+	  private TextView mTVDistance;
 	
 	  private YunyouApplication mApplication;
 	public NavigationFragment(){
@@ -103,6 +107,9 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		mLLGoInfo = (LinearLayout) mView.findViewById(R.id.ll_goGoInfo);
 		mLLGoSetting = (LinearLayout) mView.findViewById(R.id.ll_goSetting);
 		
+		mTVNickName = (TextView) mView.findViewById(R.id.tv_nickname);
+		mTVDistance = (TextView) mView.findViewById(R.id.tv_distance);
+		
 		mHeadImageView.setOnClickListener(this);
 		mLLGoLocation.setOnClickListener(this);
 		mLLGoSafe.setOnClickListener(this);
@@ -112,7 +119,10 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		mLLGoInfo.setOnClickListener(this);
 		mLLGoSetting.setOnClickListener(this);
 		
+	
+		
 		mApplication = YunyouApplication.getInstance();
+		mTVNickName.setText(mApplication.getUserInfoEx().mTrueName);
 	}
 
 	@Override
@@ -191,7 +201,7 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 	
 	private void goInfo(){
 		Intent intent = new Intent();
-		intent.setClass(getActivity(), MessageActivity.class);
+		intent.setClass(getActivity(), MessageExActivity.class);
 		startActivity(intent);
 	}
 	

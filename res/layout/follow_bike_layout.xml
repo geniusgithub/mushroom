@@ -45,14 +45,14 @@
             android:layout_height="fill_parent" >
 
                 
-                <ImageView
+	            <ImageView
                 android:id="@+id/bt_focus_pos"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:layout_marginBottom="25dp"
-                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginRight="10dp"
                 android:background="@drawable/map_location_nor"/>
                 
 
@@ -61,10 +61,9 @@
 	            android:id="@+id/bt_zoomout_pos"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:layout_alignParentRight="true"
-	            android:layout_alignParentBottom="true"
-	            android:layout_marginBottom="25dp"
-	            android:layout_marginRight="10dp"
+	            android:layout_above="@id/bt_focus_pos"
+	            android:layout_marginBottom="15dp"
+	    	    android:layout_alignLeft="@id/bt_focus_pos"
 	            android:background="@drawable/selector_zoom_in"/>
                         
                 
@@ -72,9 +71,40 @@
 	            android:id="@+id/bt_zoomin_pos"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
-	            android:layout_above="@id/bt_zoomout_pos"
-	            android:layout_alignLeft="@id/bt_zoomout_pos"
+	            android:layout_above="@id/bt_zoomout_pos"	  
+	            android:layout_alignLeft="@id/bt_focus_pos"
 	            android:background="@drawable/selector_zoom_out"/>
+	           
+<!--                 <ImageView -->
+<!--                 android:id="@+id/bt_focus_pos" -->
+<!--                 android:layout_width="wrap_content" -->
+<!--                 android:layout_height="wrap_content" -->
+<!--                 android:layout_alignParentLeft="true" -->
+<!--                 android:layout_alignParentBottom="true" -->
+<!--                 android:layout_marginBottom="25dp" -->
+<!--                 android:layout_marginLeft="10dp" -->
+<!--                 android:background="@drawable/map_location_nor"/> -->
+                
+
+
+<!-- 	           <ImageView -->
+<!-- 	            android:id="@+id/bt_zoomout_pos" -->
+<!-- 	            android:layout_width="wrap_content" -->
+<!-- 	            android:layout_height="wrap_content" -->
+<!-- 	            android:layout_alignParentRight="true" -->
+<!-- 	            android:layout_alignParentBottom="true" -->
+<!-- 	            android:layout_marginBottom="25dp" -->
+<!-- 	            android:layout_marginRight="10dp" -->
+<!-- 	            android:background="@drawable/selector_zoom_in"/> -->
+                        
+                
+<!-- 	            <ImageView -->
+<!-- 	            android:id="@+id/bt_zoomin_pos" -->
+<!-- 	            android:layout_width="wrap_content" -->
+<!-- 	            android:layout_height="wrap_content" -->
+<!-- 	            android:layout_above="@id/bt_zoomout_pos" -->
+<!-- 	            android:layout_alignLeft="@id/bt_zoomout_pos" -->
+<!-- 	            android:background="@drawable/selector_zoom_out"/> -->
 
 
         	</RelativeLayout>   

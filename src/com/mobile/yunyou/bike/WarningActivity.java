@@ -112,10 +112,11 @@ public class WarningActivity extends Activity implements OnClickListener, IReque
 	private BikeType.BikeAlertWay mAlertWay;
 	private void updateWarnData(BikeType.BikeAlertWay object){
 		mAlertWay = object;
+		mEditTextPhone.setText(mAlertWay.mPhone);
 		mCBRing.setChecked(mAlertWay.mRing);
 		mCBVebe.setChecked(mAlertWay.mVibe);
 		mCBMessage.setChecked(mAlertWay.mMessage);
-		mEditTextPhone.setText(mAlertWay.mPhone);
+
 	}
 
 	

@@ -108,7 +108,7 @@
 						        android:background="@drawable/selector_checkbox"
 						        android:layout_weight="1"
 						        android:gravity="center"
-							    android:text="50m" 
+							    android:text="100m" 
 							    android:textColor="@color/safe_text"
 							    android:button="@null"/>
 							
@@ -119,7 +119,7 @@
 						        android:background="@drawable/selector_checkbox"
 						        android:layout_weight="1"
 						        android:gravity="center"
-							    android:text="150m" 
+							    android:text="300m" 
 							    android:textColor="@color/safe_text"
 							    android:button="@null"/>
 														
@@ -130,7 +130,7 @@
 						        android:layout_weight="1"
 						        android:background="@drawable/selector_checkbox"
 						        android:gravity="center"
-							    android:text="300m" 
+							    android:text="800m" 
 							    android:textColor="@color/safe_text"
 							    android:button="@null"/>
 								
