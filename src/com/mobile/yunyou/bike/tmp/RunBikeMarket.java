@@ -75,10 +75,12 @@ public class RunBikeMarket {
 		mPreLatLng = null;
 		mLatLngList.clear();
 		mPLineList.clear();
-		mFirstLocation = mLastLocation;
+		mFirstLocation = null;
+		mLastLocation = null;
 	//	isRunning = true;
 	//	mBounds = null;
 		mLastPolyline = null;
+		mLastMarket = null;
 	}
 
 	public MarkerOptions newStartMarkerOptions(){

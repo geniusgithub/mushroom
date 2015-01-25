@@ -1,70 +1,87 @@
-package com.mobile.yunyou.bike.tmp;
+package com.mobile.yunyou.fragment;
 
 import java.util.ArrayList;
-
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.view.View;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
-import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
+import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
-import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.maps.model.PolylineOptions;
 import com.mobile.yunyou.R;
+import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.activity.MainSlideActivity;
 import com.mobile.yunyou.bike.MapUtils;
+import com.mobile.yunyou.bike.MoGuActivity;
+import com.mobile.yunyou.bike.SelfMarket;
+import com.mobile.yunyou.bike.manager.CheckUploadManager;
+import com.mobile.yunyou.bike.manager.MapMarketManager;
 import com.mobile.yunyou.bike.manager.RunRecordUploadPoxy;
 import com.mobile.yunyou.bike.manager.SelfLocationManager;
+import com.mobile.yunyou.bike.tmp.NewBikeCenter;
+import com.mobile.yunyou.bike.tmp.NewBikeEntiy;
+import com.mobile.yunyou.bike.tmp.NewBikeExActivity;
+import com.mobile.yunyou.bike.tmp.RunBikeMarket;
 import com.mobile.yunyou.datastore.RunRecordDBManager;
 import com.mobile.yunyou.map.data.LocationEx;
 import com.mobile.yunyou.map.util.StringUtil;
 import com.mobile.yunyou.model.BikeType;
+import com.mobile.yunyou.model.BikeType.BikeGetArea;
+import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.LogFactory;
+import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 import com.mobile.yunyou.util.YunTimeUtils;
 
-public class NewBikeExActivity extends Activity implements OnClickListener, 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.Settings;
+import android.support.v4.app.Fragment;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.PopupWindow;
+import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+
+public class NewBikeFragment  extends Fragment implements OnClickListener, 
 														OnCheckedChangeListener,
 														NewBikeCenter.IStatusCallBack{
+
 	private static final CommonLog log = LogFactory.createLog();
 	public static final int  MSG_UPDATE_VIEW = 0x0001;
 	
+	public MainSlideActivity mActivity;
 	
 	private Context mContext;
 	
 	private AMap aMap;
-	
+	private View mapLayout;
 	private MapView mMapView;								
 	private UiSettings mUiSettings;		
 
-
-//	public static final double DOUBLE_STUDEN_LON = 114.1017;
-//	public static final double DOUBLE_STUDEN_LAT = 22.6644;
-//	public static final LatLng ORIGIN_POSITION = new LatLng(DOUBLE_STUDEN_LAT, DOUBLE_STUDEN_LON);// 北京市中关村经纬度
-//	
 	private Handler mHandler;
 	  
 	  
@@ -95,50 +112,86 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	
 	private BikeType.BikeLRecordResult mCuRecordResult;
 	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.newbikeex_layout);
-		
-		mContext = this;
-		mMapView = (MapView) findViewById(R.id.map);
-		mMapView.onCreate(savedInstanceState);
-		aMap = mMapView.getMap();
-		
-		setupViews();
-		initData();
-		initMap();
-		clearData();
+	private static NewBikeFragment fragment=null;
+	
+	public static NewBikeFragment newInstance(){
+		fragment = new NewBikeFragment();
+		return fragment;
 	}
 	
+    @Override
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
+    	log.e("MainMapFragment onCreateView");
+    	if (mapLayout == null) {
+			mapLayout = inflater.inflate(R.layout.newbikeex_layout, null);
+			mMapView = (MapView) mapLayout.findViewById(R.id.map);
+			mMapView.onCreate(savedInstanceState);
+			if (aMap == null) {
+				aMap = mMapView.getMap();
+			}
+			setupViews(mapLayout);
+    	}else {
+			if (mapLayout.getParent() != null) {
+				((ViewGroup) mapLayout.getParent()).removeView(mapLayout);
+			}
+		}
+		return mapLayout;
+	}
+    
+    @Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onActivityCreated(savedInstanceState);
+
+
+		initData();
+		reset();
+	}
+    
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+
+        mContext = getActivity();
+        mActivity = (MainSlideActivity) activity;
+    }
+    
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		log.e("NewBikeFragment onCreate");
+	}
+
+
 	private boolean isFristResume = true;
 	/**
 	 * 方法必须重写
 	 */
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
 		mMapView.onResume();
 
-		updateCamarra(17);
-		if (isFristResume){
-			  isFristResume = false;
-			  LocationEx locationEx = SelfLocationManager.getInstance().getLastLocation();
-			  if (locationEx != null){
-				  mRunBikeMarket.addLocation(locationEx);
-				  updateNewBikeMapView();
-				  updateCamarra(locationEx);
-			  }
-			  
-			 
-		}
+//		updateCamarra(17);
+//		if (isFristResume){
+//			  isFristResume = false;
+//			  LocationEx locationEx = SelfLocationManager.getInstance().getLastLocation();
+//			  if (locationEx != null){
+////				  mRunBikeMarket.addLocation(locationEx);
+////				  updateNewBikeMapView();
+//				  updateCamarra(locationEx);
+//			  }
+//			  
+//			 
+//		}
 	}
 
 	/**
 	 * 方法必须重写
 	 */
 	@Override
-	protected void onPause() {
+	public void onPause() {
 		super.onPause();
 		mMapView.onPause();
 		
@@ -148,7 +201,7 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	 * 方法必须重写
 	 */
 	@Override
-	protected void onSaveInstanceState(Bundle outState) {
+	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		mMapView.onSaveInstanceState(outState);
 	}
@@ -157,55 +210,52 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	 * 方法必须重写
 	 */
 	@Override
-	protected void onDestroy() {
+	public void onDestroy() {
 		super.onDestroy();
 		
 		mNewBikeCenter.setCallback(null);
 		mMapView.onDestroy();
 	}
 	
-	
-
-	@Override
-	public void onBackPressed() {
-	
+	public boolean onBackPressed() {
+		
 		if (mCBLock.isChecked()){
-			return ;
+			return false;
 		}
 		
 		if (mNewBikeCenter.getRunStatus() != NewBikeCenter.IRunStatus.STOP){
 			showExitDialog(true);
-			return ;
+			return false;
 		}
 		
 		if (isVaildRecordExist){
 			showUploadDialog(true);
-			return ;
+			return false;
 		}
 		
-		super.onBackPressed();
+		return true;
 	}
 
-	private void setupViews(){
+	private void setupViews(View view){
 		mUiSettings = aMap.getUiSettings();
 		mUiSettings.setZoomControlsEnabled(false);
 
-		mTextViewTime = (TextView) findViewById(R.id.tv_timeinterval);
-		mTextViewCurSpeed = (TextView) findViewById(R.id.tv_curspeed);
-		mTextViewDistance = (TextView) findViewById(R.id.tv_distance);
-		mTextViewHSpeed = (TextView) findViewById(R.id.tv_hspeed);
-		mTextViewAverageSpeed = (TextView) findViewById(R.id.tv_averagespeed);
-		mTextViewCal = (TextView) findViewById(R.id.tv_cal);
-		mTextViewHeight = (TextView) findViewById(R.id.tv_height);
+		mTextViewTime = (TextView) view.findViewById(R.id.tv_timeinterval);
+		mTextViewCurSpeed = (TextView) view.findViewById(R.id.tv_curspeed);
+		mTextViewDistance = (TextView) view.findViewById(R.id.tv_distance);
+		mTextViewHSpeed = (TextView) view.findViewById(R.id.tv_hspeed);
+		mTextViewAverageSpeed = (TextView) view.findViewById(R.id.tv_averagespeed);
+		mTextViewCal = (TextView) view.findViewById(R.id.tv_cal);
+		mTextViewHeight = (TextView) view.findViewById(R.id.tv_height);
 		
 	
-    	mBtnBack = (Button) findViewById(R.id.btn_back);
+    	mBtnBack = (Button) view.findViewById(R.id.btn_back);
     	mBtnBack.setOnClickListener(this);
-		mBtnStart = (Button) findViewById(R.id.btn_start);
-		mBtnStop = (Button) findViewById(R.id.btn_stop);
-		mBtnStartYet = (Button) findViewById(R.id.btn_pause); 
-		mBtnStopYet = (Button) findViewById(R.id.btn_stopyet); 
-		mBtnUpload = (Button) findViewById(R.id.btn_upload); 
+		mBtnStart = (Button) view.findViewById(R.id.btn_start);
+		mBtnStop = (Button) view.findViewById(R.id.btn_stop);
+		mBtnStartYet = (Button) view.findViewById(R.id.btn_pause); 
+		mBtnStopYet = (Button) view.findViewById(R.id.btn_stopyet); 
+		mBtnUpload = (Button) view.findViewById(R.id.btn_upload); 
 		mBtnStartYet.setEnabled(false);
 		mBtnStopYet.setEnabled(false);
 		
@@ -216,9 +266,9 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 		mBtnStop.setEnabled(false);
 
 		
-		mLockView = findViewById(R.id.rl_lock);
+		mLockView = view.findViewById(R.id.rl_lock);
 		mLockView.setOnClickListener(this);
-		mCBLock = (CheckBox) findViewById(R.id.cb_lock);
+		mCBLock = (CheckBox) view.findViewById(R.id.cb_lock);
 		mCBLock.setChecked(false);
 		mCBLock.setOnCheckedChangeListener(this);
 		
@@ -226,6 +276,26 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 		
 		showButtonType(VIEW_START);
 		
+	}
+	
+	public void reset(){
+		showButtonType(VIEW_START);
+		clearData();
+		isVaildRecordExist = false;
+	
+		aMap.clear();
+		initMap();
+		
+		mRunBikeMarket.reset();
+	}
+	
+	public void centerSelf(){
+		updateCamarra(17);
+		  LocationEx locationEx = SelfLocationManager.getInstance().getLastLocation();
+		  if (locationEx != null){
+			  mSelfMarket.setPosition(new LatLng(locationEx.getOffsetLat(), locationEx.getOffsetLon()));
+			  updateCamarra(locationEx);
+		  }
 	}
 	
 	private Dialog mDialog = null;
@@ -257,62 +327,12 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 
 		if (bShow)
 		{
-			mDialog = DialogFactory.creatSelectDialog(NewBikeExActivity.this, R.string.dialog_title_exitRun, R.string.dialog_msg_exitRun,
+			mDialog = DialogFactory.creatSelectDialog(mContext, R.string.dialog_title_exitRun, R.string.dialog_msg_exitRun,
 									R.string.newbike_btn_complete, R.string.newbike_btn_drop, R.string.newbike_btn_continue, listener);
 			mDialog.show();
 		}
 	
 	}
-	
-//	private Dialog mSaveDialog = null;
-//	private void showSaveDialog(boolean bShow)
-//	{
-//		if (mSaveDialog != null)
-//		{
-//			mSaveDialog.dismiss();
-//			mSaveDialog = null;
-//		}
-//		
-//		DialogFactory.ISelectComplete onListener = new DialogFactory.ISelectComplete() {
-//
-//			@Override
-//			public void onSelectComplete(boolean flag) {
-//
-//				if (flag){
-//					BikeType.RunRecordGroup group = mNewBikeCenter.newRunRecord();
-//					log.e("mTotalDistance = " + group.mTotalDistance + ", mRunRecordList.size = " + group.mRunRecordList.size());
-//					if (group.mTotalDistance == 0 || group.mRunRecordList.size() < 2){
-//						
-//						Utils.showToast(NewBikeExActivity.this, R.string.toask_unsave_record);
-//					}else{
-//						boolean ret = false;
-//						try {
-//							ret = mRunRecordDBManager.insert(group);
-//						} catch (Exception e) {
-//							e.printStackTrace();
-//						}
-//						if (ret){
-//							Utils.showToast(NewBikeExActivity.this, R.string.toask_saveRecord_success);
-//						}else{
-//							Utils.showToast(NewBikeExActivity.this, R.string.toask_saveRecord_fail);
-//						}
-//					}	
-//				}
-//					
-//				
-//				finish();
-//			}
-//
-//		};
-//
-//		if (bShow)
-//		{
-//			mSaveDialog = DialogFactory.creatSelectDialog(this, R.string.dialog_title_saveRun, R.string.dialog_msg_saveRun, 
-//												R.string.btn_save, R.string.btn_drop, onListener);
-//			mSaveDialog.show();
-//		}
-//	
-//	}
 	
 	private Dialog mTipDialog = null;
 	private void showTipDialog(boolean bShow)
@@ -327,7 +347,8 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 				
 				@Override
 				public void onClick(View v) {
-					finish();
+					mNewBikeCenter.stopRunning();
+					finishSelf();
 				}
 			};
 
@@ -357,7 +378,7 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 				if (flag){
 					uploadRuning();
 				}else{
-					finish();
+					finishSelf();
 				}
 			}
 			
@@ -366,7 +387,7 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 		
 		if (bShow)
 		{
-			mDialog = DialogFactory.creatSelectDialog(NewBikeExActivity.this, R.string.dialog_title_uploadrecord, R.string.dialog_msg_uploadrecord,
+			mDialog = DialogFactory.creatSelectDialog(mContext, R.string.dialog_title_uploadrecord, R.string.dialog_msg_uploadrecord,
 									R.string.newbike_btn_upload, R.string.newbike_btn_dropupload,  listener);
 			mDialog.show();
 		}
@@ -374,7 +395,7 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	}
 	
 	private void initData(){
-		mNewBikeCenter = new NewBikeCenter(this);
+		mNewBikeCenter = new NewBikeCenter(mContext);
 
 		  mHandler = new Handler(){
 
@@ -406,6 +427,10 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point5));
 		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point6));
 		mSelfMarket = aMap.addMarker(new MarkerOptions().anchor(0.5f, 0.5f).icons(giflist).period(50));
+		  LocationEx locationEx = SelfLocationManager.getInstance().getLastLocation();
+		  if (locationEx != null){
+			  mSelfMarket.setPosition(new LatLng(locationEx.getOffsetLat(), locationEx.getOffsetLon()));
+		  }
 	}
 	
 	
@@ -452,14 +477,14 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	@Override
 	public void onCheckedChanged(CompoundButton arg0, boolean flag) {
 		if (flag){
-			Toast.makeText(this, "lock", Toast.LENGTH_SHORT).show();
+			Toast.makeText(mContext, "lock", Toast.LENGTH_SHORT).show();
 			
 			mBtnStart.setEnabled(false);
 			mBtnUpload.setEnabled(false);
 			mBtnStop.setEnabled(false);
 	
 		}else{
-			Toast.makeText(this, "unlock", Toast.LENGTH_SHORT).show();
+			Toast.makeText(mContext, "unlock", Toast.LENGTH_SHORT).show();
 			
 			mBtnStart.setEnabled(true);
 			mBtnUpload.setEnabled(true);
@@ -490,26 +515,13 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 		}else{
 			isVaildRecordExist = true;
 		}
-//		else{
-//			boolean ret = false;
-//			try {
-//				ret = mRunRecordDBManager.insert(group);
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			}
-//			if (!ret){
-//				Utils.showToast(this, R.string.toask_saveRecord_fail);
-//			}else{
-//				mCuRecordResult = group;
-//			}
-//		}	
 
 	}
 	
 	private void dropRunning(){
+		mNewBikeCenter.stopRunning();
 		log.e("dropRunning");
-		
-		finish();
+		finishSelf();
 	}
 	
 	private void continueRunning(){
@@ -517,7 +529,7 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 	}
 	
 	private void uploadRuning(){
-		Utils.showToast(this, "上传中...");
+		Utils.showToast(mContext, "上传中...");
 
 		
 		BikeType.BikeLRecordResult group = mNewBikeCenter.newLocalBikeRecord();
@@ -528,16 +540,15 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 			e.printStackTrace();
 		}
 		if (!ret){
-			Utils.showToast(this, R.string.toask_saveRecord_fail);
+			Utils.showToast(mContext, R.string.toask_saveRecord_fail);
 		}else{
 			mCuRecordResult = group;
 		}
 		
 		BikeType.BikeRecordUpload object = mNewBikeCenter.newBikeRecord();
-		RunRecordUploadPoxy.getInstance().requestUpload(object);
-		RunRecordUploadPoxy.getInstance().attachCurRecord(mCuRecordResult);
-		
-		finish();
+		CheckUploadManager.getInstance().addRecord(group);
+		CheckUploadManager.getInstance().attemptToUpload();
+		finishSelf();
 	}
 	
 	@Override
@@ -551,6 +562,8 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 				break;
 			case R.id.btn_start:
 					mRunBikeMarket.reset();
+//					LocationEx locationEx = SelfLocationManager.getInstance().getLastLocation();
+//					mRunBikeMarket.addLocation(locationEx);
 					mNewBikeCenter.startRunning();
 					showButtonType(VIEW_PAUSE);
 					mBtnStop.setEnabled(true);
@@ -675,38 +688,12 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 			aMap.addPolyline(polylineOptions);
 		}
 		
-//		aMap.clear();
-//			
-//		List<PolylineOptions> list = mRunBikeMarket.getPLineList();
-//		int size = list.size();
-//		for(int i = 0;i < size; i++){
-//			aMap.addPolyline(list.get(i));
-//		}
-//		
-//		MarkerOptions option = mRunBikeMarket.newStartMarkerOptions();
-//		if (option != null){
-//			aMap.addMarker(option);
-//		}
 
 	}
 	
-	
-//	private void updateStatus(){
-//		String textString = getResources().getString(R.string.newbike_text_status_stop);
-//		switch(mNewBikeCenter.getRunStatus()){
-//				case NewBikeCenter.IRunStatus.STOP:
-//					 textString = getResources().getString(R.string.newbike_text_status_stop);
-//					break;
-//				case NewBikeCenter.IRunStatus.RUNNING:
-//					 textString = getResources().getString(R.string.newbike_text_status_run);
-//					break;
-//				case NewBikeCenter.IRunStatus.PAUSE:
-//					 textString = getResources().getString(R.string.newbike_text_status_pause);
-//					break;
-//		}
-//		
-//
-//	}
-	
-	
+	public void finishSelf(){
+		reset();
+		mActivity.onFinish();
+	}
+
 }

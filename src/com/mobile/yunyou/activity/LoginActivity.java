@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.bike.manager.CheckUploadManager;
 import com.mobile.yunyou.datastore.YunyouSharePreference;
 import com.mobile.yunyou.model.GloalType;
 import com.mobile.yunyou.model.PublicType;
@@ -141,9 +142,11 @@ public class LoginActivity extends Activity implements OnClickListener, IRequest
 
     	Intent intent = new Intent();
     	//intent.setClass(this, MainActivity.class);
-    	intent.setClass(this, MainExActivity.class);
+    	intent.setClass(this, MainSlideActivity.class);
     	startActivity(intent);
     	finish();
+    	
+    	CheckUploadManager.getInstance().reCheckUpload();
     }
     
 	private void goMsgDelActivity()

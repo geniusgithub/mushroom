@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/common_dialog_title_tv"
+        style="@style/common_dialog_title_style"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="12dp"
+        android:text="" />
+
+    <TextView
+        android:id="@+id/common_dialog_msg_tv"
+        style="@style/common_dialog_message_style"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginBottom="24dp" />
+
+  <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+       	android:layout_marginLeft="15dp"
+       	android:layout_marginRight="15dp"
+       	android:layout_marginBottom="10dp">
+        
+         <TextView
+            android:id="@+id/three_dialog_1"
+   			android:background="@drawable/selector_btn_cancel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp"
+            android:textColor="#444444"
+            android:text="@string/newbike_btn_complete"
+            android:gravity="center"/>
+   
+        <TextView
+            android:id="@+id/three_dialog_2"
+   			android:background="@drawable/selector_btn_cancel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp"
+            android:textColor="#444444"
+            android:text="@string/newbike_btn_drop"
+            android:gravity="center"/>
+        
+          <TextView
+            android:id="@+id/three_dialog_3"
+   			android:background="@drawable/selector_btn_cancel"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:textSize="18sp"
+            android:textColor="#444444"
+            android:text="@string/newbike_btn_continue"
+            android:gravity="center"/>
+
+
+    </LinearLayout>
+
+</LinearLayout>

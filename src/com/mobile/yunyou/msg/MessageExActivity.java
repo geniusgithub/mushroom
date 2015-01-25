@@ -48,6 +48,7 @@ public class MessageExActivity extends Activity implements OnClickListener,
 	
 	private ProgressBar mLoadProgressBar;
 	//private Button mBtnRefresh;
+	private View mRLNoMessage;
 	
 	private Button mBtnSend;
 	private Button mBtnBack;
@@ -107,6 +108,7 @@ public class MessageExActivity extends Activity implements OnClickListener,
 		mLoadProgressBar = (ProgressBar) findViewById(R.id.load_progress);
 		//mBtnRefresh = (Button) findViewById(R.id.btn_load);
 		//mBtnRefresh.setOnClickListener(this);
+		mRLNoMessage = findViewById(R.id.rl_nomessage);
     	mListView = (PullToRefreshListView) findViewById(R.id.listview);
     	mListView.setMode(Mode.BOTH);
     	ILoadingLayout startLabels = mListView.getLoadingLayoutProxy(true, false);    
@@ -163,7 +165,7 @@ public class MessageExActivity extends Activity implements OnClickListener,
 		if (isExitLocalMsg() == false)
 		{
 		//	mListView.removeFootView();
-			mListView.setVisibility(View.GONE);
+		//	mListView.setVisibility(View.GONE);
 		//	mBtnRefresh.setVisibility(View.VISIBLE);
 		}
 		
@@ -184,6 +186,7 @@ public class MessageExActivity extends Activity implements OnClickListener,
 	
 			//	mBtnRefresh.setVisibility(View.GONE);
 				mLoadProgressBar.setVisibility(View.VISIBLE);
+				mRLNoMessage.setVisibility(View.GONE);
     }
 
 	@Override
@@ -409,9 +412,10 @@ public class MessageExActivity extends Activity implements OnClickListener,
     	mAdapter.setData(mDataArrays);
 		if (isExitLocalMsg() == false)
 		{
-			mListView.setVisibility(View.GONE);
+//			mListView.setVisibility(View.GONE);
 //			mBtnRefresh.setVisibility(View.VISIBLE);
 //			Utils.showToast(this, "您还没有任何消息");
+			mRLNoMessage.setVisibility(View.VISIBLE);
 		}
 
 	}
@@ -422,6 +426,8 @@ public class MessageExActivity extends Activity implements OnClickListener,
 	@Override
 	public void onGetResult(boolean success) {
 		
+		mListView.onRefreshComplete();
+		
 		if (!success)
 		{
 			Utils.showToast(this, R.string.request_data_fail);
@@ -429,9 +435,11 @@ public class MessageExActivity extends Activity implements OnClickListener,
 			{
 			//	mBtnRefresh.setVisibility(View.VISIBLE);
 				mLoadProgressBar.setVisibility(View.GONE);
+				mRLNoMessage.setVisibility(View.VISIBLE);
 			//	Utils.showToast(this, "您还没有任何消息");
 			}else{
 				mListView.onRefreshComplete();
+				mRLNoMessage.setVisibility(View.GONE);
 			}			
 			
 			return ;
@@ -448,14 +456,17 @@ public class MessageExActivity extends Activity implements OnClickListener,
 			{
 			//	mBtnRefresh.setVisibility(View.VISIBLE);
 				mLoadProgressBar.setVisibility(View.GONE);
-				Utils.showToast(this, "您还没有任何消息");
+				mRLNoMessage.setVisibility(View.VISIBLE);
 			}else{
 				mListView.onRefreshComplete();
+				mRLNoMessage.setVisibility(View.GONE);
 			}
 			
 			mApplication.setUnreadCount(0);		
 			return ;
 		}
+		
+		mRLNoMessage.setVisibility(View.GONE);
 	
 		mDataArrays.clear();
 		for(int i = 0; i < size; i++)
@@ -470,7 +481,8 @@ public class MessageExActivity extends Activity implements OnClickListener,
 		//mBtnRefresh.setVisibility(View.GONE);
 		mLoadProgressBar.setVisibility(View.GONE);
 		mListView.setVisibility(View.VISIBLE);
-		mListView.onRefreshComplete();
+
+
 	
 	//	mMsgManager.insertMsg(dataList);
 		

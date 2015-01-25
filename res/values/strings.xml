@@ -65,6 +65,12 @@
      	<string name="newbike_text_status_run">骑行记录中...</string>  
      	<string name="newbike_text_status_pause">骑行暂停中...</string> 
      	<string name="newbike_text_status_stop">未开始骑行...</string>  
+     	<string name="newbike_btn_complete">结束骑行</string> 
+     	<string name="newbike_btn_drop">放弃骑行</string>  
+     	<string name="newbike_btn_continue">继续骑行</string> 
+
+     	<string name="newbike_btn_upload">立即上传</string>  
+     	<string name="newbike_btn_dropupload">放弃上传</string> 
      	
      	<string name="bikerecord_text_title">历史记录</string>  
      	<string name="bikerecord_text_noRecord">当前无骑行轨迹</string>  
@@ -138,8 +144,12 @@
         
         <string name="dialog_title_exitFollow">是否退出跟踪</string>
         <string name="dialog_msg_exitFollow">您确定要退出跟踪吗?</string> 
-        <string name="dialog_title_exitRun">是否放弃当前骑行</string>
-        <string name="dialog_msg_exitRun">您确定要放弃骑行吗?</string> 
+<!--         <string name="dialog_title_exitRun">是否放弃当前骑行</string> -->
+<!--         <string name="dialog_msg_exitRun">您确定要放弃骑行吗?</string>  -->
+        <string name="dialog_title_exitRun">骑行中</string>
+        <string name="dialog_msg_exitRun">你还在骑行中，是否结束本次骑行?</string> 
+        <string name="dialog_title_uploadrecord">轨迹上传</string>
+        <string name="dialog_msg_uploadrecord">你的骑行记录还未上传，是否立即上传?)</string> 
         <string name="dialog_title_saveRun">是否保存当前骑行</string>
         <string name="dialog_msg_saveRun">是否保存当前骑行?</string> 
         <string name="dialog_title_invalidrecord">骑行记录</string>
@@ -201,8 +211,11 @@
               
         <string name="message_text_title">消息</string>
         <string name="message_btn_send">发送</string>
+        <string name="message_btn_edit">编辑</string>
         <string name="msgdel_title">删除消息</string>
-        
+        <string name="msgdel_nomessage">您还没有任何消息</string>
+              
+              
         <string name="warn_text_tip">友情提示：短信告警需要填写个人手机号码</string>  
         <string name="warn_text_phone">手机号码</string>  
         <string name="warn_text_way">告警方式</string>

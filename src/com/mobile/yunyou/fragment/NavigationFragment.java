@@ -172,9 +172,14 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 	}
 	
 	private void goNewRun(){
-		Intent intent = new Intent();
-		intent.setClass(getActivity(), NewBikeExActivity.class);
-		startActivity(intent);
+//		Intent intent = new Intent();
+//		intent.setClass(getActivity(), NewBikeExActivity.class);
+//		startActivity(intent);
+		FragmentActivity activity = getActivity();
+		if (activity instanceof MainSlideActivity){
+			MainSlideActivity mainSlideActivity = (MainSlideActivity) activity;
+			mainSlideActivity.goNewBike();
+		}
 	}
 	
 	private void goRunRecord(){

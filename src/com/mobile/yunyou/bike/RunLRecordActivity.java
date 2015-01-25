@@ -22,6 +22,7 @@ import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.bike.manager.RunRecordQueryProxy;
 import com.mobile.yunyou.bike.manager.RunRecordSubManager;
+import com.mobile.yunyou.bike.manager.CheckUploadManager.IDelObser;
 import com.mobile.yunyou.datastore.RunRecordDBManager;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.BikeType.BikeLRecordResult;
@@ -42,7 +43,8 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 															OnItemClickListener,
 															RunRecordSubManager.IBikeSubRecordResult,
 															RefreshListView.IOnRefreshListener,
-															RefreshListView.IOnLoadMoreListener{
+															RefreshListView.IOnLoadMoreListener,
+															IDelObser{
 
 	private static final CommonLog log = LogFactory.createLog();
 	
@@ -54,6 +56,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	private View mRootView;
 	private ProgressBar mLoadProgressBar;
 	private Button mBtnRefresh;
+	private Button mBtnDel;
 	
 	private TextView mTVDistance;
 	private TextView mTVCal;
@@ -114,6 +117,9 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 		mLoadProgressBar = (ProgressBar) findViewById(R.id.load_progress);
 		mBtnRefresh = (Button) findViewById(R.id.btn_load);
 		mBtnRefresh.setOnClickListener(this);
+		mBtnDel = (Button) findViewById(R.id.btn_del);
+		mBtnDel.setOnClickListener(this);
+
 		
 		mTVDistance = (TextView) findViewById(R.id.tv_distance);
 		mTVCal = (TextView) findViewById(R.id.tv_cal);
@@ -163,6 +169,10 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 					}
 					  
 				  };
+				  
+					if (!mApplication.mIsDebug){
+						mBtnDel.setVisibility(View.GONE);
+					}
 	}
 
 	private void calData(List<BikeLRecordResult> list){
@@ -262,6 +272,11 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 		switch(v.getId()){
 		case R.id.btn_load:
 			RequestFromServer();
+			break;
+		case R.id.btn_del:
+			boolean ret = mRecordDBManager.deleteAll();
+			Utils.showToast(this, "delete record from Database ret = " + ret);
+			initNetworkList(mNetworkBikeRecordResultList);
 			break;
 		}
 	}
@@ -499,5 +514,21 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 			intent.setClass(RunLRecordActivity.this, RecordMapActivity.class);
 			startActivity(intent);
 	
+	}
+
+	@Override
+	public void onDelRecord(BikeLRecordResult object) {
+		int size = mLocalBikeRecordResultList.size();
+		for(int i = 0; i < size; i++){
+			BikeLRecordResult result = mLocalBikeRecordResultList.get(i);
+			if (result.mStartTime.equals(object.mStartTime)){
+				log.e("find it!!! startTime = "  + object.mStartTime);
+				mLocalBikeRecordResultList.remove(result);
+				mBikeRecordResultList = mergeList(mLocalBikeRecordResultList, mNetworkBikeRecordResultList);
+				mAdapter.setData(mBikeRecordResultList);				
+				calData(mBikeRecordResultList);
+				continue;
+			}
+		}
 	}
 }
