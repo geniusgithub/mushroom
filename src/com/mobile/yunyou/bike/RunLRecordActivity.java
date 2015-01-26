@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.bike.manager.CheckUploadManager;
 import com.mobile.yunyou.bike.manager.RunRecordQueryProxy;
 import com.mobile.yunyou.bike.manager.RunRecordSubManager;
 import com.mobile.yunyou.bike.manager.CheckUploadManager.IDelObser;
@@ -109,6 +110,14 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 
 
 
+	@Override
+	protected void onDestroy() {
+		CheckUploadManager.getInstance().setDelListener(null);
+		super.onDestroy();
+	}
+
+
+
 	private void setupViews(){
 		mRootView = findViewById(R.id.rootView);
 	
@@ -157,22 +166,25 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 			
 			clearData();
 			
-			  mHandler = new Handler(){
+		  mHandler = new Handler(){
 
-					@Override
-					public void handleMessage(Message msg) {
-						switch(msg.what){
-						case MSG_GET_NETWORK:
-							RequestFromServer();
-							break;
-						}
+				@Override
+				public void handleMessage(Message msg) {
+					switch(msg.what){
+					case MSG_GET_NETWORK:
+						RequestFromServer();
+						break;
 					}
-					  
-				  };
+				}
 				  
-					if (!mApplication.mIsDebug){
-						mBtnDel.setVisibility(View.GONE);
-					}
+			  };
+				  
+			if (!mApplication.mIsDebug){
+				mBtnDel.setVisibility(View.GONE);
+			}
+			
+			CheckUploadManager.getInstance().setDelListener(this);
+			
 	}
 
 	private void calData(List<BikeLRecordResult> list){

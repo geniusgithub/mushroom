@@ -47,7 +47,7 @@ public class YunyouApplication extends Application{
 	
 	private boolean mIsLogin = false;
 	
-	public boolean mIsDebug = false;
+	public boolean mIsDebug = true;
 	
 	private Handler mHandler;
 	
@@ -175,17 +175,17 @@ public class YunyouApplication extends Application{
 
 	public void  downLoadHeadProfile(){
 		int size = mDeviceList.size();
-		for(int i = 0; i < size; i++){
-			mNetworkCenter.requestHeadFileDown(mDeviceList.get(i), new AbstractTaskCallback() {
-				
-				@Override
-				public void downLoadComplete(boolean isSuccess) {
-					
-					log.e("saveUri = " + getSaveUri() + ", isSuccess = " + isSuccess);
-					
-				}
-			});
-		}
+//		for(int i = 0; i < size; i++){
+//			mNetworkCenter.requestHeadFileDown(mDeviceList.get(i), new AbstractTaskCallback() {
+//				
+//				@Override
+//				public void downLoadComplete(boolean isSuccess) {
+//					
+//					log.e("saveUri = " + getSaveUri() + ", isSuccess = " + isSuccess);
+//					
+//				}
+//			});
+//		}
 		
 		if (mUserInfoEx.mType == 0){
 			log.e("ready to downLoad userInfoEx's head...");

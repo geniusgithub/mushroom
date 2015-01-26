@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:zhy="http://schemas.android.com/apk/res/com.mobile.yunyou"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" 
@@ -12,13 +13,15 @@
    		android:layout_height="wrap_content"
    		android:padding="10dp">
    		
-        	<ImageView
+            <com.mobile.yunyou.widget.CustomImageView
         	android:id="@+id/iv_head"
-        	android:layout_width="wrap_content"
-    		android:layout_height="wrap_content"
-    		android:src="@drawable/head_icon"
+        	android:layout_width="@dimen/headincon_width"
+    		android:layout_height="@dimen/headincon_width"
+    		android:layout_marginLeft="12.0dip" 
+   			zhy:src="@drawable/head_icon"
+            zhy:type="circle"
     		android:layout_centerVertical="true">
-        	</ImageView>
+        	</com.mobile.yunyou.widget.CustomImageView>
     		
             <LinearLayout 
 	         android:orientation="vertical" 

@@ -71,8 +71,11 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 	protected void onResume() {
 		super.onResume();
 		
-		mSelfLocationManager.addObserver(this);
-		mSelfLocationManager.startLocationCheck();
+		if (!mApplication.mIsDebug){
+			mSelfLocationManager.addObserver(this);
+			mSelfLocationManager.startLocationCheck();
+		}
+
 	}
 
 	/**
@@ -82,8 +85,11 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 	protected void onPause() {
 		super.onPause();
 
-		mSelfLocationManager.removeObservser(this);
-		mSelfLocationManager.stopLocationCheck();
+		if (!mApplication.mIsDebug){
+			mSelfLocationManager.removeObservser(this);
+			mSelfLocationManager.stopLocationCheck();
+		}
+
 	}
 	
 	private void setupViews(){

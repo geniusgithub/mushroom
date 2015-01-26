@@ -5,6 +5,8 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -12,6 +14,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -24,11 +27,15 @@ import com.mobile.yunyou.model.PublicType;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
+import com.mobile.yunyou.network.api.HeadFileConfigure;
 import com.mobile.yunyou.set.SetPersonCommentActivity.IViewMode;
+import com.mobile.yunyou.util.BitmapUtils;
 import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.FileManager;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
+import com.mobile.yunyou.widget.CustomImageView;
 
 public class SetPersonActivity extends Activity implements OnClickListener, IRequestCallback{
 
@@ -60,7 +67,7 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 	private String mPhoneString;
 	private String mSexString;
 	private String mBirthdayString;
-	
+	private CustomImageView mHeadImageView;
 	
 	private SingleChoicePopWindow mSingleChoicePopWindow;
 	private String[] mSexArrays = null;
@@ -94,6 +101,8 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 			mHandler.sendEmptyMessageDelayed(MSG_GET_INFO, 200);
 			
 		}
+		
+		updateHead();
 	}
 
 	private void initView()
@@ -103,6 +112,8 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 		
 		mBtnBack = (Button) findViewById(R.id.btn_back);
 		mBtnBack.setOnClickListener(this);
+		
+		mHeadImageView = (CustomImageView) findViewById(R.id.iv_head);
 		
 		mRootView = findViewById(R.id.rootView);
 		mEmailView = findViewById(R.id.ll_emailset);
@@ -505,6 +516,42 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 	}
 	
 	
-	
+	 private boolean loadHead = false;
+		public void updateHead(){
+			
+			GloalType.UserInfoEx userInfoEx = mApplication.getUserInfoEx();
+			int type = userInfoEx.mType;
+			
+			switch(type){
+			case 0:
+				if (!loadHead){
+					String uri = HeadFileConfigure.getAccountUri(mApplication.getUserInfoEx().mSid);
+					String filePath = FileManager.getSavePath(uri);
+					Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+					if (bitmap != null){
+						mHeadImageView.setImageBitmap(bitmap);
+						loadHead = true;
+					}else{
+						log.e("can't find the bitmap from filePath:" + filePath);
+					}
+				}
+				break;
+			case 1:
+				if (!loadHead){
+//					String uri = HeadFileConfigure.getRequestUri(mApplication.getCurDid());
+//					String filePath = FileManager.getSavePath(uri);
+//					Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+//					if (bitmap != null){
+//						mHeadImageView.setImageBitmap(bitmap);
+//						loadHead = true;
+//					}else{
+//						log.e("can't find the bitmap from filePath:" + filePath);
+//					}
+				}	
+				break;
+			}
+		
+			
+		}
 	
 }

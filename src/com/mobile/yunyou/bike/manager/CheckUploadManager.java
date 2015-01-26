@@ -243,7 +243,6 @@ public class CheckUploadManager implements IRequestCallback{
 			uploadIndex++;
 			attachCurRecord(null);
 			mHandler.sendEmptyMessageAtTime(MSG_STARTUPLOAD, DELAY_TIME);
-			startUpload(uploadIndex);
 			return ;
 		}
 		

@@ -24,10 +24,12 @@ import com.mobile.yunyou.msg.MessageExActivity;
 import com.mobile.yunyou.network.api.HeadFileConfigure;
 import com.mobile.yunyou.set.SetPersonActivity;
 import com.mobile.yunyou.set.SettingExActivity;
+import com.mobile.yunyou.util.BitmapUtils;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.FileManager;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.Utils;
+import com.mobile.yunyou.widget.CustomImageView;
 
 public class NavigationFragment extends Fragment implements OnClickListener{
 
@@ -43,7 +45,7 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 	private LinearLayout mLLGoInfo;
 	private LinearLayout mLLGoSetting;
 	
-	  private ImageView mHeadImageView;
+	  private CustomImageView mHeadImageView;
 	  private TextView mTVNickName;
 	  private TextView mTVDistance;
 	
@@ -97,7 +99,7 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 
 	private void setupViews(){
 		
-		mHeadImageView =  (ImageView) mView.findViewById(R.id.iv_head);
+		mHeadImageView =  (CustomImageView) mView.findViewById(R.id.iv_head);
 		mLLGoLocation = (LinearLayout) mView.findViewById(R.id.ll_goLocation);
 		mLLGoSafe = (LinearLayout) mView.findViewById(R.id.ll_goSafe);
 		mLLGoNewRun = (LinearLayout) mView.findViewById(R.id.ll_goNewRun);
@@ -221,7 +223,7 @@ public class NavigationFragment extends Fragment implements OnClickListener{
     	startActivity(intent);
 	}
 	
-	  private boolean loadHead = false;
+    private boolean loadHead = false;
 	public void updateHead(){
 		
 		GloalType.UserInfoEx userInfoEx = mApplication.getUserInfoEx();
@@ -243,15 +245,22 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 			break;
 		case 1:
 			if (!loadHead){
-				String uri = HeadFileConfigure.getRequestUri(mApplication.getCurDid());
-				String filePath = FileManager.getSavePath(uri);
-				Bitmap bitmap = BitmapFactory.decodeFile(filePath);
-				if (bitmap != null){
-					mHeadImageView.setImageBitmap(bitmap);
-					loadHead = true;
-				}else{
-					log.e("can't find the bitmap from filePath:" + filePath);
-				}
+//				String uri = HeadFileConfigure.getRequestUri(mApplication.getCurDid());
+//				String filePath = FileManager.getSavePath(uri);
+//				Bitmap bitmap = BitmapFactory.decodeFile(filePath);
+//				if (bitmap != null){
+//					Bitmap bitmap2 = BitmapUtils.getRoundedCornerBitmap(bitmap);
+//					if (bitmap2 != null){
+//						mHeadImageView.setImageBitmap(bitmap2);
+//					}else{
+//						mHeadImageView.setImageBitmap(bitmap);
+//					}
+//
+//					mHeadImageView.setImageBitmap(bitmap);
+//					loadHead = true;
+//				}else{
+//					log.e("can't find the bitmap from filePath:" + filePath);
+//				}
 			}	
 			break;
 		}
