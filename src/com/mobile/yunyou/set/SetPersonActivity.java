@@ -1,15 +1,24 @@
 package com.mobile.yunyou.set;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -20,6 +29,7 @@ import android.widget.TextView;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.bike.tmp.NewBikeExActivity;
 import com.mobile.yunyou.custom.SingleChoicePopWindow;
 import com.mobile.yunyou.device.DeviceIntentConstant;
 import com.mobile.yunyou.model.GloalType;
@@ -31,14 +41,18 @@ import com.mobile.yunyou.network.api.HeadFileConfigure;
 import com.mobile.yunyou.set.SetPersonCommentActivity.IViewMode;
 import com.mobile.yunyou.util.BitmapUtils;
 import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.FileManager;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 import com.mobile.yunyou.widget.CustomImageView;
 
+@SuppressLint("NewApi")
 public class SetPersonActivity extends Activity implements OnClickListener, IRequestCallback{
 
+
+	
 	private static final CommonLog log = LogFactory.createLog();
 	
 
@@ -89,6 +103,7 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
        
        initData();
       
+   	updateHead();
     }
 	
 	@Override
@@ -102,7 +117,7 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 			
 		}
 		
-		updateHead();
+	
 	}
 
 	private void initView()
@@ -114,6 +129,7 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 		mBtnBack.setOnClickListener(this);
 		
 		mHeadImageView = (CustomImageView) findViewById(R.id.iv_head);
+		mHeadImageView.setOnClickListener(this);
 		
 		mRootView = findViewById(R.id.rootView);
 		mEmailView = findViewById(R.id.ll_emailset);
@@ -302,6 +318,9 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 			case R.id.btn_back:
 				finish();
 				break;
+			case R.id.iv_head:
+				selectPhoto();
+				break;
 		}
 	}
 	
@@ -325,6 +344,28 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 		mNetworkCenter.StartRequestToServer(PublicType.USER_CHANGE_INFO_MASID, info, this);
 		
 		showRequestDialog(true);
+	}
+	
+	private void selectPhoto()
+	{
+		showPhotoDialog(true);
+	}
+	
+	private void takePhone(){
+		Intent intent = new Intent(
+				MediaStore.ACTION_IMAGE_CAPTURE);
+		//下面这句指定调用相机拍照后的照片存储的路径
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri
+				.fromFile(new File(Environment
+						.getExternalStorageDirectory(),
+						"yunyou.jpg")));
+		startActivityForResult(intent, TAKE_PHOTO);
+	}
+	
+	private void selectFromLocal(){
+		Intent openAlbumIntent = new Intent(Intent.ACTION_PICK);
+		openAlbumIntent.setType("image/*");
+		startActivityForResult(openAlbumIntent, CHOOSE_PHOTO);
 	}
 	
 	public void showSexWindow()
@@ -356,6 +397,36 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 			
 	}
 
+	private Dialog mDialog = null;
+	private void showPhotoDialog(boolean bShow)
+	{
+		if (mDialog != null)
+		{
+			mDialog.dismiss();
+			mDialog = null;
+		}
+		
+		DialogFactory.ISelectComplete listener = new DialogFactory.ISelectComplete() {
+
+			@Override
+			public void onSelectComplete(boolean flag) {
+				if (flag){
+					takePhone();
+				}else{
+					selectFromLocal();
+				}
+			}
+			
+		};
+
+		if (bShow)
+		{
+			mDialog = DialogFactory.creatSelectDialog(SetPersonActivity.this, R.string.dialog_title_getphone, R.string.dialog_msg_getphone,
+									R.string.btn_takephone, R.string.btn_localphone,  listener);
+			mDialog.show();
+		}
+	
+	}
 	
 	private PopupWindow mPopupWindow = null;
 	private void showRequestDialog(boolean bShow)
@@ -378,8 +449,9 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 	
 	
 	public final static int REQUEST_CODE_SET_COMMENT = 0x0001;
-	
-	
+	private static final int CHOOSE_PHOTO = 0x0002;
+	private static final int TAKE_PHOTO = 0x0003;
+	private static final int PICK_PHOTO = 0x0004;
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
@@ -389,7 +461,20 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 		case REQUEST_CODE_SET_COMMENT:
 			onSetResult(resultCode, data);
 			break;
+		case TAKE_PHOTO:
+			onTakeResult(resultCode, data);
+			break;
+		case CHOOSE_PHOTO:
+			onChooseResult(resultCode, data);
+			break;
+		case PICK_PHOTO:
+			log.e("PICK_PHOTO data = " + data);
+			if(data != null){
+				setPicToView(data);
+			}
+			break;
 		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 	
 	private void onSetResult(int resultCode, Intent data)
@@ -426,6 +511,94 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 		}
 	}
 
+	private void onTakeResult(int resultCode, Intent data){
+		if (resultCode == RESULT_OK)
+		{
+			File temp = new File(Environment.getExternalStorageDirectory()
+					+ "/yunyou.jpg");
+			startPhotoZoom(Uri.fromFile(temp));
+		}else{
+			Utils.showToast(this, "获取图片失败...");
+		}
+	}
+	
+	private void onChooseResult(int resultCode, Intent data){
+		if (resultCode == RESULT_OK)
+		{
+			startPhotoZoom(data.getData());
+		}else{
+			Utils.showToast(this, "获取图片失败...");
+		}
+	}
+	
+	private void onPickResult(int resultCode, Intent data){
+		if (resultCode == RESULT_OK)
+		{
+			startPhotoZoom(data.getData());
+		}else{
+			Utils.showToast(this, "裁剪图片失败...");
+		}
+	}
+	
+	private final static int CROP_WIDTH = 320;
+	private final static int CROP_HEIGHT = 320;
+	/**
+	 * 裁剪图片方法实现
+	 * @param uri
+	 */
+	public void startPhotoZoom(Uri uri) {
+		log.e("startPhotoZoom uri = " + uri);
+		Intent intent = new Intent("com.android.camera.action.CROP");
+		intent.setDataAndType(uri, "image/*");
+		//下面这个crop=true是设置在开启的Intent中设置显示的VIEW可裁剪
+		intent.putExtra("crop", "true");
+		// aspectX aspectY 是宽高的比例
+		intent.putExtra("aspectX", 1);
+		intent.putExtra("aspectY", 1);
+		// outputX outputY 是裁剪图片宽高
+		intent.putExtra("outputX", CROP_WIDTH);
+		intent.putExtra("outputY", CROP_HEIGHT);
+		intent.putExtra("return-data", true);
+		startActivityForResult(intent, PICK_PHOTO);
+	}
+	
+	/**
+	 * 保存裁剪之后的图片数据
+	 * @param picdata
+	 */
+	@SuppressLint("NewApi")
+	private void setPicToView(Intent picdata) {
+		Bundle extras = picdata.getExtras();
+		if (extras != null) {
+			Bitmap photo = extras.getParcelable("data");
+			int bytes =  photo.getByteCount();
+			log.e("bytes = " + bytes / 1024.0 + "KB");
+//			Drawable drawable = new BitmapDrawable(photo);
+			mHeadImageView.setImageBitmap(photo);
+			/**
+			 * 下面注释的方法是将裁剪之后的图片以Base64Coder的字符方式上
+			 * 传到服务器，QQ头像上传采用的方法跟这个类似
+			 */
+			
+			/*ByteArrayOutputStream stream = new ByteArrayOutputStream();
+			photo.compress(Bitmap.CompressFormat.JPEG, 60, stream);
+			byte[] b = stream.toByteArray();
+			// 将图片流以字符串形式存储下来
+			
+			tp = new String(Base64Coder.encodeLines(b));
+			这个地方大家可以写下给服务器上传图片的实现，直接把tp直接上传就可以了，
+			服务器处理的方法是服务器那边的事了，吼吼
+			
+			如果下载到的服务器的数据还是以Base64Coder的形式的话，可以用以下方式转换
+			为我们可以用的图片类型就OK啦...吼吼
+			Bitmap dBitmap = BitmapFactory.decodeFile(tp);
+			Drawable drawable = new BitmapDrawable(dBitmap);
+			*/
+//			ib.setBackgroundDrawable(drawable);
+//			iv.setBackgroundDrawable(drawable);
+		}
+	}
+	
 	@Override
 	public boolean onComplete(int requestAction, ResponseDataPacket dataPacket) {
 		// TODO Auto-generated method stub

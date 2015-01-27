@@ -6,6 +6,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Paint;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Toast;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 
 
 public class Utils {
-	
+	private static final CommonLog log = LogFactory.createLog();
 	public static int getScreenWidth(Context context) {
 		WindowManager manager = (WindowManager)context.getSystemService(Context.WINDOW_SERVICE);
 		Display display = manager.getDefaultDisplay();
@@ -76,6 +77,11 @@ public class Utils {
 		return adressPxLen;
 	}
 
+	//距离km 速度km/h 时间second
+	public static double getCal(double distance, double speed, int time){
+		log.e("distance = " +distance + "km -- " + "speed = " + speed + "km/h -- " + "time = " + time + "second");
+		return (distance*0.0008*speed*time);
+	}
 
 	
 	public static String toHexString(int num)

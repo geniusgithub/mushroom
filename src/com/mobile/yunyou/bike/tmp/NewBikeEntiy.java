@@ -10,8 +10,8 @@ public class NewBikeEntiy {
 	public double mCurSpeed = 0;
 	public double mHSpeed = 0;
 	public double mAverageSpeed = 0;
-	public int mHeight = 0;
-	public int mCal = 0;
+	public double mHeight = 0;
+	public double mCal = 0;
 	
 	public NewBikeEntiy(){
 		

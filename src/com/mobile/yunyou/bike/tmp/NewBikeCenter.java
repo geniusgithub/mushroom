@@ -23,6 +23,7 @@ import com.mobile.yunyou.model.BikeType.BikeLRecordSubResult;
 import com.mobile.yunyou.model.BikeType.MinLRunRecord;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
+import com.mobile.yunyou.util.Utils;
 import com.mobile.yunyou.util.YunTimeUtils;
 
 public class NewBikeCenter implements AMapLocationListener{
@@ -60,8 +61,8 @@ public class NewBikeCenter implements AMapLocationListener{
 	private double mCurSpeed = 0;
 	private double mHSpeed = 0;
 	private double mAverage = 0;
-	private int mCal = 0;
-	private int mHeight = 0;
+	private double mCal = 0;
+	private double mHeight = 0;
 	
 	private Handler mHandler;
 	public SingleGPSManager mGpsManager;
@@ -305,7 +306,7 @@ public class NewBikeCenter implements AMapLocationListener{
 		}
 		
 		if (location != null){
-			mHeight = (int) location.getAltitude();
+			mHeight =  aMapLocation.getAltitude();
 		}
 
 		if (mLastLatLng == null){
@@ -326,7 +327,9 @@ public class NewBikeCenter implements AMapLocationListener{
 		LatLng latLng = null;
 		if (location == null){
 			mCurSpeed = 0;
-			mAverage = mTotalDistance / mTimeMilllons * 1000;
+			mAverage = mTotalDistance / (mTimeMilllons / 1000);
+			
+			mCal = Utils.getCal(mTotalDistance / 1000.0, mAverage * 3.6, mTimeMilllons / 1000);
 		}else{
 
 			latLng = new LatLng(location.getOffsetLat(), location.getOffsetLon());	
@@ -340,10 +343,13 @@ public class NewBikeCenter implements AMapLocationListener{
 			}
 			
 			mAverage = mTotalDistance * 1.0 / mTimeMilllons * 1000;
+			mCal = Utils.getCal(mTotalDistance / 1000.0, mAverage * 3.6, mTimeMilllons / 1000);
 			log.e("mTotalDistance = " + mTotalDistance + "\n curspeed = " + mCurSpeed +  
 					"\n hspeed = " + mHSpeed + "\n averagespeed = " + mAverage + 
 					"\nHeight = " + mHeight + 
+					"\nmCal = " + mCal + 
 					"\n mlLatLngLists.size = " + mlLatLngLists.size());
+		
 		}
 		
 

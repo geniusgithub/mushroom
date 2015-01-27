@@ -640,8 +640,8 @@ public class NewBikeExActivity extends Activity implements OnClickListener,
 		double speed = entiy.mCurSpeed * 3.6;
 		double hspeed = entiy.mHSpeed * 3.6;
 		double averagespeed = entiy.mAverageSpeed * 3.6;
-		int cal = entiy.mCal;
-		int height = entiy.mHeight;
+		double cal = entiy.mCal;
+		double height = entiy.mHeight;
 		
 		mTextViewDistance.setText(StringUtil.ConvertByDoubeString(distance));
 		mTextViewCurSpeed.setText(StringUtil.ConvertByDoubeString(speed));

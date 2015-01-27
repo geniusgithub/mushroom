@@ -9,6 +9,8 @@
     	<string name="btn_bind">绑定</string>
     	<string name="btn_ignore">忽略</string>
     	<string name="btn_unbind">取消绑定</string>
+    	<string name="btn_takephone">拍照</string>
+    	<string name="btn_localphone">相册</string>
     	<string name="btn_drop">放弃</string>
     	<string name="btn_cancel">取消</string>
     	<string name="btn_del">删除</string>
@@ -164,7 +166,8 @@
         <string name="dialog_msg_gogps">检测到您未开启GPS定位，是否前去打开？</string>     
         <string name="dialog_title_bind">未绑定蘑菇伴侣</string>
         <string name="dialog_msg_bind">实时跟踪和GPS防盗系统功能将在绑定蘑菇伴侣后生效</string>     
-        
+        <string name="dialog_title_getphone">设置头像</string>
+        <string name="dialog_msg_getphone">设置头像并上传</string>    
         
         <string name="login_hint_account">输入云友号码</string>
         <string name="login_hint_password">输入密码</string>

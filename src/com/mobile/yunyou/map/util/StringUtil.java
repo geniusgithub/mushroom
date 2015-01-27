@@ -17,6 +17,19 @@ public class StringUtil {
 		return string.substring(0, max);
 	}
 	
+	public static String  ConvertByDoubeString(double value, int size){
+		String string = String.valueOf(value);
+		int pos = string.indexOf('.');
+		if (pos == -1){
+			return string;
+		}
+		
+		int len = string.length();
+		int max = Math.min(pos + size, len);
+		
+		return string.substring(0, max);
+	}
+	
 	public static long getTimeMillson(String startTime, String endTime){
 		try {
 			long timeStart = YunTimeUtils.getTimeMillison(startTime);
