@@ -661,8 +661,8 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 		mTextViewHSpeed.setText(StringUtil.ConvertByDoubeString(hspeed));
 		mTextViewAverageSpeed.setText(StringUtil.ConvertByDoubeString(averagespeed));
 		int tmp = (int) (cal * 1000000);
-		cal = tmp / 1000000;
-		mTextViewCal.setText(StringUtil.ConvertByDoubeString(cal, 6));
+		cal = tmp / 1000000.0;
+		mTextViewCal.setText(StringUtil.ConvertByDoubeString(cal, 7));
 		mTextViewHeight.setText(String.valueOf(height));
 	}
 

@@ -325,4 +325,36 @@ public class PublicType {
 
 		
 	}
+	
+	
+	public final static int BIKE_CHECKUPGRADE_MASID = 0x0011;	
+	public static class BikeCheckUpgradeResult implements IParseString
+	{
+		public final static String KEY_NEEDUPGRADE = "needupgrade";
+		public final static String KEY_CONTENT = "content";
+		public final static String KEY_URL = "url";
+		
+		
+		public int mNeedUpgrade = 0;
+		public String mContent = "";
+		public String mUrl = "";
+		@Override
+		public boolean parseString(String str) throws Exception {
+			JSONObject jsonObject = new JSONObject(str);
+			mNeedUpgrade = jsonObject.getInt(KEY_NEEDUPGRADE);
+			mContent = jsonObject.optString(KEY_CONTENT);
+			mUrl = jsonObject.optString(KEY_URL);
+			return true;
+		}
+		
+		public String getShowString(){
+			StringBuffer sBuffer = new StringBuffer();
+			sBuffer.append(KEY_NEEDUPGRADE + " = " + mNeedUpgrade + 
+					KEY_CONTENT + " = " + mContent + 
+					KEY_URL + " = " + mUrl);
+			
+			return sBuffer.toString();
+		}
+	}
+
 }

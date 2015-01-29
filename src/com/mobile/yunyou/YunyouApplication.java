@@ -24,6 +24,7 @@ import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.BikeType.BikeLRecordResult;
 import com.mobile.yunyou.model.GloalType;
 import com.mobile.yunyou.model.MessagePushType;
+import com.mobile.yunyou.model.PublicType;
 import com.mobile.yunyou.msg.MsgManager;
 import com.mobile.yunyou.network.HeartBeatManager;
 import com.mobile.yunyou.network.NetworkCenterEx;
@@ -75,6 +76,9 @@ public class YunyouApplication extends Application{
 	private BikeType.BikeLRecordSubResultGroup mRecordGroup = new BikeType.BikeLRecordSubResultGroup();
 	private boolean isIgnoreBind = true;
 	
+	private boolean isNewVersion = false;
+	private PublicType.BikeCheckUpgradeResult mUpdateobject;
+	
 	public synchronized static YunyouApplication getInstance()
 	{
 		return mApplication;
@@ -87,6 +91,24 @@ public class YunyouApplication extends Application{
 	public boolean getBindFlag(){
 		return isIgnoreBind;
 	}
+	
+	public void setVersionFlag(boolean flag){
+		isNewVersion = flag;
+	}
+	
+	public boolean getVersionFlag(){
+		return isNewVersion;
+	}
+	
+	public void setVersionObject(PublicType.BikeCheckUpgradeResult object){
+		mUpdateobject = object;
+	}
+	
+	public PublicType.BikeCheckUpgradeResult getVersionObject(){
+		return mUpdateobject;
+	}
+	
+	
 	
 	public void onCreate() {
 		// TODO Auto-generated method stub

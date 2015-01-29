@@ -81,6 +81,7 @@ public class Utils {
 	public static double getCal(double distance, double speed, int time){
 		log.e("distance = " +distance + "km -- " + "speed = " + speed + "km/h -- " + "time = " + time + "second");
 		return (distance*0.0008*speed*time);
+		//return (distance*speed*time);
 	}
 
 	

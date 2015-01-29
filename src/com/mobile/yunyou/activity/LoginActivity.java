@@ -83,10 +83,9 @@ public class LoginActivity extends Activity implements OnClickListener, IRequest
     	mBtnRegister.setOnClickListener(this);
     	mBtnRegister.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
     	
-//    	mBtnForgetPwd = (TextView) findViewById(R.id.tvForgetPassword);
-//    	mBtnForgetPwd.setOnClickListener(this);	
-//    	mBtnForgetPwd.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
-//   	    mBtnForgetPwd.setVisibility(View.GONE);
+    	mBtnForgetPwd = (TextView) findViewById(R.id.tvForgetPassword);
+    	mBtnForgetPwd.setOnClickListener(this);	
+    	mBtnForgetPwd.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);//下划线
     	
     	mBtnLogin = (Button) findViewById(R.id.login);
     	mBtnLogin.setOnClickListener(this);
@@ -121,9 +120,9 @@ public class LoginActivity extends Activity implements OnClickListener, IRequest
 		case R.id.login:
 			commitLogin();
 			break;
-//		case R.id.tvForgetPassword:
-//			findBackPassword();
-//			break;
+		case R.id.tvForgetPassword:
+			findBackPassword();
+			break;
 			default:
 				break;
 		}
@@ -208,7 +207,9 @@ public class LoginActivity extends Activity implements OnClickListener, IRequest
 	
 	private void findBackPassword()
 	{
-		
+//    	Intent intent = new Intent();
+//    	intent.setClass(this, ForgetPwdActivity.class);
+//    	startActivity(intent);
 	}
 	
 

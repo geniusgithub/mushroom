@@ -134,7 +134,7 @@
         <string name="toask_invalid_record">无效的骑行记录</string>  
         <string name="toask_unbind_bike">未绑定蘑菇伴侣,无法追踪</string>
         <string name="toask_query_database_fail">查询数据库失败</string>
-                      
+        <string name="toask_no_new_version">暂无新的版本</string>             
                       
         <string name="popwindow_title_bind">绑定设备账号</string>      
         <string name="popwindow_title_listener">设备监听</string>
@@ -168,6 +168,8 @@
         <string name="dialog_msg_bind">实时跟踪和GPS防盗系统功能将在绑定蘑菇伴侣后生效</string>     
         <string name="dialog_title_getphone">设置头像</string>
         <string name="dialog_msg_getphone">设置头像并上传</string>    
+        <string name="dialog_title_version_update">版本升级</string>
+        <string name="dialog_msg_version_update">是否立即升级 ？</string>
         
         <string name="login_hint_account">输入云友号码</string>
         <string name="login_hint_password">输入密码</string>
@@ -273,7 +275,8 @@
   	    <string name="setting_btn_recharge_record">充值记录</string>
   	    <string name="setting_title_recharge_now">充值卡充值</string>
   	    <string name="setting_title_recharge_record">充值记录</string>
-        
+            
+            
         <string name="about_text_title">关于</string>
         <string name="about_notice">\n\n本计算机软件程序受《中华人民共和国著作权法》及中华人民共和国最高人民法院相关司法解释、国际公约的保护。
 		本公司对本计算机软件程序的版权依上述法律及国际公约合法所有，任何未经授权许可而擅自复制、散布、反向编译或反向工程本软件程序的全部或部分，

@@ -134,16 +134,16 @@
             </LinearLayout>
 
         
-        <Button
-	     android:id="@+id/btn_save"
-	     android:layout_width="fill_parent"
-	     android:layout_height="wrap_content"
-	     android:layout_marginLeft="10.0dip" 
-	     android:layout_marginTop="10.0dip" 
-	     android:layout_marginRight="10.0dip"   
-	     android:background="@drawable/selector_btn_white"   
-	     android:text="@string/setting_commit_set"
-	     style="@style/text_whitebtn_style" />
+<!--         <Button -->
+<!-- 	     android:id="@+id/btn_save" -->
+<!-- 	     android:layout_width="fill_parent" -->
+<!-- 	     android:layout_height="wrap_content" -->
+<!-- 	     android:layout_marginLeft="10.0dip"  -->
+<!-- 	     android:layout_marginTop="10.0dip"  -->
+<!-- 	     android:layout_marginRight="10.0dip"    -->
+<!-- 	     android:background="@drawable/selector_btn_white"    -->
+<!-- 	     android:text="@string/setting_commit_set" -->
+<!-- 	     style="@style/text_whitebtn_style" /> -->
        
             
     </LinearLayout>     

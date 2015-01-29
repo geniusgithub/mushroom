@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -22,6 +23,7 @@ import com.mobile.yunyou.bike.WarningActivity;
 import com.mobile.yunyou.bike.tmp.OfflineMapActivity;
 import com.mobile.yunyou.model.GloalType;
 import com.mobile.yunyou.model.GloalType.UserInfoEx;
+import com.mobile.yunyou.model.PublicType;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
@@ -48,6 +50,8 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 	  private View mGoAboutView;
 	  private View mGoHelpView;
 	  private View mExit;
+	 
+	  private ImageView mIVUpageIcon;
 	  
 	  private Button mBtnBack;
 	  
@@ -58,7 +62,7 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 	  private YunyouApplication mApplication;
 	  private NetworkCenterEx mNetworkCenterEx;
 		
-		
+	  private boolean isFristQueryVersion = true;
 	  public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
 	        setContentView(R.layout.setex_layout);
@@ -94,6 +98,7 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 		  mGoWarningView = findViewById(R.id.ll_goWarn);
 		  mGoMoGuView = findViewById(R.id.ll_goMoGu);
 		  
+		  mIVUpageIcon = (ImageView) findViewById(R.id.iv_updateicon);
 		  mHeadImageView = (ImageView) findViewById(R.id.iv_account_head);
 		  mBtnBack = (Button) findViewById(R.id.btn_back);
 		  mBtnBack.setOnClickListener(this);
@@ -118,8 +123,25 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 		  mNetworkCenterEx = NetworkCenterEx.getInstance();
 		  
 		  UserInfoEx infoEx = mApplication.getUserInfoEx();
+		  
+		  if (mApplication.getVersionFlag()){
+	    		showUpdateIcon(true);
+	    	}else{
+	    		showUpdateIcon(false);
+	    		goVersionActivity();
+	    	}
 	  }
 
+	  
+	  private void showUpdateIcon(boolean flag){
+	    	if (flag){
+	    		mIVUpageIcon.setVisibility(View.VISIBLE);
+	    	}else{
+	    		mIVUpageIcon.setVisibility(View.GONE);
+	    	}
+	    }
+	  
+	  
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
@@ -237,7 +259,12 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 	
 	public void goVersionActivity()
 	{
-		Utils.showToast(this, "goVersionActivity");
+		if (mApplication.getVersionFlag()){
+			showVersionDialog(true);
+		}else{
+			mNetworkCenterEx.StartRequestToServer(PublicType.BIKE_CHECKUPGRADE_MASID, null, this);	
+		}
+
 	}
 	
 	public void goHelpActivity()
@@ -333,6 +360,47 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 	}
 	
 	
+	private void showVersionDialog(boolean bShow)
+	{
+		if (mDialog != null)
+		{
+			mDialog.dismiss();
+			mDialog = null;
+		}
+		
+		DialogFactory.ISelectComplete listener = new DialogFactory.ISelectComplete() {
+
+			@Override
+			public void onSelectComplete(boolean flag) {
+				if (flag){
+					PublicType.BikeCheckUpgradeResult object = mApplication.getVersionObject();	
+					if (object != null){
+						Intent intents = new Intent(Intent.ACTION_VIEW);
+						intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						intents.setData(Uri.parse(object.mUrl));
+						startActivity(intents);
+						log.e("jump to url:" + object.mUrl);
+					}
+				}else{
+					
+				}
+			}
+			
+		
+		};
+		
+		if (bShow)
+		{
+			PublicType.BikeCheckUpgradeResult object = mApplication.getVersionObject();			
+			String title = getResources().getString(R.string.dialog_title_version_update);
+			String content = object.mContent != null ? object.mContent : "";
+			mDialog = DialogFactory.creatSelectDialog(SettingExActivity.this, title, content,
+					getResources().getString(R.string.btn_sure), getResources().getString(R.string.btn_cancel),  listener);
+			mDialog.show();
+		}
+	
+	}
+	
 	@Override
 	public boolean onComplete(int requestAction, ResponseDataPacket dataPacket) {
 		// TODO Auto-generated method stub
@@ -346,17 +414,57 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 		
 		log.e("requestAction = " + Utils.toHexString(requestAction) + "\nResponseDataPacket = \n" +jsString);
 		
-//		switch(requestAction)
-//		{
-//		case PublicType.USER_GET_INFO_MASID:
-//			onGetUserInfoResult(dataPacket);
-//			break;
+		switch(requestAction)
+		{
+		case PublicType.BIKE_CHECKUPGRADE_MASID:
+			onCheckUpdate(dataPacket);
+			break;
 //		case ProductType.PRODUCT_GET_PACKET_MASID:
 //			onGetMealResult(dataPacket);
 //			break;
-//		}
+		}
 		
 		return true;
+	}
+	
+	public void onCheckUpdate(ResponseDataPacket dataPacket){
+	
+		if (dataPacket == null || dataPacket.rsp == 0)
+		{
+			if (isFristQueryVersion){
+				
+				isFristQueryVersion = false;
+			}else{
+				Utils.showToast(this, R.string.request_data_fail);
+			}
+			return ;
+		}
+		
+		PublicType.BikeCheckUpgradeResult object = new PublicType.BikeCheckUpgradeResult();
+		try {
+			object.parseString(dataPacket.data.toString());
+
+			log.e("BikeCheckUpgradeResult = " + object.getShowString());
+			
+			if (object.mNeedUpgrade == 0){
+				if (isFristQueryVersion){
+					isFristQueryVersion = false;
+				}else{
+					Utils.showToast(this, R.string.toask_no_new_version);	
+				}
+
+				mApplication.setVersionFlag(false);
+				return ;
+			}
+			
+			mApplication.setVersionFlag(true);
+			mApplication.setVersionObject(object);
+			showUpdateIcon(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Utils.showToast(this, R.string.analyze_data_fail);
+		}
 	}
 	
 //	private void onGetUserInfoResult(ResponseDataPacket dataPacket)

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:zhy="http://schemas.android.com/apk/res/com.mobile.yunyou"
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:orientation="vertical"
@@ -25,14 +26,17 @@
 	        android:layout_height="wrap_content"
 	        android:layout_marginTop="5dp" >
 	        
-	         	<ImageView 
-		           android:id="@+id/iv_userhead" 
-		           android:layout_width="60dp"
-              	   android:layout_height="60dp"
-		           android:focusable="false" 
-		           android:layout_alignParentLeft="true"/>
-	         	
-	         	
+	        	    <com.mobile.yunyou.widget.CustomImageView
+		        	android:id="@+id/iv_userhead"
+		      		android:layout_width="@dimen/msgicon_width"
+              	    android:layout_height="@dimen/msgicon_width"
+              	    android:focusable="false" 
+		            android:layout_alignParentLeft="true"
+		    		android:layout_marginRight="12.0dip" 
+		   			zhy:src="@drawable/set_mogu_icon"
+            		zhy:type="circle">
+		        	</com.mobile.yunyou.widget.CustomImageView>
+
 	         	 <CheckBox
 	                android:id="@+id/cb_checkbox"
 	                android:layout_width="wrap_content"

@@ -31,7 +31,7 @@
              android:layout_height="wrap_content"
              android:textColor="#ffffff"
              android:textSize="18sp"
-             android:background="@null"
+             android:background="@drawable/selector_btn_add_clock"
              android:text="@string/btn_save"/>
         </RelativeLayout>
     

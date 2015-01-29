@@ -14,10 +14,16 @@ import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.handmark.pulltorefresh.library.ILoadingLayout;
+import com.handmark.pulltorefresh.library.PullToRefreshBase;
+import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
+import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.bike.manager.CheckUploadManager;
@@ -43,8 +49,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 															RunRecordQueryProxy.IRequestComplete,
 															OnItemClickListener,
 															RunRecordSubManager.IBikeSubRecordResult,
-															RefreshListView.IOnRefreshListener,
-															RefreshListView.IOnLoadMoreListener,
+															OnRefreshListener2<ListView>,
 															IDelObser{
 
 	private static final CommonLog log = LogFactory.createLog();
@@ -64,7 +69,8 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	private TextView mTVTimeInterval;
 	private TextView mTVRecordCount;
 	
-	private RefreshListView mListView;
+	//private RefreshListView mListView;
+	private PullToRefreshListView mListView;
 	private RunLRecordAdapter mAdapter;
 	
 	public LinkedList<BikeLRecordResult> mNetworkBikeRecordResultList = new LinkedList<BikeLRecordResult>();
@@ -121,7 +127,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	private void setupViews(){
 		mRootView = findViewById(R.id.rootView);
 	
-		mListView = (RefreshListView) findViewById(R.id.listview);
+		mListView = (PullToRefreshListView) findViewById(R.id.listview);
 		
 		mLoadProgressBar = (ProgressBar) findViewById(R.id.load_progress);
 		mBtnRefresh = (Button) findViewById(R.id.btn_load);
@@ -140,7 +146,16 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 		mListView.setAdapter(mAdapter);
 		mListView.setOnItemClickListener(this);
 		mListView.setOnRefreshListener(this);
-		mListView.setOnLoadMoreListener(this);
+		mListView.setMode(Mode.BOTH);
+    	ILoadingLayout startLabels = mListView.getLoadingLayoutProxy(true, false);    
+    	startLabels.setPullLabel("下拉刷新...");// 刚下拉时，显示的提示    
+    	startLabels.setRefreshingLabel("正在载入...");// 刷新时    
+    	startLabels.setReleaseLabel("放开刷新...");// 下来达到一定距离时，显示的提示    
+    
+    	ILoadingLayout endLabels = mListView.getLoadingLayoutProxy(false, true);    
+    	endLabels.setPullLabel("上拉刷新...");// 刚下拉时，显示的提示    
+    	endLabels.setRefreshingLabel("正在载入...");// 刷新时    
+    	endLabels.setReleaseLabel("放开刷新...");// 下来达到一定距离时，显示的提示    
 		
 		mBtnRefresh.setVisibility(View.GONE);
 		mLoadProgressBar.setVisibility(View.VISIBLE);
@@ -379,7 +394,6 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 				mLoadProgressBar.setVisibility(View.GONE);
 			}else{
 				mListView.onRefreshComplete();
-				mListView.onLoadMoreComplete(false);
 			}			
 			
 			return ;
@@ -405,7 +419,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 		mAdapter.setData(mBikeRecordResultList);
 		
 		mListView.onRefreshComplete();
-		mListView.onLoadMoreComplete(false);
+	
 		
 		calData(mBikeRecordResultList);
 	}
@@ -467,20 +481,6 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	}
 
 
-	@Override
-	public void OnLoadMore() {
-		mBikeRecordProxy.requestHistory();
-	}
-
-
-	@Override
-	public void OnRefresh() {
-		mBikeRecordProxy.requestLast();
-	}
-
-
-
-	
 	
 	
 	
@@ -542,5 +542,19 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 				continue;
 			}
 		}
+	}
+
+
+
+	@Override
+	public void onPullDownToRefresh(PullToRefreshBase<ListView> refreshView) {
+		mBikeRecordProxy.requestLast();
+	}
+
+
+
+	@Override
+	public void onPullUpToRefresh(PullToRefreshBase<ListView> refreshView) {
+		mBikeRecordProxy.requestHistory();
 	}
 }

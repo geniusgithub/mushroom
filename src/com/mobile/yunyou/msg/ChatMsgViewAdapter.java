@@ -20,6 +20,7 @@ import com.mobile.yunyou.map.data.LocationEx;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.ImageLoader;
 import com.mobile.yunyou.util.LogFactory;
+import com.mobile.yunyou.widget.CustomImageView;
 
 public class ChatMsgViewAdapter extends BaseAdapter implements OnItemClickListener{
 	
@@ -124,7 +125,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnItemClickListen
 			  }
 
 	    	  viewHolder = new ViewHolder();
-	    	  viewHolder.ivHeadImageView = (ImageView) convertView.findViewById(R.id.iv_userhead);
+	    	  viewHolder.ivHeadImageView = (CustomImageView) convertView.findViewById(R.id.iv_userhead);
 			  viewHolder.tvSendTime = (TextView) convertView.findViewById(R.id.tv_sendtime);
 			  viewHolder.tvUserName = (TextView) convertView.findViewById(R.id.tv_username);
 			  viewHolder.tvContent = (TextView) convertView.findViewById(R.id.tv_chatcontent);
@@ -144,7 +145,6 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnItemClickListen
 	    viewHolder.tvUserName.setText("蘑菇伴侣");
 	    viewHolder.tvContent.setText(entity.getText());
 	    viewHolder.cbCheckBox.setChecked(entity.getSelectState());
-	    viewHolder.ivHeadImageView.setImageResource(R.drawable.mogu_icon);
 	    if (isShowCheckbox == true)
 	    {
 	    	 viewHolder.cbCheckBox.setVisibility(View.VISIBLE);
@@ -233,7 +233,7 @@ public class ChatMsgViewAdapter extends BaseAdapter implements OnItemClickListen
 	}
 	
     static class ViewHolder { 
-    	public ImageView ivHeadImageView;
+    	public CustomImageView ivHeadImageView;
         public TextView tvSendTime;
         public TextView tvUserName;
         public TextView tvContent;

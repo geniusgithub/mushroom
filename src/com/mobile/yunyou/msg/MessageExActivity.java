@@ -36,7 +36,7 @@ public class MessageExActivity extends Activity implements OnClickListener,
 
 	private static final int MSG_GET_MESSAGE = 0x0001;
 	
-	private final static int QUERY_COUNT = 5;
+	//private final static int QUERY_COUNT = 5;
 	private final static int REQUEST_CODE = 0x0001;
 	
 	
@@ -449,7 +449,7 @@ public class MessageExActivity extends Activity implements OnClickListener,
 		List<DeviceMsgData> dataList = msgRuestProxy.getDataArray();
 	
 		int size = dataList.size();
-		
+    	log.e("list.size = " + dataList.size());
 		if (size == 0)
 		{
 			if (isExitLocalMsg() == false)
@@ -468,7 +468,6 @@ public class MessageExActivity extends Activity implements OnClickListener,
 		
 		mRLNoMessage.setVisibility(View.GONE);
 	
-		mDataArrays.clear();
 		for(int i = 0; i < size; i++)
 		{
 			ChatMsgEntity entity = new ChatMsgEntity(dataList.get(i));
@@ -476,11 +475,12 @@ public class MessageExActivity extends Activity implements OnClickListener,
 			mDataArrays.addLast(entity);	
 		}
 		
-		mAdapter.notifyDataSetChanged();
+		mAdapter.setData(mDataArrays);
+		//mAdapter.notifyDataSetChanged();
 		
 		//mBtnRefresh.setVisibility(View.GONE);
 		mLoadProgressBar.setVisibility(View.GONE);
-		mListView.setVisibility(View.VISIBLE);
+		//mListView.setVisibility(View.VISIBLE);
 
 
 	

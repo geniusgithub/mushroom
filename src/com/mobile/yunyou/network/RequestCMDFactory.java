@@ -47,6 +47,7 @@ public class RequestCMDFactory {
 		mRequestCMDMap.put(PublicType.USER_BIND_MASID, "user_bind");
 		mRequestCMDMap.put(PublicType.USER_UNBIND_MASID, "user_unbind");
 		mRequestCMDMap.put(PublicType.USER_UPLOAD_GPS_MASID, "user_uploadgps");
+		mRequestCMDMap.put(PublicType.BIKE_CHECKUPGRADE_MASID, "bike_checkupgrade");
 		
 		mRequestCMDMap.put(DeviceSetType.DEVICE_KEYSET_MASID, "deviceset_key");
 		mRequestCMDMap.put(DeviceSetType.DEVICE_GET_KEYSET_MASID, "deviceget_key");
@@ -102,7 +103,7 @@ public class RequestCMDFactory {
 		mRequestCMDMap.put(BikeType.BIKE_RECORDUPLOAD_MASITD, "bike_uploadlocal");
 		mRequestCMDMap.put(BikeType.BIKE_LRECORD_MASITD, "bike_lrecord");
 		mRequestCMDMap.put(BikeType.BIKE_LRECORDSUB_MASITD, "bike_lrecordsub");
-		
+	
 	}
 	
 	public String getCMDString(int cmd)
