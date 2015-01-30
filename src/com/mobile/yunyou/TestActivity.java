@@ -1,20 +1,41 @@
 package com.mobile.yunyou;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
+import org.json.JSONException;
+
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.ImageView;
 
+import com.mobile.yunyou.bike.tmp.DataFactory;
 import com.mobile.yunyou.datastore.RunRecordDBManager;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.BikeType.MinRunRecord;
@@ -30,16 +51,21 @@ import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.network.api.AbstractTaskCallback;
 import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.LogFactory;
+import com.mobile.yunyou.util.UploadExUtil;
+import com.mobile.yunyou.util.UploadExUtil.OnUploadProcessListener;
 import com.mobile.yunyou.util.Utils;
 import com.mobile.yunyou.util.notifactionUtils;
 
 
 
-public class TestActivity extends Activity implements OnClickListener, IRequestCallback{
+public class TestActivity extends Activity implements OnClickListener, IRequestCallback,OnUploadProcessListener{
 
 	 private static final CommonLog log = LogFactory.createLog();
 	
+	 private ImageView mImageView;
+	 private ImageView mImageView2;
 	 private Button btnInsert;
 	 private Button btnDel;
 	 private Button btnQuery;
@@ -104,6 +130,7 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 		private YunyouApplication mApplication;
 		private NetworkCenterEx mNetworkCenter;
 
+		private	ProgressDialog progressDialog;
 		
 	  public void onCreate(Bundle savedInstanceState) {
 	        super.onCreate(savedInstanceState);
@@ -128,7 +155,10 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 	    
 	    public void initView()
 	    {
-		 
+	    	mImageView = (ImageView) findViewById(R.id.iv_image);
+	      	mImageView2 = (ImageView) findViewById(R.id.iv_image2);
+	      	
+	        progressDialog = new ProgressDialog(this);    
 			 btnInsert = (Button) findViewById(R.id.btn_insert);
 			 btnInsert.setOnClickListener(this);
 			 btnDel = (Button) findViewById(R.id.btn_del);
@@ -514,11 +544,18 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 //			       Intent intent = new Intent(Intent.ACTION_PICK);  
 //			       intent.setType("image/*");//相片类型   
 //			       startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE);  
+			
+			showPhotoDialog(true);
 			  
 		}
 		
 		
 		private void insert(){
+			
+			if (true){
+				toUploadFile(jpgeData);
+				return ;
+			}
 			BikeType.MinRunRecord record1 = new BikeType.MinRunRecord();
 			record1.mLat = 122.343435;
 			record1.mLon = 20.343545;
@@ -1440,4 +1477,295 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 	    }
 
 	    
+	    private Dialog mDialog = null;
+		private void showPhotoDialog(boolean bShow)
+		{
+			if (mDialog != null)
+			{
+				mDialog.dismiss();
+				mDialog = null;
+			}
+			
+			DialogFactory.ISelectComplete listener = new DialogFactory.ISelectComplete() {
+
+				@Override
+				public void onSelectComplete(boolean flag) {
+					if (flag){
+						takePhone();
+					}else{
+						selectFromLocal();
+					}
+				}
+				
+			};
+
+			if (bShow)
+			{
+				mDialog = DialogFactory.creatSelectDialog(TestActivity.this, R.string.dialog_title_getphone, R.string.dialog_msg_getphone,
+										R.string.btn_takephone, R.string.btn_localphone,  listener);
+				mDialog.show();
+			}
+		
+		}
+		
+		private void takePhone(){
+			Intent intent = new Intent(
+					MediaStore.ACTION_IMAGE_CAPTURE);
+			//下面这句指定调用相机拍照后的照片存储的路径
+			intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri
+					.fromFile(new File(Environment
+							.getExternalStorageDirectory(),
+							"yunyou.jpg")));
+			startActivityForResult(intent, TAKE_PHOTO);
+		}
+		
+		private void selectFromLocal(){
+			Intent openAlbumIntent = new Intent(Intent.ACTION_PICK);
+			openAlbumIntent.setType("image/*");
+			startActivityForResult(openAlbumIntent, CHOOSE_PHOTO);
+		}
+		
+		private static final int CHOOSE_PHOTO = 0x0002;
+		private static final int TAKE_PHOTO = 0x0003;
+		private static final int PICK_PHOTO = 0x0004;
+		@Override
+		protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+			// TODO Auto-generated method stub
+			log.e("requestCode = " + requestCode + ", resultCode = " + resultCode);
+			switch(requestCode)
+			{
+				case TAKE_PHOTO:
+					onTakeResult(resultCode, data);
+					break;
+				case CHOOSE_PHOTO:
+					onChooseResult(resultCode, data);
+					break;
+				case PICK_PHOTO:
+					log.e("PICK_PHOTO data = " + data);
+					if(data != null){
+						setPicToView(data);
+					}
+					break;
+			}
+			super.onActivityResult(requestCode, resultCode, data);
+		}
+		
+		private void onTakeResult(int resultCode, Intent data){
+			if (resultCode == RESULT_OK)
+			{
+				File temp = new File(Environment.getExternalStorageDirectory()
+						+ "/yunyou.jpg");
+				startPhotoZoom(Uri.fromFile(temp));
+			}else{
+				Utils.showToast(this, "获取图片失败...");
+			}
+		}
+		
+		private void onChooseResult(int resultCode, Intent data){
+			if (resultCode == RESULT_OK)
+			{
+				startPhotoZoom(data.getData());
+			}else{
+				Utils.showToast(this, "获取图片失败...");
+			}
+		}
+		
+		private byte[] jpgeData = null;
+		private String filePath = "";
+		@SuppressLint("NewApi")
+		private void setPicToView(Intent picdata) {
+			Bundle extras = picdata.getExtras();
+			if (extras != null) {
+				Bitmap photo = extras.getParcelable("data");
+				int bytes =  photo.getByteCount();
+				log.e("bytes = " + bytes / 1024.0 + "KB");
+				mImageView.setImageBitmap(photo);
+	
+				ByteArrayOutputStream stream = new ByteArrayOutputStream();
+				boolean ret = photo.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+				//log.e("compress ret = ..." + ret);
+				byte[] b = stream.toByteArray();
+				//log.e("after compress bytes = " + b.length / 1024.0 + "KB");
+				jpgeData = b;
+				filePath = saveMyBitmap(photo, "upload.jpg");
+				log.e("saveMyBitmap filePath = " + filePath);
+				
+				Bitmap bmp = BitmapFactory.decodeFile(filePath);
+				if (bmp != null){
+					int bytes2 =  bmp.getByteCount();
+					log.e("bytes2 = " + bytes2 / 1024.0 + "KB");
+					mImageView2.setImageBitmap(bmp);
+				}
+				/**
+				 * 下面注释的方法是将裁剪之后的图片以Base64Coder的字符方式上
+				 * 传到服务器，QQ头像上传采用的方法跟这个类似
+				 */			
+//				tp = new String(Base64Coder.encodeLines(b));
+//				这个地方大家可以写下给服务器上传图片的实现，直接把tp直接上传就可以了，
+//				服务器处理的方法是服务器那边的事了，吼吼
+//				
+//				如果下载到的服务器的数据还是以Base64Coder的形式的话，可以用以下方式转换
+//				为我们可以用的图片类型就OK啦...吼吼
+//				Bitmap dBitmap = BitmapFactory.decodeFile(tp);
+//				Drawable drawable = new BitmapDrawable(dBitmap);
+			
+//				ib.setBackgroundDrawable(drawable);
+//				iv.setBackgroundDrawable(drawable);
+			}
+		}
+
+		
+		private void onPickResult(int resultCode, Intent data){
+			if (resultCode == RESULT_OK)
+			{
+				startPhotoZoom(data.getData());
+			}else{
+				Utils.showToast(this, "裁剪图片失败...");
+			}
+		}
+		
+		public String saveMyBitmap(Bitmap mBitmap,String bitName)  {
+			String filePath = Environment.getExternalStorageDirectory() + "/" + bitName;
+			File temp = new File(filePath);
+	        FileOutputStream fOut = null;
+	        try {
+	                fOut = new FileOutputStream(temp);
+	        } catch (FileNotFoundException e) {
+	                e.printStackTrace();
+	        }
+	        if (fOut == null){
+	        	return null;
+	        }
+	        mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+	        try {
+	                fOut.flush();
+	                fOut.close();
+	                return filePath;
+	        } catch (IOException e) {
+	                e.printStackTrace();
+	        }
+	   
+	        return null;
+	        
+		}
+		
+		private final static int CROP_WIDTH = 160;
+		private final static int CROP_HEIGHT = 160;
+		/**
+		 * 裁剪图片方法实现
+		 * @param uri
+		 */
+		public void startPhotoZoom(Uri uri) {
+			log.e("startPhotoZoom uri = " + uri);
+			Intent intent = new Intent("com.android.camera.action.CROP");
+			intent.setDataAndType(uri, "image/*");
+			//下面这个crop=true是设置在开启的Intent中设置显示的VIEW可裁剪
+			intent.putExtra("crop", "true");
+			// aspectX aspectY 是宽高的比例
+			intent.putExtra("aspectX", 1);
+			intent.putExtra("aspectY", 1);
+			// outputX outputY 是裁剪图片宽高
+			intent.putExtra("outputX", CROP_WIDTH);
+			intent.putExtra("outputY", CROP_HEIGHT);
+			intent.putExtra("return-data", true);
+			startActivityForResult(intent, PICK_PHOTO);
+		}
+	    
+		private void toUploadFile(byte []data)
+		{
+			if (data == null || data.length == 0){
+				Utils.showToast(this, "暂无图片数据");
+				return ;
+			}
+			progressDialog.setMessage("正在上传文件...");
+			progressDialog.show();
+			String fileKey = "file";
+			
+			String jsonDATA = "";
+			try {
+				jsonDATA = DataFactory.buildUploadJsString("deviceset_avatar", "A128966000007112", "0");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			UploadExUtil uploadUtil = UploadExUtil.getInstance();
+			uploadUtil.setOnUploadProcessListener(this);  //设置监听器监听上传状态
+			
+			Map<String, String> params = new HashMap<String, String>();
+			params.put("json", jsonDATA);
+
+			uploadUtil.uploadFile( filePath,fileKey,requestURL,params);
+		}
+
+		private static String requestURL = "http://www.360lbs.net:8080";
+		
+		/**
+		 * 去上传文件
+		 */
+		protected static final int TO_UPLOAD_FILE = 1;  
+		/**
+		 * 上传文件响应
+		 */
+		protected static final int UPLOAD_FILE_DONE = 2;  //
+		/**
+		 * 选择文件
+		 */
+		public static final int TO_SELECT_PHOTO = 3;
+		/**
+		 * 上传初始化
+		 */
+		private static final int UPLOAD_INIT_PROCESS = 4;
+		/**
+		 * 上传中
+		 */
+		private static final int UPLOAD_IN_PROCESS = 5;
+		@Override
+		public void onUploadDone(int responseCode, String message) {
+			progressDialog.dismiss();
+			Message msg = Message.obtain();
+			msg.what = UPLOAD_FILE_DONE;
+			msg.arg1 = responseCode;
+			msg.obj = message;
+			handler.sendMessage(msg);
+		}
+
+
+		@Override
+		public void onUploadProcess(int uploadSize) {
+			Message msg = Message.obtain();
+			msg.what = UPLOAD_IN_PROCESS;
+			msg.arg1 = uploadSize;
+			handler.sendMessage(msg);
+		}
+
+
+		@Override
+		public void initUpload(int fileSize) {
+			Message msg = Message.obtain();
+			msg.what = UPLOAD_INIT_PROCESS;
+			msg.arg1 = fileSize;
+			handler.sendMessage(msg );
+		}	
+		
+		private Handler handler = new Handler(){
+				@Override
+				public void handleMessage(Message msg) {
+						switch (msg.what) {
+							case UPLOAD_INIT_PROCESS:				
+								break;
+								
+							case UPLOAD_IN_PROCESS:				
+								break;
+								
+							case UPLOAD_FILE_DONE:
+								String result = "响应码："+msg.arg1+"\n响应信息："+msg.obj+"\n耗时："+UploadExUtil.getRequestTime()+"秒";
+								Utils.showToast(TestActivity.this, result);
+								break;
+								
+							default:
+								break;
+						}
+						super.handleMessage(msg);
+				}
+			};
 }

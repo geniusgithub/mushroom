@@ -17,7 +17,7 @@ public class ServiceIPConfig {
 	public static final String addr = "http://www.360lbs.net:8080";
 //	public static final String addr = "http://192.168.1.106:8080";
 	
-	
+
 	public static final String correctIP = "http://www.360lbs.net/yyservice/offset.do";
 	
 }

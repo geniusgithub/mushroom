@@ -1675,4 +1675,30 @@ public class DeviceSetType {
 	public final static int DEVICE_GET_SLEEPTIME_MASID = 0x0129;
 	
 	
+	// 用户头像上传
+	public static class DevicesetAvatar implements IToJsonObject
+	{
+		private final static String KEY_CMD = "cmd";
+		private final static String KEY_SID = "sid";
+		private final static String KEY_DID = "did";
+		
+		public String mCmd = "";
+		public String mSid = "";
+		public String mDid = "";
+
+
+		@Override
+		public JSONObject toJsonObject() throws JSONException {
+			// TODO Auto-generated method stub
+			JSONObject jsonObject = new JSONObject();
+			
+			jsonObject.put(KEY_CMD, mCmd);
+			jsonObject.put(KEY_SID, mSid);
+			jsonObject.put(KEY_DID, mDid);
+			
+			return jsonObject;
+
+		}
+	}
+	
 }

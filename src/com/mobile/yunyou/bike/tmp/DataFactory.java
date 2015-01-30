@@ -2,10 +2,16 @@ package com.mobile.yunyou.bike.tmp;
 
 import java.util.LinkedList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.model.BikeType.BikeLRecordResult;
 import com.mobile.yunyou.model.BikeType.BikeLRecordSubResult;
 import com.mobile.yunyou.model.BikeType.BikeRecordUpload;
 import com.mobile.yunyou.model.BikeType.MinLRunRecord;
+import com.mobile.yunyou.network.ClientEngineEx;
+import com.mobile.yunyou.util.Utils;
 
 
 
@@ -43,6 +49,19 @@ public class DataFactory {
 		record.mHeight = 0;
 		record.mCreateTime = object.mCreateTime;
 		return record;
+	}
+	
+	
+	
+	public static String buildUploadJsString(String cmd, String sid, String did) throws Exception{
+		ClientEngineEx clientEngineEx = new ClientEngineEx();
+		clientEngineEx.setDid(did);
+		clientEngineEx.setSid(sid);
+		
+		JSONObject jsonObject = clientEngineEx.getInitJsonObject();
+		jsonObject.put("cmd", "deviceset_avatar");
+		jsonObject.put("data", new JSONObject());
+		return jsonObject.toString();
 	}
 	
 }

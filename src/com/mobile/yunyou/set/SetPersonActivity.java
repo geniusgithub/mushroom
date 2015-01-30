@@ -1,12 +1,18 @@
 package com.mobile.yunyou.set;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,7 +34,10 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.mobile.yunyou.R;
+import com.mobile.yunyou.ServiceIPConfig;
+import com.mobile.yunyou.TestActivity;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.bike.tmp.DataFactory;
 import com.mobile.yunyou.bike.tmp.NewBikeExActivity;
 import com.mobile.yunyou.custom.SingleChoicePopWindow;
 import com.mobile.yunyou.device.DeviceIntentConstant;
@@ -45,11 +54,15 @@ import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.FileManager;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
+import com.mobile.yunyou.util.UploadExUtil;
+import com.mobile.yunyou.util.UploadExUtil.OnUploadProcessListener;
 import com.mobile.yunyou.util.Utils;
 import com.mobile.yunyou.widget.CustomImageView;
 
 @SuppressLint("NewApi")
-public class SetPersonActivity extends Activity implements OnClickListener, IRequestCallback{
+public class SetPersonActivity extends Activity implements OnClickListener, 
+															IRequestCallback,
+															OnUploadProcessListener{
 
 
 	
@@ -103,7 +116,7 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
        
        initData();
       
-   	updateHead();
+   		updateHead();
     }
 	
 	@Override
@@ -122,6 +135,7 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 
 	private void initView()
 	{
+		  progressDialog = new ProgressDialog(this);   
 		mBtnSave = (Button) findViewById(R.id.btn_save);
 		mBtnSave.setOnClickListener(this);
 		
@@ -562,6 +576,9 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 		startActivityForResult(intent, PICK_PHOTO);
 	}
 	
+	
+	private String uploadFilePath = "";
+	private Bitmap curBitmap = null;
 	/**
 	 * 保存裁剪之后的图片数据
 	 * @param picdata
@@ -573,30 +590,70 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 			Bitmap photo = extras.getParcelable("data");
 			int bytes =  photo.getByteCount();
 			log.e("bytes = " + bytes / 1024.0 + "KB");
-//			Drawable drawable = new BitmapDrawable(photo);
-			mHeadImageView.setImageBitmap(photo);
-			/**
-			 * 下面注释的方法是将裁剪之后的图片以Base64Coder的字符方式上
-			 * 传到服务器，QQ头像上传采用的方法跟这个类似
-			 */
+			curBitmap = photo;
+//			mHeadImageView.setImageBitmap(photo);
+
+			uploadFilePath = saveTmpBitmap(photo, mApplication.getUserInfoEx().mSid + ".jpg");
+			log.e("saveMyBitmap filePath = " + uploadFilePath);
+			if (uploadFilePath == null){
+				Utils.showToast(this, "保存图片失败!!!");
+				return ;
+			}
 			
-			/*ByteArrayOutputStream stream = new ByteArrayOutputStream();
-			photo.compress(Bitmap.CompressFormat.JPEG, 60, stream);
-			byte[] b = stream.toByteArray();
-			// 将图片流以字符串形式存储下来
+			log.e("saveMyBitmap filePath = " + uploadFilePath);
+			toUploadFile(uploadFilePath);
 			
-			tp = new String(Base64Coder.encodeLines(b));
-			这个地方大家可以写下给服务器上传图片的实现，直接把tp直接上传就可以了，
-			服务器处理的方法是服务器那边的事了，吼吼
-			
-			如果下载到的服务器的数据还是以Base64Coder的形式的话，可以用以下方式转换
-			为我们可以用的图片类型就OK啦...吼吼
-			Bitmap dBitmap = BitmapFactory.decodeFile(tp);
-			Drawable drawable = new BitmapDrawable(dBitmap);
-			*/
-//			ib.setBackgroundDrawable(drawable);
-//			iv.setBackgroundDrawable(drawable);
 		}
+	}
+	
+	public String saveTmpBitmap(Bitmap mBitmap,String bitName)  {
+		String filePath = Environment.getExternalStorageDirectory() + "/" + bitName;
+		File temp = new File(filePath);
+        FileOutputStream fOut = null;
+        try {
+                fOut = new FileOutputStream(temp);
+        } catch (FileNotFoundException e) {
+                e.printStackTrace();
+        }
+        if (fOut == null){
+        	return null;
+        }
+        mBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+        try {
+                fOut.flush();
+                fOut.close();
+                return filePath;
+        } catch (IOException e) {
+                e.printStackTrace();
+        }
+   
+        return null;
+        
+	}
+	
+	private	ProgressDialog progressDialog;
+	private void toUploadFile(String filePath)
+	{
+
+		progressDialog.setMessage("正在上传头像...");
+		progressDialog.show();
+		String fileKey = "file";
+		
+		
+		String jsonDATA = "";
+		try {
+			jsonDATA = DataFactory.buildUploadJsString("deviceset_avatar", mApplication.getUserInfoEx().mSid, "0");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		UploadExUtil uploadUtil = UploadExUtil.getInstance();
+		uploadUtil.setOnUploadProcessListener(this);  //设置监听器监听上传状态
+		
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("json", jsonDATA);
+
+		uploadUtil.uploadFile( filePath,fileKey,ServiceIPConfig.addr,params);
 	}
 	
 	@Override
@@ -726,5 +783,111 @@ public class SetPersonActivity extends Activity implements OnClickListener, IReq
 		
 			
 		}
+		
+		
+		/**
+		 * 去上传文件
+		 */
+		protected static final int TO_UPLOAD_FILE = 1;  
+		/**
+		 * 上传文件响应
+		 */
+		protected static final int UPLOAD_FILE_DONE = 2;  //
+		/**
+		 * 选择文件
+		 */
+		public static final int TO_SELECT_PHOTO = 3;
+		/**
+		 * 上传初始化
+		 */
+		private static final int UPLOAD_INIT_PROCESS = 4;
+		/**
+		 * 上传中
+		 */
+		private static final int UPLOAD_IN_PROCESS = 5;
+		@Override
+		public void onUploadDone(int responseCode, String message) {
+			progressDialog.dismiss();
+			Message msg = Message.obtain();
+			msg.what = UPLOAD_FILE_DONE;
+			msg.arg1 = responseCode;
+			msg.obj = message;
+			handler.sendMessage(msg);
+		}
+
+
+		@Override
+		public void onUploadProcess(int uploadSize) {
+			Message msg = Message.obtain();
+			msg.what = UPLOAD_IN_PROCESS;
+			msg.arg1 = uploadSize;
+			handler.sendMessage(msg);
+		}
+
+
+		@Override
+		public void initUpload(int fileSize) {
+			Message msg = Message.obtain();
+			msg.what = UPLOAD_INIT_PROCESS;
+			msg.arg1 = fileSize;
+			handler.sendMessage(msg );
+		}	
+		
+		private Handler handler = new Handler(){
+				@Override
+				public void handleMessage(Message msg) {
+						switch (msg.what) {
+							case UPLOAD_INIT_PROCESS:				
+								break;
+								
+							case UPLOAD_IN_PROCESS:				
+								break;
+								
+							case UPLOAD_FILE_DONE:
+								String result = "响应码："+msg.arg1+"\n响应信息："+msg.obj+"\n耗时："+UploadExUtil.getRequestTime()+"秒";
+								log.e("result = " + result);
+								if (mApplication.mIsDebug){
+									Utils.showToast(SetPersonActivity.this, result);
+								}
+								
+								if (msg.arg1 == 200){
+									Utils.showToast(SetPersonActivity.this, "上传成功...");
+									
+									String uri = HeadFileConfigure.getAccountUri(mApplication.getUserInfoEx().mSid);
+									String filePath = FileManager.getSavePath(uri);
+									
+									File temp = new File(filePath);
+							        FileOutputStream fOut = null;
+							        try {
+							                fOut = new FileOutputStream(temp);
+							        } catch (FileNotFoundException e) {
+							                e.printStackTrace();
+							        }
+							        if (fOut == null || curBitmap == null){
+							        	Utils.showToast(SetPersonActivity.this, "设置本地头像失败...");
+							        	return ;
+							        }
+							        
+							        curBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
+							        try {
+							                fOut.flush();
+							                fOut.close();
+							        } catch (IOException e) {
+							                e.printStackTrace();
+							            	Utils.showToast(SetPersonActivity.this, "设置本地头像失败...");
+							            	return ;
+							        }		
+									
+									loadHead = false;
+									updateHead();
+								}else{
+									Utils.showToast(SetPersonActivity.this, "上传失败...");
+								}
 	
+								break;
+							default:
+								break;
+						}
+				}
+		};
 }

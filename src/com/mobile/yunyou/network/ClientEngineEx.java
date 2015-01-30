@@ -21,7 +21,7 @@ public class ClientEngineEx {
 	private static final CommonLog log = LogFactory.createLog();
 	
 	Caller cft = Caller.getInstance();
-	private JSONObject headers = new JSONObject();
+	public JSONObject headers = new JSONObject();
 	private String did = "";
 	private String sid = "";	
 	
@@ -162,7 +162,7 @@ public class ClientEngineEx {
 	}
 	
 	
-	private JSONObject getInitJsonObject() throws JSONException {
+	public JSONObject getInitJsonObject() throws JSONException {
 		JSONObject json = new JSONObject();
 		json.put("headers", headers);
 		json.put("sid", sid);
