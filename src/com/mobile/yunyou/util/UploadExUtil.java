@@ -141,9 +141,9 @@ public class UploadExUtil {
 			conn.setDoOutput(true); // 允许输出流
 			conn.setUseCaches(false); // 不允许使用缓存
 			conn.setRequestMethod("POST"); // 请求方式
-			conn.setRequestProperty("Charset", CHARSET); // 设置编码
-			conn.setRequestProperty("user-agent", "蘑菇骑行 (anroid; en_US)");
-			conn.setRequestProperty("connection", "keep-alive");
+			//conn.setRequestProperty("Charset", CHARSET); // 设置编码
+			//conn.setRequestProperty("user-agent", "蘑菇骑行 (anroid; en_US)");
+			//conn.setRequestProperty("connection", "keep-alive");
 			conn.setRequestProperty("Content-Type", CONTENT_TYPE + ";boundary=" + BOUNDARY);
 			/**
 			 * 当文件不为空，把文件包装并且上传

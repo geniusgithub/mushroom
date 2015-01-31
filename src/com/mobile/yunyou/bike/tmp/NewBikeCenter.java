@@ -101,6 +101,14 @@ public class NewBikeCenter implements AMapLocationListener{
 		mTimer = new Timer();	
 	}
 	
+	public long getStartTime(){
+		return mStartTimeMilllons;
+	}
+	
+	public int getDistance(){
+		return mTotalDistance;
+	}
+	
 	public int getRunStatus(){
 		return mRunStatus;
 	}

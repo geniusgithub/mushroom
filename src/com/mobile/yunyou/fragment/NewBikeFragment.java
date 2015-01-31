@@ -31,6 +31,7 @@ import com.mobile.yunyou.bike.tmp.NewBikeEntiy;
 import com.mobile.yunyou.bike.tmp.NewBikeExActivity;
 import com.mobile.yunyou.bike.tmp.RunBikeMarket;
 import com.mobile.yunyou.datastore.RunRecordDBManager;
+import com.mobile.yunyou.datastore.YunyouSharePreference;
 import com.mobile.yunyou.map.data.LocationEx;
 import com.mobile.yunyou.map.util.StringUtil;
 import com.mobile.yunyou.model.BikeType;
@@ -544,6 +545,23 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 		}else{
 			mCuRecordResult = group;
 		}
+		
+		long startTime = mNewBikeCenter.getStartTime();
+		String time = YunTimeUtils.getFormatTime1(startTime);
+		int distance = mNewBikeCenter.getDistance();
+		
+		String saveTime= YunyouSharePreference.getCurtime(mContext);
+		int saveDistance = YunyouSharePreference.getDistance(mContext);
+		
+		log.e("time = " + time  + ", distance = " + distance +"\nsaveTime = " + saveTime + ", saveDistance = " + saveDistance);
+		if (time.equalsIgnoreCase(saveTime)){
+			saveDistance += distance;
+			YunyouSharePreference.putDistance(mContext, saveDistance);
+		}else{
+			YunyouSharePreference.putCurtime(mContext, time);
+			YunyouSharePreference.putDistance(mContext, saveDistance);
+		}
+		
 		
 		BikeType.BikeRecordUpload object = mNewBikeCenter.newBikeRecord();
 		CheckUploadManager.getInstance().addRecord(group);

@@ -41,6 +41,7 @@ import com.mobile.yunyou.bike.tmp.DataFactory;
 import com.mobile.yunyou.bike.tmp.NewBikeExActivity;
 import com.mobile.yunyou.custom.SingleChoicePopWindow;
 import com.mobile.yunyou.device.DeviceIntentConstant;
+import com.mobile.yunyou.fragment.NavigationFragment;
 import com.mobile.yunyou.model.GloalType;
 import com.mobile.yunyou.model.PublicType;
 import com.mobile.yunyou.model.ResponseDataPacket;
@@ -588,8 +589,8 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 		Bundle extras = picdata.getExtras();
 		if (extras != null) {
 			Bitmap photo = extras.getParcelable("data");
-			int bytes =  photo.getByteCount();
-			log.e("bytes = " + bytes / 1024.0 + "KB");
+//			int bytes =  photo.getByteCount();
+//			log.e("bytes = " + bytes / 1024.0 + "KB");
 			curBitmap = photo;
 //			mHeadImageView.setImageBitmap(photo);
 
@@ -880,6 +881,8 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 									
 									loadHead = false;
 									updateHead();
+									
+									NavigationFragment.loadHead = false;
 								}else{
 									Utils.showToast(SetPersonActivity.this, "上传失败...");
 								}

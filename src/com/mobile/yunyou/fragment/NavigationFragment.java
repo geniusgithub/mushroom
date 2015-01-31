@@ -19,6 +19,7 @@ import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.activity.MainSlideActivity;
 import com.mobile.yunyou.bike.SafeActivity;
 import com.mobile.yunyou.bike.tmp.NewBikeExActivity;
+import com.mobile.yunyou.datastore.YunyouSharePreference;
 import com.mobile.yunyou.model.GloalType;
 import com.mobile.yunyou.msg.MessageExActivity;
 import com.mobile.yunyou.network.api.HeadFileConfigure;
@@ -29,6 +30,7 @@ import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.FileManager;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.Utils;
+import com.mobile.yunyou.util.YunTimeUtils;
 import com.mobile.yunyou.widget.CustomImageView;
 
 public class NavigationFragment extends Fragment implements OnClickListener{
@@ -95,6 +97,7 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		super.onResume();
 		
 		updateHead();
+
 	}
 
 	private void setupViews(){
@@ -109,7 +112,7 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		mLLGoSetting = (LinearLayout) mView.findViewById(R.id.ll_goSetting);
 		
 		mTVNickName = (TextView) mView.findViewById(R.id.tv_nickname);
-		mTVDistance = (TextView) mView.findViewById(R.id.tv_distance);
+		mTVDistance = (TextView) mView.findViewById(R.id.tv_curDidtance);
 		
 		mHeadImageView.setOnClickListener(this);
 		mLLGoLocation.setOnClickListener(this);
@@ -124,6 +127,8 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		
 		mApplication = YunyouApplication.getInstance();
 		mTVNickName.setText(mApplication.getUserInfoEx().mTrueName);
+		
+		updateDistance();
 	}
 
 	@Override
@@ -223,7 +228,26 @@ public class NavigationFragment extends Fragment implements OnClickListener{
     	startActivity(intent);
 	}
 	
-    private boolean loadHead = false;
+	public void updateDistance(){
+		log.e("NavigationFragment updateDistance");
+		String curTeString = YunyouSharePreference.getCurtime(YunyouApplication.getInstance());
+		long time = System.currentTimeMillis();
+		String curTime = YunTimeUtils.getFormatTime1(time);
+		
+		log.e("curTeString = " + curTeString + ", curTime = " + curTime);
+		double value = 0;
+		if (curTeString.equalsIgnoreCase(curTime)){
+			int distance = YunyouSharePreference.getDistance(YunyouApplication.getInstance());
+			value = distance / 1000.0;
+		}else{
+			
+		}
+
+		String text = "当天里程: " + String.valueOf(value) + "km";	
+		mTVDistance.setText(text);
+	}
+	
+    public static boolean  loadHead = false;
 	public void updateHead(){
 		
 		GloalType.UserInfoEx userInfoEx = mApplication.getUserInfoEx();

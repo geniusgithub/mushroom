@@ -45,6 +45,7 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 	
 	private MainMapFragment mMapExFragment;
 	private NewBikeFragment mBikeFragment;
+	private NavigationFragment mNavigationFragment;
 	
 	private ImageView mLeftIcon;
 	private TextView mTitleTextView;
@@ -107,7 +108,7 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 		SlidingMenu sm = getSlidingMenu();
 		sm.setMode(SlidingMenu.LEFT);
 
-
+		mNavigationFragment = new NavigationFragment();
 		setBehindContentView(R.layout.left_menu_frame);
 		sm.setSlidingEnabled(true);
 		sm.setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
@@ -116,7 +117,7 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 		getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 		getSupportFragmentManager()
 		.beginTransaction()
-		.replace(R.id.left_menu_frame, new NavigationFragment())
+		.replace(R.id.left_menu_frame, mNavigationFragment)
 		.commit();
 		sm.setBehindOffsetRes(R.dimen.slidingmenu_offset);
 		sm.setBehindScrollScale(0);
@@ -258,6 +259,8 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 	
 	public void onFinish(){
 		toggle();
+		
+		mNavigationFragment.updateDistance();
 	}
 	
 	@Override

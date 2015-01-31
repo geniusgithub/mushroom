@@ -1577,8 +1577,8 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 			Bundle extras = picdata.getExtras();
 			if (extras != null) {
 				Bitmap photo = extras.getParcelable("data");
-				int bytes =  photo.getByteCount();
-				log.e("bytes = " + bytes / 1024.0 + "KB");
+			//	int bytes =  photo.getByteCount();
+			//	log.e("bytes = " + bytes / 1024.0 + "KB");
 				mImageView.setImageBitmap(photo);
 	
 				ByteArrayOutputStream stream = new ByteArrayOutputStream();
@@ -1592,8 +1592,8 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 				
 				Bitmap bmp = BitmapFactory.decodeFile(filePath);
 				if (bmp != null){
-					int bytes2 =  bmp.getByteCount();
-					log.e("bytes2 = " + bytes2 / 1024.0 + "KB");
+				//	int bytes2 =  bmp.getByteCount();
+				//	log.e("bytes2 = " + bytes2 / 1024.0 + "KB");
 					mImageView2.setImageBitmap(bmp);
 				}
 				/**
