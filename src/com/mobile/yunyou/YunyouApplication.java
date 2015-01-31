@@ -48,7 +48,7 @@ public class YunyouApplication extends Application{
 	
 	private boolean mIsLogin = false;
 	
-	public boolean mIsDebug = true;
+	public boolean mIsDebug = false;
 	
 	private Handler mHandler;
 	

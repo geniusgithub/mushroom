@@ -313,7 +313,7 @@ public class NewBikeCenter implements AMapLocationListener{
 			log.e("NewBikeCenter  addLocation = null");
 		}
 		
-		if (location != null){
+		if (aMapLocation != null){
 			mHeight =  aMapLocation.getAltitude();
 		}
 

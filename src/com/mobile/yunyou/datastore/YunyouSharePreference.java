@@ -90,7 +90,7 @@ public class YunyouSharePreference {
 		log.e("putDistance = "  + distance);
 		SharedPreferences sharedPreferences = context.getSharedPreferences(SHAREPREFERENCE_NAME, 0);
 		Editor editor = sharedPreferences.edit();
-		editor.putFloat(KEY_DISTANCE, distance);
+		editor.putInt(KEY_DISTANCE, distance);
 		
 		return editor.commit();
 	}

@@ -238,6 +238,7 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		double value = 0;
 		if (curTeString.equalsIgnoreCase(curTime)){
 			int distance = YunyouSharePreference.getDistance(YunyouApplication.getInstance());
+			log.e("distance = " + distance);
 			value = distance / 1000.0;
 		}else{
 			

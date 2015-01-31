@@ -559,7 +559,7 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 			YunyouSharePreference.putDistance(mContext, saveDistance);
 		}else{
 			YunyouSharePreference.putCurtime(mContext, time);
-			YunyouSharePreference.putDistance(mContext, saveDistance);
+			YunyouSharePreference.putDistance(mContext, distance);
 		}
 		
 		
