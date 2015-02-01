@@ -33,7 +33,7 @@
               	    android:focusable="false" 
 		            android:layout_alignParentLeft="true"
 		    		android:layout_marginRight="12.0dip" 
-		   			zhy:src="@drawable/set_mogu_icon"
+		   			zhy:src="@drawable/mogu_icon"
             		zhy:type="circle">
 		        	</com.mobile.yunyou.widget.CustomImageView>
 

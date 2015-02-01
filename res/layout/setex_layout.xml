@@ -44,9 +44,20 @@
        android:id="@+id/ll_layout2"
        android:layout_below="@id/ll_layout1"
        style="@style/leba_bg_layout">
+            <LinearLayout 
+                android:id="@+id/ll_changePwd"
+                style="@style/leba_bg_top_layout">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:src="@drawable/set_rec_icon"/>
+                <TextView style="@style/text_style1" android:text="@string/setting_text_password" android:layout_weight="1.0" />
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
+            </LinearLayout> 
+             
+            <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" /> 
+             
+            
              <LinearLayout 
                 android:id="@+id/ll_goWarn"
-                style="@style/leba_bg_top_layout">
+                style="@style/leba_bg_mid_layout">
                 <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginLeft="12.0dip" android:src="@drawable/set_rec_icon"/>
                 <TextView style="@style/text_style1" android:text="@string/setting_text_warn" android:layout_weight="1.0" />
                 <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>

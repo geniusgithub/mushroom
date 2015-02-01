@@ -71,6 +71,20 @@ private static final int MSG_GET_WARNING = 0x0001;
 	}
 
 
+	
+	
+	@Override
+	public void onBackPressed() {
+
+		if (!mApplication.isBindDevice()){
+			Utils.showToast(this, R.string.toask_bind_device);
+			return ;
+		}
+		
+		super.onBackPressed();
+	}
+
+
 	private void setupViews(){
 		mRootView = findViewById(R.id.rootView);
 		
@@ -112,7 +126,7 @@ private static final int MSG_GET_WARNING = 0x0001;
 			  mBtnBind.setVisibility(View.GONE);
 			  mBtnUnBind.setVisibility(View.VISIBLE);
 			  mDeviceInfoEx =   mApplication.getCurDevice();
-			  mETAccount.setText(mDeviceInfoEx.mDid);
+			  mETAccount.setText(mDeviceInfoEx.mAlias);
 			  mETAccount.setEnabled(false);
 			  mETPassword.setEnabled(false);
 		  }else{

@@ -30,7 +30,7 @@
              android:layout_height="wrap_content"
              android:textColor="#ffffff"
              android:textSize="18sp"
-             android:background="@drawable/selector_btn_add_clock"
+             android:background="@null"
              android:text="@string/bind_text_changepwd"/>
    </RelativeLayout>
  

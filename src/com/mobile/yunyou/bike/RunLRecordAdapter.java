@@ -86,9 +86,9 @@ public class RunLRecordAdapter  extends BaseAdapter{
 		}
 
 		if (object.isLocal){
-			holder.tvType.setText("本地");
+			holder.tvType.setText("上传中");
 		}else{
-			holder.tvType.setText("网络");
+			holder.tvType.setText("已上传");
 		}
 		
 		holder.tvDistance.setText(getShowDistance(object.mTotalDistance));

@@ -155,6 +155,7 @@ public class CustomImageView extends View
 	
 	public void setImageBitmap(Bitmap bitmap){
 		mSrc = bitmap;
+		invalidate();
 	}
 
 	/**

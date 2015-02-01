@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-        <string name="app_name">蘑菇兄弟</string>
+        <string name="app_name">蘑菇骑行</string>
     
         <string name="btn_yes">是</string>
     	<string name="btn_no">否</string>
@@ -106,7 +106,7 @@
         <string name="toask_birthday_not_null">生日不能为空</string>
         <string name="toask_clockname_not_null">闹钟名称不能为空</string>
         <string name="toask_error_phone">手机号码格式不正确，请重新输入</string>
-        <string name="toask_error_birthday">生日格式不正确，请重新输入</string>
+        <string name="toask_error_birthday">生日格式不正确，请重新设置</string>
         <string name="toask_error_time">开始时间必须小于结束时间</string>
         <string name="toask_error_guard_time">关注时间不能有重复</string>
         <string name="toask_error_number">请输入正确的数字</string>
@@ -135,7 +135,8 @@
         <string name="toask_unbind_bike">未绑定蘑菇伴侣,无法追踪</string>
         <string name="toask_query_database_fail">查询数据库失败</string>
         <string name="toask_no_new_version">暂无新的版本</string>             
-                      
+        <string name="toask_bind_device">请先绑定设备</string>  
+          
         <string name="popwindow_title_bind">绑定设备账号</string>      
         <string name="popwindow_title_listener">设备监听</string>
         <string name="popwindow_title_sex">性别选择</string>  

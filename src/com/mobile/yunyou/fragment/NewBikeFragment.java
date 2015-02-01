@@ -114,6 +114,7 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 	private BikeType.BikeLRecordResult mCuRecordResult;
 	
 	private static NewBikeFragment fragment=null;
+	private YunyouApplication mApplication;
 	
 	public static NewBikeFragment newInstance(){
 		fragment = new NewBikeFragment();
@@ -186,6 +187,11 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 //			  
 //			 
 //		}
+		
+		if (!mApplication.getBindFlag()){
+			showBindDialog(true);
+		}
+
 	}
 
 	/**
@@ -364,6 +370,35 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 	
 	}
 	
+	private void showBindDialog(boolean bShow)
+	{
+		if (mTipDialog != null)
+		{
+			mTipDialog.dismiss();
+			mTipDialog = null;
+		}
+		
+			View.OnClickListener onListener = new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					Intent intent = new Intent();
+					intent.setClass(getActivity(), MoGuActivity.class);
+					startActivity(intent);
+				}
+			};
+
+
+
+		if (bShow)
+		{
+			mTipDialog = DialogFactory.creatSingleDialog(mContext, R.string.dialog_title_bind, R.string.dialog_msg_bind, onListener);
+			mTipDialog.setCancelable(false);
+			mTipDialog.show();
+		}
+	
+	}
+	
 	private void showUploadDialog(boolean bShow)
 	{
 		if (mDialog != null)
@@ -417,16 +452,17 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 //		  updateStatus();
 		  mRunRecordDBManager = RunRecordDBManager.getInstance();
 
+		  mApplication = YunyouApplication.getInstance();
 	}
 	
 	private void initMap(){
 		ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
-		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point1));
-		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point2));
-		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point3));
-		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point4));
-		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point5));
-		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point6));
+		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.location_marker));
+//		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point2));
+//		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point3));
+//		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point4));
+//		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point5));
+//		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point6));
 		mSelfMarket = aMap.addMarker(new MarkerOptions().anchor(0.5f, 0.5f).icons(giflist).period(50));
 		  LocationEx locationEx = SelfLocationManager.getInstance().getLastLocation();
 		  if (locationEx != null){

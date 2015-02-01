@@ -301,7 +301,7 @@
         	        <RelativeLayout 
         	        android:id="@+id/rl_lock"
 				    android:layout_width="wrap_content"
-				    android:layout_height="wrap_content"
+					android:layout_height="@dimen/btn_width"
 				    android:background="@drawable/red_background"
 				    android:layout_centerInParent="true">
         	             <CheckBox
@@ -316,7 +316,7 @@
         	        <Button
         	        android:id="@+id/btn_start"
 			        android:layout_width="fill_parent"
-			        android:layout_height="wrap_content"
+			        android:layout_height="@dimen/btn_width"
 			        android:layout_toLeftOf="@id/rl_lock"
 			        android:background="@drawable/selector_btn_black"
 			        android:text="@string/newbike_text_start"
@@ -327,7 +327,7 @@
         	        <Button
         	        android:id="@+id/btn_upload"
 			        android:layout_width="fill_parent"
-			        android:layout_height="wrap_content"
+					android:layout_height="@dimen/btn_width"
 			        android:layout_toLeftOf="@id/rl_lock"
 			        android:background="@drawable/selector_btn_black"
 			        android:text="@string/newbike_text_upload"
@@ -337,7 +337,7 @@
         	        <Button
         	        android:id="@+id/btn_pause"
 			        android:layout_width="fill_parent"
-			        android:layout_height="wrap_content"
+			        android:layout_height="@dimen/btn_width"
 			        android:layout_toLeftOf="@id/rl_lock"
 			        android:background="@drawable/selector_btn_black"
 			        android:text="@string/newbike_text_startyet"
@@ -347,7 +347,7 @@
         	        <Button
         	        android:id="@+id/btn_stop"
 			        android:layout_width="fill_parent"
-			        android:layout_height="wrap_content"
+        			android:layout_height="@dimen/btn_width"
 			        android:layout_toRightOf="@id/rl_lock"
 			        android:background="@drawable/selector_btn_black"
 			        android:text="@string/newbike_text_stop"
@@ -357,7 +357,7 @@
         	        <Button
         	        android:id="@+id/btn_stopyet"
 			        android:layout_width="fill_parent"
-			        android:layout_height="wrap_content"
+			        android:layout_height="@dimen/btn_width"
 			        android:layout_toRightOf="@id/rl_lock"
 			        android:background="@drawable/selector_btn_black"
 			        android:text="@string/newbike_text_stopyet"

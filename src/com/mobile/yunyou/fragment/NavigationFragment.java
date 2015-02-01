@@ -1,6 +1,9 @@
 package com.mobile.yunyou.fragment;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -14,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.mobile.yunyou.BrocastFactory;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.activity.MainSlideActivity;
@@ -21,7 +25,11 @@ import com.mobile.yunyou.bike.SafeActivity;
 import com.mobile.yunyou.bike.tmp.NewBikeExActivity;
 import com.mobile.yunyou.datastore.YunyouSharePreference;
 import com.mobile.yunyou.model.GloalType;
+import com.mobile.yunyou.model.PublicType;
+import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.msg.MessageExActivity;
+import com.mobile.yunyou.network.IRequestCallback;
+import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.network.api.HeadFileConfigure;
 import com.mobile.yunyou.set.SetPersonActivity;
 import com.mobile.yunyou.set.SettingExActivity;
@@ -52,6 +60,11 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 	  private TextView mTVDistance;
 	
 	  private YunyouApplication mApplication;
+		private NetworkCenterEx mNetworkCenter;
+		
+	private Context mContext;
+	private BroadcastReceiver mReceiver;
+	
 	public NavigationFragment(){
 		
 	}
@@ -72,6 +85,7 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		super.onDestroy();
 		
 		log.e("NavigationFragment onDestroy");
+		mContext.unregisterReceiver(mReceiver);
 	}
 	
 	@Override
@@ -87,7 +101,26 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		super.onActivityCreated(savedInstanceState);
 		log.e("NavigationFragment onActivityCreated");
 		
+		mContext = getActivity();
+		
 		setupViews();
+		
+		mReceiver = new BroadcastReceiver() {
+			
+			@Override
+			public void onReceive(Context content, Intent intent) {
+				if (intent.getAction().equalsIgnoreCase(BrocastFactory.BROCAST_UPDATE_NICKNAME)){
+					updateNickname();
+				}else if (intent.getAction().equalsIgnoreCase(BrocastFactory.BROCAST_UPDATE_HEADICON)){
+					loadHead = false;
+					updateHead();
+				}
+			}
+		};
+		
+		IntentFilter intentFilter = new IntentFilter(BrocastFactory.BROCAST_UPDATE_NICKNAME);
+		intentFilter.addAction(BrocastFactory.BROCAST_UPDATE_HEADICON);
+		mContext.registerReceiver(mReceiver, intentFilter);
 	}
 	
 
@@ -97,7 +130,6 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		super.onResume();
 		
 		updateHead();
-
 	}
 
 	private void setupViews(){
@@ -126,9 +158,12 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 	
 		
 		mApplication = YunyouApplication.getInstance();
-		mTVNickName.setText(mApplication.getUserInfoEx().mTrueName);
+
+		
+		mNetworkCenter = NetworkCenterEx.getInstance();
 		
 		updateDistance();
+		updateNickname();
 	}
 
 	@Override
@@ -162,6 +197,7 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 			break;
 		}
 	}
+
 
 	
 	private void goLocation(){
@@ -198,6 +234,11 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 	}
 	
 	private void goSafe(){
+		
+		if (!mApplication.isBindDevice()){
+			Utils.showToast(getActivity(), R.string.toask_bind_device);
+			return ;
+		}
 		Intent intent = new Intent();
 		intent.setClass(getActivity(), SafeActivity.class);
 		startActivity(intent);
@@ -248,12 +289,16 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		mTVDistance.setText(text);
 	}
 	
-    public static boolean  loadHead = false;
+	private void updateNickname(){
+		mTVNickName.setText(mApplication.getUserInfoEx().mTrueName);
+	}
+	
+    public  boolean  loadHead = false;
 	public void updateHead(){
-		
+	
 		GloalType.UserInfoEx userInfoEx = mApplication.getUserInfoEx();
 		int type = userInfoEx.mType;
-		
+		log.e("NavigationFragment	updateHead type = " + type + ", loadHead = " + loadHead);
 		switch(type){
 		case 0:
 			if (!loadHead){

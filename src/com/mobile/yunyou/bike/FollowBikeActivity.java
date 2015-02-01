@@ -12,6 +12,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -93,6 +94,8 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON); 
+		
 		setContentView(R.layout.follow_bike_layout);
 		
 		mMapView = (MapView) findViewById(R.id.map);
@@ -193,6 +196,7 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 
     	mBtnFollow = (Button) findViewById(R.id.btn_follow);
     	mBtnFollow.setOnClickListener(this);
+    	mBtnFollow.setVisibility(View.GONE);
     	
 		mZoomInBtn = (ImageView) findViewById(R.id.bt_zoomin_pos);
 		mZoomInBtn.setOnClickListener(this);

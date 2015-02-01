@@ -16,32 +16,32 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
+import android.widget.EditText;
 import android.widget.PopupWindow;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
+import com.mobile.yunyou.BrocastFactory;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.ServiceIPConfig;
-import com.mobile.yunyou.TestActivity;
 import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.bike.tmp.DataFactory;
-import com.mobile.yunyou.bike.tmp.NewBikeExActivity;
+import com.mobile.yunyou.custom.CustomTimeExPopWindow;
 import com.mobile.yunyou.custom.SingleChoicePopWindow;
-import com.mobile.yunyou.device.DeviceIntentConstant;
 import com.mobile.yunyou.fragment.NavigationFragment;
+import com.mobile.yunyou.model.BaseType.Birthday;
 import com.mobile.yunyou.model.GloalType;
 import com.mobile.yunyou.model.PublicType;
 import com.mobile.yunyou.model.ResponseDataPacket;
@@ -49,7 +49,6 @@ import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.network.api.HeadFileConfigure;
 import com.mobile.yunyou.set.SetPersonCommentActivity.IViewMode;
-import com.mobile.yunyou.util.BitmapUtils;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.FileManager;
@@ -58,12 +57,14 @@ import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.UploadExUtil;
 import com.mobile.yunyou.util.UploadExUtil.OnUploadProcessListener;
 import com.mobile.yunyou.util.Utils;
+import com.mobile.yunyou.util.VertifyUtil;
 import com.mobile.yunyou.widget.CustomImageView;
 
 @SuppressLint("NewApi")
 public class SetPersonActivity extends Activity implements OnClickListener, 
 															IRequestCallback,
-															OnUploadProcessListener{
+															OnUploadProcessListener,
+															OnCheckedChangeListener{
 
 
 	
@@ -73,26 +74,25 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 	private static final int MSG_GET_INFO = 0x0001;
 	
 	private View mRootView;
-	private View mEmailView;
-	private View mNameView;
-	private View mPwdView;
+//	private View mEmailView;
+//	private View mNameView;
+	//private View mPwdView;
 	//private View mPhoenView;
-	private View mSexView;
 	private View mBirthdayView;
 	
 	private Button mBtnSave;
 	private Button mBtnBack;
 	
 	private TextView mTVAccount;
-	private TextView mTVEmail;
-	private TextView mTVTruename;
-	private TextView mTVPhone;
-	private TextView mTVSex;
+	private EditText mETEmail;
+	private EditText mETTruename;
+	private TextView mTVPhone;	
 	private TextView mTVBirthday;
+	private RadioGroup mRGSex;
 	
 	private String mEmailString;
 	private String mNameString;
-	private String mPhoneString;
+	//private String mPhoneString;
 	private String mSexString;
 	private String mBirthdayString;
 	private CustomImageView mHeadImageView;
@@ -108,6 +108,10 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 	
 	private boolean isFirstResume = true;
 	private Handler mHandler;
+	
+	private CustomTimeExPopWindow mCustomTimePopWindow;
+	
+	private PublicType.UserChangeInfo mUsChangeInfo = new PublicType.UserChangeInfo();
 	
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -147,28 +151,42 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 		mHeadImageView.setOnClickListener(this);
 		
 		mRootView = findViewById(R.id.rootView);
-		mEmailView = findViewById(R.id.ll_emailset);
-		mNameView = findViewById(R.id.ll_nameset);
-		mPwdView = findViewById(R.id.ll_changepwd);
+		mRGSex = (RadioGroup) findViewById(R.id.rg_sex);
 		//mPhoenView = findViewById(R.id.ll_phoneset);
-		mSexView = findViewById(R.id.ll_sexset);
+
 		mBirthdayView = findViewById(R.id.ll_birthdayset);
-				
-		mEmailView.setOnClickListener(this);
-		mNameView.setOnClickListener(this);
-		mPwdView.setOnClickListener(this);
+		mBirthdayView.setClickable(false);
+		
+
+		//mPwdView.setOnClickListener(this);
 		//mPhoenView.setOnClickListener(this);
-		mSexView.setOnClickListener(this);
+
 		mBirthdayView.setOnClickListener(this);
 		
 		mTVAccount = (TextView) findViewById(R.id.tv_account);
-		mTVEmail = (TextView) findViewById(R.id.tv_email);
-		mTVTruename = (TextView) findViewById(R.id.tv_truename);
+		mETEmail = (EditText) findViewById(R.id.et_email);
+
+		mETTruename = (EditText) findViewById(R.id.et_truename);
+		
+
 		mTVPhone = (TextView) findViewById(R.id.tv_phone);
-		mTVSex = (TextView) findViewById(R.id.tv_sex);
+
 		mTVBirthday = (TextView) findViewById(R.id.tv_birthday);
 
 		mSingleChoicePopWindow = new SingleChoicePopWindow(this, mRootView, new ArrayList<String>());
+		
+		mCustomTimePopWindow = new CustomTimeExPopWindow(this, mRootView);
+		mCustomTimePopWindow.setOnOKButtonListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				onBirthdayTime();
+			}
+		});
+
+		mRGSex.setOnCheckedChangeListener(this);
+		((RadioButton) mRGSex.getChildAt(0)).toggle();
 	}
 
 	private void initData()
@@ -218,13 +236,13 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 	private void setEmail(String email)
 	{
 		mEmailString = email;
-		mTVEmail.setText(email);
+		mETEmail.setText(email);
 	}
 	
 	private void setTurename(String name)
 	{
 		mNameString = name;
-		mTVTruename.setText(name);
+		mETTruename.setText(name);
 	}
 	
 //	private void setPhone(String phone)
@@ -238,14 +256,11 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 		mSexString = sex;
 		String str = sex.toLowerCase();
 		
-		if (str.equals("m"))
+		if (str.equalsIgnoreCase("m"))
 		{
-			mTVSex.setText("男");
-		}else if (str.equals("f"))
-		{
-			mTVSex.setText("女");
+			((RadioButton) mRGSex.getChildAt(0)).toggle();
 		}else {
-			mTVSex.setText("未知");
+			((RadioButton) mRGSex.getChildAt(1)).toggle();
 		}
 	}
 	
@@ -254,49 +269,63 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 		mBirthdayString = birthday;
 		mTVBirthday.setText(birthday);
 	}
+	
+	private void onBirthdayTime()
+	{
+		int year = mCustomTimePopWindow.getYear();
+		int month = mCustomTimePopWindow.getMonth();
+		int day = mCustomTimePopWindow.getDay();
+		
+		Birthday mBirthday = new Birthday();
+		mBirthday.year = year;
+		mBirthday.month = month;
+		mBirthday.day = day;
+		
+		
+		if (VertifyUtil.isVaildBirthday(mBirthday) == false)
+		{
+			Utils.showToast(this, R.string.toask_error_birthday);
+			return ;
+		}
+		
+	
+		setBirthday(mBirthday.toString());
+		
+	}
 
 	@Override
 	public void onClick(View v) {
 		// TODO Auto-generated method stub
 		switch(v.getId())
 		{
-			case R.id.ll_emailset:
-			{			
-				Intent intent = new Intent();
-				intent.setClass(this, SetPersonCommentActivity.class);
-				intent.putExtra(SetPersonCommentActivity.VIEW_KEY, SetPersonCommentActivity.IViewMode.IVM_EMAIL);
-				
-				Bundle bundle = new Bundle();
-				bundle.putString(SetPersonIntentConstant.KEY_OBJECT_DATA, mEmailString);
-			
-				intent.putExtra(DeviceIntentConstant.KEY_DATA_BUNDLE, bundle);
-				startActivityForResult(intent, REQUEST_CODE_SET_COMMENT);
-				
-			}
-				break;
-			case R.id.ll_nameset:
-			{			
-				Intent intent = new Intent();
-				intent.setClass(this, SetPersonCommentActivity.class);
-				intent.putExtra(SetPersonCommentActivity.VIEW_KEY, SetPersonCommentActivity.IViewMode.IVM_NAME);
-				
-				Bundle bundle = new Bundle();
-				bundle.putString(SetPersonIntentConstant.KEY_OBJECT_DATA, mNameString);
-			
-				intent.putExtra(DeviceIntentConstant.KEY_DATA_BUNDLE, bundle);
-				startActivityForResult(intent, REQUEST_CODE_SET_COMMENT);
-				
-			}
-				break;
-			case R.id.ll_changepwd:
-			{			
-				Intent intent = new Intent();
-				intent.setClass(this, ChangePwdActivity.class);
-				startActivity(intent);
-				
-			}
-				break;
-				
+//			case R.id.ll_emailset:
+//			{			
+//				Intent intent = new Intent();
+//				intent.setClass(this, SetPersonCommentActivity.class);
+//				intent.putExtra(SetPersonCommentActivity.VIEW_KEY, SetPersonCommentActivity.IViewMode.IVM_EMAIL);
+//				
+//				Bundle bundle = new Bundle();
+//				bundle.putString(SetPersonIntentConstant.KEY_OBJECT_DATA, mEmailString);o
+//			
+//				intent.putExtra(DeviceIntentConstant.KEY_DATA_BUNDLE, bundle);
+//				startActivityForResult(intent, REQUEST_CODE_SET_COMMENT);
+//				
+//			}
+//				break;
+//			case R.id.ll_nameset:
+//			{			
+//				Intent intent = new Intent();
+//				intent.setClass(this, SetPersonCommentActivity.class);
+//				intent.putExtra(SetPersonCommentActivity.VIEW_KEY, SetPersonCommentActivity.IViewMode.IVM_NAME);
+//				
+//				Bundle bundle = new Bundle();
+//				bundle.putString(SetPersonIntentConstant.KEY_OBJECT_DATA, mNameString);
+//			
+//				intent.putExtra(DeviceIntentConstant.KEY_DATA_BUNDLE, bundle);
+//				startActivityForResult(intent, REQUEST_CODE_SET_COMMENT);
+//				
+//			}
+//				break;
 //			case R.id.ll_phoneset:
 //			{			
 //				Intent intent = new Intent();
@@ -311,20 +340,21 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 //				
 //			}
 //				break;
-			case R.id.ll_sexset:
-				showSexWindow();
-				break;
+//			case R.id.ll_sexset:
+//				showSexWindow();
+//				break;
 			case R.id.ll_birthdayset:
 			{
-				Intent intent = new Intent();
-				intent.setClass(this, SetPersonCommentActivity.class);
-				intent.putExtra(SetPersonCommentActivity.VIEW_KEY, SetPersonCommentActivity.IViewMode.IVM_BIRTHDAY);
-				
-				Bundle bundle = new Bundle();
-				bundle.putString(SetPersonIntentConstant.KEY_OBJECT_DATA, mBirthdayString);
-			
-				intent.putExtra(DeviceIntentConstant.KEY_DATA_BUNDLE, bundle);
-				startActivityForResult(intent, REQUEST_CODE_SET_COMMENT);
+				showBirthTimeWindow();
+//				Intent intent = new Intent();
+//				intent.setClass(this, SetPersonCommentActivity.class);
+//				intent.putExtra(SetPersonCommentActivity.VIEW_KEY, SetPersonCommentActivity.IViewMode.IVM_BIRTHDAY);
+//				
+//				Bundle bundle = new Bundle();
+//				bundle.putString(SetPersonIntentConstant.KEY_OBJECT_DATA, mBirthdayString);
+//			
+//				intent.putExtra(DeviceIntentConstant.KEY_DATA_BUNDLE, bundle);
+//				startActivityForResult(intent, REQUEST_CODE_SET_COMMENT);
 			}
 				break;
 			case R.id.btn_save:
@@ -339,18 +369,61 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 		}
 	}
 	
+	
+	private boolean checkEmailSet()
+	{
+		mEmailString = mETEmail.getText().toString();
+		
+		if (mEmailString.length() == 0)
+		{
+			Utils.showToast(this, R.string.toask_email_not_null);
+			return false;
+		}
+		
+		if (VertifyUtil.isEMail(mEmailString) == false)
+		{
+			Utils.showToast(this, R.string.toask_error_email);
+			return false;
+		}
+
+		return true;
+	}
+	
+	private boolean checkNameSet()
+	{
+		mNameString = mETTruename.getText().toString();	
+		
+		
+		if (mNameString.length() == 0)
+		{
+			Utils.showToast(this, R.string.toask_name_not_null);
+			return false;
+		}
+		
+		return true;
+	}
+	
 	private void save()
 	{
+		boolean ret = checkEmailSet();
+		if (!ret){
+			return ;
+		}
+		
+		ret = checkNameSet();
+		if (!ret){
+			return ;
+		}
 		
 		mUserInfoEx.mEmail = mEmailString;
-		mUserInfoEx.mPhone = mPhoneString;
+		//mUserInfoEx.mPhone = mPhoneString;
 		mUserInfoEx.mTrueName = mNameString;
 		mUserInfoEx.mBirthday = mBirthdayString;
 		mUserInfoEx.mSex = mSexString;
 		
-		PublicType.UserChangeInfo info = new PublicType.UserChangeInfo();
+		PublicType.UserChangeInfo info = mUsChangeInfo;
 		info.mTrueName = mNameString;
-		info.mPhone = mPhoneString;
+		//info.mPhone = mPhoneString;
 		info.mBirthday = mBirthdayString;
 		info.mAddr = mUserInfoEx.mAddr;
 		info.mEmail = mEmailString;
@@ -383,34 +456,34 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 		startActivityForResult(openAlbumIntent, CHOOSE_PHOTO);
 	}
 	
-	public void showSexWindow()
-	{
-		String str = mSexString.toLowerCase();
-		int index = 0;
-		if (str.equals("m"))
-		{
-			index = 0;
-		}else{
-			index = 1;
-		}
-		
-		mSingleChoicePopWindow.refreshData(mSexList, index);
-		mSingleChoicePopWindow.setTitle(getResources().getString(R.string.popwindow_title_sex));
-		
-		mSingleChoicePopWindow.setOnOKButtonListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View arg0) {
-				// TODO Auto-generated method stub
-				int selItem = mSingleChoicePopWindow.getSelectItem();
-			
-				setSex(selItem == 0 ? "m" : "f");
-			}
-		});
-		
-		mSingleChoicePopWindow.show(true);
-			
-	}
+//	public void showSexWindow()
+//	{
+//		String str = mSexString.toLowerCase();
+//		int index = 0;
+//		if (str.equals("m"))
+//		{
+//			index = 0;
+//		}else{
+//			index = 1;
+//		}
+//		
+//		mSingleChoicePopWindow.refreshData(mSexList, index);
+//		mSingleChoicePopWindow.setTitle(getResources().getString(R.string.popwindow_title_sex));
+//		
+//		mSingleChoicePopWindow.setOnOKButtonListener(new View.OnClickListener() {
+//			
+//			@Override
+//			public void onClick(View arg0) {
+//				// TODO Auto-generated method stub
+//				int selItem = mSingleChoicePopWindow.getSelectItem();
+//			
+//				setSex(selItem == 0 ? "m" : "f");
+//			}
+//		});
+//		
+//		mSingleChoicePopWindow.show(true);
+//			
+//	}
 
 	private Dialog mDialog = null;
 	private void showPhotoDialog(boolean bShow)
@@ -459,6 +532,24 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 			mPopupWindow.showAtLocation(mRootView, Gravity.CENTER, 0, 0);
 		}
 	
+	}
+	
+	
+	private void showBirthTimeWindow()
+	{
+		Birthday birthday = new Birthday();
+		try {
+			birthday.parseString(mBirthdayString);
+			mCustomTimePopWindow.setYear(birthday.year);
+			mCustomTimePopWindow.setMonth(birthday.month);
+			mCustomTimePopWindow.setDay(birthday.day);
+			mCustomTimePopWindow.show(true);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+
 	}
 	
 	
@@ -533,7 +624,7 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 					+ "/yunyou.jpg");
 			startPhotoZoom(Uri.fromFile(temp));
 		}else{
-			Utils.showToast(this, "获取图片失败...");
+		//	Utils.showToast(this, "获取图片失败...");
 		}
 	}
 	
@@ -542,7 +633,7 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 		{
 			startPhotoZoom(data.getData());
 		}else{
-			Utils.showToast(this, "获取图片失败...");
+		//	Utils.showToast(this, "获取图片失败...");
 		}
 	}
 	
@@ -697,7 +788,7 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 		PublicType.UserChangeInfo info = new PublicType.UserChangeInfo();
 		try {
 			info.parseString(dataPacket.data.toString());
-			
+			mUsChangeInfo = info;
 			GloalType.UserInfoEx userInfoEx = mApplication.getUserInfoEx();
 			userInfoEx.mTrueName = info.mTrueName;
 			userInfoEx.mPhone = info.mPhone;
@@ -720,6 +811,8 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 				{
 					mSexList.add(mSexArrays[i]);
 				}
+				
+				BrocastFactory.sendUserInfoUpdate(this);
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -743,16 +836,18 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 		Utils.showToast(this, R.string.set_data_success);
 		mApplication.setUserInfoEx(mUserInfoEx);
 		
+		BrocastFactory.sendUserInfoUpdate(this);
+		
 		finish();
 	}
 	
 	
 	 private boolean loadHead = false;
 		public void updateHead(){
-			
+
 			GloalType.UserInfoEx userInfoEx = mApplication.getUserInfoEx();
 			int type = userInfoEx.mType;
-			
+			log.e("SetPersonActivity updateHead type = " + type);
 			switch(type){
 			case 0:
 				if (!loadHead){
@@ -869,6 +964,8 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 							        	return ;
 							        }
 							        
+						
+							        
 							        curBitmap.compress(Bitmap.CompressFormat.JPEG, 100, fOut);
 							        try {
 							                fOut.flush();
@@ -878,11 +975,13 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 							            	Utils.showToast(SetPersonActivity.this, "设置本地头像失败...");
 							            	return ;
 							        }		
-									
-									loadHead = false;
-									updateHead();
-									
-									NavigationFragment.loadHead = false;
+							        log.e("filepath = " + filePath + "\nwrite success!!!curBitmap = " + curBitmap);
+		
+							        loadHead = false;
+							        updateHead();
+		
+			
+									BrocastFactory.sendHeadUpdate(SetPersonActivity.this);
 								}else{
 									Utils.showToast(SetPersonActivity.this, "上传失败...");
 								}
@@ -893,4 +992,14 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 						}
 				}
 		};
+
+		@Override
+		public void onCheckedChanged(RadioGroup rb, int pos) {
+			int id = rb.getCheckedRadioButtonId();
+			if (id == R.id.rb_mail){
+				mSexString = "M";
+			}else{
+				mSexString = "F";
+			}
+		}
 }

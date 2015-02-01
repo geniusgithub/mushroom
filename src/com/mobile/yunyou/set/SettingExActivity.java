@@ -45,7 +45,8 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 	  private View mGoOfflineMapView;
 	  private View mGoWarningView;
 	  private View mGoMoGuView;
-
+	  private View mChangePWDView;
+	  
 	  private View mGoVersionView;
 	  private View mGoAboutView;
 	  private View mGoHelpView;
@@ -97,6 +98,8 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 		  mGoOfflineMapView = findViewById(R.id.ll_goOfflineMap);
 		  mGoWarningView = findViewById(R.id.ll_goWarn);
 		  mGoMoGuView = findViewById(R.id.ll_goMoGu);
+		  mChangePWDView = findViewById(R.id.ll_changePwd);
+		  mChangePWDView.setOnClickListener(this);
 		  
 		  mIVUpageIcon = (ImageView) findViewById(R.id.iv_updateicon);
 		  mHeadImageView = (ImageView) findViewById(R.id.iv_account_head);
@@ -166,6 +169,9 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 		case R.id.ll_goHelp:
 			goHelpActivity();
 			break;
+		case R.id.ll_changePwd:
+			changepwd();
+			break;
 //		case R.id.ll_gorecharge:
 //			goRechargeActivity();
 //			break;
@@ -219,6 +225,12 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 		}
 	
 		
+	}
+	
+	private void changepwd(){
+		Intent intent = new Intent();
+    	intent.setClass(this, ChangePwdActivity.class);
+    	startActivity(intent);
 	}
 	
 	public void goAboutActivity()

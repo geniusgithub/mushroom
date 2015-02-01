@@ -37,8 +37,7 @@
             style="@style/leba_bg_layout">
                 <RelativeLayout
                     style="@style/leba_bg_single_layout" android:clickable="false">
-                    <TextView style="@style/text_style1" android:text="@string/setting_text_head"  android:layout_centerVertical="true" android:layout_weight="1.0" />
-	                <ImageView 
+                   <ImageView 
 	                    android:id="@+id/iv_arrow" 
 	                    android:layout_width="wrap_content" 
 	                    android:layout_height="wrap_content" 
@@ -51,8 +50,7 @@
 		        	android:id="@+id/iv_head"
 		        	android:layout_width="@dimen/headincon_width"
 		    		android:layout_height="@dimen/headincon_width"
-		    		android:layout_toLeftOf="@id/iv_arrow"
-		    		android:layout_marginRight="12.0dip" 
+		    		android:layout_marginLeft="12.0dip" 
 		   			zhy:src="@drawable/head_icon"
             		zhy:type="circle"
 		    		android:layout_centerVertical="true">
@@ -66,27 +64,27 @@
         
                 <LinearLayout
                     style="@style/leba_bg_top_layout" android:clickable="false">
-                    <TextView style="@style/text_style1" android:text="@string/setting_text_account" android:layout_weight="1.0" />
+                    <TextView style="@style/text_style1" android:text="@string/setting_text_account"  />
 	                <TextView android:id="@+id/tv_account" style="@style/text_style2" android:layout_weight="1" />      
                     <ImageView android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
                 </LinearLayout>
                 
                 <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
                 
-                 <LinearLayout android:id="@+id/ll_changepwd"
-                 	 style="@style/leba_bg_mid_layout">
-                     <TextView style="@style/text_style1" android:text="@string/setting_text_pwd" android:layout_weight="1.0" />
-                     <TextView android:id="@+id/tv_changepwd" style="@style/text_style2" android:layout_weight="1" />
-                    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
-                 </LinearLayout>
+<!--                  <LinearLayout android:id="@+id/ll_changepwd" -->
+<!--                  	 style="@style/leba_bg_mid_layout"> -->
+<!--                      <TextView style="@style/text_style1" android:text="@string/setting_text_pwd" android:layout_weight="1.0" /> -->
+<!--                      <TextView android:id="@+id/tv_changepwd" style="@style/text_style2" android:layout_weight="1" /> -->
+<!--                     <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/> -->
+<!--                  </LinearLayout> -->
                 
-                 <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
+<!--                  <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" /> -->
            
-                 <LinearLayout android:id="@+id/ll_emailset"
-                 	 style="@style/leba_bg_bottom_layout">
-                     <TextView style="@style/text_style1" android:text="@string/setting_text_email" android:layout_weight="1.0" />
-                     <TextView android:id="@+id/tv_email" style="@style/text_style2" android:layout_weight="1" />
-                    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
+                 <LinearLayout 
+                 	 style="@style/leba_bg_bottom_layout" android:clickable="false">
+                     <TextView style="@style/text_style1" android:text="@string/setting_text_email"  />
+                     <EditText android:id="@+id/et_email" android:textSize="16.0sp" android:gravity="right" android:textColor="#ff545454"  android:background="@android:color/white" android:paddingLeft="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:paddingRight="15.0dip" android:maxLength="20" android:layout_weight="1"/>
+	       
                  </LinearLayout>
                 
 <!--                  <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" /> -->
@@ -105,31 +103,62 @@
        <LinearLayout 
                 style="@style/leba_bg_layout">                  
           
-                <LinearLayout android:id="@+id/ll_nameset"
-                    style="@style/leba_bg_top_layout">
-                    <TextView style="@style/text_style1" android:text="@string/setting_text_name" android:layout_weight="1.0" />
-                    <TextView android:id="@+id/tv_truename" style="@style/text_style2" android:layout_weight="1" />
-                    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
-                </LinearLayout>
+                <LinearLayout 
+                    style="@style/leba_bg_top_layout" android:clickable="false">
+                    <TextView style="@style/text_style1" android:text="@string/setting_text_name" />
+                    <EditText android:id="@+id/et_truename" android:textSize="16.0sp" android:gravity="right" android:textColor="#ff545454"  android:background="@android:color/white" android:paddingLeft="10.0dip" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="10.0dip" android:paddingRight="15.0dip" android:maxLength="20" android:layout_weight="1"/>	       
+                 </LinearLayout>
                 
                 <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
                 
         
-                 <LinearLayout android:id="@+id/ll_sexset"
-                 	 style="@style/leba_bg_mid_layout">
-                     <TextView style="@style/text_style1" android:text="@string/setting_text_sex" android:layout_weight="1.0" />
-                     <TextView android:id="@+id/tv_sex"  style="@style/text_style2" android:layout_weight="1" />
-                     <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
-                 </LinearLayout>
+                 <RelativeLayout android:id="@+id/ll_sexset"
+                 	 style="@style/leba_bg_mid_layout" android:clickable="false">
+                     <TextView style="@style/text_style1" android:text="@string/setting_text_sex" />
+                    
+                     
+                    <RadioGroup 
+				        android:id="@+id/rg_sex"
+						android:orientation="horizontal"
+						android:layout_width="wrap_content" 
+						android:layout_height="wrap_content"
+						android:layout_marginRight="15dp"
+						android:layout_alignParentRight="true">
+						
+								<RadioButton 
+								android:id="@+id/rb_mail"
+						        android:layout_width="fill_parent" 
+						        android:layout_height="wrap_content"
+						        android:background="@drawable/selector_checkbox"
+						        android:layout_weight="1"
+						        android:gravity="center"
+							    android:text="男" 
+							    android:textColor="@color/safe_text"
+							    android:button="@null"/>
+							
+								<RadioButton 
+								android:id="@+id/rb_femail"
+						        android:layout_width="fill_parent" 
+						        android:layout_height="wrap_content"
+						        android:background="@drawable/selector_checkbox"
+						        android:layout_weight="1"
+						        android:gravity="center"
+							    android:text="女" 
+							    android:textColor="@color/safe_text"
+							    android:button="@null"/>
+														
+							
+						</RadioGroup>	
+						
+                 </RelativeLayout>
                 
                  <View android:background="@color/shape_line" android:layout_width="fill_parent" android:layout_height="1.0px" />
                       
        
                 <LinearLayout android:id="@+id/ll_birthdayset"
                     style="@style/leba_bg_bottom_layout">
-                    <TextView style="@style/text_style1" android:text="@string/setting_text_birthday" android:layout_weight="1.0" />
-                    <TextView android:id="@+id/tv_birthday" style="@style/text_style2" android:layout_weight="1" />
-                    <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginRight="12.0dip" android:src="@drawable/setting_arrow"/>
+                    <TextView style="@style/text_style1" android:text="@string/setting_text_birthday" />
+                    <TextView android:id="@+id/tv_birthday" android:layout_marginRight="12dp" style="@style/text_style2" android:layout_weight="1" />
                 </LinearLayout>                             
             </LinearLayout>
 

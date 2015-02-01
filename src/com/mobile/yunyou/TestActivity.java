@@ -553,7 +553,7 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 		private void insert(){
 			
 			if (true){
-				toUploadFile(jpgeData);
+				toUploadFile("/storage/emulated/0/upload.jpg");
 				return ;
 			}
 			BikeType.MinRunRecord record1 = new BikeType.MinRunRecord();
@@ -595,6 +595,10 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 
 		
 		public void del(){
+
+			if (true){
+				toUploadFileEx("/storage/emulated/0/upload.jpg");
+			}
 			boolean ret = mRunRecordDBManager.deleteAll();
 			
 			log.e("deleteAll ret = " + ret);
@@ -1671,9 +1675,49 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 			startActivityForResult(intent, PICK_PHOTO);
 		}
 	    
-		private void toUploadFile(byte []data)
+		private void toUploadFile(final String filePath)
 		{
-			if (data == null || data.length == 0){
+			if (filePath == null || filePath.length() == 0){
+				Utils.showToast(this, "暂无图片数据");
+				return ;
+			}
+			progressDialog.setMessage("正在上传文件...");
+			progressDialog.show();
+			String fileKey = "file";
+			
+			String jsonDATA = "";
+			try {
+				jsonDATA = DataFactory.buildUploadJsString("deviceset_avatar", "A128966000007112", "0");
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			
+			UploadExUtil uploadUtil = UploadExUtil.getInstance();
+			uploadUtil.setOnUploadProcessListener(this);  //设置监听器监听上传状态
+			
+			Map<String, String> params = new HashMap<String, String>();
+			params.put("json", jsonDATA);
+
+//			uploadUtil.uploadFile( filePath,fileKey,requestURL,params);
+			Thread thread = new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					try {
+						testweibo.uploadFile(filePath);
+					} catch (IOException e) {
+						e.printStackTrace();
+						log.e("testweibo.test(filePath); fail...");
+					}
+				}
+			});
+
+			thread.start();
+		}
+		
+		private void toUploadFileEx(String filePath)
+		{
+			if (filePath == null || filePath.length() == 0){
 				Utils.showToast(this, "暂无图片数据");
 				return ;
 			}
@@ -1695,6 +1739,7 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 			params.put("json", jsonDATA);
 
 			uploadUtil.uploadFile( filePath,fileKey,requestURL,params);
+
 		}
 
 		private static String requestURL = "http://www.360lbs.net:8080";

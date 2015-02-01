@@ -25,8 +25,10 @@ import com.mobile.yunyou.model.BikeType.BikeLRecordResult;
 import com.mobile.yunyou.model.GloalType;
 import com.mobile.yunyou.model.MessagePushType;
 import com.mobile.yunyou.model.PublicType;
+import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.msg.MsgManager;
 import com.mobile.yunyou.network.HeartBeatManager;
+import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.network.api.AbstractTaskCallback;
 import com.mobile.yunyou.service.YunyouService;
@@ -39,7 +41,7 @@ import com.mobile.yunyou.util.Utils;
 //drawable-xhdpi  1280*720     
 //drawable-xxhdpi  1920*1080    
 
-public class YunyouApplication extends Application{
+public class YunyouApplication extends Application implements IRequestCallback{
 
 	private static final CommonLog log = LogFactory.createLog();
 	
@@ -49,6 +51,8 @@ public class YunyouApplication extends Application{
 	private boolean mIsLogin = false;
 	
 	public boolean mIsDebug = false;
+	
+	public boolean mIsGetInfo = false;
 	
 	private Handler mHandler;
 	
@@ -84,6 +88,11 @@ public class YunyouApplication extends Application{
 		return mApplication;
 	}
 	
+	public void requestUserInfo(){
+		mNetworkCenter.StartRequestToServer(PublicType.USER_GET_INFO_MASID, null, this);
+	}
+	
+	
 	public void setBindFlag(boolean flag){
 		isIgnoreBind = flag;
 	}
@@ -98,6 +107,15 @@ public class YunyouApplication extends Application{
 	
 	public boolean getVersionFlag(){
 		return isNewVersion;
+	}
+	
+	
+	public void setGetInfo(boolean flag){
+		mIsGetInfo = flag;
+	}
+	
+	public boolean getIsGetInfo(){
+		return mIsGetInfo;
 	}
 	
 	public void setVersionObject(PublicType.BikeCheckUpgradeResult object){
@@ -218,6 +236,7 @@ public class YunyouApplication extends Application{
 					
 					log.e("load mUserInfoEx head  saveUri = " + getSaveUri() + ", isSuccess = " + isSuccess);
 					
+					BrocastFactory.sendHeadUpdate(YunyouApplication.getInstance());
 				}
 			});
 		}
@@ -479,5 +498,52 @@ public class YunyouApplication extends Application{
 	
 	public BikeType.BikeLRecordSubResultGroup getRunRecordSub(){
 		return mRecordGroup;
+	}
+	
+	@Override
+	public boolean onComplete(int requestAction, ResponseDataPacket dataPacket) {
+		
+		String jsString = "null";
+		if (dataPacket != null)
+		{
+			jsString = dataPacket.toString();
+		}
+		
+		log.e("requestAction = " + Utils.toHexString(requestAction) + "\nResponseDataPacket = \n" +jsString);
+		
+		switch(requestAction)
+		{
+		case PublicType.USER_GET_INFO_MASID:
+			onGetUserInfoResult(dataPacket);
+			break;
+		}
+		
+		return true;
+	}
+	
+	private void onGetUserInfoResult(ResponseDataPacket dataPacket)
+	{
+		if (dataPacket == null || dataPacket.rsp == 0)
+		{
+			return ;
+		}
+		
+		PublicType.UserChangeInfo info = new PublicType.UserChangeInfo();
+		try {
+			info.parseString(dataPacket.data.toString());
+			GloalType.UserInfoEx userInfoEx = mApplication.getUserInfoEx();
+			userInfoEx.mTrueName = info.mTrueName;
+			userInfoEx.mPhone = info.mPhone;
+			userInfoEx.mBirthday = info.mBirthday;
+			userInfoEx.mEmail = info.mEmail;
+			userInfoEx.mAddr = info.mAddr;
+			userInfoEx.mSex = info.mSex;
+			
+			BrocastFactory.sendUserInfoUpdate(this);
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -117,6 +118,12 @@ public class UploadExUtil {
 			@Override
 			public void run() {
 				toUploadFile(file, fileKey,  RequestURL, param);
+//				try {
+//					uploadFileEx(file, fileKey,  RequestURL, param);
+//				} catch (IOException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
 			}
 		}).start();
 		
@@ -141,13 +148,11 @@ public class UploadExUtil {
 			conn.setDoOutput(true); // 允许输出流
 			conn.setUseCaches(false); // 不允许使用缓存
 			conn.setRequestMethod("POST"); // 请求方式
-			//conn.setRequestProperty("Charset", CHARSET); // 设置编码
-			//conn.setRequestProperty("user-agent", "蘑菇骑行 (anroid; en_US)");
-			//conn.setRequestProperty("connection", "keep-alive");
-			conn.setRequestProperty("Content-Type", CONTENT_TYPE + ";boundary=" + BOUNDARY);
+			conn.setRequestProperty("Content-Type", CONTENT_TYPE + "; boundary=" + BOUNDARY);
 			/**
 			 * 当文件不为空，把文件包装并且上传
 			 */
+			conn.connect();
 			DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
 			StringBuffer sb = null;
 			String params = "";
@@ -166,7 +171,7 @@ public class UploadExUtil {
 					sb.append("Content-Disposition: form-data; name=\"").append(key).append("\"").append(LINE_END).append(LINE_END);
 					sb.append(value).append(LINE_END);
 					params = sb.toString();
-					log.e("write index = " + index + ", param = \n" + params);
+					log.e("content = \n" + params);
 					dos.write(params.getBytes());
 				}
 			}
@@ -178,6 +183,7 @@ public class UploadExUtil {
 			 * 这里重点注意： name里面的值为服务器端需要key 只有这个key 才可以得到对应的文件
 			 * filename是文件的名字，包含后缀名的 比如:abc.png
 			 */
+			sb.append(LINE_END);
 			sb.append(PREFIX).append(BOUNDARY).append(LINE_END);
 			sb.append("Content-Disposition:form-data; name=\"" + fileKey + "\"; filename=\"" + file.getName() + "\"" + LINE_END);
 			sb.append("Content-Type:image/jpeg" + LINE_END); // 这里配置的Content-type很重要的 ，用于服务器端辨别文件的类型的
@@ -186,7 +192,7 @@ public class UploadExUtil {
 			params = sb.toString();
 			sb = null;
 
-			log.e("write second = \n" + params);			
+			log.e("pic = \n" + params);		
 			dos.write(params.getBytes());
 			
 			/**上传文件*/
@@ -205,7 +211,7 @@ public class UploadExUtil {
 			
 			dos.write(LINE_END.getBytes());
 			byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINE_END).getBytes();
-			log.e("write end_data = " + new String(end_data));		
+			log.e("end_data = \n" + new String(end_data));
 			dos.write(end_data);
 			dos.flush();
 //			
@@ -228,24 +234,123 @@ public class UploadExUtil {
 				}
 				result = sb1.toString();
 				log.e("result : " + result);
-				sendMessage(UPLOAD_SUCCESS_CODE, "上传结果："
-						+ result);
+				sendMessage(res, result);
 				return;
 			} else {
 				log.e("request error");
-				sendMessage(UPLOAD_SERVER_ERROR_CODE,"上传失败：code=" + res);
+				sendMessage(res,"");
 				return;
 			}
 		} catch (MalformedURLException e) {
-			sendMessage(UPLOAD_SERVER_ERROR_CODE,"上传失败：error=" + e.getMessage());
+			sendMessage(404,e.getMessage());
 			e.printStackTrace();
 			return;
 		} catch (IOException e) {
-			sendMessage(UPLOAD_SERVER_ERROR_CODE,"上传失败：error=" + e.getMessage());
+			sendMessage(404,e.getMessage());
 			e.printStackTrace();
 			return;
 		}
 	}
+	
+//	public  void uploadFileEx(File f, String fileKey, String RequestURL, Map<String, String> param) throws IOException {
+//		URL url = new URL(RequestURL);
+//
+//		HttpURLConnection request = (HttpURLConnection) url.openConnection();
+//		request.setConnectTimeout(8000);
+//		request.setUseCaches(false); // 不允许使用缓存
+//		request.setReadTimeout(10 * 1000);
+//		request.setDoOutput(true);
+//		request.setRequestMethod("POST");
+//		String boundary = BOUNDARY;
+//		request.setRequestProperty("Content-Type",
+//				"multipart/form-data; boundary=" + boundary);
+////		request.setRequestProperty("Content-Type", CONTENT_TYPE + ";boundary=" + BOUNDARY);
+//		
+//		request.connect();
+//		DataOutputStream dos = new DataOutputStream(request.getOutputStream());
+//		StringBuffer sb = null;
+//		String params = "";
+//		/***
+//		 * 以下是用于上传参数
+//		 */
+//		int index = 0;
+//		if (param != null && param.size() > 0) {
+//			Iterator<String> it = param.keySet().iterator();
+//			while (it.hasNext()) {
+//				sb = null;
+//				sb = new StringBuffer();
+//				String key = it.next();
+//				String value = param.get(key);
+//				sb.append(PREFIX).append(BOUNDARY).append(LINE_END);
+//				sb.append("Content-Disposition: form-data; name=\"").append(key).append("\"").append(LINE_END).append(LINE_END);
+//				sb.append(value).append(LINE_END);
+//				params = sb.toString();
+//				log.e("content = \n" + params);
+//				dos.write(params.getBytes());
+//			}
+//		}
+//		
+//		
+//		sb = null;
+//		params = null;
+//		sb = new StringBuffer();
+//		/**
+//		 * 这里重点注意： name里面的值为服务器端需要key 只有这个key 才可以得到对应的文件
+//		 * filename是文件的名字，包含后缀名的 比如:abc.png
+//		 */
+//		sb.append(LINE_END);
+//		sb.append(PREFIX).append(BOUNDARY).append(LINE_END);
+//		sb.append("Content-Disposition:form-data; name=\"" + fileKey + "\"; filename=\"" + f.getName() + "\"" + LINE_END);
+//		sb.append("Content-Type:image/jpeg" + LINE_END); // 这里配置的Content-type很重要的 ，用于服务器端辨别文件的类型的
+//		
+//		sb.append(LINE_END);
+//		params = sb.toString();
+//		sb = null;
+//
+//		log.e("pic = \n" + params);		
+//		dos.write(params.getBytes());
+//		
+//		/**上传文件*/
+//		InputStream is = new FileInputStream(f);
+//		onUploadProcessListener.initUpload((int)f.length());
+//		byte[] bytes = new byte[1024];
+//		int len = 0;
+//		int curLen = 0;
+//		while ((len = is.read(bytes)) != -1) {
+//			curLen += len;
+//			dos.write(bytes, 0, len);
+//			onUploadProcessListener.onUploadProcess(curLen);
+//		}
+//		is.close();
+//		log.e("write imgdata success");		
+//		
+//		dos.write(LINE_END.getBytes());
+//		byte[] end_data = (PREFIX + BOUNDARY + PREFIX + LINE_END).getBytes();
+//		log.e("end_data = \n" + new String(end_data));
+//		dos.write(end_data);
+//		dos.flush();
+//
+//
+////		FileInputStream stream = new FileInputStream(f);
+////		byte[] file = new byte[(int) f.length()];
+////		stream.read(file);
+////
+////		byte[] end_data = ("\r\n--" + boundary + "--\r\n").getBytes();
+////		try {
+////
+////			OutputStream ot = request.getOutputStream();
+////			ot.write(file);
+////			ot.write(end_data);
+////			log.e("end_data = \n" + new String(end_data));
+////			ot.flush();
+////			ot.close();
+////		} catch (IOException e) {
+////			e.printStackTrace();
+////		}
+//		log.e(request.getResponseCode());
+//		log.e(request.getResponseMessage());
+//
+//	}
 
 	/**
 	 * 发送上传结果

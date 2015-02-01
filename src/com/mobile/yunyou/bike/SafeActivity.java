@@ -104,6 +104,9 @@ public class SafeActivity extends Activity implements OnCameraChangeListener,IRe
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.safe_layout);
 		
+	    mApplication = YunyouApplication.getInstance();
+	
+		
 		mMapView = (MapView) findViewById(R.id.map);
 		mMapView.onCreate(savedInstanceState);
 		aMap = mMapView.getMap();
@@ -202,7 +205,7 @@ public class SafeActivity extends Activity implements OnCameraChangeListener,IRe
 	}
 	
 	private void initData(){
-		  mApplication = YunyouApplication.getInstance();
+
 		  mNetworkCenterEx = NetworkCenterEx.getInstance();
 //		  mNetworkCenterEx.setDid("A000000012000087");
 //		  mNetworkCenterEx.setSid("A12null000007135");

@@ -153,13 +153,16 @@ public class PublicType {
 	public final static int USER_CHANGE_INFO_MASID = 0x0004;
 	public static  class UserChangeInfo implements IParseString, IToJsonObject
 	{
-			
+		public final static String KEY_CREATETIME = "createTime";
 		public final static String KEY_BIRTHDAY = "birthday";
 		public final static String KEY_ADDR = "addr";
 		public final static String KEY_SEX = "sex";
 		public final static String KEY_PHONENUM = "phoneNum";
 		public final static String KEY_TRUENAME = "trueName";
 		public final static String KEY_EMAIL = "email";
+		public final static String KEY_ACCOUNT = "account";
+
+		
 	
 		public String mTrueName = "";
 		public String mPhone = "";
@@ -167,7 +170,8 @@ public class PublicType {
 		public String mEmail = "";
 		public String mAddr = "";
 		public String mSex = "";
-		
+		public String mCreateTime = "";
+		public String mAccount = "";
 		
 		@Override
 		public boolean parseString(String jsonString) throws Exception {
@@ -180,7 +184,8 @@ public class PublicType {
 			mEmail = jsonObject.getString(KEY_EMAIL);
 			mAddr = jsonObject.getString(KEY_ADDR);
 			mSex = jsonObject.getString(KEY_SEX);
-			
+			mCreateTime = jsonObject.getString(KEY_CREATETIME);
+			mAccount = jsonObject.getString(KEY_ACCOUNT);
 			return true;
 			
 			
@@ -198,6 +203,8 @@ public class PublicType {
 			object.put(KEY_EMAIL, mEmail);
 			object.put(KEY_ADDR, mAddr);
 			object.put(KEY_SEX, mSex);
+			object.put(KEY_CREATETIME, mCreateTime);
+			object.put(KEY_ACCOUNT, mAccount);
 			return object;
 		}
 		

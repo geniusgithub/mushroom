@@ -24,4 +24,5 @@
 
     <dimen name="headincon_width">70dp</dimen>
     <dimen name="msgicon_width">60dp</dimen>
+     <dimen name="btn_width">50dp</dimen>
 </resources>

@@ -72,7 +72,7 @@ public class CustomTimeExPopWindow implements OnClickListener{
 	{
 
 		yearWheelView = (WheelView) view.findViewById(R.id.year);
-		yearWheelView.setAdapter(new NumericWheelAdapter(2012, 2020));
+		yearWheelView.setAdapter(new NumericWheelAdapter(1900, 2100));
 		yearWheelView.setCyclic(true);
 		yearWheelView.TEXT_SIZE = 30;
 		

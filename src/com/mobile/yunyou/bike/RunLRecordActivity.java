@@ -31,6 +31,7 @@ import com.mobile.yunyou.bike.manager.RunRecordQueryProxy;
 import com.mobile.yunyou.bike.manager.RunRecordSubManager;
 import com.mobile.yunyou.bike.manager.CheckUploadManager.IDelObser;
 import com.mobile.yunyou.datastore.RunRecordDBManager;
+import com.mobile.yunyou.map.util.StringUtil;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.BikeType.BikeLRecordResult;
 import com.mobile.yunyou.model.BikeType.BikeLRecordSubResult;
@@ -63,6 +64,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	private ProgressBar mLoadProgressBar;
 	private Button mBtnRefresh;
 	private Button mBtnDel;
+	private Button mBtnBack;
 	
 	private TextView mTVDistance;
 	private TextView mTVCal;
@@ -77,7 +79,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	private RunRecordQueryProxy mBikeRecordProxy;
 	private RunRecordSubManager mBikeSubRecordManager;
 	
-	private int mDistance = 0;
+	private double mDistance = 0;
 	private int mRecordCount = 0;
 	private long mTimeMillsion = 0;
 	private int mCal = 0;
@@ -134,7 +136,8 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 		mBtnRefresh.setOnClickListener(this);
 		mBtnDel = (Button) findViewById(R.id.btn_del);
 		mBtnDel.setOnClickListener(this);
-
+		mBtnBack = (Button) findViewById(R.id.btn_back);
+		mBtnBack.setOnClickListener(this);
 		
 		mTVDistance = (TextView) findViewById(R.id.tv_distance);
 		mTVCal = (TextView) findViewById(R.id.tv_cal);
@@ -215,6 +218,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 			mTimeMillsion += YunTimeUtils.getTimeInterval(object.mEndTime, object.mStartTime);
 			mDistance += object.mTotalDistance;
 		}
+		log.e("calData mDistance = " + mDistance);
 		
 		updateDatasView();
 	}
@@ -304,6 +308,9 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 			boolean ret = mRecordDBManager.deleteAll();
 			Utils.showToast(this, "delete record from Database ret = " + ret);
 			initNetworkList(mNetworkBikeRecordResultList);
+			break;
+		case R.id.btn_back:
+			finish();
 			break;
 		}
 	}
@@ -484,9 +491,9 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	
 	
 	
-    public String getShowDistance(int distance){
-    	double value = distance * 1.0 / 1000;
-    	String string = Double.valueOf(value) + "公里";
+    public String getShowDistance(double distance){
+    	String string = StringUtil.ConvertByDoubeString(distance);
+    	string += "公里";
     	return string;
     }
 
