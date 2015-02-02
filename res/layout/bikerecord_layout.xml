@@ -34,6 +34,47 @@
              android:text="@string/bikerecord_text_del"/>
      </RelativeLayout>
 
+       
+    <RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+         
+	     <ProgressBar 
+		    android:id="@+id/load_progress"
+			android:visibility="gone"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+            android:indeterminateDrawable="@drawable/load_progress"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="5dp"/>
+	     
+	    <RelativeLayout
+		    android:id="@+id/rl_nomessage"
+		    android:layout_width="fill_parent"
+		    android:layout_height="fill_parent">
+		    
+		       <ImageView
+		         android:id="@+id/iv_nomessage"
+		      	 android:layout_width="wrap_content"
+		   		 android:layout_height="wrap_content"
+		   		 android:src="@drawable/no_message_icon"
+		   		 android:layout_centerInParent="true">
+		       </ImageView>
+		       
+		       <TextView
+		         android:layout_width="fill_parent"
+		   		 android:layout_height="wrap_content"
+		   		 android:layout_below="@id/iv_nomessage"
+		   		 android:gravity="center"
+		   		 android:text="@string/msgdel_nomessage"
+		   		 android:textColor="#000000">
+		           
+		       </TextView>
+		       
+		   </RelativeLayout>
+
+   </RelativeLayout>
+   
 	 
 	<LinearLayout 	  
 	    android:layout_width="match_parent"
@@ -143,31 +184,7 @@
 	        	     
       </LinearLayout>      	
         
-	<RelativeLayout
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
-         
-	     <ProgressBar 
-		    android:id="@+id/load_progress"
-			android:visibility="gone"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-            android:indeterminateDrawable="@drawable/load_progress"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="5dp"/>
-	     
-	   	<Button 
-	   	    android:id="@+id/btn_load" 
-	   	    android:visibility="gone"
-	   	    android:layout_width="wrap_content" 
-	   	    android:layout_height="wrap_content"  
-	   	    android:layout_centerInParent="true"
-	   	    android:textSize="18.0sp" 
-	   	    android:textColor="#ffffff" 
-	   	    android:background="@drawable/selector_btn_ok" 
-	   	    android:text="@string/btn_refresh" />
 
-   </RelativeLayout>
 
     
 </RelativeLayout>

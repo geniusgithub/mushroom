@@ -605,7 +605,7 @@ public class BikeType {
 		public double mTotalDistance = 0;
 		public String mStartTime = "";
 		public String mEndTime = "";
-		public int mCal = 0;
+		public double mCal = 0;
 		public double mHSpeed = 0;
 		public double mLSpeed = 0;
 		public int mHeight = 0;
@@ -762,7 +762,7 @@ public class BikeType {
 		public double mTotalDistance = 0;
 		public String mStartTime = "";
 		public String mEndTime = "";
-		public int mCal = 0;
+		public double mCal = 0;
 		public double mHSpeed = 0;
 		public double mLSpeed = 0;
 		public int mHeight = 0;
@@ -778,7 +778,7 @@ public class BikeType {
 			mTotalDistance = jsonObject.getDouble(KEY_DISTANCE);
 			mStartTime = jsonObject.getString(KEY_STARTTIME);
 			mEndTime = jsonObject.getString(KEY_ENDTIME);
-			mCal = jsonObject.getInt(KEY_CAL);
+			mCal = jsonObject.getDouble(KEY_CAL);
 			mHSpeed = jsonObject.getDouble(KEY_HSPEED);
 			mLSpeed = jsonObject.getDouble(KEY_LSPEED);
 			mHeight = jsonObject.getInt(KEY_HEIGHT);

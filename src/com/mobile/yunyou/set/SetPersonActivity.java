@@ -74,6 +74,7 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 	private static final int MSG_GET_INFO = 0x0001;
 	
 	private View mRootView;
+	private View mHeadView;
 //	private View mEmailView;
 //	private View mNameView;
 	//private View mPwdView;
@@ -157,7 +158,8 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 		mBirthdayView = findViewById(R.id.ll_birthdayset);
 		mBirthdayView.setClickable(false);
 		
-
+		mHeadView = findViewById(R.id.rl_head);
+		mHeadView.setOnClickListener(this);
 		//mPwdView.setOnClickListener(this);
 		//mPhoenView.setOnClickListener(this);
 
@@ -363,6 +365,7 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 			case R.id.btn_back:
 				finish();
 				break;
+			case R.id.rl_head:
 			case R.id.iv_head:
 				selectPhoto();
 				break;

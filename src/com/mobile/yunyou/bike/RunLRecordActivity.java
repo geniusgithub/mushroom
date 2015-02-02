@@ -60,9 +60,10 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	private YunyouApplication mApplication;
 	private NetworkCenterEx mNetworkCenterEx;
 	
+	private View mRLNoMessage;
 	private View mRootView;
 	private ProgressBar mLoadProgressBar;
-	private Button mBtnRefresh;
+
 	private Button mBtnDel;
 	private Button mBtnBack;
 	
@@ -82,7 +83,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	private double mDistance = 0;
 	private int mRecordCount = 0;
 	private long mTimeMillsion = 0;
-	private int mCal = 0;
+	private double mCal = 0;
 	
 	private Handler mHandler;
 	
@@ -132,8 +133,6 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 		mListView = (PullToRefreshListView) findViewById(R.id.listview);
 		
 		mLoadProgressBar = (ProgressBar) findViewById(R.id.load_progress);
-		mBtnRefresh = (Button) findViewById(R.id.btn_load);
-		mBtnRefresh.setOnClickListener(this);
 		mBtnDel = (Button) findViewById(R.id.btn_del);
 		mBtnDel.setOnClickListener(this);
 		mBtnBack = (Button) findViewById(R.id.btn_back);
@@ -160,7 +159,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
     	endLabels.setRefreshingLabel("正在载入...");// 刷新时    
     	endLabels.setReleaseLabel("放开刷新...");// 下来达到一定距离时，显示的提示    
 		
-		mBtnRefresh.setVisibility(View.GONE);
+    	mRLNoMessage = findViewById(R.id.rl_nomessage);
 		mLoadProgressBar.setVisibility(View.VISIBLE);
 		mListView.setVisibility(View.GONE);
 	}
@@ -202,7 +201,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 			}
 			
 			CheckUploadManager.getInstance().setDelListener(this);
-			
+			mRLNoMessage.setVisibility(View.GONE);
 	}
 
 	private void calData(List<BikeLRecordResult> list){
@@ -218,7 +217,7 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 			mTimeMillsion += YunTimeUtils.getTimeInterval(object.mEndTime, object.mStartTime);
 			mDistance += object.mTotalDistance;
 		}
-		log.e("calData mDistance = " + mDistance);
+		log.e("calData mDistance = " + mDistance + ", mCal = " + mCal);
 		
 		updateDatasView();
 	}
@@ -232,7 +231,16 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	}
 	
 	private void updateDatasView(){
-		mTVCal.setText(String.valueOf(mCal));
+		int tmp = (int) (mCal * 10000);
+		tmp += 5;
+		mCal = tmp / 10000.0;
+		log.e("updateDatasView cal = " + mCal);
+		if (mCal < 0.001){
+			mTVCal.setText("0");
+		}else{
+			mTVCal.setText(	StringUtil.ConvertByDoubeString(mCal));	
+		}
+
 		mTVDistance.setText(getShowDistance(mDistance));
 		mTVRecordCount.setText(String.valueOf(mRecordCount));
 		mTVTimeInterval.setText(YunTimeUtils.getFormatTimeInterval(mTimeMillsion));
@@ -301,9 +309,9 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	@Override
 	public void onClick(View v) {
 		switch(v.getId()){
-		case R.id.btn_load:
-			RequestFromServer();
-			break;
+//		case R.id.btn_load:
+//			RequestFromServer();
+//			break;
 		case R.id.btn_del:
 			boolean ret = mRecordDBManager.deleteAll();
 			Utils.showToast(this, "delete record from Database ret = " + ret);
@@ -397,10 +405,11 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 			Utils.showToast(this, R.string.request_data_fail);
 			if (isExistLocalRecord() == false)
 			{
-				mBtnRefresh.setVisibility(View.VISIBLE);
+				mRLNoMessage.setVisibility(View.VISIBLE);
 				mLoadProgressBar.setVisibility(View.GONE);
 			}else{
 				mListView.onRefreshComplete();
+				mRLNoMessage.setVisibility(View.GONE);
 			}			
 			
 			return ;
@@ -411,10 +420,10 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 		if (isExistLocalRecord() == false){
 			if (list.size() != 0){
 				initNetworkList(list);
-				mBtnRefresh.setVisibility(View.GONE);
+				mRLNoMessage.setVisibility(View.GONE);
 				mLoadProgressBar.setVisibility(View.GONE);
 			}else{
-				mBtnRefresh.setVisibility(View.VISIBLE);
+				mRLNoMessage.setVisibility(View.VISIBLE);
 				mLoadProgressBar.setVisibility(View.GONE);
 			}
 			

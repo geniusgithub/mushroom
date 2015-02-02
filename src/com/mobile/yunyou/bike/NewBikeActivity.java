@@ -230,7 +230,7 @@ public class NewBikeActivity extends Activity implements OnClickListener, OnChec
 		if (isResult){
 			mHandler.sendEmptyMessage(MSG_UPDATE);
 		}else{
-			Toast.makeText(this, "get data fail!!!", Toast.LENGTH_SHORT).show();
+			Toast.makeText(this, "获取数据失败!!!", Toast.LENGTH_SHORT).show();
 		}
 	}
 

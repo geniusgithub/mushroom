@@ -36,7 +36,8 @@
         <LinearLayout 
             style="@style/leba_bg_layout">
                 <RelativeLayout
-                    style="@style/leba_bg_single_layout" android:clickable="false">
+                    android:id="@+id/rl_head"
+                    style="@style/leba_bg_single_layout" >
                    <ImageView 
 	                    android:id="@+id/iv_arrow" 
 	                    android:layout_width="wrap_content" 

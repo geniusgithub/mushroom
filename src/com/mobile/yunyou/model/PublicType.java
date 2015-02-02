@@ -132,10 +132,11 @@ public class PublicType {
 	{
 		public final static String KEY_ORIPWD = "orignalPassword";
 		public final static String KEY_NEWPWD = "newPassword";
+		public final static String KEY_DID = "did";
 		
 		public String mOldPassword = "";
 		public String mNewPassword = "";
-		
+		public String mDid = "";
 		
 		@Override
 		public JSONObject toJsonObject() throws JSONException {
@@ -143,6 +144,9 @@ public class PublicType {
 			JSONObject jsonObject = new JSONObject();
 			jsonObject.put(KEY_ORIPWD, mOldPassword);
 			jsonObject.put(KEY_NEWPWD, mNewPassword);
+			if (mDid.length() > 0){
+				jsonObject.put(KEY_DID, mDid);
+			}
 			return jsonObject;
 		}
 		

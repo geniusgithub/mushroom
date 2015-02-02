@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 
 import com.mobile.yunyou.R;
+import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.model.PublicType;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;
@@ -21,7 +22,7 @@ import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 
-public class ChangePwdActivity extends Activity implements OnClickListener, IRequestCallback{
+public class ChangeDevicePwdActivity extends Activity implements OnClickListener, IRequestCallback{
 
 	private static final CommonLog log = LogFactory.createLog();
 	 
@@ -100,6 +101,7 @@ public class ChangePwdActivity extends Activity implements OnClickListener, IReq
 		PublicType.UserChangePwd object = new PublicType.UserChangePwd();
 		object.mOldPassword = oldString;
 		object.mNewPassword = newString1;
+		object.mDid = YunyouApplication.getInstance().getCurDid();
 		
 		mNetworkCenterEx.StartRequestToServer(PublicType.USER_CHANGE_PASSWORD_MASID, object, this);
 		showRequestDialog(true);

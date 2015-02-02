@@ -22,6 +22,7 @@ import com.mobile.yunyou.model.PublicType;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
+import com.mobile.yunyou.set.ChangeDevicePwdActivity;
 import com.mobile.yunyou.set.ChangePwdActivity;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
@@ -94,7 +95,7 @@ private static final int MSG_GET_WARNING = 0x0001;
 		mBtnUnBind.setOnClickListener(this);
 		mBtnChangePwd = (Button) findViewById(R.id.btn_changepwd);
 		mBtnChangePwd.setOnClickListener(this);
-		mBtnChangePwd.setVisibility(View.GONE);
+		//mBtnChangePwd.setVisibility(View.GONE);
 		
 		mETAccount = (EditText) findViewById(R.id.et_account);
 		mETPassword = (EditText) findViewById(R.id.et_password);
@@ -132,6 +133,7 @@ private static final int MSG_GET_WARNING = 0x0001;
 		  }else{
 			  mBtnBind.setVisibility(View.VISIBLE);
 			  mBtnUnBind.setVisibility(View.GONE); 
+			  mBtnChangePwd.setVisibility(View.GONE); 
 		  }
 	}
 	
@@ -189,7 +191,7 @@ private static final int MSG_GET_WARNING = 0x0001;
 	
 	private void changepwd(){
 		Intent intent = new Intent();
-    	intent.setClass(this, ChangePwdActivity.class);
+    	intent.setClass(this, ChangeDevicePwdActivity.class);
     	startActivity(intent);
 	}
 	

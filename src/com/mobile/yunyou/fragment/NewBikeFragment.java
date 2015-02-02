@@ -2,6 +2,26 @@ package com.mobile.yunyou.fragment;
 
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.provider.Settings;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
+import android.widget.TextView;
+import android.widget.Toast;
+
 import com.amap.api.location.AMapLocation;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdate;
@@ -12,7 +32,6 @@ import com.amap.api.maps.model.BitmapDescriptor;
 import com.amap.api.maps.model.BitmapDescriptorFactory;
 import com.amap.api.maps.model.CameraPosition;
 import com.amap.api.maps.model.LatLng;
-import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.MarkerOptions;
 import com.amap.api.maps.model.PolylineOptions;
@@ -21,51 +40,22 @@ import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.activity.MainSlideActivity;
 import com.mobile.yunyou.bike.MapUtils;
 import com.mobile.yunyou.bike.MoGuActivity;
-import com.mobile.yunyou.bike.SelfMarket;
 import com.mobile.yunyou.bike.manager.CheckUploadManager;
-import com.mobile.yunyou.bike.manager.MapMarketManager;
-import com.mobile.yunyou.bike.manager.RunRecordUploadPoxy;
 import com.mobile.yunyou.bike.manager.SelfLocationManager;
 import com.mobile.yunyou.bike.tmp.NewBikeCenter;
 import com.mobile.yunyou.bike.tmp.NewBikeEntiy;
-import com.mobile.yunyou.bike.tmp.NewBikeExActivity;
 import com.mobile.yunyou.bike.tmp.RunBikeMarket;
 import com.mobile.yunyou.datastore.RunRecordDBManager;
 import com.mobile.yunyou.datastore.YunyouSharePreference;
 import com.mobile.yunyou.map.data.LocationEx;
+import com.mobile.yunyou.map.util.LocationUtil;
 import com.mobile.yunyou.map.util.StringUtil;
 import com.mobile.yunyou.model.BikeType;
-import com.mobile.yunyou.model.BikeType.BikeGetArea;
-import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.LogFactory;
-import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 import com.mobile.yunyou.util.YunTimeUtils;
-
-import android.app.Activity;
-import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.provider.Settings;
-import android.support.v4.app.Fragment;
-import android.view.Gravity;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.View.OnClickListener;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
-import android.widget.PopupWindow;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 
 public class NewBikeFragment  extends Fragment implements OnClickListener, 
 														OnCheckedChangeListener,
@@ -133,6 +123,7 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 				aMap = mMapView.getMap();
 			}
 			setupViews(mapLayout);
+			reset();
     	}else {
 			if (mapLayout.getParent() != null) {
 				((ViewGroup) mapLayout.getParent()).removeView(mapLayout);
@@ -148,7 +139,7 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 
 
 		initData();
-		reset();
+
 	}
     
     @Override
@@ -190,6 +181,12 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 		
 		if (!mApplication.getBindFlag()){
 			showBindDialog(true);
+			return ;
+		}
+		
+		if (LocationUtil.isGPSEnable(mContext) == false)
+		{
+			showGPSDialog(true);
 		}
 
 	}
@@ -306,6 +303,31 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 	}
 	
 	private Dialog mDialog = null;
+	private void showGPSDialog(boolean bShow)
+	{
+		if (mDialog != null)
+		{
+			mDialog.dismiss();
+			mDialog = null;
+		}
+		
+		OnClickListener onClickListener = new OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {			
+				Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+				startActivity(intent);
+			}
+		};
+
+		if (bShow)
+		{
+			mDialog = DialogFactory.creatDoubleDialog(mContext, R.string.dialog_title_gogps, R.string.dialog_msg_gogps,
+																R.string.btn_yes, R.string.btn_no, onClickListener);
+			mDialog.show();
+		}
+	}
+
 	private void showExitDialog(boolean bShow)
 	{
 		if (mDialog != null)
@@ -514,14 +536,14 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 	@Override
 	public void onCheckedChanged(CompoundButton arg0, boolean flag) {
 		if (flag){
-			Toast.makeText(mContext, "lock", Toast.LENGTH_SHORT).show();
+			Toast.makeText(mContext, "锁定", Toast.LENGTH_SHORT).show();
 			
 			mBtnStart.setEnabled(false);
 			mBtnUpload.setEnabled(false);
 			mBtnStop.setEnabled(false);
 	
 		}else{
-			Toast.makeText(mContext, "unlock", Toast.LENGTH_SHORT).show();
+			Toast.makeText(mContext, "解锁", Toast.LENGTH_SHORT).show();
 			
 			mBtnStart.setEnabled(true);
 			mBtnUpload.setEnabled(true);
@@ -714,9 +736,15 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 		mTextViewCurSpeed.setText(StringUtil.ConvertByDoubeString(speed));
 		mTextViewHSpeed.setText(StringUtil.ConvertByDoubeString(hspeed));
 		mTextViewAverageSpeed.setText(StringUtil.ConvertByDoubeString(averagespeed));
-		int tmp = (int) (cal * 1000000);
-		cal = tmp / 1000000.0;
-		mTextViewCal.setText(StringUtil.ConvertByDoubeString(cal, 7));
+		int tmp = (int) (cal * 10000);
+		tmp += 5;
+		cal = tmp / 10000.0;
+		log.e("updateNewBikeEntiy cal = " + cal);
+		if (cal < 0.001){
+			mTextViewCal.setText("0");
+		}else{
+			mTextViewCal.setText(StringUtil.ConvertByDoubeString(cal, 4));
+		}
 		mTextViewHeight.setText(String.valueOf(height));
 	}
 

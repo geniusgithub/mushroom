@@ -15,6 +15,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.mobile.yunyou.BrocastFactory;
@@ -54,6 +55,8 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 	//private LinearLayout mLLGoWarning;
 	private LinearLayout mLLGoInfo;
 	private LinearLayout mLLGoSetting;
+	private RelativeLayout mRLHead;
+	
 	
 	  private CustomImageView mHeadImageView;
 	  private TextView mTVNickName;
@@ -134,6 +137,8 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 
 	private void setupViews(){
 		
+		mRLHead = (RelativeLayout) mView.findViewById(R.id.rl_head);
+		
 		mHeadImageView =  (CustomImageView) mView.findViewById(R.id.iv_head);
 		mLLGoLocation = (LinearLayout) mView.findViewById(R.id.ll_goLocation);
 		mLLGoSafe = (LinearLayout) mView.findViewById(R.id.ll_goSafe);
@@ -146,6 +151,7 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		mTVNickName = (TextView) mView.findViewById(R.id.tv_nickname);
 		mTVDistance = (TextView) mView.findViewById(R.id.tv_curDidtance);
 		
+		mRLHead.setOnClickListener(this);
 		mHeadImageView.setOnClickListener(this);
 		mLLGoLocation.setOnClickListener(this);
 		mLLGoSafe.setOnClickListener(this);
@@ -190,6 +196,7 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		case R.id.ll_goSetting:
 			goSetting();
 			break;
+		case R.id.rl_head:
 		case R.id.iv_head:
 			goPersion();
 			break;

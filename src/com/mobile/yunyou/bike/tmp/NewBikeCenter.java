@@ -230,7 +230,7 @@ public class NewBikeCenter implements AMapLocationListener{
 		group.mStartTime = YunTimeUtils.getFormatTime(mStartTimeMilllons);
 		group.mEndTime = YunTimeUtils.getFormatTime(mEndTimeMilllons);
 		group.mTotalDistance =  mTotalDistance / 1000.0;
-		group.mCal = 0;
+		group.mCal = mCal;
 		group.mHSpeed = mHSpeed * 3.6;
 		group.mLSpeed = 0;
 		group.mHeight = 0;
@@ -257,7 +257,7 @@ public class NewBikeCenter implements AMapLocationListener{
 		group.mStartTime = YunTimeUtils.getFormatTime(mStartTimeMilllons);
 		group.mEndTime = YunTimeUtils.getFormatTime(mEndTimeMilllons);
 		group.mTotalDistance =  mTotalDistance / 1000.0;
-		group.mCal = 0;
+		group.mCal = mCal;
 		group.mHSpeed = mHSpeed * 3.6;
 		group.mLSpeed = 0;
 		group.mHeight = 0;

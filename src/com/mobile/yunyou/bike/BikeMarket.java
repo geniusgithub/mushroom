@@ -42,7 +42,7 @@ public class BikeMarket {
 	
 	//private boolean isRunning = true;
 	
-	
+	private View popView = null;
 	
 	
 	public BikeMarket(int drawableStart, int drawableCurrentOnline, int drawableCurrentOffline){
@@ -63,6 +63,20 @@ public class BikeMarket {
 	
 	public Marker getMarket(){
 		return mLastMarket;
+	}
+	
+	public View getPopView(){
+		return popView;
+	}
+	
+	public void attachPopView(View view){
+		popView = view;
+	}
+	
+	public void updatePopViewSelf(){
+		if (popView != null){
+			render(popView);
+		}
 	}
 	
 //	public void startRunning(){
@@ -87,6 +101,7 @@ public class BikeMarket {
 	//	isRunning = true;
 	//	mBounds = null;
 		mLastPolyline = null;
+		popView = null;
 	}
 
 	public MarkerOptions newStartMarkerOptions(){
@@ -128,9 +143,9 @@ public class BikeMarket {
 			if (mLastLocation != null){
 				double distance = MapUtils.getDistanByLatlon(mLastLocation, location);
 				log.e("BikeMarket distance = " + distance);
-				if (distance < 1){
-					return false;
-				}
+//				if (distance < 1){
+//					return false;
+//				}
 			}
 			
 
@@ -281,6 +296,6 @@ public class BikeMarket {
 			e.printStackTrace();
 		}
 		
-		return "can't get the content";
+		return "无法获取内容";
 	}
 }

@@ -46,7 +46,6 @@
 	       		      android:layout_width="wrap_content" 
 	       		      android:layout_height="wrap_content" 
 	       		      android:layout_centerInParent="true"
-	       		      android:text="00:00:00"
 	       		      android:textSize="25.0sp" 
 	       		      android:textColor="@color/black"  />
 	                  
@@ -84,7 +83,6 @@
 		       		      android:layout_width="wrap_content" 
 		       		      android:layout_height="wrap_content" 
 		       		      android:layout_centerInParent="true"
-		       		      android:text="38.56"
 		       		      android:textSize="20.0sp" 
 		       		      android:textColor="@color/black"  />  
 		       		      	
@@ -119,7 +117,6 @@
 		       		      android:layout_width="wrap_content" 
 		       		      android:layout_height="wrap_content" 
 		       		      android:layout_centerInParent="true"
-		       		      android:text="51.29"
 		       		      android:textSize="20.0sp" 
 		       		      android:textColor="@color/black"  />  
 		       		      

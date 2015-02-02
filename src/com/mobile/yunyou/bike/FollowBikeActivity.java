@@ -6,10 +6,12 @@ import java.util.List;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.provider.Settings;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
@@ -39,6 +41,7 @@ import com.mobile.yunyou.bike.manager.BikeLocationManager.IBikeLocationUpdate;
 import com.mobile.yunyou.bike.manager.SelfLocationManager;
 import com.mobile.yunyou.bike.manager.SelfLocationManager.ILocationUpdate;
 import com.mobile.yunyou.map.data.LocationEx;
+import com.mobile.yunyou.map.util.LocationUtil;
 import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.DialogFactory;
@@ -124,9 +127,7 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		mSelfLocationManager.startLocationCheck();
 		
 		if (isFirstResume){
-			mBikeLocationManager.addObserver(this);
-			mBikeLocationManager.startLocationCheck();
-			
+		
 			LocationEx locationEx = mBikeLocationManager.getLastLocation();
 			if (locationEx == null){
 				locationEx = mSelfLocationManager.getLastLocation();
@@ -136,8 +137,13 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 
 			isFirstResume = false;
 		}
-
 		
+		searchBike();
+
+		if (LocationUtil.isGPSEnable(mContext) == false)
+		{
+			showGPSDialog(true);
+		}
 
 	}
 
@@ -162,6 +168,27 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		mMapView.onSaveInstanceState(outState);
 	}
 
+	
+	
+	@Override
+	protected void onStart() {
+		// TODO Auto-generated method stub
+		super.onStart();
+		
+		mBikeLocationManager.addObserver(this);
+		mBikeLocationManager.startLocationCheck();
+		
+	}
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		
+		
+		mBikeLocationManager.removeObservser(this);
+		mBikeLocationManager.stopLocationCheck();
+	}
+
 	/**
 	 * 方法必须重写
 	 */
@@ -170,8 +197,7 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		super.onDestroy();
 		mMapView.onDestroy();
 		
-		mBikeLocationManager.removeObservser(this);
-		mBikeLocationManager.stopLocationCheck();
+
 
 	}
 	
@@ -291,6 +317,31 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		}
 	
 	}
+
+	private void showGPSDialog(boolean bShow)
+	{
+		if (mDialog != null)
+		{
+			mDialog.dismiss();
+			mDialog = null;
+		}
+		
+		OnClickListener onClickListener = new OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {			
+				Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+				startActivity(intent);
+			}
+		};
+
+		if (bShow)
+		{
+			mDialog = DialogFactory.creatDoubleDialog(mContext, R.string.dialog_title_gogps, R.string.dialog_msg_gogps,
+																R.string.btn_yes, R.string.btn_no, onClickListener);
+			mDialog.show();
+		}
+	}
 	
 	public void searchBike(){
 		log.e("searchBike");
@@ -362,7 +413,8 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 	}
 	
 	private void refreshBike(){
-		boolean isShow = false;
+		log.e("refreshBike");
+	
 
 		Marker marker = mBikeMarket.getMarket();
 		if (marker == null){
@@ -374,7 +426,7 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 			}
 			return ;
 		}
-		
+
 		
 		LatLng latLng = mBikeMarket.getLastLatLon();
 		if (latLng != null){
@@ -386,7 +438,11 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 			aMap.addPolyline(polylineOptions);
 		}
 		
-		
+
+		boolean isShow = marker.isInfoWindowShown();
+		if (isShow){
+			mBikeMarket.updatePopViewSelf();
+		}
 //		if (mSelfMarket.getLocation() != null){
 //			aMap.addMarker(mSelfMarket.newMarkerOptions());
 //		}
@@ -583,6 +639,7 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		if (title.equals("BIKE")){
 			View infoContent = getLayoutInflater().inflate(R.layout.maptip_layout, null);
 			mBikeMarket.render(infoContent);
+			mBikeMarket.attachPopView(infoContent);
 			return infoContent;
 		}
 		return null;
