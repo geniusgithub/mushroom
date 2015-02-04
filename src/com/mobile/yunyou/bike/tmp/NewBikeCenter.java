@@ -70,6 +70,8 @@ public class NewBikeCenter implements AMapLocationListener{
 	
 	private Timer mTimer;
 	private MyTimeTask mTimeTask;
+	private boolean isGetGps = false;
+	private LocationEx mLastLocationEx;
 	
 	public NewBikeCenter(Context context){
 		mHandler = new Handler(){
@@ -81,14 +83,19 @@ public class NewBikeCenter implements AMapLocationListener{
 						if (msg.obj == null){
 							addLocation(null, null);
 						}else{
+							isGetGps = true;
 							StructLocation object = (StructLocation) msg.obj;
 							addLocation(object.locationEx, object.aMapLocation);
 						}
 						break;
 					case MSG_REFRESH_TIME:
-						mTimeMilllons += 1000;
-						if (mStatusCallBack != null){
-							mStatusCallBack.onTimeChange(mTimeMilllons);
+						if (isGetGps){
+							mTimeMilllons += 1000;
+							if (mStatusCallBack != null){
+								mStatusCallBack.onTimeChange(mTimeMilllons);
+							}
+						}else{
+							log.e("isGetGps = false!!!drop time cal");
 						}
 						mHandler.sendEmptyMessageDelayed(MSG_REFRESH_TIME, 1000);
 						break;
@@ -128,6 +135,7 @@ public class NewBikeCenter implements AMapLocationListener{
 		mEndTimeMilllons = 0;
 		mLastLatLng = null;
 		mlLatLngLists.clear();
+		isGetGps = false;
 	}
 	
 	public void startRunning(){
@@ -171,7 +179,13 @@ public class NewBikeCenter implements AMapLocationListener{
 		}
 	}
 	
-	
+//	public void attachLocationUpdate(){
+//		if (mRunStatus == IRunStatus.RUNNING){
+//			mHandler.removeMessages(MSG_REFRESH_TIME);
+//			mHandler.sendEmptyMessageDelayed(MSG_REFRESH_TIME, 1000);
+//		}
+//
+//	}
 	private void start(){
 		log.e("start");
 		clear();
@@ -201,6 +215,7 @@ public class NewBikeCenter implements AMapLocationListener{
 		mGpsManager.unRegisterListen();
 		mHandler.removeMessages(MSG_REFRESH_TIME);
 		mRunStatus = IRunStatus.STOP;
+		isGetGps = false;
 	}
 	
 	private NewBikeEntiy getEntiy(){
@@ -308,7 +323,9 @@ public class NewBikeCenter implements AMapLocationListener{
 	
 	public void addLocation(LocationEx location, AMapLocation aMapLocation){
 		if (location != null){
-			log.e("NewBikeCenter  addLocation(" + location.getOffsetLat() + "," + location.getOffsetLon());
+			log.e("NewBikeCenter  addLocation(" + location.getOffsetLat() + "," + location.getOffsetLon() + 
+					YunTimeUtils.getFormatTime2(location.getTime()));
+		
 		}else{
 			log.e("NewBikeCenter  addLocation = null");
 		}
@@ -321,7 +338,7 @@ public class NewBikeCenter implements AMapLocationListener{
 			if (location != null){
 				mLastLatLng = new LatLng(location.getOffsetLat(), location.getOffsetLon());
 				mlLatLngLists.add(mLastLatLng);
-				
+				mLastLocationEx = location;
 				if (mStatusCallBack != null){
 					mStatusCallBack.onStatusChange(getEntiy());
 					mStatusCallBack.onLatlngUpdate(location, aMapLocation);
@@ -345,7 +362,18 @@ public class NewBikeCenter implements AMapLocationListener{
 			distance = MapUtils.getDistanByLatlon(mLastLatLng, latLng);
 			log.e("distance = " + distance);
 			mTotalDistance += distance;
-			mCurSpeed  = distance / CHECK_POSITION_INTERVAL * 1000;
+			//mCurSpeed  = distance / CHECK_POSITION_INTERVAL * 1000;
+			long timeInterval = location.getTime() - mLastLocationEx.getTime();
+			
+		
+			if (timeInterval != 0){
+				mCurSpeed = distance / timeInterval * 1000;
+			}else{
+				mCurSpeed = 0;
+			}
+			log.d("from " + YunTimeUtils.getFormatTime(location.getTime()) + " to " +  YunTimeUtils.getFormatTime(mLastLocationEx.getTime()) + 
+					"\ntimeInterval = " + timeInterval + ", distance = " + distance + ", speed = " + mCurSpeed );
+
 			if (mCurSpeed > mHSpeed){
 				mHSpeed = mCurSpeed;
 			}
@@ -364,6 +392,7 @@ public class NewBikeCenter implements AMapLocationListener{
 		
 		if (distance > 0.1){
 			mLastLatLng = latLng;
+			mLastLocationEx = location;
 			mlLatLngLists.add(mLastLatLng);
 		}
 		

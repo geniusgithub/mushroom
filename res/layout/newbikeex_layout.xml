@@ -374,6 +374,15 @@
 	        android:id="@+id/map"
 	        android:layout_width="match_parent"
 	        android:layout_height="match_parent" />
+	        <Button
+	        android:id="@+id/v_gps"
+	        android:layout_width="120dp"
+	        android:layout_height="wrap_content"
+	        android:background="#88444444"
+	        android:clickable="false"
+	        android:text="GPS定位中"
+	        android:layout_centerInParent="true">	            
+	        </Button>
 	    </RelativeLayout>
     
     

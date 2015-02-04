@@ -4,6 +4,7 @@
     
     <color name="shape_line">#ffcccccc</color>
     <color name="device_bg">#ffe3e3e3</color> 
+    <color name="gray">#ff666666</color>    
     <color name="gold">#b89766</color>
     <color name="select">#98aacc</color>
     <color name="window_bg">#ffeef1f3</color>

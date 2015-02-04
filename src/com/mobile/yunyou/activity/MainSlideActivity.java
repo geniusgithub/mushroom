@@ -66,6 +66,8 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 		setupViews();
 		
 		initData();
+		
+		mApplication.attatchMainActivity(this);
 	}
 	
 	@Override
@@ -91,6 +93,13 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 			mSelfLocationManager.stopLocationCheck();
 		}
 
+	}
+	
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+		
+		mApplication.attatchMainActivity(null);
 	}
 	
 	private void setupViews(){

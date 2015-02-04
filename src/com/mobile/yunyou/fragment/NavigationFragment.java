@@ -24,7 +24,10 @@ import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.activity.MainSlideActivity;
 import com.mobile.yunyou.bike.SafeActivity;
 import com.mobile.yunyou.bike.tmp.NewBikeExActivity;
+import com.mobile.yunyou.datastore.CurDayDataObject;
+import com.mobile.yunyou.datastore.CurDayRecordDBManager;
 import com.mobile.yunyou.datastore.YunyouSharePreference;
+import com.mobile.yunyou.map.util.StringUtil;
 import com.mobile.yunyou.model.GloalType;
 import com.mobile.yunyou.model.PublicType;
 import com.mobile.yunyou.model.ResponseDataPacket;
@@ -67,6 +70,9 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		
 	private Context mContext;
 	private BroadcastReceiver mReceiver;
+	
+	private CurDayRecordDBManager mCurDayRecordDBManager;
+	
 	
 	public NavigationFragment(){
 		
@@ -124,6 +130,8 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 		IntentFilter intentFilter = new IntentFilter(BrocastFactory.BROCAST_UPDATE_NICKNAME);
 		intentFilter.addAction(BrocastFactory.BROCAST_UPDATE_HEADICON);
 		mContext.registerReceiver(mReceiver, intentFilter);
+		
+
 	}
 	
 
@@ -167,6 +175,8 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 
 		
 		mNetworkCenter = NetworkCenterEx.getInstance();
+		
+		mCurDayRecordDBManager = CurDayRecordDBManager.getInstance();
 		
 		updateDistance();
 		updateNickname();
@@ -278,21 +288,40 @@ public class NavigationFragment extends Fragment implements OnClickListener{
 	
 	public void updateDistance(){
 		log.e("NavigationFragment updateDistance");
-		String curTeString = YunyouSharePreference.getCurtime(YunyouApplication.getInstance());
-		long time = System.currentTimeMillis();
-		String curTime = YunTimeUtils.getFormatTime1(time);
-		
-		log.e("curTeString = " + curTeString + ", curTime = " + curTime);
-		double value = 0;
-		if (curTeString.equalsIgnoreCase(curTime)){
-			int distance = YunyouSharePreference.getDistance(YunyouApplication.getInstance());
-			log.e("distance = " + distance);
-			value = distance / 1000.0;
-		}else{
-			
+		String userID = mApplication.getUserInfoEx().mSid;
+		CurDayDataObject object = null;
+		try {
+			object = mCurDayRecordDBManager.query(userID);
+			log.e("mCurDayRecordDBManager query \n" +  
+					"\nuserid = " + object.userID + 
+					"\nstarttime = " + object.startTime + 
+					"\ndistance = " + object.distance);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
+		double distance = 0;
+		if (object != null){
+			String curTeString = object.startTime;
+			long time = System.currentTimeMillis();
+			String curTime = YunTimeUtils.getFormatTime1(time);
+			
+			log.e("curTeString = " + curTeString + ", curTime = " + curTime);
 
-		String text = "当天里程: " + String.valueOf(value) + "km";	
+			if (curTeString.equalsIgnoreCase(curTime)){
+				distance = object.distance;			
+			}else{
+				
+			}
+
+			log.e("NavigationFragment distance = " + distance);
+		}else{
+			log.e("updateDistance object = null");
+		}
+		
+		
+		String text = "当天里程: " + StringUtil.ConvertByDoubeString(distance) + "km";
 		mTVDistance.setText(text);
 	}
 	

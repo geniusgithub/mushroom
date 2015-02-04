@@ -86,7 +86,7 @@
         <string name="maprecord_text_timeinterval">时长</string>  
         <string name="maprecord_text_distance">公里数</string>  
         <string name="maprecord_text_speed">平均速度 </string>  
-         
+        <string name="maprecord_nomessage">您还没有任何历史记录</string>
          
         <string name="toask_input_account">请输入账号</string>
         <string name="toask_input_password">请输入密码</string>
@@ -161,6 +161,8 @@
         <string name="dialog_msg_warnphone">请输入有效的手机号码\n保持短信告警功能正常</string> 
         <string name="dialog_title_exit">是否退出蘑菇兄弟</string>
         <string name="dialog_msg_exit">您确定要离开蘑菇兄弟吗?</string> 
+        <string name="dialog_title_logoff">是否退出当前账号</string>
+        <string name="dialog_msg_logoff">您确定要注销当前账号吗?</string> 
         <string name="dialog_title_unbind">解绑设备</string>
         <string name="dialog_msg_message">您确定要解绑该设备吗?</string> 
         <string name="dialog_title_gogps">打开GPS</string>
@@ -240,10 +242,11 @@
         <string name="setting_text_about">关于</string>
         <string name="setting_text_help">帮助</string>
         <string name="setting_text_offMap">离线地图下载</string>
+        <string name="setting_text_logOff">注销</string>
         <string name="setting_text_exit">登出</string>
         <string name="setting_text_old_password">旧密码</string>
         <string name="setting_text_new_password">新密码</string>
-        <string name="setting_text_new_password_again">再次输入新密码</string>
+        <string name="setting_text_new_password_again">确认新密码</string>
         <string name="setting_text_balance">查询余额</string>
         <string name="setting_text_meal">查询套餐</string>
         <string name="setting_btn_logout">退出登录</string>

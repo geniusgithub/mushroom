@@ -22,7 +22,7 @@ public class LocationEx extends Location{
 	}
 	
 	
-	public LocationEx(Location location) {
+	public LocationEx(Location location){
 		super(location);
 	}
 	

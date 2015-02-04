@@ -89,7 +89,7 @@ public class SingleGPSManager implements AMapLocationListener {
 				mListener = listener;
 				aMapLocManager.requestLocationUpdates(provider, 2000, 0, this);
 				
-				startTimer();
+			//	startTimer();
 				
 				isGetGPS = false;
 			}
@@ -103,7 +103,7 @@ public class SingleGPSManager implements AMapLocationListener {
 			{
 				aMapLocManager.removeUpdates(this);
 				mListener = null;
-				stopTimer();
+			//	stopTimer();
 				mLocation = null;
 				isGetGPS = false;
 			}
@@ -112,24 +112,24 @@ public class SingleGPSManager implements AMapLocationListener {
 	}
 
 	
-	private void startTimer( )
-	{
-
-		if (mTimeTask == null)
-		{
-			mTimeTask = new MyTimeTask();
-			mTimer.scheduleAtFixedRate(mTimeTask, 0, CHECK_POSITION_INTERVAL);
-		}
-	}
-	
-	private void stopTimer()
-	{
-		if (mTimeTask != null)
-		{
-			mTimeTask.cancel();
-			mTimeTask = null;
-		}
-	}
+//	private void startTimer( )
+//	{
+//
+//		if (mTimeTask == null)
+//		{
+//			mTimeTask = new MyTimeTask();
+//			mTimer.scheduleAtFixedRate(mTimeTask, 0, CHECK_POSITION_INTERVAL);
+//		}
+//	}
+//	
+//	private void stopTimer()
+//	{
+//		if (mTimeTask != null)
+//		{
+//			mTimeTask.cancel();
+//			mTimeTask = null;
+//		}
+//	}
 
 	class MyTimeTask extends TimerTask
 	{
@@ -183,9 +183,12 @@ public class SingleGPSManager implements AMapLocationListener {
 
 	@Override
 	public void onLocationChanged(AMapLocation location) {
-		log.e("(" + location.getLatitude() + ", " + location.getLongitude() + ")  " + YunTimeUtils.getFormatTime2(location.getTime()));
+		log.d("(" + location.getLatitude() + ", " + location.getLongitude() + ")  " + YunTimeUtils.getFormatTime2(location.getTime()));
 		isGetGPS = true;
 		mLocation = location;
+		if (mListener != null){
+			mListener.onLocationChanged(mLocation);
+		}
 	}
 
 }

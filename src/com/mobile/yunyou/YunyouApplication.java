@@ -83,6 +83,8 @@ public class YunyouApplication extends Application implements IRequestCallback{
 	private boolean isNewVersion = false;
 	private PublicType.BikeCheckUpgradeResult mUpdateobject;
 	
+	private MainSlideActivity mMainSlideActivity;
+	
 	public synchronized static YunyouApplication getInstance()
 	{
 		return mApplication;
@@ -92,6 +94,16 @@ public class YunyouApplication extends Application implements IRequestCallback{
 		mNetworkCenter.StartRequestToServer(PublicType.USER_GET_INFO_MASID, null, this);
 	}
 	
+	public void attatchMainActivity(MainSlideActivity activity){
+		mMainSlideActivity = activity;
+	}
+	
+	public void finishMainActivity(){
+		if (mMainSlideActivity != null){
+			log.e("mMainSlideActivity.finish()");
+			mMainSlideActivity.finish();
+		}
+	}
 	
 	public void setBindFlag(boolean flag){
 		isIgnoreBind = flag;

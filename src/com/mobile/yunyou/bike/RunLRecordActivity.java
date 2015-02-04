@@ -231,15 +231,20 @@ public class RunLRecordActivity extends Activity implements OnClickListener,
 	}
 	
 	private void updateDatasView(){
-		int tmp = (int) (mCal * 10000);
-		tmp += 5;
-		mCal = tmp / 10000.0;
-		log.e("updateDatasView cal = " + mCal);
-		if (mCal < 0.001){
+		if (mCal < 0.0005){
 			mTVCal.setText("0");
 		}else{
-			mTVCal.setText(	StringUtil.ConvertByDoubeString(mCal));	
+			int tmp = (int) (mCal * 10000);
+			tmp += 5;
+			mCal = tmp / 10000.0;
+			log.e("updateDatasView cal = " + mCal);
+			if (mCal < 0.001){
+				mTVCal.setText("0");
+			}else{
+				mTVCal.setText(	StringUtil.ConvertByDoubeString(mCal));	
+			}
 		}
+
 
 		mTVDistance.setText(getShowDistance(mDistance));
 		mTVRecordCount.setText(String.valueOf(mRecordCount));

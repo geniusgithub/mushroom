@@ -73,17 +73,15 @@ public class RunLRecordAdapter  extends BaseAdapter{
 		BikeType.BikeLRecordResult object = (BikeType.BikeLRecordResult) getItem(pos);
 
 		long timeStart = 0;
-		try {
-			timeStart = YunTimeUtils.getTimeMillison(object.mStartTime);
-			String mTimeTop = YunTimeUtils.getFormatTime1(timeStart);
-			holder.tvTimeTop.setText(mTimeTop);
+	
+		//	timeStart = YunTimeUtils.getTimeMillison(object.mStartTime);
+		//	String mTimeTop = YunTimeUtils.getFormatTime1(timeStart);
+			holder.tvTimeTop.setText(object.mStartTime);
 			
 			long timeMillsion = StringUtil.getTimeMillson(object.mStartTime, object.mEndTime);
 			String timeRight =  YunTimeUtils.getFormatTimeInterval(timeMillsion);
 			holder.tvTimeRight.setText(timeRight);
-		} catch (ParseException e) {
-			e.printStackTrace();
-		}
+
 
 		if (object.isLocal){
 			holder.tvType.setText("上传中");

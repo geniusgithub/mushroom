@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.activity.LoginActivity;
 import com.mobile.yunyou.bike.MoGuActivity;
 import com.mobile.yunyou.bike.WarningActivity;
 import com.mobile.yunyou.bike.tmp.OfflineMapActivity;
@@ -50,6 +51,7 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 	  private View mGoVersionView;
 	  private View mGoAboutView;
 	  private View mGoHelpView;
+	  private View mLogOffView;
 	  private View mExit;
 	 
 	  private ImageView mIVUpageIcon;
@@ -100,7 +102,9 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 		  mGoMoGuView = findViewById(R.id.ll_goMoGu);
 		  mChangePWDView = findViewById(R.id.ll_changePwd);
 		  mChangePWDView.setOnClickListener(this);
-		  
+		  mLogOffView = findViewById(R.id.ll_logOff);
+		  mLogOffView.setOnClickListener(this);
+		  mLogOffView.setVisibility(View.GONE);
 		  mIVUpageIcon = (ImageView) findViewById(R.id.iv_updateicon);
 		  mHeadImageView = (ImageView) findViewById(R.id.iv_account_head);
 		  mBtnBack = (Button) findViewById(R.id.btn_back);
@@ -172,6 +176,9 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 		case R.id.ll_changePwd:
 			changepwd();
 			break;
+		case R.id.ll_logOff:
+			showLogOffDialog(true);
+			break;
 //		case R.id.ll_gorecharge:
 //			goRechargeActivity();
 //			break;
@@ -231,6 +238,17 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 		Intent intent = new Intent();
     	intent.setClass(this, ChangePwdActivity.class);
     	startActivity(intent);
+	}
+	
+	private void logOff(){
+		log.e("logOff");
+		Intent intent = new Intent();
+    	intent.setClass(this, LoginActivity.class);
+    	startActivity(intent);
+		YunyouApplication.getInstance().finishMainActivity();
+		finish();
+
+
 	}
 	
 	public void goAboutActivity()
@@ -358,7 +376,7 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 				// TODO Auto-generated method stub
 				
 				finish();
-				
+				YunyouApplication.getInstance().finishMainActivity();
 				mApplication.exit();
 			}
 		};
@@ -366,6 +384,32 @@ public class SettingExActivity extends Activity implements OnClickListener, IReq
 		if (bShow)
 		{
 			mDialog = DialogFactory.creatDoubleDialog(this, R.string.dialog_title_exit, R.string.dialog_msg_exit, onClickListener);
+			mDialog.show();
+		}
+	
+	}
+	
+	private void showLogOffDialog(boolean bShow)
+	{
+		if (mDialog != null)
+		{
+			mDialog.dismiss();
+			mDialog = null;
+		}
+		
+		OnClickListener onClickListener = new OnClickListener() {
+			
+			@Override
+			public void onClick(View view) {
+				// TODO Auto-generated method stub
+				
+				logOff();
+			}
+		};
+
+		if (bShow)
+		{
+			mDialog = DialogFactory.creatDoubleDialog(this, R.string.dialog_title_logoff, R.string.dialog_msg_logoff, onClickListener);
 			mDialog.show();
 		}
 	

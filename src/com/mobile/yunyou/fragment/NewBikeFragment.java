@@ -45,6 +45,8 @@ import com.mobile.yunyou.bike.manager.SelfLocationManager;
 import com.mobile.yunyou.bike.tmp.NewBikeCenter;
 import com.mobile.yunyou.bike.tmp.NewBikeEntiy;
 import com.mobile.yunyou.bike.tmp.RunBikeMarket;
+import com.mobile.yunyou.datastore.CurDayDataObject;
+import com.mobile.yunyou.datastore.CurDayRecordDBManager;
 import com.mobile.yunyou.datastore.RunRecordDBManager;
 import com.mobile.yunyou.datastore.YunyouSharePreference;
 import com.mobile.yunyou.map.data.LocationEx;
@@ -83,7 +85,7 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 	private TextView mTextViewAverageSpeed;
 	private TextView mTextViewCal; 
 	private TextView mTextViewHeight; 
-	
+	private View mViewGPS;
 	
 	private Button mBtnStart;
 	private Button mBtnUpload;
@@ -105,6 +107,8 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 	
 	private static NewBikeFragment fragment=null;
 	private YunyouApplication mApplication;
+	
+	private CurDayRecordDBManager mCurDayRecordDBManager;
 	
 	public static NewBikeFragment newInstance(){
 		fragment = new NewBikeFragment();
@@ -251,7 +255,8 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 		mTextViewAverageSpeed = (TextView) view.findViewById(R.id.tv_averagespeed);
 		mTextViewCal = (TextView) view.findViewById(R.id.tv_cal);
 		mTextViewHeight = (TextView) view.findViewById(R.id.tv_height);
-		
+		mViewGPS = view.findViewById(R.id.v_gps);
+		mViewGPS.setVisibility(View.GONE);
 	
     	mBtnBack = (Button) view.findViewById(R.id.btn_back);
     	mBtnBack.setOnClickListener(this);
@@ -282,6 +287,13 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 		
 	}
 	
+	public void showGPSView(boolean flag){
+		if (flag){
+			mViewGPS.setVisibility(View.VISIBLE);
+		}else{
+			mViewGPS.setVisibility(View.GONE);
+		}
+	}
 	public void reset(){
 		showButtonType(VIEW_START);
 		clearData();
@@ -475,6 +487,8 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 		  mRunRecordDBManager = RunRecordDBManager.getInstance();
 
 		  mApplication = YunyouApplication.getInstance();
+		  
+		 mCurDayRecordDBManager = CurDayRecordDBManager.getInstance();
 	}
 	
 	private void initMap(){
@@ -608,20 +622,48 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 		String time = YunTimeUtils.getFormatTime1(startTime);
 		int distance = mNewBikeCenter.getDistance();
 		
-		String saveTime= YunyouSharePreference.getCurtime(mContext);
-		int saveDistance = YunyouSharePreference.getDistance(mContext);
-		
-		log.e("time = " + time  + ", distance = " + distance +"\nsaveTime = " + saveTime + ", saveDistance = " + saveDistance);
-		if (time.equalsIgnoreCase(saveTime)){
-			saveDistance += distance;
-			YunyouSharePreference.putDistance(mContext, saveDistance);
-		}else{
-			YunyouSharePreference.putCurtime(mContext, time);
-			YunyouSharePreference.putDistance(mContext, distance);
+		CurDayDataObject object = null;
+		try {
+			object = mCurDayRecordDBManager.query(YunyouApplication.getInstance().getUserInfoEx().mSid);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 		
+		if (object == null){
+			object = new CurDayDataObject();
+			object.userID = YunyouApplication.getInstance().getUserInfoEx().mSid;
+			object.startTime = time;
+			object.distance = distance / 1000.0;
+		}else{
+			String saveTime = object.startTime;
+			if (time.equalsIgnoreCase(saveTime)){
+				object.distance += distance / 1000.0;
+			}else{
+				object.startTime = time;
+				object.distance = distance / 1000.0;
+			}
+		}
 		
-		BikeType.BikeRecordUpload object = mNewBikeCenter.newBikeRecord();
+		boolean ret1 = false;
+		try {
+			ret1 = mCurDayRecordDBManager.update(object);
+			log.e("mCurDayRecordDBManager insert ret = " + ret1 + 
+					"\nuserid = " + object.userID + 
+					"\nstarttime = " + object.startTime + 
+					"\ndistance = " + object.distance);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		if (!ret1){
+			Utils.showToast(getActivity(), "保存里程数据失败");
+		}
+
+		
+		
+	//	BikeType.BikeRecordUpload objectRecord = mNewBikeCenter.newBikeRecord();
 		CheckUploadManager.getInstance().addRecord(group);
 		CheckUploadManager.getInstance().attemptToUpload();
 		finishSelf();
@@ -637,12 +679,18 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 				mCBLock.setChecked(!mCBLock.isChecked());
 				break;
 			case R.id.btn_start:
+				if (LocationUtil.isGPSEnable(mContext) == false)
+				{
+					showGPSDialog(true);
+					return ;
+				}
 					mRunBikeMarket.reset();
 //					LocationEx locationEx = SelfLocationManager.getInstance().getLastLocation();
 //					mRunBikeMarket.addLocation(locationEx);
 					mNewBikeCenter.startRunning();
 					showButtonType(VIEW_PAUSE);
 					mBtnStop.setEnabled(true);
+					showGPSView(true);
 					//  updateStatus();
 					break;
 //			case R.id.btn_pause:
@@ -663,6 +711,7 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 	@Override
 	public void onTimeChange(int timeMillson) {
 		updateTimesion(timeMillson);
+		showGPSView(false);
 	}
 
 	@Override
@@ -732,14 +781,16 @@ public class NewBikeFragment  extends Fragment implements OnClickListener,
 		double cal = entiy.mCal;
 		double height = entiy.mHeight;
 		
+		String curSpeed = StringUtil.ConvertByDoubeString(speed);
+		log.e("updateNewBikeEntiy speed = " + speed + ", curSpeedString = " + curSpeed);
 		mTextViewDistance.setText(StringUtil.ConvertByDoubeString(distance));
-		mTextViewCurSpeed.setText(StringUtil.ConvertByDoubeString(speed));
+		mTextViewCurSpeed.setText(curSpeed);
 		mTextViewHSpeed.setText(StringUtil.ConvertByDoubeString(hspeed));
 		mTextViewAverageSpeed.setText(StringUtil.ConvertByDoubeString(averagespeed));
 		int tmp = (int) (cal * 10000);
 		tmp += 5;
 		cal = tmp / 10000.0;
-		log.e("updateNewBikeEntiy cal = " + cal);
+		log.e("updateNewBikeEntiy cal = " + cal + "speed = " + speed);
 		if (cal < 0.001){
 			mTextViewCal.setText("0");
 		}else{

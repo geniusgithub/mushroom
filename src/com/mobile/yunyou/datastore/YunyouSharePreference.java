@@ -69,36 +69,36 @@ public class YunyouSharePreference {
 		return sharedPreferences.getBoolean(KEY_REMEMBER_PWD, false);
 	}
 	
-	public static boolean putCurtime(Context context, String curTime)
-	{
-		log.e("putCurtime = "  + curTime);
-		SharedPreferences sharedPreferences = context.getSharedPreferences(SHAREPREFERENCE_NAME, 0);
-		Editor editor = sharedPreferences.edit();
-		editor.putString(KEY_CUR_TIME, curTime);
-		
-		return editor.commit();
-	}
-	
-	public static String getCurtime(Context context)
-	{
-		SharedPreferences sharedPreferences = context.getSharedPreferences(SHAREPREFERENCE_NAME, 0);
-		return sharedPreferences.getString(KEY_CUR_TIME, "");
-	}
-	
-	public static boolean putDistance(Context context, int distance)
-	{
-		log.e("putDistance = "  + distance);
-		SharedPreferences sharedPreferences = context.getSharedPreferences(SHAREPREFERENCE_NAME, 0);
-		Editor editor = sharedPreferences.edit();
-		editor.putInt(KEY_DISTANCE, distance);
-		
-		return editor.commit();
-	}
-	
-	public static int getDistance(Context context)
-	{
-		SharedPreferences sharedPreferences = context.getSharedPreferences(SHAREPREFERENCE_NAME, 0);
-		return sharedPreferences.getInt(KEY_DISTANCE, 0);
-	}
+//	public static boolean putCurtime(Context context, String curTime)
+//	{
+//		log.e("putCurtime = "  + curTime);
+//		SharedPreferences sharedPreferences = context.getSharedPreferences(SHAREPREFERENCE_NAME, 0);
+//		Editor editor = sharedPreferences.edit();
+//		editor.putString(KEY_CUR_TIME, curTime);
+//		
+//		return editor.commit();
+//	}
+//	
+//	public static String getCurtime(Context context)
+//	{
+//		SharedPreferences sharedPreferences = context.getSharedPreferences(SHAREPREFERENCE_NAME, 0);
+//		return sharedPreferences.getString(KEY_CUR_TIME, "");
+//	}
+//	
+//	public static boolean putDistance(Context context, int distance)
+//	{
+//		log.e("putDistance = "  + distance);
+//		SharedPreferences sharedPreferences = context.getSharedPreferences(SHAREPREFERENCE_NAME, 0);
+//		Editor editor = sharedPreferences.edit();
+//		editor.putInt(KEY_DISTANCE, distance);
+//		
+//		return editor.commit();
+//	}
+//	
+//	public static int getDistance(Context context)
+//	{
+//		SharedPreferences sharedPreferences = context.getSharedPreferences(SHAREPREFERENCE_NAME, 0);
+//		return sharedPreferences.getInt(KEY_DISTANCE, 0);
+//	}
 	
 }
