@@ -116,7 +116,7 @@ public class RunRecordMarket {
 				if (preLatLng != null){
 					PolylineOptions options = new PolylineOptions();
 					options.add(preLatLng, latLng);
-					options.width(5);
+					options.width(10);
 					options.color(Color.RED);	
 					mPLineList.add(options);
 				}

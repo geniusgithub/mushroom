@@ -29,6 +29,7 @@ import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.MapView;
 import com.amap.api.maps.UiSettings;
 import com.amap.api.maps.model.CameraPosition;
+import com.amap.api.maps.model.Circle;
 import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.LatLngBounds;
 import com.amap.api.maps.model.LatLngBounds.Builder;
@@ -53,8 +54,7 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 															IBikeLocationUpdate,
 															OnMarkerClickListener,
 															InfoWindowAdapter,
-															OnInfoWindowClickListener,
-															LocationSource{
+															OnInfoWindowClickListener{
 
 	private static final CommonLog log = LogFactory.createLog();
 	private static final int MSG_REFRESH_SELF = 0x0001;
@@ -70,7 +70,6 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 	private MapView mMapView;								
 	private UiSettings mUiSettings;		
 	private View mRootView;
-	private OnLocationChangedListener mListener;
 
 
 	private YunyouApplication mApplication;
@@ -88,6 +87,7 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 	
 	private BikeLocationManager mBikeLocationManager;
 	private BikeMarket mBikeMarket;
+	private SelfExMarket mSelfExMarket;
 	//private Marker mSelfMarket;
 	
 	private SelfLocationManager mSelfLocationManager;
@@ -110,11 +110,11 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		mContext = this;
 		setupViews();
 		initData();
-		initMap();
+//		initMap();
 	}
 	
 	
-	private boolean isFirstResume = true;
+//	private boolean isFirstResume = true;
 	/**
 	 * 方法必须重写
 	 */
@@ -123,21 +123,16 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		super.onResume();
 		mMapView.onResume();
 
-		mSelfLocationManager.addObserver(this);
-		mSelfLocationManager.startLocationCheck();
+	
+	
 		
-		if (isFirstResume){
-		
-			LocationEx locationEx = mBikeLocationManager.getLastLocation();
-			if (locationEx == null){
-				locationEx = mSelfLocationManager.getLastLocation();
-			}
-			updateCamarra(13);
-			moveCamara(locationEx);
-
-			isFirstResume = false;
+		LocationEx locationEx = mBikeLocationManager.getLastLocation();
+		if (locationEx == null){
+			locationEx = mSelfLocationManager.getLastLocation();
 		}
-		
+		updateCamarra(13);
+		moveCamara(locationEx);
+
 		searchBike();
 
 		if (LocationUtil.isGPSEnable(mContext) == false)
@@ -155,8 +150,6 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		super.onPause();
 		mMapView.onPause();
 
-		mSelfLocationManager.removeObservser(this);
-		mSelfLocationManager.stopLocationCheck();
 	}
 
 	/**
@@ -175,6 +168,9 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		// TODO Auto-generated method stub
 		super.onStart();
 		
+		mSelfLocationManager.addObserver(this);
+		mSelfLocationManager.startLocationCheck();
+		
 		mBikeLocationManager.addObserver(this);
 		mBikeLocationManager.startLocationCheck();
 		
@@ -184,7 +180,8 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 	protected void onStop() {
 		super.onStop();
 		
-		
+		mSelfLocationManager.removeObservser(this);
+		mSelfLocationManager.stopLocationCheck();
 		mBikeLocationManager.removeObservser(this);
 		mBikeLocationManager.stopLocationCheck();
 	}
@@ -239,6 +236,7 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		
 		mBikeMarket = new BikeMarket(R.drawable.point_start, R.drawable.bike_point_on, R.drawable.bike_point_off);
 	//	mSelfMarket = new SelfMarket(R.drawable.self_pos);	
+		mSelfExMarket  = new SelfExMarket(R.drawable.location_marker);
 		
 	}
 	
@@ -252,7 +250,7 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 			public void handleMessage(Message msg) {
 					switch(msg.what){
 						case MSG_REFRESH_SELF:
-						//	refreshSelf();
+							refreshSelf();
 							break;
 						case MSG_REFRESH_BIKE:
 							refreshBike();
@@ -267,31 +265,32 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		  mSelfLocationManager = SelfLocationManager.getInstance();
 	}
 	
-	private void initMap(){
-//		ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
-//		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point1));
-//		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point2));
-//		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point3));
-//		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point4));
-//		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point5));
-//		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point6));
-//		mSelfMarket = aMap.addMarker(new MarkerOptions().anchor(0.5f, 0.5f).icons(giflist).period(50));
-		
-		// 自定义系统定位小蓝点
-//		MyLocationStyle myLocationStyle = new MyLocationStyle();
-//		myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.drawable.location_marker));// 设置小蓝点的图标
-//		myLocationStyle.strokeColor(Color.BLACK);// 设置圆形的边框颜色
-//		myLocationStyle.radiusFillColor(Color.argb(100, 0, 0, 180));// 设置圆形的填充颜色
-//		myLocationStyle.strokeWidth(0.1f);// 设置圆形的边框粗细
+//	private void initMap(){
+//		log.e("initMap");
+////		ArrayList<BitmapDescriptor> giflist = new ArrayList<BitmapDescriptor>();
+////		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point1));
+////		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point2));
+////		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point3));
+////		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point4));
+////		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point5));
+////		giflist.add(BitmapDescriptorFactory.fromResource(R.drawable.point6));
+////		mSelfMarket = aMap.addMarker(new MarkerOptions().anchor(0.5f, 0.5f).icons(giflist).period(50));
 //		
-//		
-//		aMap.setMyLocationStyle(myLocationStyle);
-//		aMap.setMyLocationRotateAngle(180);
-		aMap.setLocationSource(this);// 设置定位监听
-		aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
-		//设置定位的类型为定位模式 ，可以由定位、跟随或地图根据面向方向旋转几种 
-		aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
-	}
+//		// 自定义系统定位小蓝点
+////		MyLocationStyle myLocationStyle = new MyLocationStyle();
+////		myLocationStyle.myLocationIcon(BitmapDescriptorFactory.fromResource(R.drawable.location_marker));// 设置小蓝点的图标
+////		myLocationStyle.strokeColor(Color.BLACK);// 设置圆形的边框颜色
+////		myLocationStyle.radiusFillColor(Color.argb(100, 0, 0, 180));// 设置圆形的填充颜色
+////		myLocationStyle.strokeWidth(0.1f);// 设置圆形的边框粗细
+////		
+////		
+////		aMap.setMyLocationStyle(myLocationStyle);
+////		aMap.setMyLocationRotateAngle(180);
+//		aMap.setLocationSource(this);// 设置定位监听
+//		aMap.setMyLocationEnabled(true);// 设置为true表示显示定位层并可触发定位，false表示隐藏定位层并不可触发定位，默认是false
+//		//设置定位的类型为定位模式 ，可以由定位、跟随或地图根据面向方向旋转几种 
+//		aMap.setMyLocationType(AMap.LOCATION_TYPE_LOCATE);
+//	}
 
 	private Dialog mDialog = null;
 	private void showExitDialog(boolean bShow)
@@ -346,6 +345,7 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 	public void searchBike(){
 		log.e("searchBike");
 		mBikeMarket.reset();
+		mSelfExMarket.reset();
 		Message msg = mHandler.obtainMessage(MSG_REFRESH_VIEW);
 		msg.sendToTarget();
 		
@@ -354,62 +354,43 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		
 	}
 	
-//	private void refreshSelf(){
-//		boolean isShow = false;
-//		if (mMarker != null){
-//			isShow = mMarker.isInfoWindowShown();
-//		}
-//		
-//		boolean isNeedUpdate = true;
-//		if (mSelfMarket != null){
-//			isNeedUpdate = mSelfMarket.isNeedUpdate();
-//		}
-//		
-//		log.e("showView refreshSelf isShow = " + isShow + ", isNeedUpdate = " + isNeedUpdate);
-//		if (!isNeedUpdate){
-//			return ;
-//		}
-//		
-//		aMap.clear();
-//
-//		if (mSelfMarket.getLocation() != null){
-//			aMap.addMarker(mSelfMarket.newMarkerOptions());
-//		}
-//		
-//		List<PolylineOptions> list = mBikeMarket.getPLineList();
-//		int size = list.size();
-//		for(int i = 0;i < size; i++){
-//			aMap.addPolyline(list.get(i));
-//		}
-//		if (mBikeMarket.getLastLocation() != null){
-//			Marker marker = aMap.addMarker(mBikeMarket.newCurrentMarkerOptions());
-//			marker.setTitle("BIKE");
-//			mMarker = marker;
-//		}
-//		
-//		
-//		
-//		if (isShow){
-//		//	mHandler.sendEmptyMessage(MSG_SHOW_POP);
-//			mMarker.showInfoWindow();
-//		}
-//		
-//	}
 	
 	private void refreshView(){
 		aMap.clear();
 		
-		if (mBikeMarket.getLastLocation() != null){
-			Marker marker = aMap.addMarker(mBikeMarket.newCurrentMarkerOptions());
-			marker.setTitle("BIKE");
-			mBikeMarket.attchMarket(marker);
+		refreshBike();
+		
+		refreshSelf();
+	}
+	
+	private void refreshSelf(){
+		log.e("refreshSelf");
+	
+
+		Marker marker = mSelfExMarket.getMarket();
+		if (marker == null){
+			if (mSelfExMarket.getLastLocation() != null){
+				marker = aMap.addMarker(mSelfExMarket.newStartMarkerOptions());
+				mSelfExMarket.attchMarket(marker);
+
+			}
 		}
 		
-		List<PolylineOptions> list = mBikeMarket.getPLineList();
-		int size = list.size();
-		for(int i = 0; i < size; i++){
-			aMap.addPolyline(list.get(i));
+		Circle circle = mSelfExMarket.getCircle();
+		if (circle == null){
+			if (mSelfExMarket.getLastLocation() != null){
+				circle = aMap.addCircle(mSelfExMarket.newCircleOptions());
+				mSelfExMarket.attchCircle(circle);
+			}
+		}else{
+			mSelfExMarket.updateCircle();
 		}
+		
+		LatLng latLng = mSelfExMarket.getLastLatLon();
+		if (latLng != null){
+			marker.setPosition(latLng);
+		}
+		
 	}
 	
 	private void refreshBike(){
@@ -601,9 +582,24 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 	public void onLocationUpdate(final LocationEx location, AMapLocation aMapLocation) {
 		log.e("onLocationUpdate (" + location.getLatitude() + "," + location.getLongitude() + ")");
 		
-		if (mListener != null && aMapLocation != null) {
-			mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点	
-		}
+		runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+	
+				mSelfExMarket.setLocation(location);
+				if (mIsFirstCenter){
+					moveCamara(mSelfExMarket.getLastLocation());
+				}
+		
+				Message msg = mHandler.obtainMessage(MSG_REFRESH_SELF);
+				msg.sendToTarget();
+			}
+		});
+		
+//		if (mListener != null && aMapLocation != null) {
+//			mListener.onLocationChanged(aMapLocation);// 显示系统小蓝点	
+//		}
 		
 //		runOnUiThread(new Runnable() {
 //		
@@ -656,20 +652,6 @@ public class FollowBikeActivity extends Activity implements OnClickListener,
 		// TODO Auto-generated method stub
 		return false;
 	}
-
-	@Override
-	public void activate(OnLocationChangedListener listener) {
-		mListener = listener;
-	}
-
-	@Override
-	public void deactivate() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
-
 
 
 }

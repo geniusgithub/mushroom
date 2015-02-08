@@ -94,6 +94,7 @@ public class BikeMarket {
 		mFirstLocation = null;
 	}
 	public void reset(){
+		mLastMarket = null;
 		mPreLatLng = null;
 		mLatLngList.clear();
 		mPLineList.clear();
@@ -166,7 +167,7 @@ public class BikeMarket {
 			PolylineOptions options = new PolylineOptions();
 			options.add(mPreLatLng, latLng);
 			options.width(10);
-			options.color(Color.BLACK);	
+			options.color(Color.RED);	
 			mPLineList.add(options);
 			log.e("mPLineList.size = " + mPLineList.size());
 			mPreLatLng = latLng;
