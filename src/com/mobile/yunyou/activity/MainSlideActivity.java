@@ -1,5 +1,10 @@
 package com.mobile.yunyou.activity;
+import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -18,6 +23,7 @@ import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.OnCloseListener;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.OnOpenListener;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu.OnOpenedListener;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
+import com.mobile.yunyou.BrocastFactory;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
 import com.mobile.yunyou.bike.FollowBikeActivity;
@@ -28,7 +34,10 @@ import com.mobile.yunyou.fragment.MainMapFragment;
 import com.mobile.yunyou.fragment.NavigationFragment;
 import com.mobile.yunyou.fragment.NewBikeFragment;
 import com.mobile.yunyou.map.data.LocationEx;
+import com.mobile.yunyou.model.PublicType;
+import com.mobile.yunyou.set.SettingExActivity;
 import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.Utils;
 
@@ -53,6 +62,7 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 	private YunyouApplication mApplication;
 	private SelfLocationManager mSelfLocationManager;
 	
+	private BroadcastReceiver mReceiver;
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -98,6 +108,8 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
+		
+		unregisterReceiver(mReceiver);
 		
 		mApplication.attatchMainActivity(null);
 	}
@@ -177,8 +189,63 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 //			 Utils.showToast(this, "您未绑定蘑菇伴侣");
 //		 }
 		  mSelfLocationManager = SelfLocationManager.getInstance();
+		  
+		  mReceiver = new BroadcastReceiver() {
+				
+				@Override
+				public void onReceive(Context content, Intent intent) {
+					if (intent.getAction().equalsIgnoreCase(BrocastFactory.BROCAST_UPDATE_VERSON)){
+						showVersionDialog(true);
+					}
+				}
+			};
+			
+			IntentFilter intentFilter = new IntentFilter(BrocastFactory.BROCAST_UPDATE_VERSON);
+			registerReceiver(mReceiver, intentFilter);
 	}
 	
+	private Dialog mDialog;
+	private void showVersionDialog(boolean bShow)
+	{
+		if (mDialog != null)
+		{
+			mDialog.dismiss();
+			mDialog = null;
+		}
+		
+		DialogFactory.ISelectComplete listener = new DialogFactory.ISelectComplete() {
+
+			@Override
+			public void onSelectComplete(boolean flag) {
+				if (flag){
+					PublicType.BikeCheckUpgradeResult object = mApplication.getVersionObject();	
+					if (object != null){
+						Intent intents = new Intent(Intent.ACTION_VIEW);
+						intents.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+						intents.setData(Uri.parse(object.mUrl));
+						startActivity(intents);
+						log.e("jump to url:" + object.mUrl);
+					}
+				}else{
+					
+				}
+			}
+			
+		
+		};
+		
+		if (bShow)
+		{
+			PublicType.BikeCheckUpgradeResult object = mApplication.getVersionObject();			
+			String title = getResources().getString(R.string.dialog_title_version_update);
+			String content = object.mContent != null ? object.mContent : "";
+			mDialog = DialogFactory.creatSelectDialog(MainSlideActivity.this, title, content,
+					getResources().getString(R.string.btn_sure), getResources().getString(R.string.btn_cancel),  listener);
+			mDialog.setCancelable(false);
+			mDialog.show();
+		}
+	
+	}
 	
 //	public void searchBike(){
 //		mMapExFragment.searchBike();

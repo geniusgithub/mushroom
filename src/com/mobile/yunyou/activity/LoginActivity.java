@@ -328,6 +328,7 @@ public class LoginActivity extends Activity implements OnClickListener, IRequest
 			mApplication.setLoginState(true);
 			mApplication.downLoadHeadProfile();
 			mApplication.requestUserInfo();
+			mApplication.requestVersionCheck();
 			
 			goMainActivity();
 		//	goMsgDelActivity();

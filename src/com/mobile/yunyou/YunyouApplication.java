@@ -94,6 +94,11 @@ public class YunyouApplication extends Application implements IRequestCallback{
 		mNetworkCenter.StartRequestToServer(PublicType.USER_GET_INFO_MASID, null, this);
 	}
 	
+	public void requestVersionCheck(){
+		mNetworkCenter.StartRequestToServer(PublicType.BIKE_CHECKUPGRADE_MASID, null, this);
+	}
+	
+
 	public void attatchMainActivity(MainSlideActivity activity){
 		mMainSlideActivity = activity;
 	}
@@ -528,6 +533,9 @@ public class YunyouApplication extends Application implements IRequestCallback{
 		case PublicType.USER_GET_INFO_MASID:
 			onGetUserInfoResult(dataPacket);
 			break;
+		case PublicType.BIKE_CHECKUPGRADE_MASID:
+			onCheckUpdate(dataPacket);
+			break;
 		}
 		
 		return true;
@@ -556,6 +564,35 @@ public class YunyouApplication extends Application implements IRequestCallback{
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	public void onCheckUpdate(ResponseDataPacket dataPacket){
+		
+		if (dataPacket == null || dataPacket.rsp == 0)
+		{
+			return ;
+		}
+		
+		PublicType.BikeCheckUpgradeResult object = new PublicType.BikeCheckUpgradeResult();
+		try {
+			object.parseString(dataPacket.data.toString());
+
+			log.e("BikeCheckUpgradeResult = " + object.getShowString());
+			
+			if (object.mNeedUpgrade == 0){
+				mApplication.setVersionFlag(false);
+				return ;
+			}
+			
+			mApplication.setVersionFlag(true);
+			mApplication.setVersionObject(object);
+			
+			BrocastFactory.sendVersionUpdate(this);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			Utils.showToast(this, R.string.analyze_data_fail);
 		}
 	}
 }

@@ -7,6 +7,7 @@ public class BrocastFactory {
 
 	public final static String BROCAST_UPDATE_NICKNAME = "BROCAST_UPDATE_NICKNAME";
 	public final static String BROCAST_UPDATE_HEADICON = "BROCAST_UPDATE_HEADICON";
+	public final static String BROCAST_UPDATE_VERSON = "BROCAST_UPDATE_VERSON";
 	
 	public static void sendUserInfoUpdate(Context context){
 		Intent intent = new Intent();
@@ -17,6 +18,12 @@ public class BrocastFactory {
 	public static void sendHeadUpdate(Context context){
 		Intent intent = new Intent();
 		intent.setAction(BROCAST_UPDATE_HEADICON);
+		context.sendBroadcast(intent);
+	}
+	
+	public static void sendVersionUpdate(Context context){
+		Intent intent = new Intent();
+		intent.setAction(BROCAST_UPDATE_VERSON);
 		context.sendBroadcast(intent);
 	}
 }

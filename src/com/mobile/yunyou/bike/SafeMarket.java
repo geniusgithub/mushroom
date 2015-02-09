@@ -37,6 +37,7 @@ public class SafeMarket {
 		if (mObject != null && drawableID != 0){
 			mMarkerOptions.icon(BitmapDescriptorFactory.fromResource(drawableID));
 			mMarkerOptions.position(getLatLon());
+			mMarkerOptions.anchor(0.5f, 0.5f);
 		}
 
 		return mMarkerOptions;

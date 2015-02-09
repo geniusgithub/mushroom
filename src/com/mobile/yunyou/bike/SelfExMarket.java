@@ -97,6 +97,7 @@ public class SelfExMarket {
 	public MarkerOptions newStartMarkerOptions(){
 		if (mLastLocation != null && drawableIDStart != 0){
 			mMarkerOptionsStart.icon(BitmapDescriptorFactory.fromResource(drawableIDStart));
+			mMarkerOptionsStart.anchor(0.5f, 0.5f);
 			LatLng latLng = getLastLatLon();
 			if (latLng != null){
 				mMarkerOptionsStart.position(latLng);
