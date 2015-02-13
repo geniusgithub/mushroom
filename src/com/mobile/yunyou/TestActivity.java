@@ -15,8 +15,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import org.json.JSONException;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
@@ -57,6 +55,7 @@ import com.mobile.yunyou.util.UploadExUtil;
 import com.mobile.yunyou.util.UploadExUtil.OnUploadProcessListener;
 import com.mobile.yunyou.util.Utils;
 import com.mobile.yunyou.util.notifactionUtils;
+import com.mobile.yunyou.zxin.CaptureActivity;
 
 
 
@@ -545,7 +544,11 @@ public class TestActivity extends Activity implements OnClickListener, IRequestC
 //			       intent.setType("image/*");//相片类型   
 //			       startActivityForResult(intent, REQUEST_CODE_PICK_IMAGE);  
 			
-			showPhotoDialog(true);
+//			showPhotoDialog(true);
+			
+			Intent intent = new Intent();
+			intent.setClass(this, CaptureActivity.class);
+			startActivity(intent);
 			  
 		}
 		
