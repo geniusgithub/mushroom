@@ -34,12 +34,45 @@
              android:text="@string/bind_text_changepwd"/>
    </RelativeLayout>
  
-
-	<LinearLayout
-	    	android:orientation="vertical" 
-            android:layout_width="fill_parent" 
-    		android:layout_height="wrap_content">    
-
+    
+    <LinearLayout   
+	    android:orientation="vertical" 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="fill_parent">
+    	    
+		<RelativeLayout
+		        android:id="@+id/rl_zxin"
+	            android:layout_width="fill_parent" 
+	    		android:layout_height="wrap_content"
+	    		android:layout_marginTop="15dp"
+	    		android:layout_marginLeft="10.0dip"
+	       	    android:layout_marginRight="10.0dip">
+	            
+		    
+		        <ImageView
+		        android:id="@+id/iv_zxin"
+		        android:layout_width="100dp" 
+	    		android:layout_height="100dp"
+	    		android:src="@drawable/zxin_icon"
+	    		android:layout_alignParentRight="true">	            
+		        </ImageView>
+		        
+		        
+		        <TextView 
+		             android:textSize="18.0dip"
+		             android:layout_width="wrap_content" 
+	    			 android:layout_height="wrap_content"
+	        		 android:textColor="#ff00aa00"
+		             android:layout_toLeftOf="@id/iv_zxin"
+		             android:layout_marginLeft="10.0dip"
+	       	   		 android:layout_marginRight="10.0dip"
+	       	   		 android:layout_centerVertical="true"
+		             android:text="扫描蘑菇伴侣设备背面二维码来输入账号" />
+			            
+		     
+	  	</RelativeLayout> 
+  	
+	
 	     <LinearLayout 
 	            android:id="@+id/ll_layout1"
 	            style="@style/leba_bg_layout">                  
@@ -115,8 +148,8 @@
 		     android:text="@string/btn_unbind"
 		     android:textSize="18sp"
 		     android:textColor="@color/white"/>
-
-	     </RelativeLayout>
+		</RelativeLayout> 
+	 
    
 	         
 	</LinearLayout>

@@ -25,10 +25,15 @@ import android.view.SurfaceView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.mobile.yunyou.R;
+import com.mobile.yunyou.util.CommonLog;
+import com.mobile.yunyou.util.LogFactory;
 
 public class CaptureActivity extends Activity implements Callback
 {
+	
 
+	private static final String ZXIN_STRING = "ZXIN_STRING";
+	
 	private CaptureActivityHandler handler;
 	private ViewfinderView viewfinderView;
 	private boolean hasSurface;
@@ -182,12 +187,15 @@ public class CaptureActivity extends Activity implements Callback
 			@Override
 			public void onClick(DialogInterface dialog, int which)
 			{
-				//用默认浏览器打开扫描得到的地址
+//				//用默认浏览器打开扫描得到的地址
+//				Intent intent = new Intent();
+//				intent.setAction("android.intent.action.VIEW");
+//				Uri content_url = Uri.parse(obj.getText());
+//				intent.setData(content_url);
+//				startActivity(intent);
 				Intent intent = new Intent();
-				intent.setAction("android.intent.action.VIEW");
-				Uri content_url = Uri.parse(obj.getText());
-				intent.setData(content_url);
-				startActivity(intent);
+				intent.putExtra(ZXIN_STRING, obj.getText());
+				setResult(RESULT_OK, intent);
 				finish();
 			}
 		});

@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.PopupWindow;
 
 import com.mobile.yunyou.R;
@@ -28,10 +29,14 @@ import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
+import com.mobile.yunyou.zxin.CaptureActivity;
 
 public class MoGuActivity extends Activity implements OnClickListener, IRequestCallback{
 
-private static final int MSG_GET_WARNING = 0x0001;
+	private static final int MSG_GET_WARNING = 0x0001;
+	
+	private static final int MSG_ZXIN_REQUEST_CODE = 0x0002;
+	private static final String ZXIN_STRING = "ZXIN_STRING";
 	
 	private static final CommonLog log = LogFactory.createLog();
 	
@@ -53,6 +58,9 @@ private static final int MSG_GET_WARNING = 0x0001;
 	private Handler mHandler;
 	
 	private DeviceInfoEx mDeviceInfoEx = null;
+	
+	private View mZXinView;
+	private ImageView mImageViewZXin;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +109,11 @@ private static final int MSG_GET_WARNING = 0x0001;
 		mETPassword = (EditText) findViewById(R.id.et_password);
     	mBtnBack = (Button) findViewById(R.id.btn_back);
     	mBtnBack.setOnClickListener(this);
-
+    	
+    	mImageViewZXin = (ImageView) findViewById(R.id.iv_zxin);
+    	mImageViewZXin.setOnClickListener(this);
+    	
+    	mZXinView = findViewById(R.id.rl_zxin);
 	}
 	
 	private void initData(){
@@ -130,6 +142,7 @@ private static final int MSG_GET_WARNING = 0x0001;
 			  mETAccount.setText(mDeviceInfoEx.mAlias);
 			  mETAccount.setEnabled(false);
 			  mETPassword.setEnabled(false);
+			  mZXinView.setVisibility(View.GONE);
 		  }else{
 			  mBtnBind.setVisibility(View.VISIBLE);
 			  mBtnUnBind.setVisibility(View.GONE); 
@@ -139,6 +152,31 @@ private static final int MSG_GET_WARNING = 0x0001;
 	
 	
 	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		log.e("requestCode = " + requestCode + ", resultCode = " + resultCode);
+		switch (requestCode) {
+		case MSG_ZXIN_REQUEST_CODE:
+			if (resultCode == RESULT_OK){
+				inputAccount(data);
+			}
+			break;
+
+		default:
+			break;
+		}
+	}
+
+	private void inputAccount(Intent data){
+		log.e("inputAccount data = " + data);
+		String account = data.getStringExtra(ZXIN_STRING);
+		if (account == null){
+			account = "";
+		}
+		
+		mETAccount.setText(account);
+	}
+
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -153,6 +191,9 @@ private static final int MSG_GET_WARNING = 0x0001;
 			break;
 		case R.id.btn_changepwd:
 			changepwd();
+			break;
+		case R.id.iv_zxin:
+			zxin();
 			break;
 		default:
 			break;
@@ -195,7 +236,11 @@ private static final int MSG_GET_WARNING = 0x0001;
     	startActivity(intent);
 	}
 	
-	
+	private void zxin(){
+		Intent intent = new Intent();
+    	intent.setClass(this, CaptureActivity.class);
+    	startActivityForResult(intent, MSG_ZXIN_REQUEST_CODE);
+	}
 	
 	private PopupWindow mPopupWindow = null;
 	public void showRequestDialog(boolean bShow)
