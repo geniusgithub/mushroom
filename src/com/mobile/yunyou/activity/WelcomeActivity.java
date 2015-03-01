@@ -12,7 +12,7 @@ import com.mobile.yunyou.network.NetworkCenterEx;
 
 
 
-public class WelcomeActivity extends Activity{
+public class WelcomeActivity extends BaseActivity{
     /** Called when the activity is first created. */
 
 	private Handler mHandler;

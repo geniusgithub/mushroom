@@ -7,8 +7,9 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.mobile.yunyou.R;
+import com.mobile.yunyou.activity.BaseActivity;
 
-public class SetWarnActivity extends Activity implements OnClickListener{
+public class SetWarnActivity extends BaseActivity implements OnClickListener{
 
 	private Button mBtnBack;
 	

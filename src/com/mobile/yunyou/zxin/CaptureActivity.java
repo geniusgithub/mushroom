@@ -25,10 +25,11 @@ import android.view.SurfaceView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
 import com.mobile.yunyou.R;
+import com.mobile.yunyou.activity.BaseActivity;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
 
-public class CaptureActivity extends Activity implements Callback
+public class CaptureActivity extends BaseActivity implements Callback
 {
 	
 

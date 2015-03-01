@@ -13,6 +13,7 @@ import android.widget.PopupWindow;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.activity.BaseActivity;
 import com.mobile.yunyou.model.PublicType;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;
@@ -22,7 +23,7 @@ import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 
-public class ChangeDevicePwdActivity extends Activity implements OnClickListener, IRequestCallback{
+public class ChangeDevicePwdActivity extends BaseActivity implements OnClickListener, IRequestCallback{
 
 	private static final CommonLog log = LogFactory.createLog();
 	 

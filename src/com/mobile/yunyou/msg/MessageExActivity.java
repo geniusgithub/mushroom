@@ -23,6 +23,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.activity.BaseActivity;
 import com.mobile.yunyou.model.DeviceSetType;
 import com.mobile.yunyou.model.DeviceSetType.DeviceMsgData;
 import com.mobile.yunyou.network.NetworkCenterEx;
@@ -30,7 +31,7 @@ import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.Utils;
 
-public class MessageExActivity extends Activity implements OnClickListener, 
+public class MessageExActivity extends BaseActivity implements OnClickListener, 
 											OnRefreshListener2<ListView>,
 											MsgRuestProxy.IRequestComplete{
 

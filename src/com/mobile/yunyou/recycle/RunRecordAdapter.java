@@ -1,13 +1,9 @@
+package com.mobile.yunyou.recycle;
 //package com.mobile.yunyou.bike;
 //
+//import java.text.ParseException;
 //import java.util.ArrayList;
 //import java.util.List;
-//
-//import com.mobile.yunyou.R;
-//import com.mobile.yunyou.model.DeviceSetType;
-//import com.mobile.yunyou.model.BikeType.BikeRecordResult;
-//import com.mobile.yunyou.model.DeviceSetType.DeviceHistoryResult;
-//import com.mobile.yunyou.util.YunTimeUtils;
 //
 //import android.content.Context;
 //import android.view.LayoutInflater;
@@ -16,33 +12,39 @@
 //import android.widget.BaseAdapter;
 //import android.widget.TextView;
 //
-//public class BikeRecordAdapter  extends BaseAdapter{
+//import com.mobile.yunyou.R;
+//import com.mobile.yunyou.map.util.StringUtil;
+//import com.mobile.yunyou.model.BikeType;
+//import com.mobile.yunyou.util.YunTimeUtils;
+//
+//public class RunRecordAdapter  extends BaseAdapter{
 //	
-//	public List<BikeRecordResult> mBikeRecordResultList = new ArrayList<BikeRecordResult>();
+//	public List<BikeType.RunRecordGroup> mRunRecordList = new ArrayList<BikeType.RunRecordGroup>();
 //
 //	private Context mContext;
 //	
-//	public BikeRecordAdapter(Context context, List<BikeRecordResult> data)
+//	public RunRecordAdapter(Context context, List<BikeType.RunRecordGroup> data)
 //	{
 //		mContext = context;
-//		mBikeRecordResultList = data;
+//		mRunRecordList = data;
 //	}
 //	
-//	public void setData(List<BikeRecordResult> data)
+//	public void setData(List<BikeType.RunRecordGroup> data)
 //	{
-//		mBikeRecordResultList = data;
+//		mRunRecordList = data;
 //		notifyDataSetChanged();
 //	}
+//	
 //	@Override
 //	public int getCount() {
 //		// TODO Auto-generated method stub
-//		return mBikeRecordResultList.size();
+//		return mRunRecordList.size();
 //	}
 //
 //	@Override
 //	public Object getItem(int pos) {
 //		// TODO Auto-generated method stub
-//		return mBikeRecordResultList.get(pos);
+//		return mRunRecordList.get(pos);
 //	}
 //
 //	@Override
@@ -68,14 +70,29 @@
 //			holder = (ViewHolder) view.getTag();
 //		}
 //		
-//		BikeRecordResult object = (BikeRecordResult) getItem(pos);
-//		holder.tvTimeTop.setText(object.mTimeTop);
-//		holder.tvTimeRight.setText(object.mTimeRight);
-//		holder.tvDistance.setText(getShowDistance(object.mDistance));
+//		BikeType.RunRecordGroup object = (BikeType.RunRecordGroup) getItem(pos);
+//
+//		long timeStart = 0;
+//		try {
+//			timeStart = YunTimeUtils.getTimeMillison(object.mStartTime);
+//			String mTimeTop = YunTimeUtils.getFormatTime1(timeStart);
+//			holder.tvTimeTop.setText(mTimeTop);
+//			
+//			long timeMillsion = StringUtil.getTimeMillson(object.mStartTime, object.mEndTime);
+//			String timeRight =  YunTimeUtils.getFormatTimeInterval(timeMillsion);
+//			holder.tvTimeRight.setText(timeRight);
+//		} catch (ParseException e) {
+//			e.printStackTrace();
+//		}
+//
+//		
+//		
+//		holder.tvDistance.setText(getShowDistance(object.mTotalDistance));
 //		
 //		return view;
 //		
 //	}
+//
 //
 //	
 //    static class ViewHolder { 

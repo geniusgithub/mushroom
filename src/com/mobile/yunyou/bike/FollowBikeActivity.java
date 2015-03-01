@@ -37,6 +37,7 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.PolylineOptions;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.activity.BaseActivity;
 import com.mobile.yunyou.bike.manager.BikeLocationManager;
 import com.mobile.yunyou.bike.manager.BikeLocationManager.IBikeLocationUpdate;
 import com.mobile.yunyou.bike.manager.SelfLocationManager;
@@ -49,7 +50,7 @@ import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.Utils;
 
-public class FollowBikeActivity extends Activity implements OnClickListener,
+public class FollowBikeActivity extends BaseActivity implements OnClickListener,
 															ILocationUpdate,	
 															IBikeLocationUpdate,
 															OnMarkerClickListener,

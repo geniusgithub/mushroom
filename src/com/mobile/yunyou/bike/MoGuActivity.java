@@ -17,6 +17,7 @@ import android.widget.PopupWindow;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.activity.BaseActivity;
 import com.mobile.yunyou.model.GloalType;
 import com.mobile.yunyou.model.GloalType.DeviceInfoEx;
 import com.mobile.yunyou.model.PublicType;
@@ -31,7 +32,7 @@ import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 import com.mobile.yunyou.zxin.CaptureActivity;
 
-public class MoGuActivity extends Activity implements OnClickListener, IRequestCallback{
+public class MoGuActivity extends BaseActivity implements OnClickListener, IRequestCallback{
 
 	private static final int MSG_GET_WARNING = 0x0001;
 	

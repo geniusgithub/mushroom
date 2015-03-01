@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.activity.BaseActivity;
 import com.mobile.yunyou.activity.LoginActivity;
 import com.mobile.yunyou.bike.MoGuActivity;
 import com.mobile.yunyou.bike.WarningActivity;
@@ -36,7 +37,7 @@ import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 
-public class SettingExActivity extends Activity implements OnClickListener, IRequestCallback{
+public class SettingExActivity extends BaseActivity implements OnClickListener, IRequestCallback{
 
 	  private static final CommonLog log = LogFactory.createLog();
 	

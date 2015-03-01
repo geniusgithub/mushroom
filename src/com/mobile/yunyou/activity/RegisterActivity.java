@@ -19,7 +19,7 @@ import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.Utils;
 import com.mobile.yunyou.util.VertifyUtil;
 
-public class RegisterActivity extends Activity implements OnClickListener, IRequestCallback{
+public class RegisterActivity extends BaseActivity implements OnClickListener, IRequestCallback{
 
 	private static final CommonLog log = LogFactory.createLog();
 	

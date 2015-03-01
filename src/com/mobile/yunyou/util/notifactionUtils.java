@@ -8,7 +8,7 @@ import android.content.Intent;
 
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.model.DeviceSetType;
-import com.mobile.yunyou.msg.MessageActivity;
+import com.mobile.yunyou.msg.MessageExActivity;
 
 public class notifactionUtils {
 
@@ -19,7 +19,7 @@ public class notifactionUtils {
 		String message = object.mAlert;
 		
 	   Notification	notification = new Notification(R.drawable.set_logo_icon, "告警消息", System.currentTimeMillis());
-       Intent intent = new Intent(context, MessageActivity.class);
+       Intent intent = new Intent(context, MessageExActivity.class);
        PendingIntent contentIntent = PendingIntent.getActivity(context, 100, intent, 0);
        notification.setLatestEventInfo(context, "告警消息", object.mAlert, contentIntent);
        notification.flags = Notification.FLAG_AUTO_CANCEL;

@@ -30,6 +30,7 @@ import com.amap.api.maps.model.Marker;
 import com.amap.api.maps.model.PolylineOptions;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.activity.BaseActivity;
 import com.mobile.yunyou.map.util.StringUtil;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.BikeType.BikeLRecordResult;
@@ -37,7 +38,7 @@ import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.YunTimeUtils;
 
-public class RecordMapActivity extends Activity implements OnClickListener, 
+public class RecordMapActivity extends BaseActivity implements OnClickListener, 
 															OnMapLoadedListener,
 															OnMarkerClickListener,
 															InfoWindowAdapter,

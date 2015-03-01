@@ -26,6 +26,7 @@ import com.handmark.pulltorefresh.library.PullToRefreshBase.Mode;
 import com.handmark.pulltorefresh.library.PullToRefreshBase.OnRefreshListener2;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.activity.BaseActivity;
 import com.mobile.yunyou.bike.manager.CheckUploadManager;
 import com.mobile.yunyou.bike.manager.RunRecordQueryProxy;
 import com.mobile.yunyou.bike.manager.RunRecordSubManager;
@@ -45,7 +46,7 @@ import com.mobile.yunyou.util.Utils;
 import com.mobile.yunyou.util.YunTimeUtils;
 import com.mobile.yunyou.widget.RefreshListView;
 
-public class RunLRecordActivity extends Activity implements OnClickListener, 
+public class RunLRecordActivity extends BaseActivity implements OnClickListener, 
 															IRequestCallback, 
 															RunRecordQueryProxy.IRequestComplete,
 															OnItemClickListener,

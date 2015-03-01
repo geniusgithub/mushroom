@@ -45,6 +45,9 @@
             android:name="com.amap.api.v2.apikey"
             android:value="ebf5e6dcfd1078dd6cfe7ae90ed6d896" />
         
+        <meta-data android:name="TD_APP_ID" android:value="EFDA5AD7E2B11944ED022DD5871CF1AA" /> 
+        <meta-data android:name="TD_CHANNEL_ID" android:value="91.com" />
+        
         <activity android:name="com.mobile.yunyou.bike.tmp.PullToRefreshListActivity" 
              	  android:theme="@android:style/Theme.NoTitleBar">  	    
 <!--        	     <intent-filter >     -->

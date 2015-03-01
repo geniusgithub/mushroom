@@ -31,7 +31,7 @@ import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 
-public class LoginActivity extends Activity implements OnClickListener, IRequestCallback{
+public class LoginActivity extends BaseActivity implements OnClickListener, IRequestCallback{
 
 	private static final CommonLog log = LogFactory.createLog();
 	

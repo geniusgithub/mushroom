@@ -2,8 +2,10 @@ package com.mobile.yunyou;
 
 //import com.mobile.yunyou.network.NetworkCenter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import android.app.Activity;
 import android.app.Application;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -35,13 +37,14 @@ import com.mobile.yunyou.service.YunyouService;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.Utils;
+import com.tendcloud.tenddata.TCAgent;
 
 
 //drawable-hdpi  854*480 800*480 960*540
 //drawable-xhdpi  1280*720     
 //drawable-xxhdpi  1920*1080    
 
-public class YunyouApplication extends Application implements IRequestCallback{
+public class YunyouApplication extends Application implements IRequestCallback, ItatisticsEvent{
 
 	private static final CommonLog log = LogFactory.createLog();
 	
@@ -594,5 +597,34 @@ public class YunyouApplication extends Application implements IRequestCallback{
 			e.printStackTrace();
 			Utils.showToast(this, R.string.analyze_data_fail);
 		}
+	}
+
+	@Override
+	public void onEvent(String eventID) {
+		log.e("eventID = " + eventID);
+
+		TCAgent.onEvent(this, eventID);
+	}
+
+	@Override
+	public void onEvent(String eventID, HashMap<String, String> map) {
+		log.e("eventID = " + eventID);
+	
+		TCAgent.onEvent(this, eventID, "", map);
+	}
+	
+	public static void onPause(Activity context){
+
+		TCAgent.onPause(context);
+	}
+	
+	public static void onResume(Activity context){
+	
+		TCAgent.onResume(context);
+	}
+	
+	public static void onCatchError(Context context){
+	
+		TCAgent.setReportUncaughtExceptions(true);
 	}
 }

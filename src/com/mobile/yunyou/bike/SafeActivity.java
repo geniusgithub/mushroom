@@ -4,14 +4,10 @@ package com.mobile.yunyou.bike;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.Settings;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,6 +32,7 @@ import com.amap.api.maps.model.LatLng;
 import com.amap.api.services.geocoder.GeocodeSearch;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.activity.BaseActivity;
 import com.mobile.yunyou.bike.manager.BikeLocationManager;
 import com.mobile.yunyou.bike.manager.SafeAreaManager;
 import com.mobile.yunyou.bike.manager.SelfLocationManager;
@@ -48,12 +45,11 @@ import com.mobile.yunyou.network.Courier;
 import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.util.CommonLog;
-import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 
-public class SafeActivity extends Activity implements OnCameraChangeListener,IRequestCallback, 
+public class SafeActivity extends BaseActivity implements OnCameraChangeListener,IRequestCallback, 
 												OnClickListener, 
 												OnCheckedChangeListener,
 												SelfLocationManager.ILocationUpdate,

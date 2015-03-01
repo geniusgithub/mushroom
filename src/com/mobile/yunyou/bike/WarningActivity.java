@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.PopupWindow;
 
 import com.mobile.yunyou.R;
+import com.mobile.yunyou.activity.BaseActivity;
 import com.mobile.yunyou.model.BikeType;
 import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;
@@ -26,7 +27,7 @@ import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 
-public class WarningActivity extends Activity implements OnClickListener, IRequestCallback, OnCheckedChangeListener{
+public class WarningActivity extends BaseActivity implements OnClickListener, IRequestCallback, OnCheckedChangeListener{
 
 	private static final int MSG_GET_WARNING = 0x0001;
 	

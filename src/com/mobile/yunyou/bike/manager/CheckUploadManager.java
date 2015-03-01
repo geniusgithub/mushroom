@@ -1,24 +1,17 @@
 package com.mobile.yunyou.bike.manager;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
-import android.R.integer;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationListener;
 import com.mobile.yunyou.YunyouApplication;
-import com.mobile.yunyou.bike.NewBikeActivity;
-import com.mobile.yunyou.bike.manager.SelfLocationManager.ILocationUpdate;
 import com.mobile.yunyou.bike.tmp.DataFactory;
 import com.mobile.yunyou.datastore.RunRecordDBManager;
 import com.mobile.yunyou.model.BikeType;
-import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.model.BikeType.BikeLRecordResult;
+import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.util.CommonLog;

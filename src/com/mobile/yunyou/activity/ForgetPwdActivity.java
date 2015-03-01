@@ -21,7 +21,7 @@ import com.mobile.yunyou.util.LogFactory;
 import com.mobile.yunyou.util.PopWindowFactory;
 import com.mobile.yunyou.util.Utils;
 
-public class ForgetPwdActivity extends Activity implements OnClickListener, IRequestCallback{
+public class ForgetPwdActivity extends BaseActivity implements OnClickListener, IRequestCallback{
 
 	private static final CommonLog log = LogFactory.createLog();
 	 

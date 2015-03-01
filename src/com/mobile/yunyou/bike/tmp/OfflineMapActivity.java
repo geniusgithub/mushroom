@@ -29,11 +29,12 @@ import com.amap.api.maps.offlinemap.OfflineMapManager.OfflineMapDownloadListener
 import com.amap.api.maps.offlinemap.OfflineMapProvince;
 import com.amap.api.maps.offlinemap.OfflineMapStatus;
 import com.mobile.yunyou.R;
+import com.mobile.yunyou.activity.BaseActivity;
 
 /**
  * AMapV2地图中简单介绍离线地图下载
  */
-public class OfflineMapActivity extends Activity implements
+public class OfflineMapActivity extends BaseActivity implements
 		OfflineMapDownloadListener {
 	private OfflineMapManager amapManager = null;// 离线地图下载控制器
 	private List<OfflineMapProvince> provinceList = new ArrayList<OfflineMapProvince>();// 保存一级目录的省直辖市

@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -37,10 +36,10 @@ import com.mobile.yunyou.BrocastFactory;
 import com.mobile.yunyou.R;
 import com.mobile.yunyou.ServiceIPConfig;
 import com.mobile.yunyou.YunyouApplication;
+import com.mobile.yunyou.activity.BaseActivity;
 import com.mobile.yunyou.bike.tmp.DataFactory;
 import com.mobile.yunyou.custom.CustomTimeExPopWindow;
 import com.mobile.yunyou.custom.SingleChoicePopWindow;
-import com.mobile.yunyou.fragment.NavigationFragment;
 import com.mobile.yunyou.model.BaseType.Birthday;
 import com.mobile.yunyou.model.GloalType;
 import com.mobile.yunyou.model.PublicType;
@@ -48,7 +47,6 @@ import com.mobile.yunyou.model.ResponseDataPacket;
 import com.mobile.yunyou.network.IRequestCallback;
 import com.mobile.yunyou.network.NetworkCenterEx;
 import com.mobile.yunyou.network.api.HeadFileConfigure;
-import com.mobile.yunyou.set.SetPersonCommentActivity.IViewMode;
 import com.mobile.yunyou.util.CommonLog;
 import com.mobile.yunyou.util.DialogFactory;
 import com.mobile.yunyou.util.FileManager;
@@ -61,7 +59,7 @@ import com.mobile.yunyou.util.VertifyUtil;
 import com.mobile.yunyou.widget.CustomImageView;
 
 @SuppressLint("NewApi")
-public class SetPersonActivity extends Activity implements OnClickListener, 
+public class SetPersonActivity extends BaseActivity implements OnClickListener, 
 															IRequestCallback,
 															OnUploadProcessListener,
 															OnCheckedChangeListener{
@@ -568,8 +566,8 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 		switch(requestCode)
 		{
 		case REQUEST_CODE_SET_COMMENT:
-			onSetResult(resultCode, data);
-			break;
+//			onSetResult(resultCode, data);
+//			break;
 		case TAKE_PHOTO:
 			onTakeResult(resultCode, data);
 			break;
@@ -586,39 +584,39 @@ public class SetPersonActivity extends Activity implements OnClickListener,
 		super.onActivityResult(requestCode, resultCode, data);
 	}
 	
-	private void onSetResult(int resultCode, Intent data)
-	{
-		if (resultCode == RESULT_OK)
-		{
-			int viewState = data.getIntExtra(SetPersonCommentActivity.VIEW_KEY, SetPersonCommentActivity.IViewMode.IVM_NONE);
-			Bundle bundle = data.getBundleExtra(SetPersonIntentConstant.KEY_DATA_BUNDLE);
-			if (bundle ==  null)
-			{
-				return ;
-			}
-			
-			switch(viewState)
-			{
-			case IViewMode.IVM_EMAIL:
-				String emailString = bundle.getString(SetPersonIntentConstant.KEY_OBJECT_DATA);
-				setEmail(emailString);
-				break;
-//			case IViewMode.IVM_PHONE:
-//				String phoneString = bundle.getString(SetPersonIntentConstant.KEY_OBJECT_DATA);
-//				setPhone(phoneString);
+//	private void onSetResult(int resultCode, Intent data)
+//	{
+//		if (resultCode == RESULT_OK)
+//		{
+//			int viewState = data.getIntExtra(SetPersonCommentActivity.VIEW_KEY, SetPersonCommentActivity.IViewMode.IVM_NONE);
+//			Bundle bundle = data.getBundleExtra(SetPersonIntentConstant.KEY_DATA_BUNDLE);
+//			if (bundle ==  null)
+//			{
+//				return ;
+//			}
+//			
+//			switch(viewState)
+//			{
+//			case IViewMode.IVM_EMAIL:
+//				String emailString = bundle.getString(SetPersonIntentConstant.KEY_OBJECT_DATA);
+//				setEmail(emailString);
 //				break;
-			case IViewMode.IVM_NAME:
-				String nameString = bundle.getString(SetPersonIntentConstant.KEY_OBJECT_DATA);
-				setTurename(nameString);
-				break;
-			case IViewMode.IVM_BIRTHDAY:
-				String birthdayString = bundle.getString(SetPersonIntentConstant.KEY_OBJECT_DATA);
-				setBirthday(birthdayString);
-				break;
-			}
-
-		}
-	}
+////			case IViewMode.IVM_PHONE:
+////				String phoneString = bundle.getString(SetPersonIntentConstant.KEY_OBJECT_DATA);
+////				setPhone(phoneString);
+////				break;
+//			case IViewMode.IVM_NAME:
+//				String nameString = bundle.getString(SetPersonIntentConstant.KEY_OBJECT_DATA);
+//				setTurename(nameString);
+//				break;
+//			case IViewMode.IVM_BIRTHDAY:
+//				String birthdayString = bundle.getString(SetPersonIntentConstant.KEY_OBJECT_DATA);
+//				setBirthday(birthdayString);
+//				break;
+//			}
+//
+//		}
+//	}
 
 	private void onTakeResult(int resultCode, Intent data){
 		if (resultCode == RESULT_OK)
