@@ -210,6 +210,8 @@ public class YunyouApplication extends Application implements IRequestCallback, 
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			TCAgent.init(this);
 	}
 	
 	public void setSelDevChange(ISelDeviceUnbind listener){

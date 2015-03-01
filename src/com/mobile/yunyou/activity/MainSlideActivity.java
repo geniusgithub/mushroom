@@ -69,7 +69,7 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		
-	
+		YunyouApplication.onCatchError(this);
 		
 		setContentView(R.layout.main_slidemenu_layout);
 		
@@ -83,7 +83,7 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 	@Override
 	protected void onResume() {
 		super.onResume();
-		
+		YunyouApplication.onResume(this);
 		if (!mApplication.mIsDebug){
 			mSelfLocationManager.addObserver(this);
 			mSelfLocationManager.startLocationCheck();
@@ -97,7 +97,7 @@ public class MainSlideActivity extends SlidingFragmentActivity implements OnClic
 	@Override
 	protected void onPause() {
 		super.onPause();
-
+		YunyouApplication.onPause(this);
 		if (!mApplication.mIsDebug){
 			mSelfLocationManager.removeObservser(this);
 			mSelfLocationManager.stopLocationCheck();
