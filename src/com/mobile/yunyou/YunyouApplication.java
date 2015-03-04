@@ -211,7 +211,9 @@ public class YunyouApplication extends Application implements IRequestCallback, 
 				e.printStackTrace();
 			}
 			
+			
 			TCAgent.init(this);
+			TCAgent.setReportUncaughtExceptions(true);
 	}
 	
 	public void setSelDevChange(ISelDeviceUnbind listener){
