@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ActionBarSherlock/ActionBarSherlock.iml" filepath="$PROJECT_DIR$/ActionBarSherlock/ActionBarSherlock.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.handmark.pulltorefresh.library/com.handmark.pulltorefresh.library.iml" filepath="$PROJECT_DIR$/com.handmark.pulltorefresh.library/com.handmark.pulltorefresh.library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/com.jeremyfeinstein.slidingmenu.lib/com.jeremyfeinstein.slidingmenu.lib.iml" filepath="$PROJECT_DIR$/com.jeremyfeinstein.slidingmenu.lib/com.jeremyfeinstein.slidingmenu.lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/mushroom.iml" filepath="$PROJECT_DIR$/mushroom.iml" />
+      <module fileurl="file://$PROJECT_DIR$/support_v4/support_v4.iml" filepath="$PROJECT_DIR$/support_v4/support_v4.iml" />
+    </modules>
+  </component>
+</project>
